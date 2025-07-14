@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Portfolio | MUTAG HOUSE</title>
+  <style>
+    /* ===== BASE STYLES ===== */
+    :root {
+      --primary: #7f94ff;
+      --dark: #0a0f2c;
+      --light: #ffffff;
+      --gray: #e0e0e0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* ===== HEADER ===== */
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-img {
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    nav a.active,
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    /* ===== PORTFOLIO HERO ===== */
+    .portfolio-hero {
+      padding: 12rem 0 6rem;
+      text-align: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+    }
+    
+    .portfolio-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    .portfolio-hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* ===== PORTFOLIO GRID ===== */
+    .portfolio-grid {
+      padding: 4rem 0;
+      display: grid;
+      gap: 3rem;
+    }
+    
+    .portfolio-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .portfolio-media {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #7f94ff, #5c6cd9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .portfolio-content {
+      padding: 2rem;
+    }
+    
+    .client-logo {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+    
+    .portfolio-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+    
+    .portfolio-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .service-tag {
+      background: rgba(127, 148, 255, 0.2);
+      color: var(--primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .portfolio-content p {
+      margin-bottom: 1rem;
+      color: var(--gray);
+    }
+    
+    .testimonial {
+      font-style: italic;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.07);
+      border-left: 3px solid var(--primary);
+      margin-top: 1rem;
+      color: var(--gray);
+    }
+    
+    /* ===== CLIENT SHOWCASE ===== */
+    .client-showcase {
+      padding: 4rem 0;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .client-showcase h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .showcase-subtitle {
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+    
+    .client-logos {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .client-logos img {
+      height: 60px;
+      filter: grayscale(100%) brightness(2);
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    
+    .client-logos img:hover {
+      filter: none;
+      opacity: 1;
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 3rem 0;
+      background: rgba(0, 0, 0, 0.8);
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+    
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+    
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: #5c6cd9;
+      text-decoration: underline;
+    }
+    
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (min-width: 768px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .featured-item {
+        grid-column: span 2;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .portfolio-hero {
+        padding: 10rem 0 4rem;
+      }
+      
+      .client-logos {
+        gap: 1.5rem;
+      }
+      
+      .client-logos img {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="index.html"><img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img"></a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Portfolio Hero -->
+  <section class="portfolio-hero">
+    <div class="container">
+      <h1>Client Success Stories</h1>
+      <p>Transforming businesses through strategic branding, compliance expertise, and growth solutions</p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <main class="portfolio-grid container">
+    <!-- FlowerClub -->
+    <article class="portfolio-item featured-item">
+      <div class="portfolio-media">
+        Social Media Samples
+      </div>
+      <div class="portfolio-content">
+        <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo">
+        <h2>Social Media Transformation for FlowerClub</h2>
+        <div class="portfolio-services">
+          <span class="service-tag">Social Media Strategy</span>
+          <span class="service-tag">Content Creation</span>
+          <span class="service-tag">Brand Storytelling</span>
+        </div>
+        <p>Revitalized FlowerClub's digital presence with stunning visual content that increased their engagement by 140%. Created scroll-stopping social media images that perfectly captured their floral artistry while establishing a consistent brand aesthetic.</p>
+        
+        <div class="testimonial">
+          <p>"MUTAG HOUSE's visual content made our flowers look even more beautiful than in real life! Their social media expertise helped us triple our online inquiries while maintaining our premium brand image."</p>
+          <p><strong>— FlowerClub Marketing Director</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mathibele Mahlaela Attorneys -->
+    <article class="portfolio-item">
+      <div class="portfolio-media">
+        Corporate Stationery
+      </div>
+      <div class="portfolio-content">
+        <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo">
+        <h2>Legal Branding Solutions</h2>
+        <div class="portfolio-services">
+          <span class="service-tag">Business Cards</span>
+          <span class="service-tag">CIPC Compliance</span>
+          <span class="service-tag">Regulatory Filing</span>
+        </div>
+        <p>Developed professional business cards and provided compliance services for Mathibele Mahlaela Attorneys. Created elegant stationery that reflects their legal expertise while ensuring all regulatory requirements were met.</p>
+      </div>
+    </article>
+
+    <!-- La Gracia Estate -->
+    <article class="portfolio-item">
+      <div class="portfolio-media">
+        Corporate Branding
+      </div>
+      <div class="portfolio-content">
+        <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo">
+        <h2>Complete Brand Identity</h2>
+        <div class="portfolio-services">
+          <span class="service-tag">Logo Design</span>
+          <span class="service-tag">Business Cards</span>
+          <span class="service-tag">Letterhead</span>
+          <span class="service-tag">Strategic Planning</span>
+        </div>
+        <p>Created a comprehensive brand identity for La Gracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the real estate market.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Client Showcase Section -->
+  <section class="client-showcase">
+    <div class="container">
+      <h2>Trusted By Industry Leaders</h2>
+      <p class="showcase-subtitle">We're proud to have partnered with these distinguished organizations</p>
+      <div class="client-logos">
+        <img src="flowerclub-logo.png" alt="FlowerClub">
+        <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
+        <img src="lagracia-logo.png" alt="La Gracia Estate">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
+      <p>Email: <a href="mailto:keitumetse.mahlaela@mutag.co.za">keitumetse.mahlaela@mutag.co.za</a> | Phone: 084 999 1108</p>
+    </div>
+  </footer>
+</body>
+</html>

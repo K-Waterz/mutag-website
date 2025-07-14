@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | MUTAG HOUSE</title>
+  <meta name="description" content="Thank you for contacting MUTAG HOUSE. We've received your message and will respond shortly.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Logo-no-background.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Thank You Page Specific Styles */
+    .thank-you {
+      text-align: center;
+      padding: 8rem 2rem;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(10, 15, 44, 0.9), rgba(10, 15, 44, 0.7));
+    }
+    
+    .thank-you-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .thank-you h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #7f94ff;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .thank-you p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      color: #e0e0e0;
+    }
+    
+    .thank-you-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn-return {
+      background-color: #7f94ff;
+      color: white;
+    }
+    
+    .btn-contact {
+      background-color: transparent;
+      border: 2px solid #7f94ff;
+      color: #7f94ff;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .thank-you-content {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    /* Confirmation Icon */
+    .confirmation-icon {
+      font-size: 4rem;
+      color: #7f94ff;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" aria-label="Return to homepage">
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" />
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Thank You Message -->
+  <main class="thank-you">
+    <div class="thank-you-content">
+      <div class="confirmation-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h1>Thank You!</h1>
+      <p>We've received your message and will respond within 24-48 hours during business days.</p>
+      <div class="thank-you-actions">
+        <a href="index.html" class="btn btn-return">Return Home</a>
+        <a href="contact.html" class="btn btn-contact">Send Another Message</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="Logo-no-background.png" alt="MUTAG Logo" width="120" loading="lazy" />
+          <p>Built to Brand. Designed to Deliver.</p>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
+          <p>
+            <a href="mailto:keitumetse.mahlaela@mutag.co.za">keitumetse.mahlaela@mutag.co.za</a> | 
+            <a href="tel:0849991108">084 999 1108</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

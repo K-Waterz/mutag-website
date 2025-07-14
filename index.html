@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Website</title>
-</head>
-<body>
-  <h1>Hello, World!</h1>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MUTAG HOUSE | Built to Brand. Designed to Deliver.</title>
-  <meta name="description" content="MUTAG HOUSE is a creative branding agency offering marketing, printing, and start-up services for modern businesses across South Africa." />
+  <meta name="description" content="MUTAG HOUSE is a creative branding agency offering marketing, printing, and business services for modern businesses across South Africa." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/jpeg" href="Mutag-logo.jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +23,7 @@
   <!-- 🔵 Header -->
   <header>
     <div class="container nav">
-      <a href="index.html"><img src="Mutag-logo.jpeg" alt="MUTAG Logo" class="logo-img" /></a>
+      <a href="index.html"><img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" /></a>
       <nav>
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
@@ -50,7 +40,7 @@
     <div class="container hero-grid">
       <div class="hero-text">
         <h1>Built to Brand.<br>Designed to Deliver.</h1>
-        <p>Marketing, branding, and start-up services done right.</p>
+        <p>Marketing, branding, and business services done right.</p>
         <a href="contact.html" class="btn">Let's Build</a>
       </div>
       <div class="hero-img">
@@ -64,7 +54,11 @@
     <div class="container two-column">
       <div class="text">
         <h2>Who We Are</h2>
-        <p>MUTAG HOUSE is a full-service agency focused on corporate branding, printing, and supporting new businesses with affordable start-up solutions. We blend design, marketing, and logistics into one seamless offering.</p>
+        <p>MUTAG HOUSE is a forward-thinking branding and marketing company based in Centurion, South Africa. We specialize in helping businesses of all sizes build strong brand identities through strategic design, impactful content, and modern marketing solutions. From professional logos and presentations to digital campaigns and business setup services — we're your creative partner from day one.</p>
+        <p>We work closely with entrepreneurs, SMEs, corporates, and public entities to develop the visuals, platforms, and strategies they need to thrive. Whether you're launching a new business, refreshing your identity, or scaling up your marketing — we're here to deliver excellence with purpose.</p>
+      </div>
+      <div class="image">
+        <img src="Social-media-phone.png" alt="Social Media Phone" />
       </div>
     </div>
   </section>
@@ -84,11 +78,11 @@
         </div>
         <div class="card">
           <h3>📈 Marketing</h3>
-          <p>Socials, email, automation</p>
+          <p>Social media, email, automation</p>
         </div>
         <div class="card">
-          <h3>🚀 Start-Up Services</h3>
-          <p>Company reg, tax, BEE, domain setup</p>
+          <h3>🚀 Business Setup</h3>
+          <p>Company registration, BEE, domain setup</p>
         </div>
       </div>
       <a href="services.html" class="btn">Explore All Services</a>
@@ -99,7 +93,7 @@
   <section class="portfolio-preview" data-aos="fade-up">
     <div class="container">
       <h2>Work That Speaks</h2>
-      <p>See how we’ve brought brands to life across various industries.</p>
+      <p>See how we've brought brands to life across various industries.</p>
       <a href="portfolio.html" class="btn">View Portfolio</a>
     </div>
   </section>
@@ -116,15 +110,18 @@
   <footer>
     <div class="container">
       <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
-      <p>Email: mahlaela.keitumetse@gmail.com | Phone: 084 999 1108</p>
-      <p>Follow us on Facebook: Coming Soon</p>
+      <p>Email: keitumetse.mahlaela@mutag.co.za | Phone: 084 999 1108</p>
     </div>
   </footer>
 
   <!-- 🔵 Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
   </script>
   <script src="script.js"></script>
 </body>
