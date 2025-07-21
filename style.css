@@ -1052,4 +1052,37 @@ footer {
   .client-logos img {
     height: 32px !important;
   }
+  .contact-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-md) !important;
+    padding: 0 !important;
+  }
+  .contact-info, .contact-form {
+    width: 100% !important;
+    padding: var(--space-md) !important;
+    box-sizing: border-box !important;
+  }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    font-size: 1rem !important;
+    padding: var(--space-md) !important;
+  }
+  .contact-form button,
+  .btn-submit {
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: var(--space-md) !important;
+  }
+  .contact-method {
+    padding: var(--space-md) !important;
+    font-size: 1rem !important;
+  }
+  .contact-hero {
+    padding: 8rem var(--space-md) 2rem !important;
+  }
+  .contact-hero h1 {
+    font-size: 1.5rem !important;
+  }
 }
