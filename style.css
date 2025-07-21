@@ -950,7 +950,15 @@ footer {
 
 @media (max-width: 600px) {
   nav ul {
-    gap: var(--space-md);
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: flex-start !important;
+    padding: var(--space-md) 0 !important;
+  }
+  nav a {
+    display: block !important;
+    padding: 0.75rem 0 !important;
+    font-size: 1.1rem !important;
   }
   
   .hero {
