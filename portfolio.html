@@ -4,13 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Portfolio | MUTAG HOUSE</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     /* ===== BASE STYLES ===== */
     :root {
-      --primary: #7f94ff;
-      --dark: #0a0f2c;
-      --light: #ffffff;
-      --gray: #e0e0e0;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      
+      /* Neutral Colors */
+      --dark: #0f172a;
+      --dark-light: #1e293b;
+      --gray: #64748b;
+      --gray-light: #94a3b8;
+      --light: #f8fafc;
+      --white: #ffffff;
+      
+      /* Glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --gradient-secondary: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+      
+      /* Typography */
+      --font-primary: 'Inter', 'Poppins', sans-serif;
+      --font-secondary: 'Poppins', sans-serif;
+      
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      
+      /* Border Radius */
+      --radius-sm: 0.5rem;
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
     }
     
     * {
@@ -20,10 +69,13 @@
     }
     
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-primary);
       background-color: var(--dark);
       color: var(--light);
       line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     
     .container {
@@ -35,13 +87,20 @@
     
     /* ===== HEADER ===== */
     header {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 0;
+      background: rgba(15, 23, 42, 0.8);
+      padding: var(--space-sm) var(--space-lg);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    header.scrolled {
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-lg);
     }
     
     .nav {
@@ -51,54 +110,63 @@
     }
     
     .logo-img {
-      height: 40px;
-      transition: transform 0.3s ease;
+      height: 45px;
+      width: auto;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
     
     .logo-img:hover {
-      transform: scale(1.05);
+      transform: scale(1.05) translateY(-2px);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
     
     nav ul {
       display: flex;
       list-style: none;
-      gap: 2rem;
+      gap: var(--space-xl);
+      align-items: center;
     }
     
     nav a {
-      color: var(--light);
       text-decoration: none;
+      color: var(--light);
       font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      padding: 0.5rem 0;
+      padding: var(--space-xs) 0;
+      letter-spacing: 0.025em;
     }
     
-    nav a::after {
+    nav a::before {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: -2px;
       left: 0;
       width: 0;
       height: 2px;
-      background-color: var(--primary);
-      transition: width 0.3s ease;
+      background: var(--gradient-primary);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 1px;
     }
     
-    nav a:hover::after,
-    nav a.active::after {
+    nav a:hover::before,
+    nav a.active::before {
       width: 100%;
     }
     
     nav a.active,
     nav a:hover {
-      color: var(--primary);
+      color: var(--primary-light);
+      transform: translateY(-1px);
     }
     
     /* ===== PORTFOLIO HERO ===== */
     .portfolio-hero {
-      padding: 12rem 0 6rem;
+      padding: 12rem var(--space-lg) 6rem;
       text-align: center;
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+      background: var(--gradient-secondary);
     }
     
     .portfolio-hero h1 {
@@ -106,6 +174,7 @@
       color: var(--primary);
       margin-bottom: 1rem;
       line-height: 1.2;
+      font-weight: 700;
     }
     
     .portfolio-hero p {
@@ -117,64 +186,80 @@
     
     /* ===== PORTFOLIO GRID ===== */
     .portfolio-grid {
-      padding: 4rem 0;
+      padding: var(--space-2xl) var(--space-lg);
       display: grid;
-      gap: 3rem;
+      gap: var(--space-xl);
     }
     
     .portfolio-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 1rem;
+      background: var(--glass-bg);
+      border-radius: var(--radius-xl);
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--glass-border);
     }
     
     .portfolio-item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl), 0 0 30px rgba(99, 102, 241, 0.2);
     }
     
     .portfolio-media {
-      height: 300px;
+      height: 450px;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #7f94ff, #5c6cd9);
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: var(--white);
       font-size: 1.5rem;
     }
     
+    .portfolio-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .portfolio-item:hover .portfolio-media img {
+      transform: scale(1.05);
+    }
+    
     .portfolio-content {
-      padding: 2rem;
+      padding: var(--space-xl);
     }
     
     .client-logo {
       height: 60px;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-md);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
     
     .portfolio-content h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       color: var(--light);
+      font-weight: 600;
     }
     
     .portfolio-services {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1rem 0;
+      gap: var(--space-xs);
+      margin: var(--space-md) 0;
     }
     
     .service-tag {
-      background: rgba(127, 148, 255, 0.2);
-      color: var(--primary);
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--primary-light);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-xl);
       font-size: 0.8rem;
       font-weight: 500;
+      border: 1px solid rgba(99, 102, 241, 0.2);
     }
     
     .portfolio-content p {
@@ -184,71 +269,105 @@
     
     .testimonial {
       font-style: italic;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.07);
+      padding: var(--space-lg);
+      background: rgba(255, 255, 255, 0.05);
       border-left: 3px solid var(--primary);
-      margin-top: 1rem;
-      color: var(--gray);
+      margin-top: var(--space-md);
+      color: var(--gray-light);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
     }
     
     /* ===== CLIENT SHOWCASE ===== */
     .client-showcase {
-      padding: 4rem 0;
+      padding: var(--space-2xl) var(--space-lg);
       text-align: center;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(15, 23, 42, 0.6);
+      position: relative;
     }
     
     .client-showcase h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: var(--space-sm);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
     }
     
     .showcase-subtitle {
-      color: var(--gray);
-      margin-bottom: 2rem;
+      color: var(--gray-light);
+      margin-bottom: var(--space-xl);
+      font-size: 1.1rem;
     }
     
     .client-logos {
       display: flex;
       justify-content: center;
-      gap: 3rem;
+      gap: var(--space-xl);
       flex-wrap: wrap;
     }
     
     .client-logos img {
       height: 60px;
-      filter: grayscale(100%) brightness(2);
-      opacity: 0.8;
-      transition: all 0.3s ease;
+      filter: grayscale(100%) brightness(1.5);
+      opacity: 0.7;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .client-logos img:hover {
       filter: none;
       opacity: 1;
+      transform: scale(1.1);
     }
     
     /* ===== FOOTER ===== */
     footer {
-      padding: 3rem 0;
-      background: rgba(0, 0, 0, 0.8);
+      padding: var(--space-xl) var(--space-lg);
+      background: rgba(15, 23, 42, 0.9);
       text-align: center;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
     }
     
-    footer p {
-      margin-bottom: 0.5rem;
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: var(--space-lg);
     }
     
-    footer a {
-      color: var(--primary);
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .footer-brand img {
+      height: 40px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .footer-brand img:hover {
+      transform: scale(1.05);
+    }
+    
+    .footer-copyright {
+      color: var(--gray-light);
+      font-size: 0.9rem;
+    }
+    
+    .footer-copyright a {
+      color: var(--primary-light);
       text-decoration: none;
       transition: color 0.3s ease;
     }
     
-    footer a:hover {
-      color: #5c6cd9;
-      text-decoration: underline;
+    .footer-copyright a:hover {
+      color: var(--primary);
     }
     
     /* ===== RESPONSIVE DESIGN ===== */
@@ -264,11 +383,11 @@
     
     @media (max-width: 600px) {
       nav ul {
-        gap: 1rem;
+        gap: var(--space-md);
       }
       
       .portfolio-hero {
-        padding: 10rem 0 4rem;
+        padding: 10rem var(--space-md) 4rem;
       }
       
       .client-logos {
@@ -278,14 +397,24 @@
       .client-logos img {
         height: 40px;
       }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      
+      .footer-copyright {
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="container nav">
-      <a href="index.html"><img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img"></a>
+      <a href="index.html" class="logo-link">
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img"></a>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -298,19 +427,19 @@
   </header>
 
   <!-- Portfolio Hero -->
-  <section class="portfolio-hero">
+  <section class="portfolio-hero" data-aos="fade-up">
     <div class="container">
-      <h1>Client Success Stories</h1>
-      <p>Transforming businesses through strategic branding, compliance expertise, and growth solutions</p>
+      <h1 data-aos="fade-up" data-aos-delay="200">Client Success Stories</h1>
+      <p data-aos="fade-up" data-aos-delay="300">Transforming businesses through strategic branding, compliance expertise, and growth solutions</p>
     </div>
   </section>
 
   <!-- Portfolio Grid -->
   <main class="portfolio-grid container">
     <!-- FlowerClub -->
-    <article class="portfolio-item featured-item">
+    <article class="portfolio-item featured-item" data-aos="fade-up" data-aos-delay="200">
       <div class="portfolio-media">
-        Social Media Samples
+        <img src="flowerclub-social-media.gif" alt="FlowerClub Social Media Transformation GIF" style="width:100%;max-width:700px;display:block;margin:0 auto;">
       </div>
       <div class="portfolio-content">
         <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo">
@@ -330,9 +459,9 @@
     </article>
 
     <!-- Mathibele Mahlaela Attorneys -->
-    <article class="portfolio-item">
+    <article class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
       <div class="portfolio-media">
-        Corporate Stationery
+        <img src="business-card-mockup.png" alt="Mathibele Mahlaela Attorneys Business Cards Mockup" style="width:100%;max-width:600px;display:block;margin:0 auto;">
       </div>
       <div class="portfolio-content">
         <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo">
@@ -347,9 +476,9 @@
     </article>
 
     <!-- La Gracia Estate -->
-    <article class="portfolio-item">
+    <article class="portfolio-item" data-aos="fade-up" data-aos-delay="400">
       <div class="portfolio-media">
-        Corporate Branding
+        <video src="la-gracia-video.mp4" controls style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);background:#000;" poster="lagracia-logo.png"></video>
       </div>
       <div class="portfolio-content">
         <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo">
@@ -366,11 +495,11 @@
   </main>
 
   <!-- Client Showcase Section -->
-  <section class="client-showcase">
+  <section class="client-showcase" data-aos="fade-up">
     <div class="container">
-      <h2>Trusted Across Industries</h2>
-      <p class="showcase-subtitle">We're proud to have partnered with these distinguished organizations</p>
-      <div class="client-logos">
+      <h2 data-aos="fade-up" data-aos-delay="200">Trusted Across Industries</h2>
+      <p class="showcase-subtitle" data-aos="fade-up" data-aos-delay="300">We're proud to have partnered with these distinguished organizations</p>
+      <div class="client-logos" data-aos="fade-up" data-aos-delay="400">
         <img src="flowerclub-logo.png" alt="FlowerClub">
         <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
         <img src="lagracia-logo.png" alt="La Gracia Estate">
@@ -381,9 +510,37 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
-      <p>Email: <a href="mailto:keitumetse.mahlaela@mutag.co.za">keitumetse.mahlaela@mutag.co.za</a> | Phone: 084 999 1108</p>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="Logo-no-background.png" alt="MUTAG Logo" />
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
+          <p>Email: <a href="mailto:info@mutag.co.za">info@mutag.co.za</a> | Phone: <a href="tel:0849991108">084 999 1108</a></p>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 100
+    });
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>
