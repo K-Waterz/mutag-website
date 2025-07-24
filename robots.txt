@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /thank-you.html
+
+# Allow all search engines to crawl the site except thank-you.html
+# Add disallow rules below if you want to block specific folders or files
+
+# Sitemap location
+Sitemap: https://www.mutag.co.za/sitemap.xml 
