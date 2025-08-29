@@ -746,6 +746,21 @@ nav a:hover {
   padding: var(--space-2xl) var(--space-lg);
 }
 
+.map-embed {
+  margin-top: var(--space-2xl);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
 .contact-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
