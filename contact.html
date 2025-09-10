@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | MUTAG HOUSE</title>
+  <title>Contact MUTAG HOUSE | Corporate Enquiries</title>
+  <meta name="description" content="Speak to MUTAG HOUSE about corporate branding, marketing and compliant web development. Request a formal quote or proposal." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mutag.co.za/contact.html" />
+  <meta name="keywords" content="contact MUTAG, corporate proposal, RFP support, SLA, South Africa" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact MUTAG HOUSE | Corporate Enquiries" />
+  <meta property="og:description" content="Speak to MUTAG HOUSE about corporate branding, marketing and compliant web development. Request a formal quote or proposal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mutag.co.za/contact.html" />
+  <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact MUTAG HOUSE | Corporate Enquiries" />
+  <meta name="twitter:description" content="Speak to MUTAG HOUSE about corporate branding, marketing and compliant web development. Request a formal quote or proposal." />
+  <meta name="twitter:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   <link rel="stylesheet" href="style.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -15,6 +32,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MUTAG HOUSE",
+    "url": "https://www.mutag.co.za",
+    "logo": "https://www.mutag.co.za/Logo-no-background.png",
+    "sameAs": [
+      "https://www.facebook.com/people/MUTAG-House/61578437019157/",
+      "https://www.linkedin.com/company/mutag-house/",
+      "https://www.instagram.com/mutag_house"
+    ]
+  }
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -50,6 +81,11 @@
           <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="icon-label">Theme</span>
+      </button>
     </div>
   </header>
 
@@ -203,6 +239,28 @@
         submitBtn.disabled = false;
       }, 3000);
     });
+  </script>
+  <script>
+    (function(){
+      const STORAGE_KEY = 'mh-theme';
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const initial = saved ? saved : (prefersDark ? 'dark' : 'light');
+      if (initial === 'light') document.documentElement.setAttribute('data-theme','light');
+      const btn = document.getElementById('themeToggle');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+          if (isLight) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem(STORAGE_KEY, 'dark');
+          } else {
+            document.documentElement.setAttribute('data-theme','light');
+            localStorage.setItem(STORAGE_KEY, 'light');
+          }
+        });
+      }
+    })();
   </script>
 </body>
 </html>

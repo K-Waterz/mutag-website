@@ -3,8 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MUTAG HOUSE | Built to Brand. Designed to Deliver.</title>
-  <meta name="description" content="MUTAG HOUSE is a creative branding agency offering marketing, printing, and business services for modern businesses across South Africa." />
+  <title>MUTAG HOUSE | Corporate Branding, Marketing & Digital Solutions</title>
+  <meta name="description" content="Branding & marketing agency in Centurion. Logos, websites, printing and growth campaigns that win work, save time, and build credibility for South African businesses." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mutag.co.za/" />
+  <meta name="author" content="MUTAG HOUSE" />
+  <meta name="keywords" content="corporate branding, enterprise marketing, corporate identity, presentation design, governance compliance, business setup, print management, South Africa" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MUTAG HOUSE | Corporate Branding, Marketing & Digital Solutions" />
+  <meta property="og:description" content="Corporate-focused branding, marketing and development services built for procurement and compliance needs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mutag.co.za/" />
+  <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MUTAG HOUSE | Corporate Branding, Marketing & Digital Solutions" />
+  <meta name="twitter:description" content="Corporate-focused branding, marketing and development services built for procurement and compliance needs." />
+  <meta name="twitter:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   <link rel="stylesheet" href="style.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -49,9 +66,21 @@
     "email": "info@mutag.co.za",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Centurion",
+      "addressLocality": "Centurion",
+      "addressRegion": "Gauteng",
+      "postalCode": "0157",
       "addressCountry": "ZA"
     },
     "url": "https://www.mutag.co.za",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.8597,
+      "longitude": 28.1836
+    },
+    "areaServed": ["Centurion", "Pretoria", "Gauteng", "South Africa"],
+    "category": ["Marketing Agency", "Website Designer", "Branding Agency", "Printing Service"],
+    "hasMap": "https://www.google.com/maps?q=Centurion,+Gauteng",
     "priceRange": "$$",
     "sameAs": [
       "https://www.facebook.com/people/MUTAG-House/61578437019157/",
@@ -202,6 +231,7 @@
   </script>
 </head>
 <body>
+  <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Branding & Marketing Agency in Centurion | MUTAG HOUSE</h1>
   <!-- 🔵 Background Video -->
   <!-- Removed background video for performance -->
 
@@ -219,17 +249,23 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="icon-label">Theme</span>
+      </button>
     </div>
   </header>
 
-  <!-- 🔵 Hero -->
+  <!-- 🔵 Hero (Capture Attention) -->
   <section class="hero" data-aos="fade-up">
     <div class="container hero-grid">
       <div class="hero-text" data-aos="fade-right" data-aos-delay="200">
-        <h1>Built to Brand.<br>Designed to Deliver.</h1>
-        <p>Marketing, branding, and business services done right.</p>
+        <h2 style="font-size:0;line-height:0;margin:0;padding:0;border:0;">Built to Brand. Designed to Deliver.</h2>
+        <p style="font-size:2.25rem;font-weight:700;margin:0 0 12px 0;">Built to Brand. Designed to Deliver.</p>
+        <p>Logos that make your business unforgettable. Websites that convert. Print that wins tenders. Marketing that grows pipeline — without the busywork.</p>
         <a href="contact.html" class="btn">
-          <span>Let's Build</span>
+          <span>Book a Consultation</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12,5 19,12 12,19"></polyline>
@@ -256,10 +292,10 @@
     </div>
   </section>
 
-  <!-- 🔵 Services -->
+  <!-- 🔵 Add Value (Services: Feature → Benefits) -->
   <section class="services-preview" data-aos="fade-up">
     <div class="container">
-      <h2 data-aos="fade-up" data-aos-delay="200">Our Core Services</h2>
+      <h2 data-aos="fade-up" data-aos-delay="200">Services that move the needle</h2>
       <div class="cards">
         <div class="card" data-aos="fade-up" data-aos-delay="300">
           <div class="card-icon">
@@ -269,7 +305,11 @@
             </svg>
           </div>
           <h3>Branding</h3>
-          <p>Logos, brand kits, presentations</p>
+          <p><strong>Feature:</strong> Strategic identity — logo, brand system, and on-brand assets.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Be remembered and chosen more often.</li>
+            <li><strong>Benefit:</strong> Consistency that speeds up sales and approvals.</li>
+          </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="400">
           <div class="card-icon">
@@ -279,7 +319,11 @@
             </svg>
           </div>
           <h3>Marketing</h3>
-          <p>Social media, email, automation</p>
+          <p><strong>Feature:</strong> Campaigns across social, email and search with automation.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Fill your pipeline with qualified leads.</li>
+            <li><strong>Benefit:</strong> Save hours weekly with done-for-you execution.</li>
+          </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="450">
           <div class="card-icon">
@@ -290,7 +334,11 @@
             </svg>
           </div>
           <h3>Development Services</h3>
-          <p>Website & landing pages, e-commerce stores, custom web apps</p>
+          <p><strong>Feature:</strong> High-performance websites, landing pages and e‑commerce.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Convert more visitors into sales and enquiries.</li>
+            <li><strong>Benefit:</strong> Fast, secure builds that scale with your growth.</li>
+          </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="500">
           <div class="card-icon">
@@ -301,7 +349,11 @@
             </svg>
           </div>
           <h3>Business Setup</h3>
-          <p>Company registration, business documentation</p>
+          <p><strong>Feature:</strong> Company registration and business documentation.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Get procurement-ready faster.</li>
+            <li><strong>Benefit:</strong> Avoid admin delays with compliant paperwork.</li>
+          </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="550">
           <div class="card-icon">
@@ -311,8 +363,12 @@
               <rect x="16" y="4" width="3" height="13"/>
             </svg>
           </div>
-          <h3>Presentations & Content Creation</h3>
-          <p>Pitch decks, presentations, social media content</p>
+          <h3>Presentations & Content</h3>
+          <p><strong>Feature:</strong> Investor decks, sales presentations and content.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Win rooms with clear, confident storytelling.</li>
+            <li><strong>Benefit:</strong> Reuse assets to speed up future pitches.</li>
+          </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="600">
           <div class="card-icon">
@@ -323,11 +379,15 @@
             </svg>
           </div>
           <h3>Printing</h3>
-          <p>Flyers, banners, certificates, gifting</p>
+          <p><strong>Feature:</strong> Premium stationery, large-format and branded gifting.</p>
+          <ul class="service-benefits">
+            <li><strong>Benefit:</strong> Sharp quality that elevates credibility.</li>
+            <li><strong>Benefit:</strong> Reliable timelines — 100% on-time delivery.</li>
+          </ul>
         </div>
       </div>
       <a href="services.html" class="btn" data-aos="fade-up" data-aos-delay="700">
-        <span>Explore All Services</span>
+        <span>See Full Capabilities</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12,5 19,12 12,19"></polyline>
@@ -336,11 +396,11 @@
     </div>
   </section>
 
-  <!-- 🔵 Portfolio Preview -->
+  <!-- 🔵 Show Proof (Portfolio + Testimonials + Trust) -->
   <section class="portfolio-preview" data-aos="fade-up">
     <div class="container">
       <h2 data-aos="fade-up" data-aos-delay="200">Work That Speaks</h2>
-      <p data-aos="fade-up" data-aos-delay="300">See how we've brought brands to life across various industries.</p>
+      <p data-aos="fade-up" data-aos-delay="300">Results across retail, services and public entities — from identity to go‑to‑market.</p>
       <a href="portfolio.html" class="btn" data-aos="fade-up" data-aos-delay="400">
         <span>View Portfolio</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -348,15 +408,56 @@
           <polyline points="12,5 19,12 12,19"></polyline>
         </svg>
       </a>
+      <div class="cards" style="margin-top:24px;">
+        <div class="card" data-aos="fade-up" data-aos-delay="450">
+          <h3>What clients say</h3>
+          <p>“Professional, fast and on-brand — we launched in half the time and hit our targets.”</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="500">
+          <h3>Trusted signals</h3>
+          <p>100% on-time delivery • South Africa based • Procurement-ready documentation</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="550">
+          <h3>Selected outcomes</h3>
+          <p>+45% lead enquiries after website launch • Tender-ready brand kits</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 🔵 Contact CTA -->
+  <!-- 🔵 FAQ -->
+  <section class="services-faq" data-aos="fade-up">
+    <div class="container">
+      <h2>FAQ: Branding, Printing & Start‑Up Services</h2>
+      <details>
+        <summary>How fast can we get a new logo and brand kit?</summary>
+        <p>Typical turnarounds are 7–14 days depending on scope. Rush options available. You get logo files, typography, colours and ready‑to‑use assets.</p>
+      </details>
+      <details>
+        <summary>Do you handle company registration and documents?</summary>
+        <p>Yes. We register your company and prepare essential documents so you can invoice and tender sooner.</p>
+      </details>
+      <details>
+        <summary>Can you manage printing end‑to‑end?</summary>
+        <p>We design, proof, print and deliver. Expect premium quality and reliable timelines — our KPI is 100% on‑time delivery.</p>
+      </details>
+      <details>
+        <summary>Will my website be SEO‑ready?</summary>
+        <p>Yes. We build fast, mobile‑first websites with on‑page SEO and tracking so you can measure growth from day one.</p>
+      </details>
+      <details>
+        <summary>Do you work with start‑ups and corporates?</summary>
+        <p>Both. From first identity to enterprise rebrands — we scale services to your stage and budget.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 🔵 Encourage Action (CTA) -->
   <section class="contact-cta" data-aos="fade-up">
     <div class="container">
-      <h2 data-aos="fade-up" data-aos-delay="200">Start Something Great</h2>
+      <h2 data-aos="fade-up" data-aos-delay="200">Let’s build your brand today</h2>
       <a href="contact.html" class="btn" data-aos="fade-up" data-aos-delay="300">
-        <span>Talk to Us</span>
+        <span>Book a Consultation</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12,5 19,12 12,19"></polyline>
@@ -435,5 +536,27 @@
     });
   </script>
   <script src="script.js"></script>
+  <script>
+    (function(){
+      const STORAGE_KEY = 'mh-theme';
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const initial = saved ? saved : (prefersDark ? 'dark' : 'light');
+      if (initial === 'light') document.documentElement.setAttribute('data-theme','light');
+      const btn = document.getElementById('themeToggle');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+          if (isLight) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem(STORAGE_KEY, 'dark');
+          } else {
+            document.documentElement.setAttribute('data-theme','light');
+            localStorage.setItem(STORAGE_KEY, 'light');
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
