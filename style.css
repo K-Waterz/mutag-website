@@ -902,19 +902,46 @@ textarea:focus-visible {
   justify-content: center;
   gap: var(--space-xl);
   flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.client-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: var(--space-md);
+}
+
+.client-logo-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .client-logos img {
-  height: 60px;
+  max-width: 100%;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   filter: grayscale(100%) brightness(1.5);
   opacity: 0.7;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.client-logos img:hover {
+.client-logo-item:hover img {
   filter: none;
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* ================ MODERN CONTACT STYLES ================ */
@@ -1169,6 +1196,16 @@ footer {
   .footer-copyright {
     text-align: right;
   }
+  
+  .client-logos {
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  
+  .client-logo-item {
+    width: 150px;
+    height: 70px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1291,9 +1328,15 @@ footer {
   }
   .client-logos {
     gap: var(--space-md) !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .client-logo-item {
+    width: 140px !important;
+    height: 60px !important;
   }
   .client-logos img {
-    height: 32px !important;
+    max-height: 35px !important;
   }
   .contact-wrapper {
     display: flex !important;
