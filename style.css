@@ -89,9 +89,58 @@
 [data-theme='light'] .card li {
   color: #475569;
 }
+[data-theme='light'] .service-card li {
+  color: #475569;
+}
 [data-theme='light'] .hero-text p {
   color: #0f172a;
   font-weight: 500;
+}
+[data-theme='light'] .two-column .text p {
+  color: #334155;
+}
+[data-theme='light'] .service-desc {
+  color: #334155;
+}
+[data-theme='light'] .cta-section p {
+  color: #334155;
+}
+
+/* Improved contrast for dark mode */
+:not([data-theme='light']) .two-column .text p {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .card p {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .service-desc {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .service-card li {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .card li {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .cta-section p {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .showcase-subtitle {
+  color: #cbd5e1;
+}
+
+:not([data-theme='light']) .kpi-badge p {
+  color: #cbd5e1;
+}
+
+[data-theme='light'] .kpi-badge p {
+  color: #475569;
 }
 
 /* ================ BASE STYLES ================ */
