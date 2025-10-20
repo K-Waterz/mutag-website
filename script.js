@@ -1,6 +1,69 @@
 // Enhanced Scroll and Navigation Scripts
 document.addEventListener("DOMContentLoaded", () => {
   try {
+    // Enhanced device theme detection - Works with existing theme system
+    function detectAndSetTheme() {
+      const STORAGE_KEY = 'mh-theme';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const html = document.documentElement;
+      
+      // Only set device preference if no manual override exists
+      if (!saved) {
+        if (prefersDark) {
+          html.removeAttribute('data-theme'); // Dark is default
+        } else {
+          html.setAttribute('data-theme', 'light');
+        }
+      }
+      
+      // Listen for system theme changes (only update if no manual preference set)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const currentSaved = localStorage.getItem(STORAGE_KEY);
+        if (!currentSaved) {
+          if (e.matches) {
+            html.removeAttribute('data-theme');
+          } else {
+            html.setAttribute('data-theme', 'light');
+          }
+        }
+      });
+    }
+    
+    // Initialize theme detection
+    detectAndSetTheme();
+
+    // Enhanced mobile video autoplay handling
+    function ensureVideoAutoplay() {
+      const videos = document.querySelectorAll('.hero-background-video, .elevate-video');
+      videos.forEach(video => {
+        if (video) {
+          // Force play on mobile devices
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log('Auto-play prevented, attempting fallback:', error);
+              // Fallback: try to play when user interacts
+              document.addEventListener('touchstart', () => {
+                video.play().catch(() => {});
+              }, { once: true });
+            });
+          }
+          
+          // Ensure video is muted for autoplay compliance
+          video.muted = true;
+          
+          // Add error handling
+          video.addEventListener('error', (e) => {
+            console.log('Video error:', e);
+          });
+        }
+      });
+    }
+
+    // Initialize video autoplay
+    ensureVideoAutoplay();
+
     // Scroll to top on page load (with smooth behavior)
     window.scrollTo({
       top: 0,

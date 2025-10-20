@@ -92,10 +92,6 @@
 [data-theme='light'] .service-card li {
   color: #475569;
 }
-[data-theme='light'] .hero-text p {
-  color: #0f172a;
-  font-weight: 500;
-}
 [data-theme='light'] .two-column .text p {
   color: #334155;
 }
@@ -380,12 +376,19 @@ textarea:focus-visible {
 .hero-text p {
   font-size: clamp(1.1rem, 2.2vw, 1.25rem);
   margin: var(--space-lg) 0;
-  color: var(--light);
+  color: #ffffff;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure hero heading text is high contrast against video background */
+.hero-main-heading {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .hero-img img {
@@ -465,6 +468,29 @@ textarea:focus-visible {
 .btn-submit:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg), 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ================ ELEVATE VIDEO SECTION ================ */
+.elevate-video-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 var(--space-lg);
+  position: relative;
+}
+
+.elevate-video {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--glass-border);
+}
+
+.elevate-video:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl), 0 0 25px rgba(91, 108, 255, 0.3);
 }
 
 /* ================ MODERN SECTIONS ================ */
