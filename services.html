@@ -22,6 +22,11 @@
   <meta name="twitter:description" content="Unforgettable logos, converting websites, reliable printing and pipeline growth for Centurion and SA." />
   <meta name="twitter:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Preload critical resources -->
+  <link rel="preload" href="Logo-no-background.png" as="image">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -30,8 +35,9 @@
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#0f172a" />
   <meta name="theme-color" content="#0f172a" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -71,7 +77,7 @@
   <header id="header">
     <div class="container nav">
       <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" />
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" loading="eager" />
       </a>
       <nav>
         <ul>
@@ -211,7 +217,7 @@
 
         <!-- Elevate Business Video Section -->
         <div class="elevate-video-section" data-aos="fade-up" data-aos-delay="750" style="margin: 4rem 0; text-align: center;">
-          <video class="elevate-video" autoplay muted loop playsinline preload="auto" webkit-playsinline>
+          <video class="elevate-video" autoplay muted loop playsinline preload="metadata" webkit-playsinline>
             <source src="Mutag wesbite images/ELEVATE YOUR BUSINESS TODAY.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -241,7 +247,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="Logo-no-background.png" alt="MUTAG Logo" />
+          <img src="Logo-no-background.png" alt="MUTAG Logo" loading="lazy" />
         </div>
         <div class="footer-copyright">
           <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
@@ -265,14 +271,22 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
   <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100
-    });
+    // Initialize AOS after it loads
+    function initAOS() {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 100
+        });
+      } else {
+        setTimeout(initAOS, 100);
+      }
+    }
+    initAOS();
 
     // Header scroll effect
     const header = document.getElementById('header');

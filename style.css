@@ -1206,41 +1206,12 @@ textarea:focus-visible {
   width: auto;
   height: auto;
   object-fit: contain;
-  /* Optimized white background removal */
-  filter: 
-    brightness(0) 
-    invert(1) 
-    contrast(1.1);
-  opacity: 0.95;
+  opacity: 0.9;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: transparent !important;
-  mix-blend-mode: screen;
   will-change: transform, filter; /* Optimize for performance */
 }
 
-/* Enhanced white background removal for all logos */
-.client-logos img[src*="flowerclub"],
-.client-logos img[src*="attorneys"], 
-.client-logos img[src*="lagracia"],
-.client-logos img[src*="Rapatla-rue"],
-.client-logos img[src$=".png"],
-.client-logos img[src$=".jpg"],
-.client-logos img[src$=".jpeg"] {
-  filter: 
-    brightness(0) 
-    invert(1) 
-    contrast(1.1);
-  background: transparent !important;
-  mix-blend-mode: screen;
-  opacity: 0.95;
-}
-
 .client-logos img:hover {
-  filter: 
-    brightness(0) 
-    invert(1) 
-    contrast(1.2);
-  mix-blend-mode: screen;
   opacity: 1;
   transform: scale(1.05);
 }

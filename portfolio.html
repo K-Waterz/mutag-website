@@ -28,10 +28,16 @@
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#0f172a" />
   <meta name="theme-color" content="#0f172a" />
+  <!-- Preload critical resources -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Optimized font loading with display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
   <!-- Preload critical images for faster loading -->
   <link rel="preload" href="Logo-no-background.png" as="image">
   <link rel="preload" href="flowerclub-logo.png" as="image">
@@ -101,7 +107,7 @@
   <header id="header">
     <div class="container nav">
       <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img"></a>
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" loading="eager"></a>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -268,7 +274,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="Logo-no-background.png" alt="MUTAG Logo" />
+          <img src="Logo-no-background.png" alt="MUTAG Logo" loading="lazy" />
         </div>
         <div class="footer-copyright">
           <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
@@ -292,14 +298,22 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
   <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100
-    });
+    // Initialize AOS after it loads
+    function initAOS() {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 100
+        });
+      } else {
+        setTimeout(initAOS, 100);
+      }
+    }
+    initAOS();
 
     // Header scroll effect
     const header = document.getElementById('header');

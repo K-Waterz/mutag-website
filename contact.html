@@ -28,10 +28,16 @@
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#0f172a" />
   <meta name="theme-color" content="#0f172a" />
+  <!-- Preload critical resources -->
+  <link rel="preload" href="Logo-no-background.png" as="image">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -88,7 +94,7 @@
   <header id="header">
     <div class="container nav">
       <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" />
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" loading="eager" />
       </a>
       <nav>
         <ul>
@@ -193,7 +199,7 @@
         </form>
       </div>
       <div class="map-embed" data-aos="fade-up" data-aos-delay="200">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.197457593111!2d28.109473800000004!3d-25.8958786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e957b9a6a48370d%3A0x3271642b353143a0!2sMUTAG%20House!5e0!3m2!1sen!2sza!4v1756481037751!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.197457593111!2d28.109473800000004!3d-25.8958786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e957b9a6a48370d%3A0x3271642b353143a0!2sMUTAG%20House!5e0!3m2!1sen!2sza!4v1756481037751!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MUTAG HOUSE Location Map"></iframe>
       </div>
     </div>
   </section>
@@ -203,7 +209,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="Logo-no-background.png" alt="MUTAG Logo" />
+          <img src="Logo-no-background.png" alt="MUTAG Logo" loading="lazy" />
         </div>
         <div class="footer-copyright">
           <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
@@ -227,14 +233,22 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
   <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100
-    });
+    // Initialize AOS after it loads
+    function initAOS() {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 100
+        });
+      } else {
+        setTimeout(initAOS, 100);
+      }
+    }
+    initAOS();
 
     // Header scroll effect
     const header = document.getElementById('header');

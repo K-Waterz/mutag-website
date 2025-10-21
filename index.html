@@ -29,205 +29,49 @@
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#0f172a" />
   <meta name="theme-color" content="#0f172a" />
+  <!-- Preload critical resources -->
+  <link rel="preload" href="Logo-no-background.png" as="image">
+  <link rel="preload" href="Mutag wesbite images/black star hero.gif" as="image">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Optimized font loading with display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
 
+  <!-- Consolidated JSON-LD for better performance -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MUTAG HOUSE",
-    "url": "https://www.mutag.co.za",
-    "logo": "https://www.mutag.co.za/Mutag-logo.jpeg",
-    "sameAs": [
-      "https://www.facebook.com/people/MUTAG-House/61578437019157/",
-      "https://www.linkedin.com/company/mutag-house/",
-      "https://www.instagram.com/mutag_house"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MUTAG HOUSE",
+      "url": "https://www.mutag.co.za",
+      "logo": "https://www.mutag.co.za/Logo-no-background.png",
+      "email": "info@mutag.co.za",
       "telephone": "+27729572238",
-      "contactType": "customer service",
-      "areaServed": "ZA",
-      "availableLanguage": ["en"]
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "MUTAG HOUSE",
-    "image": "https://www.mutag.co.za/Mutag-logo.jpeg",
-    "telephone": "+27729572238",
-    "email": "info@mutag.co.za",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Centurion",
-      "addressLocality": "Centurion",
-      "addressRegion": "Gauteng",
-      "postalCode": "0157",
-      "addressCountry": "ZA"
-    },
-    "url": "https://www.mutag.co.za",
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -25.8597,
-      "longitude": 28.1836
-    },
-    "areaServed": ["Centurion", "Pretoria", "Gauteng", "South Africa"],
-    "category": ["Marketing Agency", "Website Designer", "Branding Agency", "Printing Service"],
-    "hasMap": "https://www.google.com/maps?q=Centurion,+Gauteng",
-    "priceRange": "$$",
-    "sameAs": [
-      "https://www.facebook.com/people/MUTAG-House/61578437019157/",
-      "https://www.linkedin.com/company/mutag-house/",
-      "https://www.instagram.com/mutag_house"
-    ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "MUTAG HOUSE",
-    "url": "https://www.mutag.co.za",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.mutag.co.za/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": [
-      "Branding & Design",
-      "Digital Marketing",
-      "Development Services",
-      "Business Setup",
-      "Print Services",
-      "Presentations & Content Creation"
-    ],
-    "provider": {
-      "@type": "Organization",
-      "name": "MUTAG HOUSE"
-    },
-    "areaServed": "ZA",
-    "availableChannel": {
-      "@type": "ServiceChannel",
-      "serviceUrl": "https://www.mutag.co.za/services.html"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Web Development",
-    "provider": {
-      "@type": "Organization",
-      "name": "MUTAG HOUSE",
-      "url": "https://www.mutag.co.za"
-    },
-    "areaServed": "ZA",
-    "description": "Custom web development, responsive websites, landing pages, e-commerce stores, and web applications for businesses in South Africa.",
-    "serviceOutput": "Responsive websites, e-commerce stores, web applications",
-    "availableChannel": {
-      "@type": "ServiceChannel",
-      "serviceUrl": "https://www.mutag.co.za/services.html"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Business Startup Services",
-    "provider": {
-      "@type": "Organization",
-      "name": "MUTAG HOUSE",
-      "url": "https://www.mutag.co.za"
-    },
-    "areaServed": "ZA",
-    "description": "Company registration, business documentation, branding, and support for new businesses in South Africa.",
-    "serviceOutput": "Registered companies, business documentation, brand identity",
-    "availableChannel": {
-      "@type": "ServiceChannel",
-      "serviceUrl": "https://www.mutag.co.za/services.html"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.mutag.co.za/"
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Centurion",
+        "addressRegion": "Gauteng",
+        "addressCountry": "ZA"
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Services",
-        "item": "https://www.mutag.co.za/services.html"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Portfolio",
-        "item": "https://www.mutag.co.za/portfolio.html"
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "Contact",
-        "item": "https://www.mutag.co.za/contact.html"
-      }
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "MUTAG HOUSE | Built to Brand. Designed to Deliver.",
-    "url": "https://www.mutag.co.za",
-    "description": "MUTAG HOUSE is a creative branding agency offering marketing, printing, and business services for modern businesses across South Africa.",
-    "inLanguage": "en",
-    "isPartOf": {
+      "sameAs": [
+        "https://www.facebook.com/people/MUTAG-House/61578437019157/",
+        "https://www.linkedin.com/company/mutag-house/",
+        "https://www.instagram.com/mutag_house"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "WebSite",
+      "name": "MUTAG HOUSE",
       "url": "https://www.mutag.co.za"
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -239,7 +83,7 @@
   <header id="header">
     <div class="container nav">
       <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" />
+        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" loading="eager" />
       </a>
       <nav>
         <ul>
@@ -260,7 +104,7 @@
   <!-- 🔵 Hero (Capture Attention) -->
   <section class="hero" data-aos="fade-up">
     <!-- Background GIF -->
-    <img class="hero-background-gif" src="Mutag wesbite images/black star hero.gif" alt="Hero Background Animation">
+    <img class="hero-background-gif" src="Mutag wesbite images/black star hero.gif" alt="Hero Background Animation" loading="eager">
     <div class="container hero-grid">
       <div class="hero-text" data-aos="fade-right" data-aos-delay="200">
         <h2 style="font-size:0;line-height:0;margin:0;padding:0;border:0;">Built to Brand. Designed to Deliver.</h2>
@@ -286,7 +130,7 @@
         <p>We work closely with entrepreneurs, SMEs, corporates, and public entities to develop the visuals, platforms, and strategies they need to thrive. Whether you're launching a new business, refreshing your identity, or scaling up your marketing — we're here to deliver excellence with purpose.</p>
       </div>
       <div class="image" data-aos="fade-left" data-aos-delay="400">
-        <img class="team-working-img" src="Mutag wesbite images/Team working on project on separate screens.png" alt="Team working on project on separate screens" />
+        <img class="team-working-img" src="Mutag wesbite images/Team working on project on separate screens.png" alt="Team working on project on separate screens" loading="lazy" />
       </div>
     </div>
   </section>
@@ -294,7 +138,7 @@
   <!-- 🔵 Add Value (Services: Feature → Benefits) -->
   <section class="services-preview" data-aos="fade-up">
     <!-- Background Triangles GIF -->
-    <img class="services-background-matrix" src="Mutag wesbite images/blue triangles.gif" alt="Blue Triangles Background Animation">
+    <img class="services-background-matrix" src="Mutag wesbite images/blue triangles.gif" alt="Blue Triangles Background Animation" loading="lazy">
     <div class="container services-content">
       <h2 data-aos="fade-up" data-aos-delay="200">Services that move the needle</h2>
       <div class="cards">
@@ -437,7 +281,7 @@
       </div>
       <!-- Social Media Phone Image -->
       <div class="portfolio-phone-image" data-aos="fade-up" data-aos-delay="600" style="margin-top: 3rem; text-align: center;">
-        <img src="Social-media-phone.png" alt="Social Media Phone" />
+        <img src="Social-media-phone.png" alt="Social Media Phone" loading="lazy" />
       </div>
     </div>
   </section>
@@ -462,7 +306,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="Logo-no-background.png" alt="MUTAG Logo" />
+          <img src="Logo-no-background.png" alt="MUTAG Logo" loading="lazy" />
         </div>
         <div class="footer-copyright">
           <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
@@ -486,16 +330,23 @@
   </footer>
 
   <!-- 🔵 Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
   <script>
-    // Initialize AOS with modern settings
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100,
-      delay: 0
-    });
+    // Initialize AOS after it loads
+    function initAOS() {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 100,
+          delay: 0
+        });
+      } else {
+        setTimeout(initAOS, 100);
+      }
+    }
+    initAOS();
 
     // Header scroll effect
     const header = document.getElementById('header');
