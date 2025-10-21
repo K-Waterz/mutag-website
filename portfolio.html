@@ -32,6 +32,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Preload critical images for faster loading -->
+  <link rel="preload" href="Logo-no-background.png" as="image">
+  <link rel="preload" href="flowerclub-logo.png" as="image">
+  <link rel="preload" href="attorneys-logo.png" as="image">
+  <link rel="preload" href="lagracia-logo.png" as="image">
+  <link rel="preload" href="Rapatla-rue-logo.jpg" as="image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -125,10 +131,10 @@
     <!-- FlowerClub -->
     <article class="portfolio-item featured-item" data-aos="fade-up" data-aos-delay="200">
       <div class="portfolio-media">
-        <img src="flowerclub-social-media.gif" alt="FlowerClub Social Media Transformation GIF" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+        <img src="flowerclub-social-media.gif" alt="FlowerClub Social Media Transformation GIF" style="width:100%;max-width:700px;display:block;margin:0 auto;" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo">
+        <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo" loading="lazy">
         <h2>Social Media Transformation for FlowerClub</h2>
         <div class="portfolio-services">
           <span class="service-tag">Social Media Strategy</span>
@@ -147,10 +153,10 @@
     <!-- Mathibele Mahlaela Attorneys -->
     <article class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
       <div class="portfolio-media">
-        <img src="business-card-mockup.png" alt="Mathibele Mahlaela Attorneys Business Cards Mockup" style="width:100%;max-width:600px;display:block;margin:0 auto;">
+        <img src="business-card-mockup.png" alt="Mathibele Mahlaela Attorneys Business Cards Mockup" style="width:100%;max-width:600px;display:block;margin:0 auto;" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo">
+        <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo" loading="lazy">
         <h2>Legal Branding Solutions</h2>
         <div class="portfolio-services">
           <span class="service-tag">Business Cards</span>
@@ -164,10 +170,10 @@
     <!-- La Gracia Estate -->
     <article class="portfolio-item" data-aos="fade-up" data-aos-delay="400">
       <div class="portfolio-media">
-        <video src="la-gracia-video.mp4" controls style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);background:#000;" poster="lagracia-logo.png"></video>
+        <video src="la-gracia-video.mp4" controls preload="metadata" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);background:#000;" poster="lagracia-logo.png"></video>
       </div>
       <div class="portfolio-content">
-        <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo">
+        <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo" loading="lazy">
         <h2>Complete Brand Identity</h2>
         <div class="portfolio-services">
           <span class="service-tag">Logo Design</span>
@@ -182,10 +188,10 @@
     <!-- Rapatla-rue -->
     <article class="portfolio-item" data-aos="fade-up" data-aos-delay="500">
       <div class="portfolio-media">
-        <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue Website and Digital Solutions" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);">
+        <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue Website and Digital Solutions" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue Logo" class="client-logo">
+        <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue Logo" class="client-logo" loading="lazy">
         <h2>Complete Digital Business Setup</h2>
         <div class="portfolio-services">
           <span class="service-tag">Custom Website Development</span>
@@ -206,99 +212,29 @@
       <div class="client-logos-container" data-aos="fade-up" data-aos-delay="400">
         <div class="client-logos">
           <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
+            <img src="flowerclub-logo.png" alt="FlowerClub" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
+            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
+            <img src="lagracia-logo.png" alt="La Gracia Estate" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
+            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue" loading="lazy">
           </div>
-          <!-- Additional sets for seamless infinite scroll -->
+          <!-- Additional set for seamless infinite scroll -->
           <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
-          </div>
-          <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
+            <img src="flowerclub-logo.png" alt="FlowerClub" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
+            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
-          </div>
-          
-          <!-- Set 3 -->
-          <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
+            <img src="lagracia-logo.png" alt="La Gracia Estate" loading="lazy">
           </div>
           <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
-          </div>
-          <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
-          </div>
-          <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
-          </div>
-          
-          <!-- Set 4 -->
-          <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
-          </div>
-          <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
-          </div>
-          <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
-          </div>
-          <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
-          </div>
-          
-          <!-- Set 5 -->
-          <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
-          </div>
-          <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
-          </div>
-          <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
-          </div>
-          <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
-          </div>
-          
-          <!-- Set 6 -->
-          <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
-          </div>
-          <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
-          </div>
-          <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
-          </div>
-          <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
-          </div>
-          
-          <!-- Set 7 -->
-          <div class="client-logo-item">
-            <img src="flowerclub-logo.png" alt="FlowerClub">
-          </div>
-          <div class="client-logo-item">
-            <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys">
-          </div>
-          <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate">
-          </div>
-          <div class="client-logo-item">
-            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue">
+            <img src="Rapatla-rue-logo.jpg" alt="Rapatla-rue" loading="lazy">
           </div>
         </div>
       </div>

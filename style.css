@@ -1166,6 +1166,7 @@ textarea:focus-visible {
   gap: var(--space-xl);
   animation: scrollLogos 30s linear infinite;
   width: fit-content;
+  will-change: transform; /* Optimize for animation performance */
 }
 
 @keyframes scrollLogos {
@@ -1205,17 +1206,16 @@ textarea:focus-visible {
   width: auto;
   height: auto;
   object-fit: contain;
-  /* Aggressive white background removal */
+  /* Optimized white background removal */
   filter: 
     brightness(0) 
-    saturate(100%) 
     invert(1) 
-    contrast(1.1)
-    drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+    contrast(1.1);
   opacity: 0.95;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: transparent !important;
   mix-blend-mode: screen;
+  will-change: transform, filter; /* Optimize for performance */
 }
 
 /* Enhanced white background removal for all logos */
@@ -1228,10 +1228,8 @@ textarea:focus-visible {
 .client-logos img[src$=".jpeg"] {
   filter: 
     brightness(0) 
-    saturate(100%) 
     invert(1) 
-    contrast(1.1)
-    drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+    contrast(1.1);
   background: transparent !important;
   mix-blend-mode: screen;
   opacity: 0.95;
@@ -1240,10 +1238,8 @@ textarea:focus-visible {
 .client-logos img:hover {
   filter: 
     brightness(0) 
-    saturate(100%) 
     invert(1) 
-    contrast(1.2)
-    drop-shadow(0 4px 12px rgba(255, 255, 255, 0.4));
+    contrast(1.2);
   mix-blend-mode: screen;
   opacity: 1;
   transform: scale(1.05);
