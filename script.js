@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize theme detection
     detectAndSetTheme();
 
-    // Enhanced mobile video autoplay handling
+    // Enhanced mobile video autoplay handling for elevate video
     function ensureVideoAutoplay() {
-      const videos = document.querySelectorAll('.hero-background-video, .elevate-video');
+      const videos = document.querySelectorAll('.elevate-video');
       videos.forEach(video => {
         if (video) {
           // Force play on mobile devices
