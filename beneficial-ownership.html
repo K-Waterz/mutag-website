@@ -23,6 +23,159 @@
   <meta name="twitter:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Mobile Optimizations for Beneficial Ownership Page */
+    @media (max-width: 768px) {
+      /* Hero Section */
+      .about-hero {
+        padding: 2rem 0 !important;
+      }
+      .about-hero h1 {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+        margin-bottom: 1rem !important;
+      }
+      .about-hero .subheading {
+        font-size: 1rem !important;
+        padding: 0 1rem;
+      }
+      
+      /* Main Content */
+      main {
+        padding: 2rem 0 !important;
+      }
+      
+      /* Two Column Layout - Stack on Mobile */
+      .two-column {
+        flex-direction: column !important;
+        gap: 2rem !important;
+      }
+      .two-column .image {
+        margin-top: 0 !important;
+      }
+      .two-column .image > div {
+        padding: 1.5rem !important;
+      }
+      
+      /* Section Spacing */
+      .about-section {
+        margin-bottom: 3rem !important;
+      }
+      .about-section h2 {
+        font-size: 1.75rem !important;
+        margin-bottom: 2rem !important;
+      }
+      
+      /* Service Cards */
+      .cards {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      
+      /* Process Section */
+      .process-step {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      .process-number {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        font-size: 1rem !important;
+      }
+      .process-steps {
+        gap: 2rem !important;
+      }
+      
+      /* Common Challenges Box */
+      .challenges-box {
+        padding: 1.5rem !important;
+      }
+      .challenges-box h3 {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+      }
+      
+      /* Why Choose Us Grid */
+      .why-choose-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      .why-choose-grid > div {
+        padding: 1.25rem !important;
+      }
+      
+      /* CTA Section */
+      .cta-section {
+        padding: 2.5rem 1.5rem !important;
+      }
+      .cta-section h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem) !important;
+        margin-bottom: 1rem !important;
+      }
+      .cta-section > div > p {
+        font-size: 1rem !important;
+        margin-bottom: 1.5rem !important;
+      }
+      .cta-buttons {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      .cta-section .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .cta-section > div > p:last-child {
+        font-size: 0.85rem !important;
+        line-height: 1.8 !important;
+      }
+      
+      /* Breadcrumb */
+      nav[aria-label="Breadcrumb"] {
+        padding: 0.75rem 0 !important;
+      }
+      nav[aria-label="Breadcrumb"] ol {
+        font-size: 0.8rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.25rem !important;
+      }
+      
+      /* Container Padding */
+      .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      
+      /* Text Content */
+      .text p, .text ul {
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+      }
+      .text ul {
+        padding-left: 1.25rem !important;
+      }
+      
+      /* Card Text */
+      .card p {
+        font-size: 0.9rem !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      /* Extra Small Devices */
+      .about-hero {
+        padding: 1.5rem 0 !important;
+      }
+      main {
+        padding: 1.5rem 0 !important;
+      }
+      .about-section {
+        margin-bottom: 2rem !important;
+      }
+      .cta-section {
+        padding: 2rem 1rem !important;
+      }
+    }
+  </style>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -267,33 +420,33 @@
       </section>
 
       <!-- The Process -->
-      <section class="about-section" data-aos="fade-up" style="margin-bottom: 4rem;">
+      <section class="about-section process-section" data-aos="fade-up" style="margin-bottom: 4rem;">
         <h2 style="text-align: center; margin-bottom: 3rem;">Our Process</h2>
         <div style="max-width: 900px; margin: 0 auto;">
-          <div style="display: grid; gap: 2.5rem;">
-            <div data-aos="fade-up" data-aos-delay="200" style="display: flex; gap: 1.5rem; align-items: flex-start;">
-              <div style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">1</div>
+          <div class="process-steps" style="display: grid; gap: 2.5rem;">
+            <div class="process-step" data-aos="fade-up" data-aos-delay="200" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+              <div class="process-number" style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">1</div>
               <div style="flex: 1;">
                 <h3 style="margin-bottom: 0.75rem; color: #7f94ff;">Initial Consultation</h3>
                 <p style="line-height: 1.7; margin: 0;">We start by understanding your company structure, ownership details, and any specific circumstances that may affect beneficial ownership identification. This helps us determine exactly what information needs to be registered.</p>
               </div>
             </div>
-            <div data-aos="fade-up" data-aos-delay="300" style="display: flex; gap: 1.5rem; align-items: flex-start;">
-              <div style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">2</div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="300" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+              <div class="process-number" style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">2</div>
               <div style="flex: 1;">
                 <h3 style="margin-bottom: 0.75rem; color: #7f94ff;">Information Collection</h3>
                 <p style="line-height: 1.7; margin: 0;">We guide you through collecting all necessary information about beneficial owners, including personal details, identification documents, and ownership percentages. We ensure all data is accurate and complete.</p>
               </div>
             </div>
-            <div data-aos="fade-up" data-aos-delay="400" style="display: flex; gap: 1.5rem; align-items: flex-start;">
-              <div style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">3</div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="400" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+              <div class="process-number" style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">3</div>
               <div style="flex: 1;">
                 <h3 style="margin-bottom: 0.75rem; color: #7f94ff;">Registration & Submission</h3>
                 <p style="line-height: 1.7; margin: 0;">We prepare and submit all required documentation to CIPC on your behalf, ensuring that all forms are completed correctly and all information meets regulatory requirements.</p>
               </div>
             </div>
-            <div data-aos="fade-up" data-aos-delay="500" style="display: flex; gap: 1.5rem; align-items: flex-start;">
-              <div style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">4</div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="500" style="display: flex; gap: 1.5rem; align-items: flex-start;">
+              <div class="process-number" style="background: #7f94ff; color: white; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">4</div>
               <div style="flex: 1;">
                 <h3 style="margin-bottom: 0.75rem; color: #7f94ff;">Confirmation & Documentation</h3>
                 <p style="line-height: 1.7; margin: 0;">Once registration is complete, we provide you with confirmation and maintain copies of all documentation for your records. We also set up reminders for when updates may be needed.</p>
@@ -304,10 +457,10 @@
       </section>
 
       <!-- Common Challenges -->
-      <section class="about-section" data-aos="fade-up" style="margin-bottom: 4rem;">
+      <section class="about-section challenges-section" data-aos="fade-up" style="margin-bottom: 4rem;">
         <h2 style="text-align: center; margin-bottom: 3rem;">Common Challenges We Solve</h2>
         <div style="max-width: 900px; margin: 0 auto;">
-          <div style="background: rgba(127, 148, 255, 0.1); padding: 2.5rem; border-radius: 1rem; border-left: 4px solid #7f94ff;">
+          <div class="challenges-box" style="background: rgba(127, 148, 255, 0.1); padding: 2.5rem; border-radius: 1rem; border-left: 4px solid #7f94ff;">
             <h3 style="color: #7f94ff; margin-bottom: 1.5rem;">Understanding Complex Ownership Structures</h3>
             <p style="margin-bottom: 1.5rem;">Many companies have complex ownership structures with multiple layers of entities, trusts, or holding companies. Determining who the ultimate beneficial owners are can be challenging. We help you navigate these complexities and identify all beneficial owners correctly.</p>
             
@@ -324,10 +477,10 @@
       </section>
 
       <!-- Why Choose Us -->
-      <section class="about-section" data-aos="fade-up" style="margin-bottom: 4rem;">
+      <section class="about-section why-choose-section" data-aos="fade-up" style="margin-bottom: 4rem;">
         <h2 style="text-align: center; margin-bottom: 3rem;">Why Choose MUTAG HOUSE for Beneficial Ownership Services?</h2>
         <div style="max-width: 1000px; margin: 0 auto;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
+          <div class="why-choose-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
             <div style="padding: 1.5rem; background: rgba(127, 148, 255, 0.05); border-radius: 0.75rem; border: 1px solid rgba(127, 148, 255, 0.2);">
               <h3 style="color: #7f94ff; margin-bottom: 0.75rem; font-size: 1.25rem;">Expert Knowledge</h3>
               <p style="line-height: 1.7; margin: 0;">Our team understands South African company law and CIPC requirements, ensuring your beneficial ownership registration is handled correctly.</p>
@@ -349,11 +502,11 @@
       </section>
 
       <!-- CTA Section -->
-      <section data-aos="fade-up" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(rgba(127, 148, 255, 0.1), rgba(127, 148, 255, 0.05)); border-radius: 1rem; margin-top: 3rem;">
+      <section class="cta-section" data-aos="fade-up" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(rgba(127, 148, 255, 0.1), rgba(127, 148, 255, 0.05)); border-radius: 1rem; margin-top: 3rem;">
         <div style="max-width: 800px; margin: 0 auto;">
           <h2 data-aos="fade-up" data-aos-delay="200" style="margin-bottom: 1rem; font-size: clamp(1.75rem, 4vw, 2.5rem);">Need Help with Beneficial Ownership?</h2>
           <p data-aos="fade-up" data-aos-delay="300" style="font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7;">Don't let beneficial ownership compliance become a challenge. Our team is here to help you navigate the requirements and ensure your company stays compliant.</p>
-          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+          <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
             <a href="contact.html" class="btn" data-aos="fade-up" data-aos-delay="400">
               <span>Get Started Today</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
