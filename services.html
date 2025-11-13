@@ -41,6 +41,65 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "MUTAG HOUSE",
+    "image": "https://www.mutag.co.za/Logo-no-background.png",
+    "@id": "https://www.mutag.co.za",
+    "url": "https://www.mutag.co.za",
+    "telephone": "+27729572238",
+    "email": "info@mutag.co.za",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Centurion",
+      "addressLocality": "Centurion",
+      "addressRegion": "Gauteng",
+      "postalCode": "0157",
+      "addressCountry": "ZA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.8958786,
+      "longitude": 28.1094738
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    "priceRange": "$$",
+    "areaServed": {
+      "@type": "City",
+      "name": "Centurion"
+    },
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": -25.8958786,
+        "longitude": 28.1094738
+      },
+      "geoRadius": {
+        "@type": "Distance",
+        "name": "Gauteng Province"
+      }
+    },
+    "sameAs": [
+      "https://www.facebook.com/people/MUTAG-House/61578437019157/",
+      "https://www.linkedin.com/company/mutag-house/",
+      "https://www.instagram.com/mutag_house"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": "MUTAG HOUSE",
     "url": "https://www.mutag.co.za",
@@ -142,13 +201,14 @@
   <header id="header">
     <div class="container nav">
       <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG Logo" class="logo-img" loading="eager" />
+        <img src="Logo-no-background.png" alt="MUTAG HOUSE Logo - Branding and Marketing Agency" class="logo-img" loading="eager" />
       </a>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html" class="active">Services</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -162,10 +222,9 @@
 
   <!-- Services Page Content -->
   <main>
-    <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Branding, Web Development & Marketing Services in Centurion | MUTAG HOUSE</h1>
     <section class="services-hero" data-aos="fade-up">
       <div class="container">
-        <h2 data-aos="fade-up" data-aos-delay="200" style="font-size:0;line-height:0;margin:0;padding:0;border:0;">Built to Brand. Designed to Deliver.</h2>
+        <h1 data-aos="fade-up" data-aos-delay="200">Branding, Web & Marketing Services in Centurion</h1>
         <p class="subheading" data-aos="fade-up" data-aos-delay="300">Logos that make you unforgettable. Websites that convert. Printing that shows up on time.</p>
       </div>
     </section>
@@ -188,6 +247,13 @@
               <li>Corporate identity</li>
               <li>Marketing materials</li>
             </ul>
+            <a href="contact.html" class="btn" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; padding: 0.5rem 1rem;">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
           </article>
 
           <article class="service-card" data-aos="fade-up" data-aos-delay="300">
@@ -205,6 +271,13 @@
               <li>Search engine optimization</li>
               <li>Content creation</li>
             </ul>
+            <a href="contact.html" class="btn" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; padding: 0.5rem 1rem;">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
           </article>
 
           <article class="service-card" data-aos="fade-up" data-aos-delay="400">
@@ -223,6 +296,13 @@
               <li>Landing pages</li>
               <li>SEO optimization</li>
             </ul>
+            <a href="contact.html" class="btn" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; padding: 0.5rem 1rem;">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
           </article>
 
           <article class="service-card" data-aos="fade-up" data-aos-delay="500">
@@ -237,10 +317,17 @@
             <p class="service-desc">Complete business registration and documentation services.</p>
             <ul>
               <li>Company registration</li>
-              <li>Beneficial ownership</li>
+              <li><a href="beneficial-ownership.html" style="color: #7f94ff; text-decoration: underline; font-weight: 600;">Beneficial ownership</a> <span style="color: #ef4444; font-size: 0.8em;">★ Popular</span></li>
               <li>Business documentation</li>
               <li>Compliance setup</li>
             </ul>
+            <a href="contact.html" class="btn" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; padding: 0.5rem 1rem;">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
           </article>
 
           <article class="service-card" data-aos="fade-up" data-aos-delay="600">
@@ -277,6 +364,13 @@
               <li>Marketing materials</li>
               <li>Large format printing</li>
             </ul>
+            <a href="contact.html" class="btn" style="margin-top: 1rem; display: inline-block; font-size: 0.9rem; padding: 0.5rem 1rem;">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
           </article>
         </div>
 
@@ -289,19 +383,97 @@
         </div>
 
         <div class="services-tie-in" data-aos="fade-up" data-aos-delay="800" style="margin: 2rem 0; text-align: center; font-size: 1.15rem; font-weight: 500;">
-          <p>From strategy to screen — we don’t just design, we build.<br>
+          <p>From strategy to screen — we don't just design, we build.<br>
           As a full-service agency, we connect branding, marketing, and technology under one roof to deliver seamless digital solutions.</p>
         </div>
 
-        <div class="cta-section" data-aos="fade-up" data-aos-delay="700">
-          <p>Ready to elevate your organization? Request a corporate-ready proposal with timelines and scope.</p>
-          <a href="contact.html" class="btn">
-            <span>Get a Custom Quote</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12,5 19,12 12,19"></polyline>
-            </svg>
-          </a>
+        <!-- Beneficial Ownership Banner -->
+        <section data-aos="fade-up" style="margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(127, 148, 255, 0.15), rgba(127, 148, 255, 0.05)); border-radius: 1rem; border: 2px solid rgba(127, 148, 255, 0.3);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+            <div style="flex: 1; min-width: 250px;">
+              <h3 style="color: #7f94ff; margin-bottom: 0.5rem; font-size: 1.5rem;">Need Help with Beneficial Ownership?</h3>
+              <p style="margin-bottom: 0; color: #94a3b8;">Many businesses struggle with CIPC beneficial ownership requirements. We make it simple and ensure compliance.</p>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="beneficial-ownership.html" class="btn" style="white-space: nowrap;">
+                <span>Learn More</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12,5 19,12 12,19"></polyline>
+                </svg>
+              </a>
+              <a href="https://wa.link/rgwahs" target="_blank" rel="noopener noreferrer" class="btn" style="background: #25D366; border-color: #25D366; white-space: nowrap;">
+                <span>Chat on WhatsApp</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Expanded Service Details -->
+        <section class="service-details-expanded" data-aos="fade-up" style="margin: 4rem 0;">
+          <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Why Choose Our Services</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+              <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">At MUTAG HOUSE, we understand that your brand is one of your most valuable assets. That's why we take a comprehensive, strategic approach to every project, ensuring that every element of your brand identity and marketing strategy works together to achieve your business goals.</p>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div>
+                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Comprehensive Solutions</h3>
+                  <p>We offer a complete range of branding and marketing services, from initial concept development to final execution. This means you can get everything you need from one trusted partner, ensuring consistency across all your brand touchpoints.</p>
+                </div>
+                <div>
+                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Strategic Approach</h3>
+                  <p>Every project begins with a thorough understanding of your business, your market, and your goals. We don't just create beautiful designs – we develop strategic solutions that drive real business results.</p>
+                </div>
+                <div>
+                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Modern Technology</h3>
+                  <p>We leverage the latest tools and technologies to create websites and digital solutions that are fast, secure, and optimized for search engines. Our development approach ensures your digital presence performs at its best.</p>
+                </div>
+                <div>
+                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Local Expertise</h3>
+                  <p>Based in Centurion, we understand the South African market and can help you navigate local business requirements. Our team combines local market knowledge with international best practices.</p>
+                </div>
+              </div>
+
+              <div style="margin-top: 3rem; padding: 2rem; background: rgba(127, 148, 255, 0.1); border-radius: 1rem;">
+                <h3 style="margin-bottom: 1rem;">Our Process</h3>
+                <p style="margin-bottom: 1rem;">We follow a proven process that ensures every project delivers exceptional results:</p>
+                <ol style="line-height: 2; padding-left: 1.5rem;">
+                  <li><strong>Discovery:</strong> We start by understanding your business, your goals, and your challenges through detailed consultations and research.</li>
+                  <li><strong>Strategy:</strong> Based on our findings, we develop a comprehensive strategy that aligns with your business objectives and market position.</li>
+                  <li><strong>Design & Development:</strong> Our creative team brings the strategy to life through compelling designs and robust technical implementation.</li>
+                  <li><strong>Launch & Support:</strong> We ensure smooth launches and provide ongoing support to help you maximize the value of your investment.</li>
+                </ol>
+              </div>
+
+              <div style="margin-top: 3rem;">
+                <p style="font-size: 1.1rem; line-height: 1.8;">Whether you're a startup looking to establish your brand identity, an established business seeking to refresh your image, or a company ready to scale your marketing efforts, MUTAG HOUSE has the expertise and resources to help you succeed. <a href="contact.html" style="color: #7f94ff; text-decoration: underline;">Contact us today</a> to discuss how we can help transform your business.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="cta-section" data-aos="fade-up" data-aos-delay="700" style="margin-top: 3rem;">
+          <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">Ready to elevate your business? Let's discuss how our services can help you achieve your goals.</p>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="contact.html" class="btn">
+              <span>Get a Custom Quote</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
+            <a href="portfolio.html" class="btn" style="background: transparent; border: 2px solid #7f94ff; color: #7f94ff;">
+              <span>View Our Work</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12,5 19,12 12,19"></polyline>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
