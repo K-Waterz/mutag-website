@@ -582,6 +582,10 @@ textarea:focus-visible {
   margin: 4rem auto;
   padding: 0 var(--space-lg);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .elevate-video {
@@ -592,6 +596,12 @@ textarea:focus-visible {
   box-shadow: var(--shadow-xl);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--glass-border);
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  transform: none !important;
+  transform-origin: center center;
+  rotate: 0deg !important;
 }
 
 .elevate-video:hover {
