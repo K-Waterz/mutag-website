@@ -315,7 +315,7 @@ header.scrolled {
   spline-viewer {
     min-height: 500px;
     transform: scale(0.5);
-    top: -25%;
+    top: 20%;
     right: 0;
   }
   
