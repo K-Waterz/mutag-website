@@ -590,8 +590,10 @@ spline-viewer {
 }
 
 .service-icon {
-  font-size: 3rem;
+  font-size: 1.5rem;
   margin-bottom: var(--space-md);
+  opacity: 0.7;
+  filter: grayscale(0.3);
 }
 
 .service-card h3 {
@@ -731,6 +733,10 @@ spline-viewer {
   background: var(--dark);
   padding: calc(var(--space-2xl) * 1.5) var(--space-xl);
   border-top: 1px solid var(--glass-border);
+}
+
+.footer .container {
+  max-width: 1600px;
 }
 
 .footer-content {
@@ -1632,6 +1638,48 @@ spline-viewer {
   margin-top: var(--space-md);
   color: var(--gray-light);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Portfolio Description Read More */
+.portfolio-description {
+  margin: var(--space-md) 0;
+}
+
+.portfolio-description p {
+  color: var(--gray-light);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.portfolio-description .description-more {
+  display: none;
+}
+
+.portfolio-description.expanded .description-more {
+  display: block;
+}
+
+.read-more-btn {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary-light);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: var(--space-xs);
+}
+
+.read-more-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.read-more-btn.expanded::after {
+  content: " less";
 }
 
 /* ================ MODERN CLIENT SHOWCASE ================ */
