@@ -2335,12 +2335,16 @@ footer {
   }
   
   .footer {
-    padding: var(--space-lg) var(--space-sm);
+    padding: var(--space-lg) var(--space-xs);
+    box-sizing: border-box;
+    width: 100%;
   }
   
   .footer .container {
     max-width: 100%;
-    padding: 0 var(--space-sm);
+    padding: 0 var(--space-xs);
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .footer-content {
@@ -2413,9 +2417,11 @@ footer {
   .service-cards,
   .services-grid {
     grid-template-columns: 1fr !important;
-    gap: var(--space-lg);
-    padding: 0 var(--space-sm) !important;
+    gap: var(--space-md);
+    padding: 0 var(--space-xs) !important;
     max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .card,
@@ -2423,8 +2429,19 @@ footer {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    padding: var(--space-xl) !important;
+    padding: var(--space-lg) var(--space-md) !important;
     text-align: center;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .card *,
+  .service-card * {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .card h3,
@@ -2451,28 +2468,36 @@ footer {
     flex-shrink: 0;
   }
   
-  /* Consistent section padding on mobile */
+  /* Consistent section padding on mobile - reduced for wider boxes */
   section {
-    padding-left: var(--space-sm) !important;
-    padding-right: var(--space-sm) !important;
+    padding-left: var(--space-xs) !important;
+    padding-right: var(--space-xs) !important;
+    box-sizing: border-box;
   }
   
   .container {
     max-width: 100% !important;
-    padding: 0 var(--space-sm) !important;
+    padding: 0 var(--space-xs) !important;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .section-title {
     text-align: center;
-    padding: 0 var(--space-sm);
+    padding: 0 var(--space-xs);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
   }
   
   .two-column {
     flex-direction: column !important;
     gap: var(--space-lg);
-    padding: 0 var(--space-sm) !important;
+    padding: 0 var(--space-xs) !important;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .two-column .text,
@@ -2480,6 +2505,14 @@ footer {
     width: 100%;
     max-width: 100%;
     text-align: center;
+    box-sizing: border-box;
+    padding: 0 var(--space-xs);
+  }
+  
+  .two-column .text p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.8;
   }
   
   .two-column .text h2 {
@@ -2493,7 +2526,8 @@ footer {
   .services-details,
   .contact-section,
   .portfolio-grid {
-    padding: var(--space-xl) var(--space-sm) !important;
+    padding: var(--space-xl) var(--space-xs) !important;
+    box-sizing: border-box;
   }
   
   /* Consistent button alignment */
@@ -2525,12 +2559,37 @@ footer {
   
   /* Service and card content should be left-aligned for readability */
   .service-card p,
-  .card p,
+  .card p {
+    text-align: left;
+    line-height: 1.8;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: var(--space-sm);
+  }
+  
   .service-card ul,
-  .card ul,
+  .card ul {
+    text-align: left;
+    padding-left: var(--space-md);
+    word-wrap: break-word;
+  }
+  
   .service-card li,
   .card li {
     text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.7;
+    margin-bottom: var(--space-xs);
+  }
+  
+  /* Ensure all text is readable */
+  .service-card h3,
+  .card h3 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
   }
   
   /* Ensure images are properly displayed */
@@ -2545,39 +2604,123 @@ footer {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
   }
   
   .portfolio-content {
-    padding: var(--space-lg) !important;
+    padding: var(--space-lg) var(--space-md) !important;
     text-align: center;
+    box-sizing: border-box;
+    width: 100%;
   }
   
   .portfolio-content h2 {
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+  }
+  
+  .portfolio-description {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .portfolio-description p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.8;
+    text-align: left;
   }
   
   /* Contact form mobile fixes */
   .contact-wrapper {
     flex-direction: column;
     gap: var(--space-lg);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 var(--space-xs);
   }
   
   .contact-info,
   form {
     width: 100%;
     max-width: 100%;
-    padding: var(--space-lg) !important;
+    padding: var(--space-lg) var(--space-md) !important;
+    box-sizing: border-box;
+  }
+  
+  form input,
+  form textarea,
+  form select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
   }
   
   /* Services page mobile fixes */
   .services-hero {
-    padding: 6rem var(--space-sm) 4rem !important;
+    padding: 6rem var(--space-xs) 4rem !important;
     text-align: center;
+    box-sizing: border-box;
   }
   
   .services-hero h1,
   .services-hero .subheading {
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0 var(--space-xs);
+    line-height: 1.4;
+  }
+  
+  /* Global mobile text improvements */
+  body {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+  }
+  
+  p, li, span, a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Ensure all containers use box-sizing */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Hero section mobile fixes */
+  .hero-section {
+    padding: 5rem var(--space-xs) 3rem !important;
+    box-sizing: border-box;
+  }
+  
+  .hero-content {
+    padding: 0 var(--space-xs) !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .hero-text {
+    padding: 0 var(--space-xs) !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .hero-title,
+  .hero-subtitle {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+    padding: 0 var(--space-xs);
   }
   .hero-grid {
     flex-direction: column !important;
