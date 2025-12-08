@@ -294,29 +294,40 @@ header.scrolled {
   }
   
   .hero-content {
-    grid-template-columns: 1fr 1fr;
-    margin-top: 25rem;
+    grid-template-columns: 1fr;
+    margin-top: 0;
     max-width: 100%;
     margin-left: 0;
     gap: var(--space-md);
   }
   
-  .hero-text {
-    order: 1;
-    max-width: 30rem;
-    margin-left: 10%;
-  }
-  
   .hero-3d {
     height: 500px;
-    order: 2;
+    order: 1;
   }
   
   spline-viewer {
     min-height: 500px;
     transform: scale(0.5);
-    top: 20%;
+    top: 0;
     right: 0;
+  }
+  
+  .hero-text {
+    order: 2;
+    max-width: 100%;
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .hero-title {
+    width: 100%;
+  }
+  
+  .hero-subtitle {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
   }
   
   .hero-subtitle {
