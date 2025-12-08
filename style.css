@@ -477,7 +477,8 @@ spline-viewer {
   height: 100%;
   min-height: 700px;
   display: block;
-  position: relative;
+  position: absolute;
+  top: 0;
   right: -20%;
 }
 
