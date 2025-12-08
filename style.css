@@ -729,26 +729,27 @@ spline-viewer {
 /* Footer Styles */
 .footer {
   background: var(--dark);
-  padding: var(--space-2xl) var(--space-lg);
+  padding: calc(var(--space-2xl) * 1.5) var(--space-xl);
   border-top: 1px solid var(--glass-border);
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-xl);
-  margin-bottom: var(--space-xl);
+  gap: calc(var(--space-xl) * 1.5);
+  margin-bottom: calc(var(--space-xl) * 1.5);
 }
 
 .footer-section h3,
 .footer-section h4 {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
   color: var(--light);
 }
 
 .footer-section p {
   color: var(--gray-light);
-  line-height: 1.6;
+  line-height: 1.8;
+  margin-bottom: var(--space-sm);
 }
 
 .footer-section ul {
@@ -756,7 +757,7 @@ spline-viewer {
 }
 
 .footer-section ul li {
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
 .footer-section ul li a {
@@ -771,7 +772,8 @@ spline-viewer {
 
 .social-links {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
 }
 
 .social-links a img {
@@ -786,9 +788,10 @@ spline-viewer {
 
 .footer-bottom {
   text-align: center;
-  padding-top: var(--space-lg);
+  padding-top: calc(var(--space-lg) * 1.5);
   border-top: 1px solid var(--glass-border);
   color: var(--gray-light);
+  margin-top: var(--space-lg);
 }
 
 /* Legacy hero class for compatibility */
