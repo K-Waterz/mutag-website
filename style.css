@@ -736,13 +736,13 @@ spline-viewer {
 }
 
 .footer .container {
-  max-width: 1600px;
+  max-width: 1800px;
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: calc(var(--space-xl) * 1.5);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(var(--space-xl) * 2);
   margin-bottom: calc(var(--space-xl) * 1.5);
 }
 
