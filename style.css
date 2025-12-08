@@ -272,30 +272,32 @@ header.scrolled {
 }
 
 @media (max-width: 768px) {
+  header {
+    padding: 1rem 0.1rem;
+  }
+  
   .nav-toggle {
     display: flex;
   }
   
   .nav-menu {
-    position: fixed;
-    top: 70px;
-    left: -100%;
-    flex-direction: column;
-    background: rgba(15, 23, 42, 0.98);
-    width: 100%;
-    text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-    padding: var(--space-lg) 0;
-    backdrop-filter: blur(20px);
+    display: none;
   }
   
-  .nav-menu.active {
-    left: 0;
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .btn-signing,
+  .btn {
+    padding: 0.6rem 1.5rem;
   }
   
   .hero-content {
     grid-template-columns: 1fr;
+    margin-top: 25rem;
+    max-width: 30rem;
+    margin-left: 10%;
   }
   
   .hero-3d {
@@ -305,6 +307,14 @@ header.scrolled {
   
   spline-viewer {
     min-height: 500px;
+    transform: scale(0.5);
+    top: -25%;
+    right: 0;
+  }
+  
+  .hero-subtitle {
+    max-width: 30rem;
+    margin-left: 10%;
   }
 }
   box-shadow: var(--shadow-lg);
@@ -1918,6 +1928,22 @@ footer {
 }
 
 /* ================ RESPONSIVE DESIGN ================ */
+@media (max-width: 1300px) {
+  header {
+    padding: 1rem 0.5rem;
+  }
+  
+  .hero-content {
+    margin-top: 85%;
+  }
+  
+  spline-viewer {
+    transform: scale(0.8);
+    top: -20%;
+    right: 2%;
+  }
+}
+
 @media (min-width: 768px) {
   .hero {
     padding: 12rem var(--space-lg) 6rem;
