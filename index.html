@@ -1,28 +1,248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0B0F1A" />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-69Y20X3B4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-69Y20X3B4W');
+  </script>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUTAG HOUSE | Premium Branding & Marketing Solutions</title>
+  <meta name="description" content="MUTAG HOUSE is a branding and marketing agency in Centurion, South Africa. We provide professional logos, websites, printing services, and growth campaigns that help businesses win work, save time, and build credibility." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mutag.co.za/" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="MUTAG HOUSE | Premium Branding & Marketing Solutions" />
+  <meta property="og:description" content="Premium branding and marketing solutions for enterprises that demand excellence." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mutag.co.za/" />
+  <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="msapplication-TileColor" content="#0f172a" />
+  <meta name="theme-color" content="#0f172a" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Spline 3D Library -->
+  <script type="module" src="https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <nav class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="Logo-no-background.png" alt="MUTAG HOUSE" />
+        </a>
+      </div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section with 3D -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Built to Brand.
+          <span class="gradient-text">Designed to Deliver.</span>
+        </h1>
+        <p class="hero-subtitle">
+          We transform ambitious ideas into compelling brands that command attention, build authority, and drive meaningful business growth through strategic design and precision execution.
+        </p>
+        <div class="hero-buttons">
+          <a href="contact.html" class="btn btn-primary">Request Strategy Call</a>
+          <a href="services.html" class="btn btn-secondary">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-3d">
+        <!-- Spline 3D Scene - Replace with your Spline scene URL -->
+        <div id="spline-container" class="spline-container">
+          <canvas id="spline-canvas"></canvas>
+        </div>
+        <!-- Fallback gradient background if Spline doesn't load -->
+        <div class="hero-gradient-fallback"></div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Branding</h3>
+          <p>Complete brand identity and design solutions for businesses.</p>
+          <ul>
+            <li>Logo design</li>
+            <li>Brand guidelines</li>
+            <li>Corporate identity</li>
+            <li>Marketing materials</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <h3>Marketing</h3>
+          <p>Digital marketing campaigns and strategies to grow your business.</p>
+          <ul>
+            <li>Social media marketing</li>
+            <li>Email campaigns</li>
+            <li>SEO optimization</li>
+            <li>Content creation</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <h3>Development</h3>
+          <p>Professional websites and digital solutions for businesses.</p>
+          <ul>
+            <li>Corporate websites</li>
+            <li>E-commerce platforms</li>
+            <li>Landing pages</li>
+            <li>SEO optimization</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🖨️</div>
+          <h3>Printing</h3>
+          <p>High-quality printing services for all your business needs.</p>
+          <ul>
+            <li>Business cards</li>
+            <li>Brochures & flyers</li>
+            <li>Banners & signage</li>
+            <li>Packaging</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview Section -->
+  <section class="about-preview-section">
+    <div class="container">
+      <div class="two-column">
+        <div class="text">
+          <h2>Who We Are</h2>
+          <p>
+            MUTAG HOUSE is a forward-thinking branding and marketing agency based in Centurion, South Africa. 
+            We specialize in helping businesses build strong brand identities through strategic design and modern marketing solutions.
+          </p>
+          <a href="about.html" class="btn btn-primary">Learn More</a>
+        </div>
+        <div class="image">
+          <img src="Logo-no-background.png" alt="MUTAG HOUSE" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Elevate Your Brand?</h2>
+      <p>Let's discuss how we can help transform your business.</p>
+      <a href="contact.html" class="btn btn-primary btn-large">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MUTAG HOUSE</h3>
+          <p>Premium branding and marketing solutions for enterprises that demand excellence.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: info@mutag.co.za</p>
+          <p>Phone: +27 72 957 2238</p>
+          <p>Location: Centurion, South Africa</p>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://www.facebook.com/people/MUTAG-House/61578437019157/" target="_blank" rel="noopener">
+              <img src="Facebook-logo.svg" alt="Facebook" />
+            </a>
+            <a href="https://www.linkedin.com/company/mutag-house/" target="_blank" rel="noopener">
+              <img src="LinkedIn-logo.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://www.instagram.com/mutag_house" target="_blank" rel="noopener">
+              <img src="Instagram-logo.svg" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    // Initialize Spline 3D Scene
+    // Replace 'YOUR_SPLINE_SCENE_URL' with your actual Spline scene URL
+    // You can get this from Spline.app after creating and publishing your scene
+    const splineContainer = document.getElementById('spline-container');
+    const splineCanvas = document.getElementById('spline-canvas');
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    // Example: Load Spline scene (uncomment and add your scene URL)
+    /*
+    import { Application } from 'https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js';
+    const app = new Application(splineCanvas);
+    app.load('YOUR_SPLINE_SCENE_URL');
+    */
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-69Y20X3B4W"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-69Y20X3B4W');
-    </script>
-    
-    <title>MUTAG HOUSE | Premium Branding & Marketing Solutions</title>
-  </head>
-  <body>
-    <!-- Your HTML content here -->
-  </body>
+    // Fallback: Show gradient if Spline doesn't load
+    if (splineCanvas && !splineCanvas.getContext('webgl')) {
+      document.querySelector('.hero-gradient-fallback').style.display = 'block';
+    }
+  </script>
+</body>
 </html>

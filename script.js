@@ -70,9 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: 'smooth'
     });
 
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+          navMenu.classList.remove('active');
+          navToggle.classList.remove('active');
+        }
+      });
+    }
+
     // Highlight current nav link with better matching
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll("nav a");
+    const navLinks = document.querySelectorAll(".nav-menu a, nav a");
 
     navLinks.forEach(link => {
       try {
@@ -84,7 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (normalizedCurrent === normalizedLink || 
             (normalizedCurrent === '' && normalizedLink === '/') ||
-            (normalizedCurrent.endsWith('index') && normalizedLink === '/')) {
+            (normalizedCurrent.endsWith('index') && normalizedLink === '/') ||
+            (normalizedCurrent === '/index.html' && normalizedLink === '/')) {
           link.classList.add("active");
         }
       } catch (e) {
@@ -152,13 +172,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add focus styles for keyboard navigation
     navLinks.forEach(link => {
       link.addEventListener("focus", () => {
-        link.parentElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'nearest'
-        });
+        if (link.parentElement) {
+          link.parentElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'nearest'
+          });
+        }
       });
     });
+    
+    // 3D Scene Parallax Effect
+    const hero3d = document.querySelector('.hero-3d');
+    if (hero3d) {
+      window.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        const x = (clientX / innerWidth - 0.5) * 20;
+        const y = (clientY / innerHeight - 0.5) * 20;
+        hero3d.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
+      });
+    }
 
   } catch (error) {
     console.error("Initialization error:", error);

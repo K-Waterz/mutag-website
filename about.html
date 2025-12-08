@@ -176,25 +176,25 @@
 <body>
   <!-- Header -->
   <header id="header">
-    <div class="container nav">
-      <a href="index.html" class="logo-link">
-        <img src="Logo-no-background.png" alt="MUTAG HOUSE Logo - Branding and Marketing Agency" class="logo-img" loading="eager" />
-      </a>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span class="icon-label">Theme</span>
+    <nav class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="Logo-no-background.png" alt="MUTAG HOUSE" />
+        </a>
+      </div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-    </div>
+    </nav>
   </header>
 
   <!-- Breadcrumb Navigation -->
@@ -363,15 +363,53 @@
   </main>
 
   <!-- Footer -->
-  <footer>
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-brand">
-          <img src="Logo-no-background.png" alt="MUTAG HOUSE Logo" loading="lazy" />
+        <div class="footer-section">
+          <h3>MUTAG HOUSE</h3>
+          <p>Premium branding and marketing solutions for enterprises that demand excellence.</p>
         </div>
-        <div class="footer-copyright">
-          <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
-          <p>Email: <a href="mailto:info@mutag.co.za">info@mutag.co.za</a> | Phone: <a href="tel:+27729572238">+27729572238</a>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: info@mutag.co.za</p>
+          <p>Phone: +27 72 957 2238</p>
+          <p>Location: Centurion, South Africa</p>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://www.facebook.com/people/MUTAG-House/61578437019157/" target="_blank" rel="noopener">
+              <img src="Facebook-logo.svg" alt="Facebook" />
+            </a>
+            <a href="https://www.linkedin.com/company/mutag-house/" target="_blank" rel="noopener">
+              <img src="LinkedIn-logo.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://www.instagram.com/mutag_house" target="_blank" rel="noopener">
+              <img src="Instagram-logo.svg" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MUTAG HOUSE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
             <a href="https://www.linkedin.com/company/mutag-house/" target="_blank" style="margin-left: 12px; vertical-align: middle;">
               <!-- LinkedIn SVG -->
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 30 30.000001" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="a948a134fb"><path d="M 0.484375 0 L 29.515625 0 L 29.515625 29.03125 L 0.484375 29.03125 Z M 0.484375 0 "/></clipPath><clipPath id="ca50b93e32"><path d="M 4.601562 5.738281 L 23 5.738281 L 23 23.15625 L 4.601562 23.15625 Z M 4.601562 5.738281 "/></clipPath><clipPath id="f1e0d50058"><path d="M 23 20 L 25.648438 20 L 25.648438 23.15625 L 23 23.15625 Z M 23 20 "/></clipPath></defs><g id="d6b3d39aab"><g clip-rule="nonzero" clip-path="url(#a948a134fb)"><path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;" d="M 0.484375 0 L 29.515625 0 L 29.515625 29.03125 L 0.484375 29.03125 Z M 0.484375 0 "/><path style=" stroke:none;fill-rule:nonzero;fill:#0f172a;fill-opacity:1;" d="M 0.484375 0 L 29.515625 0 L 29.515625 29.03125 L 0.484375 29.03125 Z M 0.484375 0 "/></g><path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;" d="M 24.527344 22.03125 C 24.621094 22.035156 24.703125 22 24.765625 21.933594 C 24.832031 21.867188 24.863281 21.785156 24.855469 21.695312 C 24.855469 21.453125 24.707031 21.339844 24.40625 21.339844 L 23.914062 21.339844 L 23.914062 22.597656 L 24.101562 22.597656 L 24.101562 22.046875 L 24.328125 22.046875 L 24.332031 22.054688 L 24.683594 22.597656 L 24.878906 22.597656 L 24.5 22.035156 Z M 24.3125 21.90625 L 24.101562 21.90625 L 24.101562 21.480469 L 24.371094 21.480469 C 24.511719 21.480469 24.671875 21.503906 24.671875 21.683594 C 24.671875 21.890625 24.507812 21.90625 24.3125 21.90625 "/><g clip-rule="nonzero" clip-path="url(#ca50b93e32)"><path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;" d="M 19.722656 20.457031 L 17.109375 20.457031 L 17.109375 16.449219 C 17.109375 15.492188 17.09375 14.261719 15.75 14.261719 C 14.390625 14.261719 14.183594 15.304688 14.183594 16.378906 L 14.183594 20.457031 L 11.570312 20.457031 L 11.570312 12.214844 L 14.078125 12.214844 L 14.078125 13.339844 L 14.113281 13.339844 C 14.367188 12.914062 14.71875 12.578125 15.164062 12.339844 C 15.605469 12.101562 16.082031 11.992188 16.585938 12.007812 C 19.234375 12.007812 19.722656 13.714844 19.722656 15.9375 Z M 8.621094 11.085938 C 8.421875 11.085938 8.226562 11.050781 8.042969 10.972656 C 7.855469 10.898438 7.691406 10.792969 7.550781 10.652344 C 7.410156 10.511719 7.296875 10.351562 7.222656 10.171875 C 7.144531 9.988281 7.105469 9.800781 7.105469 9.601562 C 7.105469 9.40625 7.144531 9.214844 7.222656 9.035156 C 7.296875 8.851562 7.40625 8.691406 7.550781 8.550781 C 7.691406 8.410156 7.855469 8.304688 8.042969 8.230469 C 8.226562 8.152344 8.421875 8.117188 8.621094 8.117188 C 8.824219 8.117188 9.015625 8.152344 9.203125 8.230469 C 9.386719 8.304688 9.550781 8.410156 9.695312 8.550781 C 9.835938 8.691406 9.945312 8.851562 10.023438 9.03125 C 10.097656 9.214844 10.136719 9.40625 10.136719 9.601562 C 10.136719 9.796875 10.101562 9.988281 10.023438 10.167969 C 9.945312 10.351562 9.835938 10.511719 9.695312 10.652344 C 9.550781 10.792969 9.386719 10.898438 9.203125 10.972656 C 9.015625 11.050781 8.824219 11.085938 8.621094 11.085938 M 9.929688 20.457031 L 7.3125 20.457031 L 7.3125 12.214844 L 9.929688 12.214844 Z M 21.023438 5.738281 L 6 5.738281 C 5.832031 5.738281 5.667969 5.765625 5.507812 5.828125 C 5.347656 5.890625 5.210938 5.980469 5.085938 6.097656 C 4.964844 6.214844 4.871094 6.351562 4.804688 6.503906 C 4.738281 6.65625 4.703125 6.816406 4.699219 6.984375 L 4.699219 21.765625 C 4.703125 21.933594 4.738281 22.09375 4.804688 22.25 C 4.871094 22.402344 4.964844 22.539062 5.085938 22.652344 C 5.210938 22.769531 5.347656 22.859375 5.507812 22.921875 C 5.664062 22.984375 5.832031 23.015625 6 23.015625 L 21.023438 23.015625 C 21.195312 23.015625 21.359375 22.984375 21.519531 22.921875 C 21.675781 22.863281 21.816406 22.773438 21.941406 22.65625 C 22.0625 22.539062 22.15625 22.402344 22.226562 22.25 C 22.292969 22.09375 22.328125 21.933594 22.332031 21.765625 L 22.332031 6.984375 C 22.328125 6.816406 22.292969 6.65625 22.226562 6.5 C 22.15625 6.347656 22.0625 6.210938 21.941406 6.09375 C 21.816406 5.980469 21.675781 5.890625 21.519531 5.828125 C 21.359375 5.765625 21.195312 5.734375 21.023438 5.738281 "/></g><g clip-rule="nonzero" clip-path="url(#f1e0d50058)"><path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;" d="M 24.335938 20.78125 C 24.230469 20.78125 24.128906 20.796875 24.027344 20.824219 C 23.925781 20.851562 23.828125 20.890625 23.738281 20.941406 C 23.648438 20.996094 23.566406 21.058594 23.492188 21.132812 C 23.417969 21.203125 23.355469 21.285156 23.304688 21.375 C 23.25 21.464844 23.210938 21.558594 23.183594 21.660156 C 23.160156 21.757812 23.144531 21.859375 23.144531 21.964844 C 23.144531 22.066406 23.160156 22.167969 23.1875 22.265625 C 23.214844 22.367188 23.257812 22.460938 23.308594 22.550781 C 23.363281 22.640625 23.425781 22.71875 23.5 22.792969 C 23.574219 22.867188 23.65625 22.929688 23.75 22.980469 C 23.839844 23.03125 23.9375 23.070312 24.039062 23.097656 C 24.140625 23.121094 24.242188 23.136719 24.347656 23.136719 C 24.453125 23.136719 24.554688 23.121094 24.660156 23.097656 C 24.761719 23.070312 24.855469 23.03125 24.949219 22.980469 C 25.039062 22.929688 25.121094 22.867188 25.195312 22.792969 C 25.269531 22.71875 25.335938 22.640625 25.386719 22.550781 C 25.441406 22.460938 25.480469 22.367188 25.507812 22.265625 C 25.535156 22.167969 25.550781 22.066406 25.550781 21.964844 C 25.550781 21.859375 25.539062 21.757812 25.511719 21.660156 C 25.484375 21.558594 25.445312 21.464844 25.394531 21.375 C 25.339844 21.285156 25.277344 21.203125 25.203125 21.132812 C 25.128906 21.058594 25.046875 20.996094 24.957031 20.941406 C 24.867188 20.890625 24.769531 20.851562 24.667969 20.824219 C 24.566406 20.796875 24.464844 20.78125 24.359375 20.78125 L 24.335938 20.78125 M 24.335938 23 C 24.195312 23.003906 24.0625 22.980469 23.933594 22.929688 C 23.800781 22.878906 23.6875 22.804688 23.585938 22.710938 C 23.484375 22.617188 23.40625 22.503906 23.351562 22.378906 C 23.296875 22.253906 23.265625 22.121094 23.265625 21.984375 C 23.261719 21.847656 23.289062 21.714844 23.339844 21.589844 C 23.390625 21.460938 23.464844 21.347656 23.5625 21.25 C 23.660156 21.152344 23.769531 21.074219 23.898438 21.019531 C 24.027344 20.964844 24.160156 20.9375 24.300781 20.933594 C 24.441406 20.933594 24.574219 20.957031 24.707031 21.007812 C 24.835938 21.058594 24.953125 21.128906 25.050781 21.226562 C 25.152344 21.320312 25.230469 21.429688 25.285156 21.558594 C 25.339844 21.683594 25.371094 21.8125 25.371094 21.949219 C 25.371094 21.957031 25.371094 21.960938 25.371094 21.96875 C 25.375 22.101562 25.351562 22.230469 25.304688 22.355469 C 25.253906 22.480469 25.179688 22.59375 25.085938 22.6875 C 24.992188 22.785156 24.882812 22.863281 24.757812 22.914062 C 24.632812 22.96875 24.5 22.996094 24.363281 23 L 24.335938 23 "/></g></g></svg>
