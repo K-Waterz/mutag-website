@@ -294,15 +294,22 @@ header.scrolled {
   }
   
   .hero-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     margin-top: 25rem;
+    max-width: 100%;
+    margin-left: 0;
+    gap: var(--space-md);
+  }
+  
+  .hero-text {
+    order: 1;
     max-width: 30rem;
     margin-left: 10%;
   }
   
   .hero-3d {
     height: 500px;
-    order: -1;
+    order: 2;
   }
   
   spline-viewer {
@@ -1935,6 +1942,15 @@ footer {
   
   .hero-content {
     margin-top: 85%;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .hero-text {
+    order: 1;
+  }
+  
+  .hero-3d {
+    order: 2;
   }
   
   spline-viewer {
