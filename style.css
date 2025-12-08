@@ -190,7 +190,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 1000;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -272,18 +272,26 @@ header.scrolled {
 }
 
 @media (max-width: 768px) {
+  /* Ensure body has padding for fixed header */
+  body {
+    padding-top: 70px;
+  }
+  
   header {
     padding: 1rem 0.1rem;
+    z-index: 1000;
   }
   
   .nav-container {
     max-width: 100%;
     padding: 0 var(--space-xs);
+    position: relative;
+    z-index: 1001;
   }
   
   .nav-toggle {
     display: flex;
-    z-index: 101;
+    z-index: 1002;
     position: relative;
   }
   
@@ -2079,18 +2087,26 @@ footer {
 
 /* ================ RESPONSIVE DESIGN ================ */
 @media (max-width: 1300px) {
+  /* Ensure body has padding for fixed header on tablet */
+  body {
+    padding-top: 70px;
+  }
+  
   header {
     padding: 1rem 0.5rem;
+    z-index: 1000;
   }
   
   .nav-container {
     max-width: 100%;
     padding: 0 var(--space-sm);
+    position: relative;
+    z-index: 1001;
   }
   
   .nav-toggle {
     display: flex;
-    z-index: 101;
+    z-index: 1002;
     position: relative;
   }
   
@@ -2118,12 +2134,27 @@ footer {
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     padding: var(--space-lg) 0;
     backdrop-filter: blur(20px);
-    z-index: 100;
+    z-index: 999;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
   
   .nav-menu.active {
     left: 0;
     display: flex;
+  }
+  
+  .nav-menu li {
+    width: 100%;
+    padding: var(--space-sm) 0;
+    list-style: none;
+  }
+  
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
   }
   
   .hero-section {
@@ -2679,6 +2710,21 @@ footer {
   body {
     word-wrap: break-word;
     overflow-wrap: break-word;
+    padding-top: 70px !important;
+    overflow-x: hidden;
+  }
+  
+  /* Prevent horizontal scrolling */
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Ensure main content doesn't overlap with fixed header */
+  main,
+  section:first-of-type {
+    margin-top: 0;
+    padding-top: var(--space-md);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -2697,30 +2743,378 @@ footer {
     box-sizing: border-box;
   }
   
-  /* Hero section mobile fixes */
-  .hero-section {
-    padding: 5rem var(--space-xs) 3rem !important;
-    box-sizing: border-box;
+  /* Prevent overlapping with fixed header */
+  .hero-section,
+  .portfolio-hero,
+  .services-hero,
+  .contact-hero,
+  .about-hero {
+    padding-top: 6rem !important;
+    margin-top: 0 !important;
   }
   
-  .hero-content {
-    padding: 0 var(--space-xs) !important;
-    width: 100%;
-    box-sizing: border-box;
+  
+  /* Ensure no elements overlap */
+  .nav-menu.active ~ * {
+    position: relative;
+    z-index: 1;
   }
   
-  .hero-text {
-    padding: 0 var(--space-xs) !important;
-    width: 100%;
-    box-sizing: border-box;
+  /* Prevent content from going under navigation */
+  body.nav-open {
+    overflow: hidden;
   }
   
-  .hero-title,
-  .hero-subtitle {
+  /* About page specific fixes */
+  .about-hero {
+    padding: 6rem var(--space-xs) 3rem !important;
+  }
+  
+  .about-section {
+    padding: var(--space-xl) var(--space-xs) !important;
+    margin-bottom: var(--space-xl) !important;
+  }
+  
+  /* Services page specific fixes */
+  .services-details {
+    padding: var(--space-xl) var(--space-xs) !important;
+  }
+  
+  /* Contact page specific fixes */
+  .contact-section {
+    padding: var(--space-xl) var(--space-xs) !important;
+  }
+  
+  .contact-hero {
+    padding: 6rem var(--space-xs) 3rem !important;
+  }
+  
+  /* Portfolio page specific fixes */
+  .portfolio-hero {
+    padding: 6rem var(--space-xs) 3rem !important;
+  }
+  
+  /* Ensure all sections have proper spacing */
+  section {
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Fix for breadcrumb navigation */
+  nav[aria-label="Breadcrumb"] {
+    margin-top: 70px;
+    padding: var(--space-sm) var(--space-xs) !important;
+  }
+  
+  /* Prevent any element from overlapping */
+  .nav-logo,
+  .nav-menu,
+  .nav-toggle {
+    position: relative;
+    z-index: auto;
+  }
+  
+  /* Ensure buttons don't overlap */
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
     word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.4;
+    margin: var(--space-xs) 0;
+  }
+  
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Fix for service tags */
+  .service-tag,
+  .portfolio-services {
+    display: inline-block;
+    word-wrap: break-word;
+    max-width: 100%;
+    margin: var(--space-xs);
+  }
+  
+  /* Ensure lists don't overflow */
+  ul, ol {
+    padding-left: var(--space-md);
+    margin: var(--space-sm) 0;
+    max-width: 100%;
+  }
+  
+  /* Fix for client logos */
+  .client-logos {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Ensure forms don't overflow */
+  form {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  input, textarea, select {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Fix for KPI badges */
+  .kpi-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md);
     padding: 0 var(--space-xs);
+  }
+  
+  .kpi-badge {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-lg) var(--space-md) !important;
+  }
+  
+  /* Ensure read more button doesn't overlap */
+  .read-more-btn {
+    width: auto;
+    max-width: 100%;
+    margin-top: var(--space-md);
+    word-wrap: break-word;
+  }
+  
+  /* Fix absolute positioned elements on mobile */
+  .scroll-indicator,
+  .hero-gradient-fallback {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Ensure no horizontal overflow */
+  * {
+    max-width: 100vw;
+  }
+  
+  /* Fix for any floating elements */
+  .card::before,
+  .service-card::before {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  /* Ensure proper spacing between all elements */
+  .service-card + .service-card,
+  .card + .card,
+  .portfolio-item + .portfolio-item {
+    margin-top: var(--space-lg);
+  }
+  
+  /* Fix for contact methods */
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    width: 100%;
+  }
+  
+  .contact-method {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-lg) var(--space-md) !important;
+  }
+  
+  /* Map embed mobile fix */
+  .map-embed {
+    width: 100%;
+    max-width: 100%;
+    margin: var(--space-lg) 0;
+  }
+  
+  .map-embed iframe {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Client showcase mobile fix */
+  .client-showcase {
+    padding: var(--space-xl) var(--space-xs) !important;
+  }
+  
+  /* KPI section mobile fix */
+  .kpi-section {
+    padding: var(--space-xl) var(--space-xs) !important;
+  }
+  
+  /* Ensure all headings are properly sized */
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem) !important;
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+  }
+  
+  h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+  }
+  
+  /* Ensure proper text spacing */
+  p {
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+  }
+  
+  /* Fix for any table elements */
+  table {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+  
+  /* Ensure video elements are responsive */
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix for any iframe elements */
+  iframe {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Navigation menu mobile fixes - ensure it works on all pages */
+  .nav-menu li {
+    margin: 0;
+    padding: var(--space-sm) 0;
+    width: 100%;
+    display: block;
+  }
+  
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-menu a:last-child {
+    border-bottom: none;
+  }
+  
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    background: rgba(91, 108, 255, 0.1);
+    color: var(--primary-light);
+  }
+  
+  /* Ensure navigation doesn't overlap content */
+  .nav-menu.active {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    overflow-y: auto;
+  }
+  
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Ensure all page-specific hero sections have proper spacing */
+  .portfolio-hero,
+  .services-hero,
+  .contact-hero,
+  .about-hero {
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+    padding-left: var(--space-xs) !important;
+    padding-right: var(--space-xs) !important;
+  }
+  
+  /* Ensure main content areas don't overlap */
+  main {
+    padding-top: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Fix for any absolute positioned elements that might cause issues */
+  .hero-3d,
+  spline-viewer {
+    position: relative !important;
+  }
+  
+  /* Ensure service tags wrap properly */
+  .portfolio-services {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+  
+  .service-tag {
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-sm);
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
+  /* Fix for client showcase on mobile */
+  .client-showcase {
+    padding: var(--space-xl) var(--space-xs) !important;
+  }
+  
+  .client-logos-container {
+    padding: 0 var(--space-xs);
+  }
+  
+  /* Ensure all text elements are readable */
+  .testimonial {
+    padding: var(--space-md) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7;
+    word-wrap: break-word;
+  }
+  
+  /* Fix for any tables */
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure proper spacing for all interactive elements */
+  a, button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fix for any modals or overlays */
+  .modal,
+  .overlay {
+    z-index: 10000;
   }
   .hero-grid {
     flex-direction: column !important;
@@ -2733,8 +3127,11 @@ footer {
   .hero-text p {
     font-size: 1rem !important;
   }
-  .service-card h3 {
-    font-size: 1.1rem !important;
+  .service-card h3,
+  .card h3 {
+    font-size: 1.3rem !important;
+    word-wrap: break-word;
+    line-height: 1.3;
   }
   .testimonial {
     padding: var(--space-md) !important;
@@ -2742,8 +3139,23 @@ footer {
   }
   .footer-content {
     flex-direction: column !important;
-    gap: var(--space-md) !important;
-    align-items: flex-start !important;
+    gap: var(--space-lg) !important;
+    align-items: center !important;
+    text-align: center;
+  }
+  
+  .footer-section {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .footer-section ul {
+    text-align: center;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    text-align: center;
   }
   .footer-brand img {
     height: 32px !important;

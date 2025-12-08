@@ -75,16 +75,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const navMenu = document.getElementById('navMenu');
     
     if (navToggle && navMenu) {
-      navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
+      navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (isActive) {
+          document.body.classList.add('menu-open');
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.width = '100%';
+        } else {
+          document.body.classList.remove('menu-open');
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
+        }
+      });
+      
+      // Close menu when clicking on a nav link
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          navToggle.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
+        });
       });
       
       // Close menu when clicking outside
       document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        if (navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !navToggle.contains(e.target)) {
           navMenu.classList.remove('active');
           navToggle.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
+        }
+      });
+      
+      // Close menu on window resize if it's open
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          navToggle.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
         }
       });
     }
