@@ -55,9 +55,10 @@ After building, verify that:
    npm run build
    ```
 
-2. **Upload all contents** from the `/dist` folder to your web server's root directory:
-   - Upload `index.html` to the root
-   - Upload the entire `/assets` folder to the root (so assets are at `/assets/`)
+2. **Upload all contents** from the `/dist` folder **directly into `public_html`** (NOT in a subfolder):
+   - Upload `index.html` directly into `public_html/` (the web root)
+   - Upload the entire `/assets` folder directly into `public_html/` (so assets are at `/assets/`)
+   - ⚠️ **IMPORTANT**: Upload the CONTENTS of `/dist`, not the `/dist` folder itself
 
 3. **Verify file structure on server**:
    ```
@@ -94,10 +95,11 @@ After building, verify that:
    ```
 
 2. **Via FTP/cPanel File Manager**:
-   - Navigate to your website's root directory (usually `public_html` or `www`)
+   - Navigate to your website's root directory (`public_html`)
    - **Backup** the current `index.html` (rename to `index.html.backup`)
-   - Upload the new `index.html` from `/dist` folder
-   - Upload the `/dist/assets` folder to the root
+   - Upload the new `index.html` from `/dist` folder **directly into `public_html`** (NOT in a subfolder)
+   - Upload the `/dist/assets` folder **directly into `public_html`** (so it becomes `public_html/assets/`)
+   - ⚠️ **CRITICAL**: Upload the CONTENTS of `/dist` directly into `public_html`, not the `/dist` folder itself
    - Upload all static images and folders referenced in components
 
 3. **Verify**:

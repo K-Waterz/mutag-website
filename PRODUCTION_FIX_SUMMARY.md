@@ -49,8 +49,9 @@ dist/
    ```
 
 2. **Upload to server**:
-   - Upload **all contents** from `/dist` folder to your web server root
+   - Upload **all contents** from `/dist` folder **directly into `public_html`** (NOT in a subfolder)
    - This includes `index.html` and the `/assets` folder
+   - ⚠️ **IMPORTANT**: Upload the CONTENTS of `/dist` directly into `public_html`, not the `/dist` folder itself
 
 3. **Upload static assets** (images referenced in components):
    - `/Logo-no-background.png`
