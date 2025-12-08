@@ -79,10 +79,12 @@ const StructuredData = ({ type, data }) => {
     }
   }
 
+  const schema = getSchema()
+  
   return (
     <Helmet>
       <script type="application/ld+json">
-        {JSON.stringify(getSchema())}
+        {JSON.stringify(schema)}
       </script>
     </Helmet>
   )
