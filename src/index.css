@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-brand-dark text-brand-light font-body;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Type Scale - REM with 1.25 ratio */
+  h1 {
+    font-size: 3.815rem; /* 5xl */
+  }
+  
+  h2 {
+    font-size: 3.052rem; /* 4xl */
+  }
+  
+  h3 {
+    font-size: 2.441rem; /* 3xl */
+  }
+  
+  h4 {
+    font-size: 1.953rem; /* 2xl */
+  }
+  
+  h5 {
+    font-size: 1.563rem; /* xl */
+  }
+  
+  h6 {
+    font-size: 1.25rem; /* lg */
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.441rem;
+    }
+    
+    h2 {
+      font-size: 1.953rem;
+    }
+    
+    h3 {
+      font-size: 1.563rem;
+    }
+  }
+}
+
+@layer components {
+  /* Container */
+  .container {
+    @apply max-w-container mx-auto px-4 md:px-6 lg:px-8;
+  }
+  
+  /* Grid System */
+  .grid-12 {
+    @apply grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8;
+  }
+  
+  .grid-8 {
+    @apply grid grid-cols-4 md:grid-cols-8 gap-4 md:gap-6;
+  }
+  
+  .grid-4 {
+    @apply grid grid-cols-4 gap-4;
+  }
+  
+  /* Focus states for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-blue;
+  }
+}
+
+@layer utilities {
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, #4379D9 0%, #5D308E 100%);
+  }
+  
+  .gradient-text {
+    @apply gradient-primary bg-clip-text text-transparent;
+  }
+  
+  /* Smooth transitions */
+  .transition-luxury {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Card hover lift */
+  .card-lift {
+    @apply transition-luxury;
+  }
+  
+  .card-lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
