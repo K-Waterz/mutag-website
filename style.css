@@ -283,10 +283,40 @@ header.scrolled {
   
   .nav-toggle {
     display: flex;
+    z-index: 101;
+    position: relative;
+  }
+  
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
   }
   
   .nav-menu {
-    display: none;
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.98);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: var(--space-lg) 0;
+    backdrop-filter: blur(20px);
+    z-index: 100;
+  }
+  
+  .nav-menu.active {
+    left: 0;
+    display: flex;
   }
   
   .hero-section {
@@ -616,12 +646,11 @@ spline-viewer {
 .service-icon {
   font-size: 2.5rem;
   margin-bottom: var(--space-md);
-  display: block;
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
   color: var(--primary-light);
 }
 
@@ -630,6 +659,8 @@ spline-viewer {
   height: 48px;
   stroke: currentColor;
   color: var(--primary-light);
+  display: block;
+  flex-shrink: 0;
 }
 
 .service-card h3 {
@@ -1518,12 +1549,11 @@ spline-viewer {
 .service-icon {
   font-size: 2.5rem;
   margin-bottom: var(--space-md);
-  display: block;
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
   color: var(--primary-light);
 }
 
@@ -1532,6 +1562,8 @@ spline-viewer {
   height: 48px;
   stroke: currentColor;
   color: var(--primary-light);
+  display: block;
+  flex-shrink: 0;
 }
 
 .service-card h3 {
@@ -2056,6 +2088,44 @@ footer {
     padding: 0 var(--space-sm);
   }
   
+  .nav-toggle {
+    display: flex;
+    z-index: 101;
+    position: relative;
+  }
+  
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.98);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: var(--space-lg) 0;
+    backdrop-filter: blur(20px);
+    z-index: 100;
+  }
+  
+  .nav-menu.active {
+    left: 0;
+    display: flex;
+  }
+  
   .hero-section {
     padding: 6rem var(--space-md) 4rem;
     min-height: auto;
@@ -2133,11 +2203,15 @@ footer {
     width: 44px;
     height: 44px;
     margin: 0 auto var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .service-icon svg {
     width: 44px;
     height: 44px;
+    display: block;
   }
   
   .portfolio-grid {
@@ -2251,13 +2325,6 @@ footer {
     padding: var(--space-sm) var(--space-lg);
   }
   
-  .service-card {
-    padding: var(--space-lg);
-  }
-  
-  .service-card h3 {
-    font-size: 1.3rem;
-  }
   
   .contact-form {
     padding: var(--space-lg);
@@ -2267,9 +2334,55 @@ footer {
     padding: var(--space-md);
   }
   
+  .footer {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .footer .container {
+    max-width: 100%;
+    padding: 0 var(--space-sm);
+  }
+  
   .footer-content {
-    flex-direction: column;
-    gap: var(--space-md);
+    grid-template-columns: 1fr !important;
+    gap: var(--space-lg);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .footer-section {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+  
+  .footer-section h3,
+  .footer-section h4 {
+    text-align: center;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .footer-section ul {
+    text-align: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    text-align: center;
+    margin-bottom: var(--space-xs);
+  }
+  
+  .social-links {
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
   }
   
   .footer-copyright {
@@ -2296,41 +2409,175 @@ footer {
     margin: 0 auto;
     border-radius: var(--radius-md);
   }
-  .cards {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-md);
-    padding: 0 !important;
-  }
+  .cards,
   .service-cards,
   .services-grid {
     grid-template-columns: 1fr !important;
-    gap: var(--space-md);
-    padding: 0 var(--space-sm);
+    gap: var(--space-lg);
+    padding: 0 var(--space-sm) !important;
     max-width: 100%;
   }
   
+  .card,
   .service-card {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
+    padding: var(--space-xl) !important;
+    text-align: center;
+  }
+  
+  .card h3,
+  .service-card h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: var(--space-md);
+  }
+  
+  .card-icon,
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-icon svg,
+  .service-icon svg {
+    width: 48px;
+    height: 48px;
+    display: block;
+    flex-shrink: 0;
+  }
+  
+  /* Consistent section padding on mobile */
+  section {
+    padding-left: var(--space-sm) !important;
+    padding-right: var(--space-sm) !important;
+  }
+  
+  .container {
+    max-width: 100% !important;
+    padding: 0 var(--space-sm) !important;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    padding: 0 var(--space-sm);
+  }
+  
+  .two-column {
+    flex-direction: column !important;
+    gap: var(--space-lg);
+    padding: 0 var(--space-sm) !important;
+    text-align: center;
+  }
+  
+  .two-column .text,
+  .two-column .image {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .two-column .text h2 {
+    text-align: center;
+  }
+  
+  .services-section,
+  .about-preview-section,
+  .cta-section,
+  .about-section,
+  .services-details,
+  .contact-section,
+  .portfolio-grid {
+    padding: var(--space-xl) var(--space-sm) !important;
+  }
+  
+  /* Consistent button alignment */
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .hero-buttons,
+  .two-column .text .btn {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  /* Consistent heading alignment */
+  .section-title,
+  .hero-title,
+  .hero-subtitle,
+  .cta-section h2,
+  .cta-section p {
+    text-align: center;
+  }
+  
+  /* Service and card content should be left-aligned for readability */
+  .service-card p,
+  .card p,
+  .service-card ul,
+  .card ul,
+  .service-card li,
+  .card li {
+    text-align: left;
+  }
+  
+  /* Ensure images are properly displayed */
+  .two-column .image img,
+  .portfolio-media img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Portfolio specific mobile fixes */
+  .portfolio-item {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .portfolio-content {
     padding: var(--space-lg) !important;
     text-align: center;
   }
   
-  .service-icon {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto var(--space-md);
+  .portfolio-content h2 {
+    text-align: center;
   }
   
-  .service-icon svg {
-    width: 40px;
-    height: 40px;
+  /* Contact form mobile fixes */
+  .contact-wrapper {
+    flex-direction: column;
+    gap: var(--space-lg);
   }
-  .two-column {
-    flex-direction: column !important;
-    gap: var(--space-md);
-    padding: 0 !important;
+  
+  .contact-info,
+  form {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-lg) !important;
+  }
+  
+  /* Services page mobile fixes */
+  .services-hero {
+    padding: 6rem var(--space-sm) 4rem !important;
+    text-align: center;
+  }
+  
+  .services-hero h1,
+  .services-hero .subheading {
+    text-align: center;
   }
   .hero-grid {
     flex-direction: column !important;
