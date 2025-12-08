@@ -731,31 +731,34 @@ spline-viewer {
 /* Footer Styles */
 .footer {
   background: var(--dark);
-  padding: calc(var(--space-2xl) * 1.5) var(--space-xl);
+  padding: var(--space-lg) var(--space-xl);
   border-top: 1px solid var(--glass-border);
 }
 
 .footer .container {
-  max-width: 1800px;
+  max-width: 95%;
+  width: 100%;
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: calc(var(--space-xl) * 2);
-  margin-bottom: calc(var(--space-xl) * 1.5);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .footer-section h3,
 .footer-section h4 {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
   color: var(--light);
+  font-size: 1rem;
 }
 
 .footer-section p {
   color: var(--gray-light);
-  line-height: 1.8;
-  margin-bottom: var(--space-sm);
+  line-height: 1.5;
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
 }
 
 .footer-section ul {
@@ -763,7 +766,8 @@ spline-viewer {
 }
 
 .footer-section ul li {
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
 }
 
 .footer-section ul li a {
@@ -778,8 +782,8 @@ spline-viewer {
 
 .social-links {
   display: flex;
-  gap: var(--space-lg);
-  margin-top: var(--space-sm);
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
 }
 
 .social-links a img {
@@ -794,10 +798,11 @@ spline-viewer {
 
 .footer-bottom {
   text-align: center;
-  padding-top: calc(var(--space-lg) * 1.5);
+  padding-top: var(--space-md);
   border-top: 1px solid var(--glass-border);
   color: var(--gray-light);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-sm);
+  font-size: 0.85rem;
 }
 
 /* Legacy hero class for compatibility */
