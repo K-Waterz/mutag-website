@@ -39,6 +39,7 @@
   
   <!-- Spline 3D Library -->
   <script type="module" src="https://unpkg.com/@splinetool/runtime@1.0.0/build/runtime.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.6/build/spline-viewer.js"></script>
   
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
@@ -84,10 +85,8 @@
         </div>
       </div>
       <div class="hero-3d">
-        <!-- Spline 3D Scene - Replace with your Spline scene URL -->
-        <div id="spline-container" class="spline-container">
-          <canvas id="spline-canvas"></canvas>
-        </div>
+        <!-- Spline 3D Scene -->
+        <spline-viewer url="https://prod.spline.design/wDX1L4rdAciYLZL0/scene.splinecode"></spline-viewer>
         <!-- Fallback gradient background if Spline doesn't load -->
         <div class="hero-gradient-fallback"></div>
       </div>
