@@ -184,10 +184,14 @@ const Home = () => {
             className="relative"
           >
             <img
-              src="/Mutag wesbite images/Team working on project on separate screens.png"
+              src="/images/team-collaboration.png"
               alt="MUTAG HOUSE team collaborating"
               className="rounded-2xl shadow-2xl"
               loading="lazy"
+              onError={(e) => {
+                console.error('Image failed to load:', e.target.src)
+                e.target.style.display = 'none'
+              }}
             />
           </motion.div>
         </div>
