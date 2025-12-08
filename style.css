@@ -1797,27 +1797,41 @@ spline-viewer {
   color: #475569;
 }
 
-/* Client logos container with overflow hidden for scrolling effect */
+/* Client logos container - no overflow needed for dancing animation */
 .client-logos-container {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  padding: var(--space-lg) 0;
 }
 
 .client-logos {
   display: flex;
   gap: var(--space-xl);
-  animation: scrollLogos 30s linear infinite;
-  width: fit-content;
-  will-change: transform; /* Optimize for animation performance */
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-@keyframes scrollLogos {
-  0% {
-    transform: translateX(0);
+/* Dancing animation for logos */
+@keyframes danceLogo {
+  0%, 100% {
+    transform: translateY(0) scale(1);
   }
-  100% {
-    transform: translateX(calc(-200px * 4 - var(--space-xl) * 3)); /* Move by exactly one set to create seamless loop */
+  25% {
+    transform: translateY(-15px) scale(1.05);
+  }
+  50% {
+    transform: translateY(0) scale(1);
+  }
+  75% {
+    transform: translateY(-10px) scale(1.02);
   }
 }
 
@@ -1834,13 +1848,48 @@ spline-viewer {
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: var(--space-md);
+  animation: danceLogo 3s ease-in-out infinite;
+}
+
+/* Stagger the animation for each logo to create a wave effect */
+.client-logo-item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.client-logo-item:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.client-logo-item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.client-logo-item:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+.client-logo-item:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+.client-logo-item:nth-child(6) {
+  animation-delay: 1.5s;
+}
+
+.client-logo-item:nth-child(7) {
+  animation-delay: 1.8s;
+}
+
+.client-logo-item:nth-child(8) {
+  animation-delay: 2.1s;
 }
 
 .client-logo-item:hover {
   background: transparent !important;
   border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+  transform: translateY(-5px) scale(1.1);
   box-shadow: var(--shadow-md);
+  animation-play-state: paused; /* Pause dancing on hover */
 }
 
 .client-logos img {
@@ -3162,13 +3211,19 @@ footer {
   }
   .client-logos {
     gap: var(--space-md) !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
   }
   .client-logos-container {
-    overflow-x: auto;
+    overflow: visible !important;
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
   }
   .client-logo-item {
     width: 160px !important;
     height: 80px !important;
+    animation: danceLogo 3s ease-in-out infinite !important;
   }
   .client-logos img {
     max-height: 60px !important;

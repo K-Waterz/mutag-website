@@ -41,3 +41,4 @@ npm run dev
 3. **What errors are in the browser console?** (F12 → Console tab)
 4. **What does the terminal show?** (when you run `npm run dev`)
 
+
