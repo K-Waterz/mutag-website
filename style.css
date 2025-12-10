@@ -62,6 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  padding-top: 70px;
 }
 
 /* ================ TYPOGRAPHY ================ */
@@ -315,7 +316,7 @@ img {
 
 /* ================ HERO SECTION ================ */
 .hero-section {
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -820,10 +821,6 @@ img {
 
 /* ================ MOBILE OPTIMIZATIONS ================ */
 @media (max-width: 767px) {
-  body {
-    padding-top: 70px;
-  }
-  
   .hero-section {
     min-height: calc(100vh - 70px);
     padding: 4rem var(--space-sm) 3rem;
