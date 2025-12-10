@@ -382,8 +382,9 @@ header.scrolled {
   
   .hero-subtitle {
     width: 100%;
-    max-width: 100%;
+    max-width: 30rem;
     margin: 0 auto var(--space-lg);
+    margin-left: 10%;
     text-align: center;
   }
   
@@ -393,13 +394,6 @@ header.scrolled {
     gap: var(--space-sm);
     margin-top: var(--space-md);
   }
-  
-  .hero-subtitle {
-    max-width: 30rem;
-    margin-left: 10%;
-  }
-}
-  box-shadow: var(--shadow-lg);
 }
 
 .nav {
