@@ -176,3 +176,8 @@ If you encounter issues:
 3. Ensure file permissions are correct
 4. Check that asset paths match the server structure
 
+
+
+
+
+
