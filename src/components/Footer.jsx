@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
@@ -53,14 +52,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand Column */}
           <div className="md:col-span-4">
-            <Link to="/" className="inline-block mb-6">
+            <a href="/" className="inline-block mb-6">
               <img
                 src="/Logo-no-background.png"
                 alt="MUTAG HOUSE"
                 className="h-10 w-auto"
                 loading="lazy"
               />
-            </Link>
+            </a>
             <p className="text-brand-light/60 text-sm mb-6 max-w-xs">
               Premium branding and marketing solutions for enterprises that demand excellence.
             </p>
@@ -86,12 +85,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
+                  <a
+                    href={link.path}
                     className="text-brand-light/60 hover:text-brand-blue transition-luxury text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -138,13 +137,13 @@ const Footer = () => {
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (
-              <Link
+              <a
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className="text-sm text-brand-light/60 hover:text-brand-blue transition-luxury"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
         </div>

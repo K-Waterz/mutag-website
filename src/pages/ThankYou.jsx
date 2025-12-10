@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import { Helmet } from 'react-helmet-async'
 
@@ -49,16 +48,16 @@ const ThankYou = () => {
             </p>
 
             <div className="flex gap-4 justify-center flex-wrap">
-              <Link to="/">
+              <a href="/">
                 <Button variant="primary" size="lg">
                   Return Home
                 </Button>
-              </Link>
-              <Link to="/contact">
+              </a>
+              <a href="/contact">
                 <Button variant="secondary" size="lg">
                   Send Another Message
                 </Button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

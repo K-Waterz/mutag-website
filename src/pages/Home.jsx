@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import Card from '../components/Card'
 import Button from '../components/Button'
@@ -119,14 +118,14 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-brand-light/70 max-w-3xl mx-auto mb-10">
               We transform ambitious ideas into compelling brands that command attention, build authority, and drive meaningful business growth through strategic design and precision execution.
             </p>
-            <Link to="/contact">
+            <a href="/contact">
               <Button
                 size="lg"
                 className="text-base px-10 py-4"
               >
                 Request Private Strategy Call
               </Button>
-            </Link>
+            </a>
           </motion.div>
         </div>
 
@@ -169,12 +168,12 @@ const Home = () => {
             <p className="text-lg text-brand-light/80 mb-6">
               We work closely with entrepreneurs, SMEs, and established corporations to develop the visuals, platforms, and strategies they need to thrive. Whether you're launching a new business, refreshing your identity, or scaling up your marketing — we're here to deliver excellence with purpose.
             </p>
-            <Link
-              to="/about"
+            <a
+              href="/about"
               className="text-brand-blue hover:underline font-medium"
             >
               Learn more about our approach →
-            </Link>
+            </a>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -223,11 +222,11 @@ const Home = () => {
           ))}
         </div>
         <div className="text-center mt-12">
-          <Link to="/services">
+          <a href="/services">
             <Button variant="secondary">
               See Full Capabilities
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
 
@@ -258,11 +257,11 @@ const Home = () => {
           </Card>
         </div>
         <div className="text-center">
-          <Link to="/work">
+          <a href="/work">
             <Button variant="primary">
               View Portfolio
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
 
@@ -298,11 +297,11 @@ const Home = () => {
           <p className="text-xl text-brand-light/70 mb-10">
             Ready to transform your business? Get in touch and let's discuss how MUTAG HOUSE can help you achieve your branding and marketing goals.
           </p>
-          <Link to="/contact">
+          <a href="/contact">
             <Button size="lg">
               Request Private Strategy Call
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
     </>

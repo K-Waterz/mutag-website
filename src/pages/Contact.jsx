@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Section from '../components/Section'
 import Button from '../components/Button'
@@ -7,7 +6,6 @@ import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
 
 const Contact = () => {
-  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     company: '',
     decisionMaker: '',
@@ -93,7 +91,7 @@ const Contact = () => {
       
       // Redirect after 2 seconds
       setTimeout(() => {
-        navigate('/thank-you')
+        window.location.href = '/thank-you'
       }, 2000)
     } catch (error) {
       setSubmitStatus('error')

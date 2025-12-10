@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const location = useLocation()
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +26,11 @@ const Header = () => {
     { path: '/contact', label: 'Contact' }
   ]
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => {
+    const current = currentPath.replace('.html', '')
+    const checkPath = path === '/' ? '/' : path
+    return current === checkPath || current === checkPath + '.html'
+  }
 
   return (
     <motion.header
@@ -39,21 +46,21 @@ const Header = () => {
       <nav className="container py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center" aria-label="MUTAG HOUSE Home">
+          <a href="/" className="flex items-center" aria-label="MUTAG HOUSE Home">
             <img
               src="/Logo-no-background.png"
               alt="MUTAG HOUSE"
               className="h-10 w-auto"
               loading="eager"
             />
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className={`text-sm font-medium transition-luxury ${
                   isActive(link.path)
                     ? 'text-brand-blue'
@@ -61,18 +68,18 @@ const Header = () => {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link
-              to="/contact"
+            <a
+              href="/contact"
               className="gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm transition-luxury hover:opacity-90 hover:shadow-lg hover:shadow-brand-blue/20"
             >
               Request Private Strategy Call
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -117,9 +124,9 @@ const Header = () => {
           >
             <div className="flex flex-col gap-4 pt-6">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.path}
-                  to={link.path}
+                  href={link.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-base font-medium transition-luxury ${
                     isActive(link.path)
@@ -128,15 +135,15 @@ const Header = () => {
                   }`}
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
-              <Link
-                to="/contact"
+              <a
+                href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm text-center mt-2"
               >
                 Request Private Strategy Call
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}
