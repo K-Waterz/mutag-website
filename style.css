@@ -164,20 +164,23 @@ img {
 
 /* ================ HEADER & NAVIGATION ================ */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(15, 23, 42, 0.98);
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  background: rgba(15, 23, 42, 0.98) !important;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.3s ease;
   min-height: 70px;
-  display: flex;
+  display: flex !important;
   align-items: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  width: 100%;
+  width: 100% !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .header.scrolled {
@@ -189,10 +192,13 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-sm) var(--space-sm);
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) {
@@ -207,6 +213,8 @@ img {
   z-index: 1001;
   background: transparent;
   background-color: transparent;
+  visibility: visible;
+  opacity: 1;
 }
 
 .logo-img {
@@ -215,6 +223,8 @@ img {
   transition: transform 0.3s ease;
   background: transparent;
   background-color: transparent;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* White logo for dark backgrounds (header is always dark) */
@@ -248,6 +258,8 @@ img {
   cursor: pointer;
   padding: 8px;
   z-index: 1001;
+  visibility: visible;
+  opacity: 1;
 }
 
 .mobile-menu-toggle span {
@@ -293,11 +305,11 @@ img {
 
 @media (min-width: 768px) {
   .mobile-menu-toggle {
-    display: none;
+    display: none !important;
   }
   
   .nav-menu {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     position: static;
     background: transparent;
@@ -306,6 +318,8 @@ img {
     border: none;
     align-items: center;
     gap: var(--space-lg);
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 
@@ -318,6 +332,8 @@ img {
   position: relative;
   text-decoration: none;
   display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .nav-link::after {

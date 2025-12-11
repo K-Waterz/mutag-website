@@ -18,15 +18,32 @@ function initAnimations() {
 
 function setupAnimations() {
   // ================ HEADER ANIMATION ================
-  gsap.from('.header', {
-    y: -100,
-    duration: 0.6,
-    ease: 'power3.out'
-  });
+  // Ensure header is visible first, then animate
+  const header = document.querySelector('.header');
+  if (header) {
+    header.style.transform = 'translateY(0)';
+    header.style.visibility = 'visible';
+    header.style.opacity = '1';
+    
+    // Only animate if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      gsap.from('.header', {
+        y: -100,
+        duration: 0.6,
+        ease: 'power3.out',
+        onComplete: function() {
+          // Ensure header stays visible after animation
+          if (header) {
+            header.style.transform = 'translateY(0)';
+          }
+        }
+      });
+    }
+  }
 
   // Header scroll effect
   let lastScroll = 0;
-  const header = document.getElementById('header');
+  const header = document.getElementById('header') || document.querySelector('.header');
   
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
