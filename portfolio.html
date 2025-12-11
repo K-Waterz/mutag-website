@@ -233,25 +233,26 @@
 </head>
 <body>
   <!-- Header -->
-  <header id="header">
+  <header id="header" class="header">
     <nav class="nav-container">
-      <div class="nav-logo">
-        <a href="index.html">
-          <img src="Logo-no-background.png" alt="MUTAG HOUSE" />
-        </a>
-      </div>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html" class="active">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <a href="index.html" class="logo-link" aria-label="MUTAG HOUSE Home">
+        <img src="Logo-no-background.png" alt="MUTAG HOUSE" class="logo-img">
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
+      
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link active">Work</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn btn-primary nav-cta">Request Private Strategy Call</a>
+      </div>
     </nav>
   </header>
 
@@ -418,12 +419,33 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-section">
-          <h3>MUTAG HOUSE</h3>
-          <p>Premium branding and marketing solutions for enterprises that demand excellence.</p>
+        <div class="footer-brand">
+          <img src="Logo-no-background.png" alt="MUTAG HOUSE" class="footer-logo-img">
+          <p class="footer-description">Premium branding and marketing solutions for enterprises that demand excellence.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/people/MUTAG-House/61578437019157/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/mutag-house/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/mutag_house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="footer-section">
-          <h4>Quick Links</h4>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -432,24 +454,12 @@
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <p>Email: info@mutag.co.za</p>
-          <p>Phone: +27 72 957 2238</p>
-          <p>Location: Centurion, South Africa</p>
-        </div>
-        <div class="footer-section">
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="https://www.facebook.com/people/MUTAG-House/61578437019157/" target="_blank" rel="noopener">
-              <img src="Facebook-logo.svg" alt="Facebook" />
-            </a>
-            <a href="https://www.linkedin.com/company/mutag-house/" target="_blank" rel="noopener">
-              <img src="LinkedIn-logo.svg" alt="LinkedIn" />
-            </a>
-            <a href="https://www.instagram.com/mutag_house" target="_blank" rel="noopener">
-              <img src="Instagram-logo.svg" alt="Instagram" />
-            </a>
+        <div class="footer-contact">
+          <h3>Contact</h3>
+          <div class="contact-info">
+            <p><a href="mailto:info@mutag.co.za">info@mutag.co.za</a></p>
+            <p><a href="tel:+27729572238">+27 72 957 2238</a></p>
+            <p>Centurion, South Africa</p>
           </div>
         </div>
       </div>
