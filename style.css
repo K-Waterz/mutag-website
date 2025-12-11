@@ -65,6 +65,15 @@ body {
   padding-top: 0;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100%;
+  min-height: 100vh;
+}
+
 /* ================ TYPOGRAPHY ================ */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary);
@@ -517,6 +526,73 @@ img {
   z-index: 1;
 }
 
+/* Services and About page specific sections */
+.services-details,
+.about-section {
+  padding: var(--space-2xl) var(--space-sm);
+  position: relative;
+  z-index: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: var(--dark);
+  width: 100%;
+  color: var(--light);
+}
+
+.services-details *,
+.about-section * {
+  visibility: visible;
+  opacity: 1;
+  color: inherit;
+}
+
+.services-details h1,
+.services-details h2,
+.services-details h3,
+.about-section h1,
+.about-section h2,
+.about-section h3 {
+  color: var(--light);
+  visibility: visible;
+  opacity: 1;
+}
+
+.services-details p,
+.about-section p {
+  color: var(--gray-light);
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .services-details,
+  .about-section {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .service-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (min-width: 768px) {
   .section {
     padding: var(--space-2xl) var(--space-lg);
@@ -555,10 +631,37 @@ img {
   gap: var(--space-xl);
   align-items: center;
   width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .two-column > * {
   width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.two-column .text,
+.two-column .text-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--light);
+}
+
+.two-column .text h2,
+.two-column .text h3,
+.two-column .text-content h2,
+.two-column .text-content h3 {
+  color: var(--light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.two-column .text p,
+.two-column .text-content p {
+  color: var(--gray-light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) {
@@ -964,6 +1067,17 @@ img {
   margin-top: 70px;
   position: relative;
   z-index: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.contact-hero *,
+.portfolio-hero *,
+.services-hero *,
+.about-hero * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--light) !important;
 }
 
 @media (min-width: 768px) {
@@ -980,17 +1094,62 @@ img {
 .about-hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: var(--space-md);
-  color: var(--light);
+  color: var(--light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .portfolio-hero p,
 .services-hero .subheading,
 .about-hero .subheading {
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: var(--gray-light);
+  color: var(--gray-light) !important;
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.service-desc {
+  color: var(--gray-light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.services-details article,
+.services-details .service-card {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.services-details article *,
+.services-details .service-card * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.about-section .text,
+.about-section .text-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--light);
+}
+
+.about-section .text h2,
+.about-section .text h3,
+.about-section .text-content h2,
+.about-section .text-content h3 {
+  color: var(--light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.about-section .text p,
+.about-section .text-content p {
+  color: var(--gray-light) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) {
