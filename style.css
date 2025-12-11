@@ -106,12 +106,16 @@ img {
   max-height: 40px;
   width: auto;
   object-fit: contain;
+  background: transparent;
+  background-color: transparent;
 }
 
 .footer-logo-img {
   max-height: 40px;
   width: auto;
   object-fit: contain;
+  background: transparent;
+  background-color: transparent;
 }
 
 .client-logo {
@@ -199,12 +203,16 @@ img {
   display: flex;
   align-items: center;
   z-index: 1001;
+  background: transparent;
+  background-color: transparent;
 }
 
 .logo-img {
   height: 40px;
   width: auto;
   transition: transform 0.3s ease;
+  background: transparent;
+  background-color: transparent;
 }
 
 .logo-img:hover {
@@ -815,6 +823,8 @@ img {
   height: 40px;
   width: auto;
   margin-bottom: var(--space-sm);
+  background: transparent;
+  background-color: transparent;
 }
 
 .footer-description {
