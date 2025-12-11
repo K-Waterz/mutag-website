@@ -215,6 +215,24 @@ img {
   background-color: transparent;
 }
 
+/* White logo for dark backgrounds (header is always dark) */
+.logo-img-white {
+  display: block;
+}
+
+.logo-img-black {
+  display: none;
+}
+
+/* Black logo for light backgrounds - only if logo is inside a light section */
+.section-light .logo-img-white {
+  display: none;
+}
+
+.section-light .logo-img-black {
+  display: block;
+}
+
 .logo-img:hover {
   transform: scale(1.05);
 }
@@ -825,6 +843,15 @@ img {
   margin-bottom: var(--space-sm);
   background: transparent;
   background-color: transparent;
+}
+
+/* Footer logo switching - footer is dark, so use white logo */
+.footer-logo-white {
+  display: block;
+}
+
+.footer-logo-black {
+  display: none;
 }
 
 .footer-description {
