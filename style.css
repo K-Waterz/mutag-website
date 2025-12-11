@@ -62,7 +62,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: visible;
   padding-top: 0;
+  min-height: 100vh;
 }
 
 main {
@@ -71,7 +73,14 @@ main {
   visibility: visible !important;
   opacity: 1 !important;
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
+  overflow: visible;
+}
+
+main > * {
+  overflow: visible;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* ================ TYPOGRAPHY ================ */
@@ -163,6 +172,7 @@ img {
   padding: 0 var(--space-sm);
   position: relative;
   z-index: 1;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
@@ -517,7 +527,7 @@ img {
 .section {
   padding: var(--space-2xl) var(--space-sm);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   z-index: 1;
 }
 
@@ -537,6 +547,8 @@ img {
   background: var(--dark);
   width: 100%;
   color: var(--light);
+  overflow: visible;
+  min-height: auto;
 }
 
 .services-details *,
@@ -1127,6 +1139,53 @@ img {
 .services-details .service-card * {
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Service details expanded section */
+.service-details-expanded {
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.service-details-expanded * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.service-details-expanded h2,
+.service-details-expanded h3 {
+  color: var(--light) !important;
+}
+
+.service-details-expanded p {
+  color: var(--gray-light) !important;
+}
+
+/* Contact CTA section */
+.contact-cta {
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.contact-cta * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.contact-cta h2 {
+  color: var(--light) !important;
+}
+
+.contact-cta p {
+  color: var(--gray-light) !important;
 }
 
 .about-section .text,
