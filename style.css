@@ -62,7 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  padding-top: 70px;
+  padding-top: 0;
 }
 
 /* ================ TYPOGRAPHY ================ */
@@ -148,6 +148,8 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-sm);
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -254,6 +256,7 @@ img {
   z-index: 999;
   max-height: calc(100vh - 70px);
   overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav-menu.active {
@@ -372,6 +375,7 @@ img {
   background: var(--gradient-secondary);
   overflow: hidden;
   margin-top: 70px;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -419,6 +423,7 @@ img {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  pointer-events: none;
 }
 
 .mouse {
@@ -457,6 +462,7 @@ img {
   padding: var(--space-2xl) var(--space-sm);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .section > * {
@@ -546,6 +552,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .image-content img {
@@ -589,6 +597,7 @@ img {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 .service-card:hover {
@@ -666,6 +675,7 @@ img {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 .work-card:hover {
@@ -708,6 +718,7 @@ img {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 .testimonial-quote {
@@ -740,6 +751,8 @@ img {
   text-align: center;
   background: var(--gradient-secondary);
   position: relative;
+  z-index: 1;
+  margin-top: 0;
 }
 
 @media (min-width: 768px) {
@@ -768,6 +781,9 @@ img {
   background: var(--dark);
   padding: var(--space-xl) var(--space-sm);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
 }
 
 @media (min-width: 768px) {
@@ -952,6 +968,7 @@ img {
   background: var(--dark);
   position: relative;
   z-index: 1;
+  margin-top: 0;
 }
 
 @media (min-width: 768px) {
@@ -979,6 +996,8 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
 }
 
 .contact-info h2 {
@@ -1032,6 +1051,8 @@ img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-form:hover {
@@ -1048,6 +1069,8 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
+  position: relative;
+  z-index: 1;
 }
 
 .form-group label {
@@ -1304,6 +1327,8 @@ img {
 .kpi-section {
   padding: var(--space-2xl) var(--space-sm);
   background: var(--dark-light);
+  position: relative;
+  z-index: 1;
 }
 
 .kpi-grid {
@@ -1326,6 +1351,8 @@ img {
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-md);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .kpi-badge h4 {
@@ -1343,6 +1370,8 @@ img {
 .client-showcase {
   padding: var(--space-2xl) var(--space-sm);
   background: var(--dark);
+  position: relative;
+  z-index: 1;
 }
 
 .showcase-subtitle {
