@@ -280,6 +280,8 @@ img {
   visibility: visible;
   opacity: 1;
   position: relative;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-toggle:focus {
@@ -314,7 +316,7 @@ img {
 }
 
 .nav-menu {
-  display: none;
+  display: none !important;
   flex-direction: column;
   position: fixed;
   top: 70px;
@@ -331,6 +333,7 @@ img {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   visibility: visible;
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .nav-menu.active {

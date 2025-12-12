@@ -58,27 +58,43 @@ function setupAnimations() {
   });
 
   // ================ MOBILE MENU ================
-  const mobileToggle = document.querySelector('.mobile-menu-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-  
-  if (mobileToggle && navMenu) {
+  function initMobileMenu() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (!mobileToggle || !navMenu) {
+      console.warn('Mobile menu elements not found');
+      return;
+    }
+    
     // Ensure menu is initially hidden
     navMenu.classList.remove('active');
+    mobileToggle.setAttribute('aria-expanded', 'false');
     
-    mobileToggle.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent event bubbling
-      const isActive = mobileToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+    // Toggle menu function
+    function toggleMenu() {
+      const isActive = mobileToggle.classList.contains('active');
       
-      // Update aria-expanded for accessibility
-      mobileToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-      
-      // Prevent body scroll when menu is open
       if (isActive) {
-        document.body.style.overflow = 'hidden';
-      } else {
+        // Close menu
+        mobileToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+      } else {
+        // Open menu
+        mobileToggle.classList.add('active');
+        navMenu.classList.add('active');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
       }
+    }
+    
+    // Click handler for toggle button
+    mobileToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
     });
 
     // Close menu when clicking a link
@@ -93,7 +109,7 @@ function setupAnimations() {
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', function(e) {
       if (navMenu.classList.contains('active') && 
           !navMenu.contains(e.target) && 
           !mobileToggle.contains(e.target)) {
@@ -105,7 +121,7 @@ function setupAnimations() {
     });
     
     // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && navMenu.classList.contains('active')) {
         mobileToggle.classList.remove('active');
         navMenu.classList.remove('active');
@@ -113,7 +129,12 @@ function setupAnimations() {
         document.body.style.overflow = '';
       }
     });
+    
+    console.log('Mobile menu initialized');
   }
+  
+  // Initialize mobile menu
+  initMobileMenu();
 
   // ================ HERO ANIMATIONS ================
   const heroTitle = document.querySelector('.hero-title');
