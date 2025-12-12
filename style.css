@@ -329,7 +329,7 @@ img {
 }
 
 .nav-menu {
-  display: none !important;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 70px;
@@ -350,18 +350,18 @@ img {
 }
 
 .nav-menu.active {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
   transform: translateY(0) !important;
 }
 
 /* Force menu to show when active - override everything */
 #mobile-menu-toggle.active + .nav-menu,
 .nav-menu.active {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 @media (min-width: 768px) {
