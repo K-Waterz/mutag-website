@@ -270,7 +270,7 @@ img {
 
 .mobile-menu-toggle,
 #mobile-menu-toggle {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   gap: 4px;
   background: none !important;
@@ -344,9 +344,9 @@ img {
   max-height: calc(100vh - 70px);
   overflow-y: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .nav-menu.active {
@@ -365,7 +365,8 @@ img {
 }
 
 @media (min-width: 768px) {
-  .mobile-menu-toggle {
+  .mobile-menu-toggle,
+  #mobile-menu-toggle {
     display: none !important;
   }
   
@@ -381,6 +382,16 @@ img {
     gap: var(--space-lg);
     visibility: visible !important;
     opacity: 1 !important;
+    top: auto;
+    left: auto;
+    right: auto;
+    max-height: none;
+    overflow-y: visible;
+    box-shadow: none;
+  }
+  
+  .nav-menu.active {
+    display: flex !important;
   }
 }
 
