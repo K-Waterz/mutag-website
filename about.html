@@ -182,7 +182,7 @@
         <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black">
       </a>
       
-      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
         <span></span>
         <span></span>
         <span></span>
@@ -419,6 +419,123 @@
     </div>
   </footer>
 
+  <!-- Mobile Menu Script - Must run before other scripts -->
+  <script>
+    (function() {
+      'use strict';
+      
+      function setupMobileMenu() {
+        var toggleBtn = document.getElementById('mobile-menu-toggle') || document.querySelector('.mobile-menu-toggle');
+        var menu = document.querySelector('.nav-menu');
+        
+        if (!toggleBtn || !menu) {
+          console.log('Menu elements not ready, retrying...', {toggleBtn: !!toggleBtn, menu: !!menu});
+          return false;
+        }
+        
+        console.log('Setting up mobile menu...', {toggleBtn, menu});
+        
+        // Remove all existing event listeners by cloning
+        var newToggle = toggleBtn.cloneNode(true);
+        toggleBtn.parentNode.replaceChild(newToggle, toggleBtn);
+        toggleBtn = newToggle;
+        
+        function toggleMenu(e) {
+          if (e) {
+            if (e.preventDefault) e.preventDefault();
+            if (e.stopPropagation) e.stopPropagation();
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          }
+          
+          var isOpen = menu.classList.contains('active');
+          
+          console.log('Toggle called, current state:', isOpen);
+          
+          if (isOpen) {
+            toggleBtn.classList.remove('active');
+            menu.classList.remove('active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            console.log('Menu closed');
+          } else {
+            toggleBtn.classList.add('active');
+            menu.classList.add('active');
+            toggleBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            console.log('Menu opened');
+          }
+          
+          return false;
+        }
+        
+        // Direct property assignment (most reliable)
+        toggleBtn.onclick = toggleMenu;
+        toggleBtn.ontouchend = function(e) {
+          if (e.preventDefault) e.preventDefault();
+          toggleMenu(e);
+          return false;
+        };
+        
+        // Event listeners as backup
+        try {
+          toggleBtn.addEventListener('click', toggleMenu, {capture: true, passive: false});
+          toggleBtn.addEventListener('touchend', toggleMenu, {capture: true, passive: false});
+        } catch(e) {
+          console.warn('addEventListener failed, using onclick only');
+        }
+        
+        // Make absolutely sure it's clickable
+        toggleBtn.style.pointerEvents = 'auto';
+        toggleBtn.style.cursor = 'pointer';
+        toggleBtn.style.position = 'relative';
+        toggleBtn.style.zIndex = '1001';
+        
+        // Close menu when clicking links
+        var links = menu.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+          links[i].addEventListener('click', function() {
+            toggleBtn.classList.remove('active');
+            menu.classList.remove('active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        }
+        
+        // Close on outside click
+        document.addEventListener('click', function(e) {
+          if (menu.classList.contains('active') && 
+              !menu.contains(e.target) && 
+              !toggleBtn.contains(e.target)) {
+            toggleBtn.classList.remove('active');
+            menu.classList.remove('active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          }
+        });
+        
+        console.log('Mobile menu setup complete!');
+        return true;
+      }
+      
+      // Try immediately
+      if (setupMobileMenu()) {
+        console.log('Menu initialized on first try');
+      } else {
+        // Try on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(setupMobileMenu, 10);
+          });
+        }
+        
+        // Try with delays
+        setTimeout(function() { setupMobileMenu(); }, 50);
+        setTimeout(function() { setupMobileMenu(); }, 200);
+        setTimeout(function() { setupMobileMenu(); }, 500);
+        setTimeout(function() { setupMobileMenu(); }, 1000);
+      }
+    })();
+  </script>
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

@@ -326,7 +326,7 @@
       'use strict';
       
       function setupMobileMenu() {
-        var toggleBtn = document.getElementById('mobile-menu-toggle');
+        var toggleBtn = document.getElementById('mobile-menu-toggle') || document.querySelector('.mobile-menu-toggle');
         var menu = document.querySelector('.nav-menu');
         
         if (!toggleBtn || !menu) {
