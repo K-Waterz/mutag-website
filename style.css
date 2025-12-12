@@ -268,27 +268,31 @@ img {
   transform: scale(1.05);
 }
 
-.mobile-menu-toggle {
-  display: flex;
+.mobile-menu-toggle,
+#mobile-menu-toggle {
+  display: flex !important;
   flex-direction: column;
   gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 12px 8px;
-  z-index: 1001;
-  visibility: visible;
-  opacity: 1;
-  position: relative;
-  pointer-events: auto;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 12px 8px !important;
+  z-index: 1001 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  pointer-events: auto !important;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   -webkit-user-select: none;
   user-select: none;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 44px !important;
+  min-height: 44px !important;
   justify-content: center;
   align-items: center;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin: 0;
 }
 
 .mobile-menu-toggle:focus {
@@ -345,6 +349,15 @@ img {
   transition: opacity 0.3s ease;
 }
 
+.nav-menu.active {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Force menu to show when active - override everything */
+#mobile-menu-toggle.active + .nav-menu,
 .nav-menu.active {
   display: flex !important;
   visibility: visible !important;
