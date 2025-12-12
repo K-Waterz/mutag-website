@@ -1466,13 +1466,49 @@ img {
 }
 
 /* ================ ANIMATIONS (GSAP will handle these) ================ */
+/* Ensure all content is visible by default - animations will enhance, not hide */
 .fade-in {
-  opacity: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .slide-up {
-  transform: translateY(30px);
-  opacity: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+/* Override any GSAP initial states - ensure content is visible */
+.hero-title,
+.hero-subtitle,
+.hero-section .btn,
+.section,
+.cta-section,
+.service-card,
+.work-card,
+.testimonial-card,
+.text-content,
+.image-content,
+.services-details,
+.about-section,
+.service-details-expanded,
+.contact-cta {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure all headings and text are visible */
+h1, h2, h3, h4, h5, h6,
+p, li, span, a, div {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* But allow specific hidden elements to remain hidden */
+.hidden,
+[hidden],
+[style*="display: none"] {
+  display: none !important;
 }
 
 /* ================ MOBILE OPTIMIZATIONS ================ */
