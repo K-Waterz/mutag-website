@@ -40,7 +40,7 @@
         <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black">
       </a>
       
-      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="void(0)">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="if(typeof toggleMobileMenu==='function'){toggleMobileMenu(event);return false;}">
         <span></span>
         <span></span>
         <span></span>
@@ -321,5 +321,66 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Simple mobile menu fallback for iOS -->
+  <script>
+    (function() {
+      function initMobileMenuSimple() {
+        var toggle = document.getElementById('mobile-menu-toggle') || document.querySelector('.mobile-menu-toggle');
+        var menu = document.querySelector('.nav-menu');
+        
+        if (!toggle || !menu) {
+          setTimeout(initMobileMenuSimple, 100);
+          return;
+        }
+        
+        function toggleMenu(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          
+          var isActive = toggle.classList.contains('active');
+          
+          if (isActive) {
+            toggle.classList.remove('active');
+            menu.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          } else {
+            toggle.classList.add('active');
+            menu.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+          }
+          
+          return false;
+        }
+        
+        // Remove existing onclick and add new one
+        toggle.onclick = toggleMenu;
+        toggle.ontouchend = function(e) {
+          e.preventDefault();
+          toggleMenu(e);
+        };
+        
+        // Also add event listeners
+        toggle.addEventListener('click', toggleMenu, true);
+        toggle.addEventListener('touchend', toggleMenu, true);
+        
+        // Expose globally
+        window.toggleMobileMenu = toggleMenu;
+        
+        console.log('Simple mobile menu initialized');
+      }
+      
+      // Try multiple times
+      initMobileMenuSimple();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenuSimple);
+      }
+      setTimeout(initMobileMenuSimple, 50);
+      setTimeout(initMobileMenuSimple, 200);
+    })();
+  </script>
 </body>
 </html>
