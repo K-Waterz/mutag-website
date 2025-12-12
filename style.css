@@ -275,13 +275,20 @@ img {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 12px 8px;
   z-index: 1001;
   visibility: visible;
   opacity: 1;
   position: relative;
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
 }
 
 .mobile-menu-toggle:focus {
@@ -301,6 +308,8 @@ img {
   height: 2px;
   background: var(--light);
   transition: all 0.3s ease;
+  pointer-events: none;
+  display: block;
 }
 
 .mobile-menu-toggle.active span:nth-child(1) {
