@@ -201,7 +201,7 @@ const About = () => {
       </Section>
 
       {/* CTA */}
-      <Section background="dark" className="gradient-primary/10">
+      <Section background="dark" className="gradient-primary/10 !pb-32 md:!pb-40">
         <div className="text-center max-w-3xl mx-auto px-4">
           <h2 className="font-heading text-3xl md:text-4xl mb-6">
             Ready to Build Your Brand?
