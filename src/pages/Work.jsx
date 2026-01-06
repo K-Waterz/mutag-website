@@ -55,6 +55,39 @@ const Work = () => {
       fullDescription: 'Delivered a comprehensive digital transformation for Rapatla-rue, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems. We also created targeted digital advertising campaigns to help them reach their audience and drive business growth. Our full-service approach ensured they launched with enterprise-grade reliability and performance.',
       tags: ['Custom Website', 'Digital Advertising', 'Premium Hosting'],
       link: 'https://rapatlarue.co.za'
+    },
+    {
+      id: 5,
+      title: 'Custom Internal Quoting System for We Moove SA',
+      category: 'Custom Software Development',
+      image: '/we-moove-sa-logo.png',
+      logo: '/we-moove-sa-logo.png',
+      description: 'Built a custom internal web-based quoting feature that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally.',
+      fullDescription: 'Built a custom internal web-based quoting feature that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally. The solution provides We Moove SA\'s team with an intuitive interface to quickly generate accurate service quotes while maintaining the confidentiality of their pricing strategies and business logic.',
+      tags: ['Custom Software', 'Web Development', 'Internal Tools'],
+      link: null
+    },
+    {
+      id: 6,
+      title: 'Social Media Visual Advertising for Magnificent Pools',
+      category: 'Social Media Marketing',
+      image: '/magnificent-pools-logo.png',
+      logo: '/magnificent-pools-logo.png',
+      description: 'We designed social media visual advertisements to support marketing and client acquisition efforts.',
+      fullDescription: 'We designed social media visual advertisements to support marketing and client acquisition efforts for Magnificent Pools. Our creative team developed eye-catching visual content that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
+      tags: ['Social Media Marketing', 'Visual Design', 'Content Creation'],
+      link: null
+    },
+    {
+      id: 7,
+      title: 'Website Development & Brand Identity for XFM Tech',
+      category: 'Website Development',
+      image: '/xfm-tech-logo.png',
+      logo: '/xfm-tech-logo.png',
+      description: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. Developed branded social media visual content to support online visibility and reinforce brand recognition.',
+      fullDescription: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. We also developed branded social media visual content to support online visibility and reinforce brand recognition. The comprehensive digital solution established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
+      tags: ['Website Development', 'Brand Identity', 'Social Media Marketing'],
+      link: null
     }
   ]
 
