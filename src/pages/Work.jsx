@@ -65,7 +65,7 @@ const Work = () => {
       description: 'Built a custom internal web-based quoting feature for We Moove SA that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally.',
       fullDescription: 'The solution provides We Moove SA\'s team with an intuitive interface to quickly generate accurate service quotes while maintaining the confidentiality of their pricing strategies and business logic. This internal tool has significantly improved their operational efficiency and customer service response times.',
       tags: ['Custom Software', 'Web Development', 'Internal Tools'],
-      link: null
+      link: 'https://wn48nk66.forms.app/my-new-form'
     },
     {
       id: 6,
