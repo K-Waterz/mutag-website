@@ -1754,6 +1754,38 @@ p, li, span, a, div {
   outline-offset: 2px;
 }
 
+/* Portfolio Description Read More */
+.portfolio-description .description-more {
+  display: none;
+}
+
+.portfolio-description.expanded .description-more {
+  display: block;
+}
+
+.read-more-btn {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-top: var(--space-sm);
+}
+
+.read-more-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.read-more-btn.expanded {
+  background: var(--primary);
+  color: var(--white);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

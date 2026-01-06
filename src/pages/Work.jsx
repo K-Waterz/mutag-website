@@ -19,7 +19,7 @@ const Work = () => {
       image: '/flowerclub-social-media.gif',
       logo: '/flowerclub-logo.png',
       description: 'Revitalized FlowerClub\'s digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic.',
-      fullDescription: 'Revitalized FlowerClub\'s digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic. Our team developed a comprehensive social media strategy that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.',
+      fullDescription: 'Our team developed a comprehensive social media strategy for FlowerClub that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.',
       tags: ['Social Media Strategy', 'Content Creation', 'Brand Storytelling'],
       link: 'https://flowerclub.co.za'
     },
@@ -29,19 +29,19 @@ const Work = () => {
       category: 'Website Development',
       image: '/business-card-mockup.png',
       logo: '/attorneys-logo.png',
-      description: 'Developed professional business cards and provided compliance services for Mathibele Mahlaela Attorneys. We also created their complete website, establishing a strong online presence.',
-      fullDescription: 'Developed professional business cards and provided compliance services for Mathibele Mahlaela Attorneys. We also created their complete website, establishing a strong online presence that reflects their legal expertise and professionalism. The website features a clean, professional design that conveys trustworthiness and makes it easy for clients to learn about their services and get in touch.',
+      description: 'Developed professional business cards and provided compliance services for Mathibele Mahlaela Attorneys. We also created their complete website, establishing a strong online presence that reflects their legal expertise and professionalism.',
+      fullDescription: 'The website features a clean, professional design that conveys trustworthiness and makes it easy for clients to learn about Mathibele Mahlaela Attorneys\' services and get in touch. We also handled the complete business documentation process, ensuring all regulatory and compliance requirements were properly addressed.',
       tags: ['Website Development', 'Business Cards', 'CIPC Compliance'],
       link: 'https://mathibelem.co.za'
     },
     {
       id: 3,
-      title: 'Complete Brand Identity for La Gracia Farm',
+      title: 'Complete Brand Identity for Lagracia Estate',
       category: 'Brand Identity',
       image: '/lagracia-logo.png',
       logo: '/lagracia-logo.png',
-      description: 'Created a comprehensive brand identity for La Gracia Farm including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
-      fullDescription: 'Created a comprehensive brand identity for La Gracia Farm including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market. Our design approach incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications.',
+      description: 'Created a comprehensive brand identity for Lagracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
+      fullDescription: 'Our design approach for Lagracia Estate incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications. The brand identity extends across all touchpoints, creating a consistent experience that helps build recognition and trust.',
       tags: ['Logo Design', 'Business Cards', 'Letterhead'],
       link: null
     },
@@ -51,8 +51,8 @@ const Work = () => {
       category: 'Digital Solutions',
       image: '/Rapatla-rue-logo.jpg',
       logo: '/Rapatla-rue-logo.jpg',
-      description: 'Delivered a comprehensive digital transformation for Rapatla-rue, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems.',
-      fullDescription: 'Delivered a comprehensive digital transformation for Rapatla-rue, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems. We also created targeted digital advertising campaigns to help them reach their audience and drive business growth. Our full-service approach ensured they launched with enterprise-grade reliability and performance.',
+      description: 'Delivered a comprehensive digital transformation for Rapatla Rue Attorneys, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems.',
+      fullDescription: 'We also created targeted digital advertising campaigns for Rapatla Rue Attorneys to help them reach their audience and drive business growth. Our full-service approach ensured they launched with enterprise-grade reliability and performance, with every aspect of their digital presence optimized for both user experience and search engine visibility.',
       tags: ['Custom Website', 'Digital Advertising', 'Premium Hosting'],
       link: 'https://rapatlarue.co.za'
     },
@@ -62,8 +62,8 @@ const Work = () => {
       category: 'Custom Software Development',
       image: '/we-moove-sa-logo.png',
       logo: '/we-moove-sa-logo.png',
-      description: 'Built a custom internal web-based quoting feature that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally.',
-      fullDescription: 'Built a custom internal web-based quoting feature that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally. The solution provides We Moove SA\'s team with an intuitive interface to quickly generate accurate service quotes while maintaining the confidentiality of their pricing strategies and business logic.',
+      description: 'Built a custom internal web-based quoting feature for We Moove SA that enables staff to estimate service costs based on predefined inputs, streamlining pricing workflows and improving turnaround time without exposing internal logic externally.',
+      fullDescription: 'The solution provides We Moove SA\'s team with an intuitive interface to quickly generate accurate service quotes while maintaining the confidentiality of their pricing strategies and business logic. This internal tool has significantly improved their operational efficiency and customer service response times.',
       tags: ['Custom Software', 'Web Development', 'Internal Tools'],
       link: null
     },
@@ -73,8 +73,8 @@ const Work = () => {
       category: 'Social Media Marketing',
       image: '/magnificent-pools-logo.png',
       logo: '/magnificent-pools-logo.png',
-      description: 'We designed social media visual advertisements to support marketing and client acquisition efforts.',
-      fullDescription: 'We designed social media visual advertisements to support marketing and client acquisition efforts for Magnificent Pools. Our creative team developed eye-catching visual content that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
+      description: 'We designed social media visual advertisements for Magnificent Pools to support marketing and client acquisition efforts.',
+      fullDescription: 'Our creative team developed eye-catching visual content for Magnificent Pools that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
       tags: ['Social Media Marketing', 'Visual Design', 'Content Creation'],
       link: 'https://www.magpools.co.za/'
     },
@@ -84,8 +84,8 @@ const Work = () => {
       category: 'Website Development',
       image: '/xfm-tech-logo.png',
       logo: '/xfm-tech-logo.png',
-      description: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. Developed branded social media visual content to support online visibility and reinforce brand recognition.',
-      fullDescription: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. We also developed branded social media visual content to support online visibility and reinforce brand recognition. The comprehensive digital solution established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
+      description: 'Design and development of a modern, responsive website for XFM Tech that serves as their primary digital presence. The website clearly communicates the company\'s technology offerings while reinforcing a strong, professional brand identity.',
+      fullDescription: 'We also developed branded social media visual content for XFM Tech to support online visibility and reinforce brand recognition. The comprehensive digital solution established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
       tags: ['Website Development', 'Brand Identity', 'Social Media Marketing'],
       link: 'https://xfmtech.com/'
     }
