@@ -76,7 +76,7 @@ const Work = () => {
       description: 'We designed social media visual advertisements to support marketing and client acquisition efforts.',
       fullDescription: 'We designed social media visual advertisements to support marketing and client acquisition efforts for Magnificent Pools. Our creative team developed eye-catching visual content that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
       tags: ['Social Media Marketing', 'Visual Design', 'Content Creation'],
-      link: null
+      link: 'https://www.magpools.co.za/'
     },
     {
       id: 7,
@@ -87,7 +87,7 @@ const Work = () => {
       description: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. Developed branded social media visual content to support online visibility and reinforce brand recognition.',
       fullDescription: 'Design and development of a modern, responsive website that serves as the primary digital presence for XFM Tech. The website was built to clearly communicate the company\'s technology offerings while reinforcing a strong, professional brand identity. We also developed branded social media visual content to support online visibility and reinforce brand recognition. The comprehensive digital solution established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
       tags: ['Website Development', 'Brand Identity', 'Social Media Marketing'],
-      link: null
+      link: 'https://xfmtech.com/'
     }
   ]
 
