@@ -89,8 +89,8 @@ const Services = () => {
       description: 'We leverage the latest tools and technologies to create websites and digital solutions that are fast, secure, and optimized.'
     },
     {
-      title: 'Local Expertise',
-      description: 'Based in Centurion, we understand the South African market and can help you navigate local business requirements.'
+      title: 'Scalable Solutions',
+      description: 'Our services are designed to grow with your business, from startup to enterprise. We build solutions that scale and adapt to your evolving needs.'
     }
   ]
 
@@ -146,6 +146,17 @@ const Services = () => {
                   </li>
                 ))}
               </ul>
+              <div className="mt-6">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline transition-luxury"
+                >
+                  Learn more
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </Card>
           ))}
         </div>

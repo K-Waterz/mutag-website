@@ -69,18 +69,6 @@ const Home = () => {
     }
   ]
 
-  const testimonials = [
-    {
-      quote: "MUTAG HOUSE's visual content made our flowers look even more beautiful than in real life! Their social media expertise helped us triple our online inquiries while maintaining our premium brand image.",
-      author: "FlowerClub Marketing Director",
-      outcome: "3x increase in qualified leads"
-    },
-    {
-      quote: "Professional, fast and on-brand — we help businesses launch faster and achieve their marketing goals.",
-      author: "Client Testimonial",
-      outcome: "100% on-time delivery"
-    }
-  ]
 
   return (
     <>
@@ -262,26 +250,6 @@ const Home = () => {
               View Portfolio
             </Button>
           </a>
-        </div>
-      </Section>
-
-      {/* Testimonials */}
-      <Section
-        title="Trusted by Industry Leaders"
-        background="light"
-      >
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} delay={index * 0.1}>
-              <p className="text-brand-dark/80 text-lg mb-6 italic">
-                "{testimonial.quote}"
-              </p>
-              <div className="border-t border-brand-blue/20 pt-4">
-                <p className="font-medium text-brand-dark">{testimonial.author}</p>
-                <p className="text-sm text-brand-blue mt-1">{testimonial.outcome}</p>
-              </div>
-            </Card>
-          ))}
         </div>
       </Section>
 

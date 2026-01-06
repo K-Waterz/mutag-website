@@ -29,7 +29,7 @@ const About = () => {
   const approach = [
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" />
         </svg>
       ),
@@ -38,7 +38,7 @@ const About = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       ),
@@ -47,7 +47,7 @@ const About = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
@@ -95,7 +95,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-lg text-brand-light/80 mb-6">
-              MUTAG HOUSE was founded with a clear vision: to help businesses of all sizes build compelling brand identities that drive growth and success. Based in Centurion, South Africa, we've established ourselves as a trusted partner for entrepreneurs, small and medium enterprises, and established corporations looking to elevate their brand presence.
+              MUTAG HOUSE was founded with a clear vision: to help businesses of all sizes build compelling brand identities that drive growth and success. We've established ourselves as a trusted partner for entrepreneurs, small and medium enterprises, and established corporations looking to elevate their brand presence.
             </p>
             <p className="text-lg text-brand-light/80 mb-6">
               Our journey began with a simple belief – that every business, regardless of size, deserves access to professional branding and marketing services that can transform their market presence. We combine creative excellence with strategic thinking to deliver solutions that not only look great but also deliver measurable results.
@@ -206,7 +206,7 @@ const About = () => {
           <h2 className="font-heading text-3xl md:text-4xl mb-6">
             Ready to Build Your Brand?
           </h2>
-          <p className="text-xl text-brand-light/70 mb-10">
+          <p className="text-xl text-brand-light/90 mb-10">
             Let's discuss how MUTAG HOUSE can help transform your business.
           </p>
           <Link to="/contact">
