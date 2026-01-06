@@ -43,6 +43,7 @@ function App() {
       case '/services.html':
         return <Services />
       case '/work':
+      case '/portfolio':
       case '/portfolio.html':
         return <Work />
       case '/contact':
