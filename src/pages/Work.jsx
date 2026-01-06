@@ -36,12 +36,12 @@ const Work = () => {
     },
     {
       id: 3,
-      title: 'Complete Brand Identity for Lagracia Estate',
+      title: 'Complete Brand Identity for La Gracia Estate',
       category: 'Brand Identity',
       image: '/lagracia-logo.png',
       logo: '/lagracia-logo.png',
-      description: 'Created a comprehensive brand identity for Lagracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
-      fullDescription: 'Our design approach for Lagracia Estate incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications. The brand identity extends across all touchpoints, creating a consistent experience that helps build recognition and trust.',
+      description: 'Created a comprehensive brand identity for La Gracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
+      fullDescription: 'Our design approach for La Gracia Estate incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications. The brand identity extends across all touchpoints, creating a consistent experience that helps build recognition and trust.',
       tags: ['Logo Design', 'Business Cards', 'Letterhead'],
       link: null
     },
