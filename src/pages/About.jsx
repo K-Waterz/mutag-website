@@ -70,12 +70,12 @@ const About = () => {
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-24">
         <div className="absolute inset-0 gradient-primary opacity-10" />
-        <div className="container relative z-10 text-center">
+        <div className="container relative z-10 text-center px-4">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-heading text-4xl md:text-5xl lg:text-6xl mb-6"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6"
           >
             About MUTAG HOUSE
           </motion.h1>
@@ -83,7 +83,7 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-brand-light/70 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl text-brand-light/70 max-w-3xl mx-auto px-2"
           >
             A forward-thinking branding and marketing agency helping businesses build strong brand identities through strategic design and modern marketing solutions.
           </motion.p>
@@ -92,15 +92,15 @@ const About = () => {
 
       {/* Our Story */}
       <Section title="Our Story" background="dark">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-lg text-brand-light/80 mb-6">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
+          <div className="px-4 md:px-0">
+            <p className="text-base md:text-lg text-brand-light/80 mb-6">
               MUTAG HOUSE was founded with a clear vision: to help businesses of all sizes build compelling brand identities that drive growth and success. We've established ourselves as a trusted partner for entrepreneurs, small and medium enterprises, and established corporations looking to elevate their brand presence.
             </p>
-            <p className="text-lg text-brand-light/80 mb-6">
+            <p className="text-base md:text-lg text-brand-light/80 mb-6">
               Our journey began with a simple belief – that every business, regardless of size, deserves access to professional branding and marketing services that can transform their market presence. We combine creative excellence with strategic thinking to deliver solutions that not only look great but also deliver measurable results.
             </p>
-            <p className="text-lg text-brand-light/80">
+            <p className="text-base md:text-lg text-brand-light/80">
               Over the years, we've worked with diverse businesses across various industries, from retail and legal services to agricultural businesses and technology. Each project has taught us something new, and we bring that accumulated expertise to every client engagement.
             </p>
           </div>
@@ -109,11 +109,12 @@ const About = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="px-4 md:px-0"
           >
             <img
               src="/Mutag wesbite images/Team working on project on separate screens.png"
               alt="MUTAG HOUSE team"
-              className="rounded-2xl shadow-2xl"
+              className="w-full max-w-full h-auto rounded-2xl shadow-2xl"
               loading="lazy"
             />
           </motion.div>
@@ -122,12 +123,12 @@ const About = () => {
 
       {/* Our Approach */}
       <Section title="Our Approach" background="light">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
           {approach.map((item, index) => (
             <Card key={item.title} delay={index * 0.1}>
               <div className="text-brand-blue mb-4">{item.icon}</div>
-              <h3 className="font-heading text-xl mb-3">{item.title}</h3>
-              <p className="text-brand-dark/70">{item.description}</p>
+              <h3 className="font-heading text-lg md:text-xl mb-3">{item.title}</h3>
+              <p className="text-sm md:text-base text-brand-dark/70">{item.description}</p>
             </Card>
           ))}
         </div>
@@ -135,19 +136,20 @@ const About = () => {
 
       {/* What We Do */}
       <Section title="What We Do" background="dark">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="px-4 md:px-0"
           >
-            <p className="text-lg text-brand-light/80 mb-6">
+            <p className="text-base md:text-lg text-brand-light/80 mb-6">
               At MUTAG HOUSE, we offer a comprehensive suite of branding and marketing services designed to help your business succeed in today's competitive marketplace.
             </p>
-            <ul className="space-y-4 text-brand-light/80">
+            <ul className="space-y-4 text-base md:text-lg text-brand-light/80">
               <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <div>
@@ -155,7 +157,7 @@ const About = () => {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <div>
@@ -163,7 +165,7 @@ const About = () => {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-brand-blue flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <div>
@@ -177,11 +179,12 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="px-4 md:px-0"
           >
             <img
               src="/Mutag wesbite images/Team showing each other code on a screen.png"
               alt="MUTAG HOUSE team developing"
-              className="rounded-2xl shadow-2xl"
+              className="w-full max-w-full h-auto rounded-2xl shadow-2xl"
               loading="lazy"
             />
           </motion.div>
@@ -190,11 +193,11 @@ const About = () => {
 
       {/* Our Values */}
       <Section title="Our Values" background="light">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-0">
           {values.map((value, index) => (
             <Card key={value.title} delay={index * 0.1}>
-              <h3 className="font-heading text-xl mb-3 text-brand-blue">{value.title}</h3>
-              <p className="text-brand-dark/70">{value.description}</p>
+              <h3 className="font-heading text-lg md:text-xl mb-3 text-brand-blue">{value.title}</h3>
+              <p className="text-sm md:text-base text-brand-dark/70">{value.description}</p>
             </Card>
           ))}
         </div>
@@ -202,8 +205,8 @@ const About = () => {
 
       {/* CTA */}
       <Section background="dark" className="gradient-primary/10 !pb-48 md:!pb-64 lg:!pb-80">
-        <div className="text-center max-w-3xl mx-auto px-4">
-          <h2 className="font-heading text-3xl md:text-4xl mb-6">
+        <div className="text-center max-w-3xl mx-auto px-4 sm:px-6">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl mb-6">
             Ready to Build Your Brand?
           </h2>
           <p className="text-base md:text-xl text-brand-light/90 mb-10 leading-relaxed">
