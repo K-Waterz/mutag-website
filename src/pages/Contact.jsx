@@ -113,7 +113,7 @@ const Contact = () => {
     <>
       <Helmet>
         <title>Contact MUTAG HOUSE | Corporate Enquiries</title>
-        <meta name="description" content="Contact MUTAG HOUSE for corporate branding, marketing, and web development services. Get in touch via email, phone, or WhatsApp. Request a formal quote or proposal for your business needs." />
+        <meta name="description" content="Contact MUTAG HOUSE for software development services. Schedule a consultation to discuss your custom web applications, APIs, and digital infrastructure needs." />
         <meta property="og:title" content="Contact MUTAG HOUSE | Corporate Enquiries" />
         <meta property="og:description" content="Contact MUTAG HOUSE for corporate branding, marketing, and web development services." />
         <link rel="canonical" href="https://www.mutag.co.za/contact" />

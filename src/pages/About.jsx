@@ -60,7 +60,7 @@ const About = () => {
     <>
       <Helmet>
         <title>About MUTAG HOUSE | Branding & Marketing Agency in Centurion</title>
-        <meta name="description" content="Learn about MUTAG HOUSE, a forward-thinking branding and marketing agency in Centurion, South Africa. We help businesses build strong brand identities through strategic design and modern marketing solutions." />
+        <meta name="description" content="Learn about MUTAG HOUSE, a software development studio in Centurion, South Africa. We architect and build enterprise-grade software solutions for modern businesses." />
         <meta property="og:title" content="About MUTAG HOUSE | Branding & Marketing Agency" />
         <meta property="og:description" content="Learn about MUTAG HOUSE, a forward-thinking branding and marketing agency in Centurion, South Africa." />
         <link rel="canonical" href="https://www.mutag.co.za/about" />

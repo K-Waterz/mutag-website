@@ -74,7 +74,7 @@ const Home = () => {
     <>
       <Helmet>
         <title>MUTAG HOUSE | Software Development Studio & Digital Systems</title>
-        <meta name="description" content="MUTAG HOUSE is a software development studio and digital systems company in Centurion, South Africa. We architect, build, and scale enterprise-grade software solutions—from custom web applications and backend systems to authentication platforms, business intelligence dashboards, and API integrations." />
+        <meta name="description" content="Software development studio in Centurion, South Africa. We build scalable web applications, APIs, authentication systems, dashboards, and automation platforms." />
         <meta property="og:title" content="MUTAG HOUSE | Software Development Studio & Digital Systems" />
         <meta property="og:description" content="We build the software systems that power your business—not just websites, but scalable platforms, integrated workflows, and enterprise-ready solutions that grow with you." />
         <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />

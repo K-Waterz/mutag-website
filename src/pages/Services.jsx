@@ -98,7 +98,7 @@ const Services = () => {
     <>
       <Helmet>
         <title>Branding, Web & Marketing Services in Centurion | MUTAG HOUSE</title>
-        <meta name="description" content="Comprehensive branding, web development, and marketing services in Centurion. From unforgettable logos and fast websites to reliable printing and growth campaigns - we help South African businesses succeed." />
+        <meta name="description" content="Software development services: custom web applications, backend systems, APIs, authentication platforms, dashboards, and automation workflows. Centurion, South Africa." />
         <meta property="og:title" content="Branding, Web & Marketing Services | MUTAG HOUSE" />
         <meta property="og:description" content="Comprehensive branding, web development, and marketing services in Centurion." />
         <link rel="canonical" href="https://www.mutag.co.za/services" />

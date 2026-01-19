@@ -61,7 +61,7 @@ const Footer = () => {
               />
             </a>
             <p className="text-brand-light/60 text-sm mb-6 max-w-xs">
-              Premium branding and marketing solutions for enterprises that demand excellence.
+              Software development studio and digital systems company. We architect, build, and scale enterprise-grade software solutions that power modern businesses.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (

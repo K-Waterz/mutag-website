@@ -102,7 +102,7 @@ const Work = () => {
     <>
       <Helmet>
         <title>Corporate Portfolio | MUTAG HOUSE</title>
-        <meta name="description" content="Explore MUTAG HOUSE's portfolio of successful branding and marketing projects. See how we've helped legal firms, agricultural businesses, and retail businesses across South Africa achieve their goals." />
+        <meta name="description" content="Explore MUTAG HOUSE's portfolio of software systems. See how we've helped businesses with custom applications, dashboards, APIs, and automation platforms." />
         <meta property="og:title" content="Corporate Portfolio | MUTAG HOUSE" />
         <meta property="og:description" content="Explore MUTAG HOUSE's portfolio of successful branding and marketing projects." />
         <link rel="canonical" href="https://www.mutag.co.za/work" />
