@@ -73,10 +73,10 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>MUTAG HOUSE | Premium Branding & Marketing Solutions</title>
-        <meta name="description" content="MUTAG HOUSE is a branding and marketing agency in Centurion, South Africa. We provide professional logos, websites, printing services, and growth campaigns that help businesses win work, save time, and build credibility." />
-        <meta property="og:title" content="MUTAG HOUSE | Premium Branding & Marketing Solutions" />
-        <meta property="og:description" content="Premium branding and marketing solutions for enterprises that demand excellence." />
+        <title>MUTAG HOUSE | Software Development Studio & Digital Systems</title>
+        <meta name="description" content="MUTAG HOUSE is a software development studio and digital systems company in Centurion, South Africa. We architect, build, and scale enterprise-grade software solutions—from custom web applications and backend systems to authentication platforms, business intelligence dashboards, and API integrations." />
+        <meta property="og:title" content="MUTAG HOUSE | Software Development Studio & Digital Systems" />
+        <meta property="og:description" content="We build the software systems that power your business—not just websites, but scalable platforms, integrated workflows, and enterprise-ready solutions that grow with you." />
         <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
         <meta property="og:url" content="https://www.mutag.co.za/" />
         <meta property="og:type" content="website" />
