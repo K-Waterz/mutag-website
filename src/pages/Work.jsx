@@ -14,50 +14,6 @@ const Work = () => {
   const portfolioItems = [
     {
       id: 1,
-      title: 'Social Media Transformation for FlowerClub',
-      category: 'Social Media Strategy',
-      image: '/flowerclub-social-media.gif',
-      logo: '/flowerclub-logo.png',
-      description: 'Revitalized FlowerClub\'s digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic.',
-      fullDescription: 'Our team developed a comprehensive social media strategy for FlowerClub that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.',
-      tags: ['Social Media Strategy', 'Content Creation', 'Brand Storytelling'],
-      link: 'https://flowerclub.co.za'
-    },
-    {
-      id: 2,
-      title: 'Legal Branding Solutions & Website Development',
-      category: 'Website Development',
-      image: '/business-card-mockup.png',
-      logo: '/attorneys-logo.png',
-      description: 'Developed professional business cards and provided compliance services for Mathibele Mahlaela Attorneys. We also created their complete website, establishing a strong online presence that reflects their legal expertise and professionalism.',
-      fullDescription: 'The website features a clean, professional design that conveys trustworthiness and makes it easy for clients to learn about Mathibele Mahlaela Attorneys\' services and get in touch. We also handled the complete business documentation process, ensuring all regulatory and compliance requirements were properly addressed.',
-      tags: ['Website Development', 'Business Cards', 'CIPC Compliance'],
-      link: 'https://mathibelem.co.za'
-    },
-    {
-      id: 3,
-      title: 'Complete Brand Identity for La Gracia Estate',
-      category: 'Brand Identity',
-      image: '/lagracia-logo.png',
-      logo: '/lagracia-logo.png',
-      description: 'Created a comprehensive brand identity for La Gracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
-      fullDescription: 'Our design approach for La Gracia Estate incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications. The brand identity extends across all touchpoints, creating a consistent experience that helps build recognition and trust.',
-      tags: ['Logo Design', 'Business Cards', 'Letterhead'],
-      link: null
-    },
-    {
-      id: 4,
-      title: 'Complete Digital Business Setup & Advertising',
-      category: 'Digital Solutions',
-      image: '/Rapatla-rue-logo.jpg',
-      logo: '/Rapatla-rue-logo.jpg',
-      description: 'Delivered a comprehensive digital transformation for Rapatla Rue Attorneys, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems.',
-      fullDescription: 'We also created targeted digital advertising campaigns for Rapatla Rue Attorneys to help them reach their audience and drive business growth. Our full-service approach ensured they launched with enterprise-grade reliability and performance, with every aspect of their digital presence optimized for both user experience and search engine visibility.',
-      tags: ['Custom Website', 'Digital Advertising', 'Premium Hosting'],
-      link: 'https://rapatlarue.co.za'
-    },
-    {
-      id: 5,
       title: 'Custom Internal Quoting System for We Moove SA',
       category: 'Custom Software Development',
       image: '/we-moove-sa-logo.png',
@@ -68,26 +24,70 @@ const Work = () => {
       link: 'https://wn48nk66.forms.app/my-new-form'
     },
     {
-      id: 6,
-      title: 'Social Media Visual Advertising for Magnificent Pools',
-      category: 'Social Media Marketing',
-      image: '/magnificent-pools-logo.png',
-      logo: '/magnificent-pools-logo.png',
-      description: 'We designed social media visual advertisements for Magnificent Pools to support marketing and client acquisition efforts.',
-      fullDescription: 'Our creative team developed eye-catching visual content for Magnificent Pools that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
-      tags: ['Social Media Marketing', 'Visual Design', 'Content Creation'],
-      link: 'https://www.magpools.co.za/'
+      id: 2,
+      title: 'Complete Digital Business Setup & Advertising',
+      category: 'Digital Solutions',
+      image: '/Rapatla-rue-logo.jpg',
+      logo: '/Rapatla-rue-logo.jpg',
+      description: 'Delivered a comprehensive digital transformation for Rapatla Rue Attorneys, including a modern, responsive website with cutting-edge design, seamless hosting infrastructure, and professional email systems. We also created targeted digital advertising campaigns to help them reach their audience and drive business growth.',
+      fullDescription: 'Our full-service approach ensured they launched with enterprise-grade reliability and performance, with every aspect of their digital presence optimized for both user experience and search engine visibility. The technical foundation we built supports their ongoing marketing efforts, enabling scalable growth and consistent brand messaging across all digital channels.',
+      tags: ['Custom Website', 'Premium Hosting', 'SEO Optimization', 'Digital Advertising'],
+      link: 'https://rapatlarue.co.za'
     },
     {
-      id: 7,
+      id: 3,
       title: 'Website Development & Brand Identity for XFM Tech',
       category: 'Website Development',
       image: '/xfm-tech-logo.png',
       logo: '/xfm-tech-logo.png',
-      description: 'Design and development of a modern, responsive website for XFM Tech that serves as their primary digital presence. The website clearly communicates the company\'s technology offerings while reinforcing a strong, professional brand identity.',
-      fullDescription: 'We also developed branded social media visual content for XFM Tech to support online visibility and reinforce brand recognition. The comprehensive digital solution established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
+      description: 'Developed a modern, responsive website for XFM Tech that serves as their primary digital presence, clearly communicating the company\'s technology offerings through an intuitive user interface and optimized performance. We also developed branded social media visual content to support online visibility and reinforce brand recognition.',
+      fullDescription: 'The website\'s technical architecture ensures fast load times, mobile responsiveness, and seamless user experience across all devices. This strong technical foundation is complemented by our brand identity work, which established XFM Tech as a professional technology solutions provider with a cohesive brand presence across all digital touchpoints.',
       tags: ['Website Development', 'Brand Identity', 'Social Media Marketing'],
       link: 'https://xfmtech.com/'
+    },
+    {
+      id: 4,
+      title: 'Website Development & Legal Branding Solutions',
+      category: 'Website Development',
+      image: '/business-card-mockup.png',
+      logo: '/attorneys-logo.png',
+      description: 'Created a complete website for Mathibele Mahlaela Attorneys, establishing a strong online presence with a clean, professional design that conveys trustworthiness and makes it easy for clients to learn about their services and get in touch. We also developed professional business cards and provided compliance services.',
+      fullDescription: 'The website features responsive design, intuitive navigation, and optimized performance to ensure clients can easily access information about Mathibele Mahlaela Attorneys\' legal expertise. We also handled the complete business documentation process, ensuring all regulatory and compliance requirements were properly addressed, and designed professional business cards that reflect their legal professionalism.',
+      tags: ['Website Development', 'Business Cards', 'CIPC Compliance'],
+      link: 'https://mathibelem.co.za'
+    },
+    {
+      id: 5,
+      title: 'Lead Capturing & Social Media Visual Advertising for Magnificent Pools',
+      category: 'Web Development',
+      image: '/magnificent-pools-logo.png',
+      logo: '/magnificent-pools-logo.png',
+      description: 'Created a dedicated launch landing page for Magnificent Pools that enabled customers to scan a URL and have their leads automatically captured into a database, all without requiring any changes to their existing website. We also designed social media visual advertisements to support marketing and client acquisition efforts.',
+      fullDescription: 'The landing page solution integrated lead capture functionality with database storage, allowing them to collect and manage customer inquiries efficiently while maintaining their current website infrastructure. Our creative team also developed eye-catching visual content for Magnificent Pools that effectively communicated their pool cleaning and maintenance services, helping them attract new clients and strengthen their brand presence across social media platforms.',
+      tags: ['Landing Page Development', 'Lead Capture System', 'Database Integration', 'Social Media Marketing', 'Visual Design'],
+      link: 'https://www.magpools.co.za/'
+    },
+    {
+      id: 6,
+      title: 'Social Media Transformation for FlowerClub',
+      category: 'Social Media Strategy',
+      image: '/flowerclub-social-media.gif',
+      logo: '/flowerclub-logo.png',
+      description: 'Revitalized FlowerClub\'s digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic.',
+      fullDescription: 'Our team developed a comprehensive social media strategy for FlowerClub that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.',
+      tags: ['Social Media Strategy', 'Content Creation', 'Brand Storytelling'],
+      link: 'https://flowerclub.co.za'
+    },
+    {
+      id: 7,
+      title: 'Complete Brand Identity for La Gracia Estate',
+      category: 'Brand Identity',
+      image: '/lagracia-logo.png',
+      logo: '/lagracia-logo.png',
+      description: 'Created a comprehensive brand identity for La Gracia Estate including logo, business cards, and letterhead. The cohesive stationery package established their professional presence in the agricultural market.',
+      fullDescription: 'Our design approach for La Gracia Estate incorporated elements that reflected the farm\'s connection to the land and agricultural heritage, while maintaining a modern and professional aesthetic suitable for business communications. The brand identity extends across all touchpoints, creating a consistent experience that helps build recognition and trust.',
+      tags: ['Logo Design', 'Business Cards', 'Letterhead'],
+      link: null
     }
   ]
 
