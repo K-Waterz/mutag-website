@@ -121,9 +121,19 @@
       margin-bottom: 2.4rem;
     }
 
-    /* Client showcase logos */
+    /* Client showcase logos — glow only, no border, no label */
     .client-logo-item .logo-link-wrap {
-      margin-bottom: 1.9rem;
+      margin-bottom: 0;
+      border: none;
+      padding: 0.35rem 0.5rem;
+    }
+
+    .client-logo-item .logo-link-wrap:hover {
+      border: none;
+    }
+
+    .client-logo-item .logo-link-wrap::before {
+      display: none;
     }
 
     /* Non-linked logos (e.g. La Gracia) keep normal styling */
