@@ -48,15 +48,89 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
   <style>
-    /* Hover effect for clickable client logos */
-    .client-logo-item a img:hover,
-    .portfolio-content a img:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
+    /* ── Pulse glow animation (always-on attention getter) ── */
+    @keyframes logo-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.0), 0 0 0 3px rgba(99,102,241,0.15); }
+      50%       { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.0), 0 0 0 3px rgba(99,102,241,0.35); }
     }
-    .client-logo-item a,
-    .portfolio-content a {
-      transition: transform 0.3s ease;
+
+    /* ── Clickable logo wrapper ── */
+    .logo-link-wrap {
+      position: relative;
+      display: inline-block;
+      border-radius: 0.75rem;
+      /* Always-visible dashed border — screams "this is interactive" */
+      border: 1.5px dashed rgba(99, 102, 241, 0.45);
+      padding: 0.35rem 0.5rem;
+      /* Gentle pulsing ring so it catches the eye even without hovering */
+      animation: logo-pulse 2.6s ease-in-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-decoration: none;
+      outline-offset: 3px;
+    }
+
+    /* Pause pulse on hover — it's done its job */
+    .logo-link-wrap:hover {
+      animation: none;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      border-color: rgba(99, 102, 241, 0.85);
+      border-style: solid;
+    }
+
+    /* Subtle ring on focus (keyboard nav) */
+    .logo-link-wrap:focus-visible {
+      outline: 2px solid #6366f1;
+    }
+
+    /* ── Always-visible "↗ Visit Site" label below logo ── */
+    .logo-link-wrap::before {
+      content: "↗ Visit Site";
+      position: absolute;
+      bottom: -1.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #6366f1;
+      white-space: nowrap;
+      opacity: 0.75;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    /* On hover the label brightens fully */
+    .logo-link-wrap:hover::before {
+      opacity: 1;
+    }
+
+    /* Give the logo img itself a pointer cursor */
+    .logo-link-wrap img {
+      cursor: pointer;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .logo-link-wrap:hover img {
+      opacity: 0.9;
+    }
+
+    /* Extra spacing on portfolio-content logos to accommodate the label */
+    .portfolio-content .logo-link-wrap {
+      margin-bottom: 2.4rem;
+    }
+
+    /* Client showcase logos */
+    .client-logo-item .logo-link-wrap {
+      margin-bottom: 1.9rem;
+    }
+
+    /* Non-linked logos (e.g. La Gracia) keep normal styling */
+    .client-logo-item img.no-link,
+    .portfolio-content img.no-link {
+      display: block;
+      margin-bottom: 1rem;
     }
   </style>
   <!-- Preload critical images for faster loading -->
@@ -315,8 +389,8 @@
         <img src="we-moove-sa-logo.png" alt="We Moove SA Custom Quoting System" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <a href="https://wn48nk66.forms.app/my-new-form" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="we-moove-sa-logo.png" alt="We Moove SA Logo" class="client-logo" loading="lazy" style="max-height: 80px; max-width: 200px; width: auto; height: auto; object-fit: contain; display: block; margin-bottom: 1rem; cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://wn48nk66.forms.app/my-new-form" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit We Moove SA website">
+          <img src="we-moove-sa-logo.png" alt="We Moove SA Logo" class="client-logo" loading="lazy" style="max-height: 80px; max-width: 200px; width: auto; height: auto; object-fit: contain;">
         </a>
         <h2>Custom Internal Quoting System for We Moove SA</h2>
         <div class="portfolio-services">
@@ -338,8 +412,8 @@
         <img src="Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys Website and Digital Solutions" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <a href="https://rapatlarue.co.za" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys Logo" class="client-logo" loading="lazy" style="cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://rapatlarue.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Rapatla Rue Attorneys website">
+          <img src="Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys Logo" class="client-logo" loading="lazy" style="cursor: pointer;">
         </a>
         <h2>Complete Digital Business Setup & Advertising for Rapatla Rue Attorneys</h2>
         <div class="portfolio-services">
@@ -363,8 +437,8 @@
         <img src="xfm-tech-logo.png" alt="XFM Tech Website Development and Brand Identity" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <a href="https://xfmtech.com/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="xfm-tech-logo.png" alt="XFM Tech Logo" class="client-logo" loading="lazy" style="cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://xfmtech.com/" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit XFM Tech website">
+          <img src="xfm-tech-logo.png" alt="XFM Tech Logo" class="client-logo" loading="lazy" style="cursor: pointer;">
         </a>
         <h2>Website Development & Brand Identity for XFM Tech</h2>
         <div class="portfolio-services">
@@ -386,8 +460,8 @@
         <img src="business-card-mockup.png" alt="Mathibele Mahlaela Attorneys Business Cards Mockup" style="width:100%;max-width:600px;display:block;margin:0 auto;" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <a href="https://mathibelem.co.za" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo" loading="lazy" style="cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://mathibelem.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Mathibele Mahlaela Attorneys website">
+          <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys Logo" class="client-logo" loading="lazy" style="cursor: pointer;">
         </a>
         <h2>Website Development & Legal Branding Solutions</h2>
         <div class="portfolio-services">
@@ -410,8 +484,8 @@
         <video src="Magnificent video ad.mp4" controls preload="metadata" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);background:#000;object-fit:contain;transform:none;" poster="magnificent-pools-logo.png"></video>
       </div>
       <div class="portfolio-content">
-        <a href="https://www.magpools.co.za/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="magnificent-pools-logo.png" alt="Magnificent Pools Logo" class="client-logo" loading="lazy" style="cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://www.magpools.co.za/" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Magnificent Pools website">
+          <img src="magnificent-pools-logo.png" alt="Magnificent Pools Logo" class="client-logo" loading="lazy" style="cursor: pointer;">
         </a>
         <h2>Lead Capturing & Social Media Visual Advertising for Magnificent Pools</h2>
         <div class="portfolio-services">
@@ -435,8 +509,8 @@
         <img src="Flower Club black and white image.png" alt="FlowerClub Social Media Transformation" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy">
       </div>
       <div class="portfolio-content">
-        <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-          <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo" loading="lazy" style="cursor: pointer; transition: opacity 0.3s;">
+        <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit FlowerClub website">
+          <img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo" loading="lazy" style="cursor: pointer;">
         </a>
         <h2>Social Media Transformation for FlowerClub</h2>
         <div class="portfolio-services">
@@ -458,7 +532,7 @@
         <video src="la-gracia-video.mp4" controls preload="metadata" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);background:#000;object-fit:contain;transform:none;" poster="lagracia-logo.png"></video>
       </div>
       <div class="portfolio-content">
-        <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo" loading="lazy">
+        <img src="lagracia-logo.png" alt="La Gracia Estate Logo" class="client-logo no-link" loading="lazy" style="margin-bottom: 1rem;">
         <h2>Complete Brand Identity for La Gracia Estate</h2>
         <div class="portfolio-services">
           <span class="service-tag">Logo Design</span>
@@ -483,36 +557,36 @@
       <div class="client-logos-container" data-aos="fade-up" data-aos-delay="400">
         <div class="client-logos" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 3rem;">
           <div class="client-logo-item">
-            <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="flowerclub-logo.png" alt="FlowerClub brand identity design by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit FlowerClub website">
+              <img src="flowerclub-logo.png" alt="FlowerClub brand identity design by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
           <div class="client-logo-item">
-            <a href="https://mathibelem.co.za" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys legal branding services by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://mathibelem.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Mathibele Mahlaela Attorneys website">
+              <img src="attorneys-logo.png" alt="Mathibele Mahlaela Attorneys legal branding services by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
           <div class="client-logo-item">
-            <img src="lagracia-logo.png" alt="La Gracia Estate brand identity design by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block;">
+            <img src="lagracia-logo.png" alt="La Gracia Estate brand identity design by MUTAG HOUSE" loading="lazy" class="no-link" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block;">
           </div>
           <div class="client-logo-item">
-            <a href="https://rapatlarue.co.za" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys website development and digital solutions by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://rapatlarue.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Rapatla Rue Attorneys website">
+              <img src="Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys website development and digital solutions by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
           <div class="client-logo-item">
-            <a href="https://wn48nk66.forms.app/my-new-form" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="we-moove-sa-logo.png" alt="We Moove SA custom software development by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://wn48nk66.forms.app/my-new-form" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit We Moove SA website">
+              <img src="we-moove-sa-logo.png" alt="We Moove SA custom software development by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
           <div class="client-logo-item">
-            <a href="https://www.magpools.co.za/" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="magnificent-pools-logo.png" alt="Magnificent Pools social media marketing by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://www.magpools.co.za/" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit Magnificent Pools website">
+              <img src="magnificent-pools-logo.png" alt="Magnificent Pools social media marketing by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
           <div class="client-logo-item">
-            <a href="https://xfmtech.com/" target="_blank" rel="noopener noreferrer" style="display: block;">
-              <img src="xfm-tech-logo.png" alt="XFM Tech website development and brand identity by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain; display: block; cursor: pointer; transition: opacity 0.3s;">
+            <a href="https://xfmtech.com/" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit XFM Tech website">
+              <img src="xfm-tech-logo.png" alt="XFM Tech website development and brand identity by MUTAG HOUSE" loading="lazy" style="height: 64px; width: auto; max-width: 200px; object-fit: contain;">
             </a>
           </div>
         </div>
@@ -585,7 +659,7 @@
         <div class="footer-contact">
           <h3>Contact</h3>
           <div class="contact-info">
-            <p><a href="mailto:info@mutag.co.za">info@mutag.co.za</a></p>
+            <p><a href="/cdn-cgi/l/email-protection#d8b1b6beb798b5adacb9bff6bbb7f6a2b9"><span class="__cf_email__" data-cfemail="523b3c343d123f272633357c313d7c2833">[email&#160;protected]</span></a></p>
             <p><a href="tel:+27729572238">+27 72 957 2238</a></p>
             <p>Centurion, South Africa</p>
           </div>
@@ -598,7 +672,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js" async></script>
   <script>
     // Initialize AOS after it loads
     function initAOS() {
@@ -774,10 +848,9 @@
         }
         
         // Try with delays
-        setTimeout(function() { setupMobileMenu(); }, 50);
-        setTimeout(function() { setupMobileMenu(); }, 200);
-        setTimeout(function() { setupMobileMenu(); }, 500);
-        setTimeout(function() { setupMobileMenu(); }, 1000);
+        setTimeout(function() { setupMobileMenu(); }, 100);
+        setTimeout(function() { setupMobileMenu(); }, 300);
+        setTimeout(function() { setupMobileMenu(); }, 600);
       }
     })();
   </script>
