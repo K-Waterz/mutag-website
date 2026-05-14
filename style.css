@@ -1815,4 +1815,11 @@ html.motion-ready .scroll-reveal-target.is-revealed {
     filter: none !important;
     will-change: auto;
   }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
 }

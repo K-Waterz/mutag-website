@@ -144,15 +144,20 @@ function initAOS() {
 
   window.__mhAosInitialized = true;
 
+  // Match portfolio.html: do not use AOS.disable() here — Windows "Animations" off maps to
+  // prefers-reduced-motion; we neutralize motion in style.css instead so scroll reveals still run.
   AOS.init({
     duration: 800,
     easing: 'ease-out-cubic',
     once: true,
     offset: 100,
     mirror: false,
-    anchorPlacement: 'top-bottom',
-    disable: function () {
-      return window.matchMedia(MOTION_QUERY).matches;
+    anchorPlacement: 'top-bottom'
+  });
+
+  requestAnimationFrame(() => {
+    if (typeof AOS !== 'undefined' && typeof AOS.refresh === 'function') {
+      AOS.refresh();
     }
   });
 }
@@ -190,6 +195,10 @@ function initAnimations() {
 
 function setupAnimations() {
   document.documentElement.classList.add('motion-ready');
+
+  if (document.querySelector('[data-aos]')) {
+    initAOS();
+  }
 
   // ================ HEADER ANIMATION ================
   // Ensure header is visible first, then animate
@@ -276,13 +285,12 @@ function setupAnimations() {
 
   setupScrollReveals();
 
-  if (document.querySelector('[data-aos]')) {
-    initAOS();
-  }
-
   window.addEventListener('load', () => {
     if (typeof AOS !== 'undefined' && typeof AOS.refresh === 'function') {
       AOS.refresh();
+    }
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
     }
   });
 
