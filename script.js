@@ -122,18 +122,38 @@ function setupScrollReveals() {
 }
 
 function initAOS() {
+  if (!document.querySelector('[data-aos]')) {
+    return;
+  }
+
   if (typeof AOS === 'undefined') {
+    initAOS._tries = (initAOS._tries || 0) + 1;
+    if (initAOS._tries > 120) {
+      return;
+    }
     setTimeout(initAOS, 100);
     return;
   }
 
+  if (window.__mhAosInitialized) {
+    if (typeof AOS.refresh === 'function') {
+      AOS.refresh();
+    }
+    return;
+  }
+
+  window.__mhAosInitialized = true;
+
   AOS.init({
-    duration: 850,
+    duration: 800,
     easing: 'ease-out-cubic',
     once: true,
-    offset: 90,
+    offset: 100,
     mirror: false,
-    anchorPlacement: 'top-bottom'
+    anchorPlacement: 'top-bottom',
+    disable: function () {
+      return window.matchMedia(MOTION_QUERY).matches;
+    }
   });
 }
 
@@ -255,6 +275,16 @@ function setupAnimations() {
   }
 
   setupScrollReveals();
+
+  if (document.querySelector('[data-aos]')) {
+    initAOS();
+  }
+
+  window.addEventListener('load', () => {
+    if (typeof AOS !== 'undefined' && typeof AOS.refresh === 'function') {
+      AOS.refresh();
+    }
+  });
 
   // ================ BUTTON HOVER MICRO-INTERACTIONS ================
   const buttons = document.querySelectorAll('.btn');
