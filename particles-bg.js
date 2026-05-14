@@ -1,17 +1,25 @@
 /**
  * Full-page particle field + scroll ripples + cursor glow (matches portfolio.html).
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
+ * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
  */
 (function () {
   var canvas = document.getElementById('particle-canvas');
   if (!canvas || !canvas.getContext) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  function startParticleField() {
   var ctx = canvas.getContext('2d');
   var W, H;
   var mouse = { x: 0, y: 0 };
   var target = { x: 0, y: 0 };
   var tiltX = 0, tiltY = 0;
   var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  var TOTAL = isMobile ? 60 : 90;
+  var cores = typeof navigator.hardwareConcurrency === 'number' ? navigator.hardwareConcurrency : 4;
+  var lightDevice = isMobile || cores <= 4;
+  var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
 
@@ -177,4 +185,11 @@
   }
 
   draw();
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startParticleField, { timeout: 2000 });
+  } else {
+    window.setTimeout(startParticleField, 16);
+  }
 })();

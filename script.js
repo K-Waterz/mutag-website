@@ -147,10 +147,10 @@ function initAOS() {
   // Match portfolio.html: do not use AOS.disable() here — Windows "Animations" off maps to
   // prefers-reduced-motion; we neutralize motion in style.css instead so scroll reveals still run.
   AOS.init({
-    duration: 800,
+    duration: 550,
     easing: 'ease-out-cubic',
     once: true,
-    offset: 100,
+    offset: 72,
     mirror: false,
     anchorPlacement: 'top-bottom'
   });
@@ -177,15 +177,68 @@ function setupDomUIEnhancements() {
     header.style.visibility = 'visible';
     header.style.opacity = '1';
 
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+    let scrollTicking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (scrollTicking) {
+          return;
+        }
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          scrollTicking = false;
+          const currentScroll = window.pageYOffset;
+          if (currentScroll > 100) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+      },
+      { passive: true }
+    );
   }
+
+  const prefetchedHrefs = {};
+  function prefetchInternalPage(href) {
+    if (!href) {
+      return;
+    }
+    try {
+      const resolved = new URL(href, window.location.href);
+      if (resolved.origin !== window.location.origin) {
+        return;
+      }
+      const cacheKey = resolved.pathname + resolved.search;
+      if (prefetchedHrefs[cacheKey]) {
+        return;
+      }
+      prefetchedHrefs[cacheKey] = true;
+      const linkEl = document.createElement('link');
+      linkEl.rel = 'prefetch';
+      linkEl.href = cacheKey;
+      document.head.appendChild(linkEl);
+    } catch (e) {
+      /* ignore invalid URLs */
+    }
+  }
+
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return;
+    }
+    if (!/\.html(\?|$)/i.test(href) && href !== 'index.html' && !href.endsWith('/')) {
+      return;
+    }
+    link.addEventListener(
+      'pointerenter',
+      () => {
+        prefetchInternalPage(href);
+      },
+      { passive: true }
+    );
+  });
 
   const navLinks = document.querySelectorAll('.nav-link');
   const currentPath = window.location.pathname;
@@ -268,12 +321,33 @@ function setupDomUIEnhancements() {
   });
 }
 
-// Wait for GSAP and DOM to be ready
+// Wait for GSAP and DOM to be ready (only poll when a GSAP script tag exists — main pages ship without GSAP)
 let animationInitAttempts = 0;
 const MAX_ANIMATION_INIT_ATTEMPTS = 80;
 
+function gsapScriptMayLoad() {
+  return Boolean(
+    document.querySelector(
+      'script[src*="gsap"], script[src*="GSAP"], script[src*="greensock"], script[src*="ScrollTrigger"]'
+    )
+  );
+}
+
+function bootstrapWithoutGsap() {
+  document.documentElement.classList.add('motion-ready');
+  if (document.querySelector('[data-aos]')) {
+    initAOS();
+  }
+  setupDomUIEnhancements();
+}
+
 function initAnimations() {
   const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+  if (!hasGsap && !gsapScriptMayLoad()) {
+    bootstrapWithoutGsap();
+    return;
+  }
 
   if (!hasGsap) {
     animationInitAttempts += 1;
@@ -283,11 +357,7 @@ function initAnimations() {
       return;
     }
 
-    document.documentElement.classList.add('motion-ready');
-    if (document.querySelector('[data-aos]')) {
-      initAOS();
-    }
-    setupDomUIEnhancements();
+    bootstrapWithoutGsap();
     return;
   }
 
