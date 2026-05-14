@@ -1536,42 +1536,39 @@ img {
 }
 
 /* ================ ANIMATIONS (GSAP will handle these) ================ */
-/* Ensure all content is visible by default - animations will enhance, not hide */
-.fade-in {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
+.fade-in,
 .slide-up {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateY(0) !important;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-/* Override any GSAP initial states - ensure content is visible */
-.hero-title,
-.hero-subtitle,
-.hero-section .btn,
-.section,
-.cta-section,
-.service-card,
-.work-card,
-.testimonial-card,
-.text-content,
-.image-content,
-.services-details,
-.about-section,
-.service-details-expanded,
-.contact-cta {
-  opacity: 1 !important;
-  visibility: visible !important;
+html:not(.motion-ready) .hero-title,
+html:not(.motion-ready) .hero-subtitle,
+html:not(.motion-ready) .hero-section .btn,
+html:not(.motion-ready) .section,
+html:not(.motion-ready) .cta-section,
+html:not(.motion-ready) .service-card,
+html:not(.motion-ready) .work-card,
+html:not(.motion-ready) .testimonial-card,
+html:not(.motion-ready) .text-content,
+html:not(.motion-ready) .image-content,
+html:not(.motion-ready) .services-details,
+html:not(.motion-ready) .about-section,
+html:not(.motion-ready) .service-details-expanded,
+html:not(.motion-ready) .contact-cta,
+html:not(.motion-ready) .portfolio-item,
+html:not(.motion-ready) .process-step {
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Ensure all headings and text are visible */
-h1, h2, h3, h4, h5, h6,
-p, li, span, a, div {
-  opacity: 1 !important;
-  visibility: visible !important;
+html.motion-ready .scroll-reveal-target {
+  will-change: transform, opacity;
+}
+
+html.motion-ready .scroll-reveal-target.is-revealed {
+  will-change: auto;
 }
 
 /* But allow specific hidden elements to remain hidden */
@@ -1810,5 +1807,12 @@ p, li, span, a, div {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html.motion-ready .scroll-reveal-target {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto;
   }
 }

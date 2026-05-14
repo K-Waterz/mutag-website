@@ -1,14 +1,166 @@
 // ================ GSAP ANIMATIONS ================
-// Wait for GSAP and DOM to be ready
-function initAnimations() {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    setTimeout(initAnimations, 50);
+const MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function prefersReducedMotion() {
+  return window.matchMedia(MOTION_QUERY).matches;
+}
+
+function shouldSkipScrollAnimation(element) {
+  return element.hasAttribute('data-aos') || Boolean(element.closest('[data-aos]'));
+}
+
+function markRevealTarget(element) {
+  if (element) {
+    element.classList.add('scroll-reveal-target');
+  }
+}
+
+function revealOnScroll(selector, options = {}) {
+  if (prefersReducedMotion()) {
     return;
   }
-  
+
+  const { scrollTrigger: scrollTriggerOptions = {}, ...animationOptions } = options;
+  const targets = gsap.utils.toArray(selector).filter((element) => !shouldSkipScrollAnimation(element));
+
+  targets.forEach((element) => {
+    markRevealTarget(element);
+
+    gsap.from(element, {
+      opacity: 0,
+      y: 40,
+      scale: 0.985,
+      filter: 'blur(10px)',
+      duration: 0.9,
+      ease: 'power3.out',
+      immediateRender: false,
+      ...animationOptions,
+      scrollTrigger: {
+        trigger: element,
+        start: 'top 86%',
+        toggleActions: 'play none none none',
+        once: true,
+        ...scrollTriggerOptions
+      },
+      onComplete: function() {
+        element.classList.add('is-revealed');
+      }
+    });
+  });
+}
+
+function setupScrollReveals() {
+  if (prefersReducedMotion()) {
+    return;
+  }
+
+  revealOnScroll('.section-title, .section-subtitle, .cta-title, .cta-text, .about-hero h1, .about-hero .subheading, .services-hero h1, .services-hero .subheading, .portfolio-hero h1, .portfolio-hero .subheading', {
+    y: 36
+  });
+
+  revealOnScroll('.text-content, .image-content', {
+    y: 44
+  });
+
+  revealOnScroll('.about-section, .services-details, .contact-cta, .cta-section', {
+    y: 48
+  });
+
+  const batchSelectors = [
+    '.service-card',
+    '.work-card',
+    '.testimonial-card',
+    '.portfolio-item',
+    '.process-step',
+    '.about-section .card',
+    '.footer-content > div'
+  ].join(', ');
+
+  ScrollTrigger.batch(batchSelectors, {
+    start: 'top 88%',
+    once: true,
+    onEnter: (batch) => {
+      const targets = batch.filter((element) => !shouldSkipScrollAnimation(element));
+      if (!targets.length) {
+        return;
+      }
+
+      targets.forEach(markRevealTarget);
+
+      gsap.from(targets, {
+        opacity: 0,
+        y: 36,
+        scale: 0.985,
+        filter: 'blur(8px)',
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.1,
+        immediateRender: false,
+        onComplete: function() {
+          this.targets().forEach((target) => target.classList.add('is-revealed'));
+        }
+      });
+    }
+  });
+
+  gsap.utils.toArray('.image-content img, .portfolio-media img, .about-section .image img').forEach((image) => {
+    if (shouldSkipScrollAnimation(image)) {
+      return;
+    }
+
+    gsap.to(image, {
+      yPercent: -10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: image,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  });
+}
+
+function initAOS() {
+  if (typeof AOS === 'undefined') {
+    setTimeout(initAOS, 100);
+    return;
+  }
+
+  AOS.init({
+    duration: 850,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 90,
+    mirror: false,
+    anchorPlacement: 'top-bottom'
+  });
+}
+
+// Wait for GSAP and DOM to be ready
+let animationInitAttempts = 0;
+const MAX_ANIMATION_INIT_ATTEMPTS = 80;
+
+function initAnimations() {
+  const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+  if (!hasGsap) {
+    animationInitAttempts += 1;
+
+    if (animationInitAttempts < MAX_ANIMATION_INIT_ATTEMPTS) {
+      setTimeout(initAnimations, 50);
+      return;
+    }
+
+    if (document.querySelector('[data-aos]')) {
+      initAOS();
+    }
+
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger);
-  
-  // Wait for DOM to be ready
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', setupAnimations);
   } else {
@@ -17,9 +169,11 @@ function initAnimations() {
 }
 
 function setupAnimations() {
+  document.documentElement.classList.add('motion-ready');
+
   // ================ HEADER ANIMATION ================
   // Ensure header is visible first, then animate
-  const header = document.querySelector('.header');
+  const header = document.getElementById('header') || document.querySelector('.header');
   if (header) {
     header.style.transform = 'translateY(0)';
     header.style.visibility = 'visible';
@@ -42,20 +196,17 @@ function setupAnimations() {
   }
 
   // Header scroll effect
-  let lastScroll = 0;
-  const header = document.getElementById('header') || document.querySelector('.header');
-  
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 20) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
 
   // ================ MOBILE MENU ================
   // Mobile menu is handled via inline script in HTML for maximum compatibility
@@ -64,221 +215,69 @@ function setupAnimations() {
   const heroTitle = document.querySelector('.hero-title');
   const heroSubtitle = document.querySelector('.hero-subtitle');
   const heroButton = document.querySelector('.hero-section .btn');
-  
-  // Ensure elements are visible first
-  if (heroTitle) {
-    heroTitle.style.opacity = '1';
-    heroTitle.style.visibility = 'visible';
-    gsap.from(heroTitle, {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.2,
-      immediateRender: false
-    });
-  }
-  
-  if (heroSubtitle) {
-    heroSubtitle.style.opacity = '1';
-    heroSubtitle.style.visibility = 'visible';
-    gsap.from(heroSubtitle, {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.4,
-      immediateRender: false
-    });
-  }
-  
-  if (heroButton) {
-    heroButton.style.opacity = '1';
-    heroButton.style.visibility = 'visible';
-    gsap.from(heroButton, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: 'power3.out',
-      delay: 0.6,
-      immediateRender: false
-    });
+
+  if (!prefersReducedMotion()) {
+    if (heroTitle) {
+      markRevealTarget(heroTitle);
+      gsap.from(heroTitle, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.2,
+        immediateRender: false
+      });
+    }
+
+    if (heroSubtitle) {
+      markRevealTarget(heroSubtitle);
+      gsap.from(heroSubtitle, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.4,
+        immediateRender: false
+      });
+    }
+
+    if (heroButton) {
+      markRevealTarget(heroButton);
+      gsap.from(heroButton, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: 'power3.out',
+        delay: 0.6,
+        immediateRender: false
+      });
+    }
   }
 
-  // ================ SECTION FADE-INS ON SCROLL ================
-  const sections = document.querySelectorAll('.section, .cta-section');
-  
-  sections.forEach((section, index) => {
-    // Ensure section is visible first
-    section.style.opacity = '1';
-    section.style.visibility = 'visible';
-    
-    gsap.from(section, {
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      ease: 'power3.out',
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          section.style.opacity = '1';
-          section.style.visibility = 'visible';
-        }
-      }
-    });
-  });
-
-  // ================ SERVICE CARDS ANIMATION ================
-  const serviceCards = document.querySelectorAll('.service-card');
-  
-  serviceCards.forEach((card, index) => {
-    // Ensure card is visible first
-    card.style.opacity = '1';
-    card.style.visibility = 'visible';
-    
-    gsap.from(card, {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      ease: 'power3.out',
-      delay: index * 0.1,
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          card.style.opacity = '1';
-          card.style.visibility = 'visible';
-        }
-      }
-    });
-  });
-
-  // ================ WORK CARDS ANIMATION ================
-  const workCards = document.querySelectorAll('.work-card');
-  
-  workCards.forEach((card, index) => {
-    // Ensure card is visible first
-    card.style.opacity = '1';
-    card.style.visibility = 'visible';
-    
-    gsap.from(card, {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      ease: 'power3.out',
-      delay: index * 0.1,
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          card.style.opacity = '1';
-          card.style.visibility = 'visible';
-        }
-      }
-    });
-  });
-
-  // ================ TESTIMONIAL CARDS ANIMATION ================
-  const testimonialCards = document.querySelectorAll('.testimonial-card');
-  
-  testimonialCards.forEach((card, index) => {
-    // Ensure card is visible first
-    card.style.opacity = '1';
-    card.style.visibility = 'visible';
-    
-    gsap.from(card, {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      ease: 'power3.out',
-      delay: index * 0.15,
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          card.style.opacity = '1';
-          card.style.visibility = 'visible';
-        }
-      }
-    });
-  });
-
-  // ================ TWO COLUMN ANIMATIONS ================
-  const textContent = document.querySelector('.text-content');
-  const imageContent = document.querySelector('.image-content');
-  
-  if (textContent) {
-    textContent.style.opacity = '1';
-    textContent.style.visibility = 'visible';
-    gsap.from(textContent, {
-      opacity: 0,
-      x: -30,
-      duration: 0.8,
-      ease: 'power3.out',
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: textContent,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          textContent.style.opacity = '1';
-          textContent.style.visibility = 'visible';
-        }
-      }
-    });
-  }
-  
-  if (imageContent) {
-    imageContent.style.opacity = '1';
-    imageContent.style.visibility = 'visible';
-    gsap.from(imageContent, {
-      opacity: 0,
-      x: 30,
-      duration: 0.8,
-      ease: 'power3.out',
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: imageContent,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-        onEnter: () => {
-          imageContent.style.opacity = '1';
-          imageContent.style.visibility = 'visible';
-        }
-      }
-    });
-  }
+  setupScrollReveals();
 
   // ================ BUTTON HOVER MICRO-INTERACTIONS ================
   const buttons = document.querySelectorAll('.btn');
-  
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-      gsap.to(button, {
-        scale: 1.02,
-        duration: 0.2,
-        ease: 'power2.out'
+
+  if (!prefersReducedMotion()) {
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+          scale: 1.02,
+          duration: 0.2,
+          ease: 'power2.out'
+        });
+      });
+
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, {
+          scale: 1,
+          duration: 0.2,
+          ease: 'power2.out'
+        });
       });
     });
-    
-    button.addEventListener('mouseleave', () => {
-      gsap.to(button, {
-        scale: 1,
-        duration: 0.2,
-        ease: 'power2.out'
-      });
-    });
-  });
+  }
 
   // ================ NAV LINK ACTIVE STATE ================
   const navLinks = document.querySelectorAll('.nav-link');
@@ -373,28 +372,22 @@ initAnimations();
 // ================ SAFETY: Ensure all content is visible even if GSAP fails ================
 // This runs after a short delay to ensure content is visible even if GSAP doesn't load
 setTimeout(() => {
-  // Make sure all potentially animated elements are visible
   const animatedElements = document.querySelectorAll(
-    '.hero-title, .hero-subtitle, .section, .cta-section, .service-card, .work-card, .testimonial-card, .text-content, .image-content, .services-details, .about-section'
+    '.hero-title, .hero-subtitle, .section, .cta-section, .service-card, .work-card, .testimonial-card, .text-content, .image-content, .services-details, .about-section, .portfolio-item, .process-step, .scroll-reveal-target'
   );
-  
+
   animatedElements.forEach(el => {
     if (el && window.getComputedStyle(el).opacity === '0') {
       el.style.opacity = '1';
       el.style.visibility = 'visible';
+      el.style.transform = 'none';
+      el.style.filter = 'none';
     }
   });
-  
-  // Check if GSAP loaded, if not, ensure all content is visible
+
   if (typeof gsap === 'undefined') {
+    document.documentElement.classList.remove('motion-ready');
     console.warn('GSAP not loaded - ensuring all content is visible');
-    document.querySelectorAll('*').forEach(el => {
-      const computed = window.getComputedStyle(el);
-      if (computed.opacity === '0' && !el.classList.contains('hidden') && !el.hasAttribute('hidden')) {
-        el.style.opacity = '1';
-        el.style.visibility = 'visible';
-      }
-    });
   }
 }, 1000);
 
