@@ -1839,7 +1839,8 @@ html.motion-ready .scroll-reveal-target.is-revealed {
   body:has(#particle-canvas) .service-card,
   body:has(#particle-canvas) .work-card,
   body:has(#particle-canvas) .testimonial-card,
-  body:has(#particle-canvas) .portfolio-item {
+  body:has(#particle-canvas) .portfolio-item,
+  body:has(#particle-canvas) .header {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
@@ -1860,81 +1861,123 @@ html.motion-ready .scroll-reveal-target.is-revealed {
   z-index: 0;
 }
 
-/* Translucent panels over particle field (read-through like portfolio tiles) */
-body:has(#particle-canvas) .section-dark {
-  background: rgba(15, 23, 42, 0.42);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Root: body paint was hiding gaps between particles; keep page tone on html only */
+html:has(#particle-canvas) {
+  background-color: var(--dark);
+  min-height: 100%;
 }
 
+body:has(#particle-canvas) {
+  background-color: transparent;
+}
+
+/* Same glass treatment as .portfolio-item: rgba(255,255,255,0.03) + light border; no heavy blur (blur hides motion) */
+body:has(#particle-canvas) .section-dark,
 body:has(#particle-canvas) .section-light {
-  background: rgba(30, 41, 59, 0.48);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-body:has(#particle-canvas) .hero-section {
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.55) 0%, rgba(11, 18, 34, 0.68) 100%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
+body:has(#particle-canvas) .hero-section,
 body:has(#particle-canvas) .contact-hero,
 body:has(#particle-canvas) .portfolio-hero,
 body:has(#particle-canvas) .services-hero,
 body:has(#particle-canvas) .about-hero {
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.52) 0%, rgba(11, 18, 34, 0.65) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.22) 0%, rgba(11, 18, 34, 0.28) 100%) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 body:has(#particle-canvas) .cta-section {
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.5) 0%, rgba(11, 18, 34, 0.62) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.18) 0%, rgba(11, 18, 34, 0.26) 100%) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 body:has(#particle-canvas) .contact-section {
-  background: rgba(15, 23, 42, 0.38);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-body:has(#particle-canvas) .kpi-section {
-  background: rgba(30, 41, 59, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+body:has(#particle-canvas) .services-details,
+body:has(#particle-canvas) .about-section {
+  background: rgba(15, 23, 42, 0.14);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
+body:has(#particle-canvas) .kpi-section,
 body:has(#particle-canvas) .client-showcase {
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 body:has(#particle-canvas) .footer {
-  background: rgba(15, 23, 42, 0.72);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body:has(#particle-canvas) .header {
+  background: rgba(15, 23, 42, 0.88) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
+body:has(#particle-canvas) .header.scrolled {
+  background: rgba(15, 23, 42, 0.92) !important;
+}
+
 body:has(#particle-canvas) .about-section .card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 body:has(#particle-canvas) .service-card,
 body:has(#particle-canvas) .work-card,
 body:has(#particle-canvas) .testimonial-card {
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 body:has(#particle-canvas) .portfolio-item {
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body:has(#particle-canvas) .contact-form,
+body:has(#particle-canvas) .contact-method {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body:has(#particle-canvas) .kpi-badge {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body:has(#particle-canvas) main {
+  background: transparent;
+}
+
+/* Thank-you and other pages: embedded <style> or inline heroes */
+body:has(#particle-canvas) .thank-you {
+  background: linear-gradient(rgba(10, 15, 44, 0.2), rgba(10, 15, 44, 0.14)) !important;
 }
 
 /* ================ PORTFOLIO-STYLE CLIENT LOGO LINKS ================ */
