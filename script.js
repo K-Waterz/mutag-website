@@ -162,6 +162,112 @@ function initAOS() {
   });
 }
 
+let __mhDomUIBound = false;
+
+/** Header scroll state, nav, smooth anchors, year, lazy images, forms — no GSAP required. */
+function setupDomUIEnhancements() {
+  if (__mhDomUIBound) {
+    return;
+  }
+  __mhDomUIBound = true;
+
+  const header = document.getElementById('header') || document.querySelector('.header');
+  if (header) {
+    header.style.transform = 'translateY(0)';
+    header.style.visibility = 'visible';
+    header.style.opacity = '1';
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  const currentPath = window.location.pathname;
+
+  navLinks.forEach((link) => {
+    const linkPath = link.getAttribute('href');
+    if (linkPath === currentPath || (currentPath === '/' && linkPath === '/')) {
+      link.classList.add('active');
+    }
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#' && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const headerHeight = header ? header.offsetHeight : 0;
+          const targetPosition = target.offsetTop - headerHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  const images = document.querySelectorAll('img[loading="lazy"]');
+
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach((img) => imageObserver.observe(img));
+  }
+
+  const contactForm = document.querySelector('form');
+  if (contactForm && contactForm.action) {
+    contactForm.addEventListener('submit', (e) => {
+      const requiredFields = contactForm.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach((field) => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.style.borderColor = '#ef4444';
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  window.addEventListener('beforeunload', () => {
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
+  });
+}
+
 // Wait for GSAP and DOM to be ready
 let animationInitAttempts = 0;
 const MAX_ANIMATION_INIT_ATTEMPTS = 80;
@@ -177,10 +283,11 @@ function initAnimations() {
       return;
     }
 
+    document.documentElement.classList.add('motion-ready');
     if (document.querySelector('[data-aos]')) {
       initAOS();
     }
-
+    setupDomUIEnhancements();
     return;
   }
 
@@ -224,18 +331,7 @@ function setupAnimations() {
     }
   }
 
-  // Header scroll effect
-  if (header) {
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-
-      if (currentScroll > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-  }
+  setupDomUIEnhancements();
 
   // ================ MOBILE MENU ================
   // Mobile menu is handled via inline script in HTML for maximum compatibility
@@ -245,7 +341,7 @@ function setupAnimations() {
   const heroSubtitle = document.querySelector('.hero-subtitle');
   const heroButton = document.querySelector('.hero-section .btn');
 
-  if (!prefersReducedMotion()) {
+  if (!prefersReducedMotion() && typeof gsap !== 'undefined') {
     if (heroTitle) {
       markRevealTarget(heroTitle);
       gsap.from(heroTitle, {
@@ -283,7 +379,9 @@ function setupAnimations() {
     }
   }
 
-  setupScrollReveals();
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    setupScrollReveals();
+  }
 
   window.addEventListener('load', () => {
     if (typeof AOS !== 'undefined' && typeof AOS.refresh === 'function') {
@@ -297,8 +395,8 @@ function setupAnimations() {
   // ================ BUTTON HOVER MICRO-INTERACTIONS ================
   const buttons = document.querySelectorAll('.btn');
 
-  if (!prefersReducedMotion()) {
-    buttons.forEach(button => {
+  if (!prefersReducedMotion() && typeof gsap !== 'undefined') {
+    buttons.forEach((button) => {
       button.addEventListener('mouseenter', () => {
         gsap.to(button, {
           scale: 1.02,
@@ -316,92 +414,6 @@ function setupAnimations() {
       });
     });
   }
-
-  // ================ NAV LINK ACTIVE STATE ================
-  const navLinks = document.querySelectorAll('.nav-link');
-  const currentPath = window.location.pathname;
-  
-  navLinks.forEach(link => {
-    const linkPath = link.getAttribute('href');
-    if (linkPath === currentPath || (currentPath === '/' && linkPath === '/')) {
-      link.classList.add('active');
-    }
-  });
-
-  // ================ SMOOTH SCROLLING FOR ANCHOR LINKS ================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href !== '#' && href.startsWith('#')) {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const headerHeight = header.offsetHeight;
-          const targetPosition = target.offsetTop - headerHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-
-  // ================ SET CURRENT YEAR ================
-  const yearElement = document.getElementById('current-year');
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-
-  // ================ IMAGE LAZY LOADING ENHANCEMENT ================
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          observer.unobserve(img);
-        }
-      });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-  }
-
-  // ================ FORM VALIDATION (if contact form exists) ================
-  const contactForm = document.querySelector('form');
-  if (contactForm && contactForm.action) {
-    contactForm.addEventListener('submit', (e) => {
-      const requiredFields = contactForm.querySelectorAll('[required]');
-      let isValid = true;
-      
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          isValid = false;
-          field.style.borderColor = '#ef4444';
-        } else {
-          field.style.borderColor = '';
-        }
-      });
-      
-      if (!isValid) {
-        e.preventDefault();
-      }
-    });
-  }
-
-  // ================ PERFORMANCE: Cleanup on page unload ================
-  window.addEventListener('beforeunload', () => {
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    }
-  });
 }
 
 // Initialize animations
@@ -424,8 +436,7 @@ setTimeout(() => {
   });
 
   if (typeof gsap === 'undefined') {
-    document.documentElement.classList.remove('motion-ready');
-    console.warn('GSAP not loaded - ensuring all content is visible');
+    console.warn('GSAP not loaded - using AOS and static UI enhancements only');
   }
 }, 1000);
 

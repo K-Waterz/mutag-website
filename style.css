@@ -1822,4 +1822,103 @@ html.motion-ready .scroll-reveal-target.is-revealed {
     transition: none !important;
     filter: none !important;
   }
+
+  .logo-link-wrap {
+    animation: none !important;
+  }
+}
+
+/* ================ PARTICLE CANVAS (site-wide) ================ */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================ PORTFOLIO-STYLE CLIENT LOGO LINKS ================ */
+@keyframes logo-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.0), 0 0 0 3px rgba(99,102,241,0.15); }
+  50%       { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.0), 0 0 0 3px rgba(99,102,241,0.35); }
+}
+
+.logo-link-wrap {
+  position: relative;
+  display: inline-block;
+  border-radius: 0.75rem;
+  border: 1.5px dashed rgba(99, 102, 241, 0.45);
+  padding: 0.35rem 0.5rem;
+  animation: logo-pulse 2.6s ease-in-out infinite;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  outline-offset: 3px;
+}
+
+.logo-link-wrap:hover {
+  animation: none;
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.85);
+  border-style: solid;
+}
+
+.logo-link-wrap:focus-visible {
+  outline: 2px solid #6366f1;
+}
+
+.logo-link-wrap::before {
+  content: "↗ Visit Site";
+  position: absolute;
+  bottom: -1.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #6366f1;
+  white-space: nowrap;
+  opacity: 0.75;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.logo-link-wrap:hover::before {
+  opacity: 1;
+}
+
+.logo-link-wrap img {
+  cursor: pointer;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.logo-link-wrap:hover img {
+  opacity: 0.9;
+}
+
+.portfolio-content .logo-link-wrap {
+  margin-bottom: 2.4rem;
+}
+
+.client-logo-item .logo-link-wrap {
+  margin-bottom: 0;
+  border: none;
+  padding: 0.35rem 0.5rem;
+}
+
+.client-logo-item .logo-link-wrap:hover {
+  border: none;
+}
+
+.client-logo-item .logo-link-wrap::before {
+  display: none;
+}
+
+.client-logo-item img.no-link,
+.portfolio-content img.no-link {
+  display: block;
+  margin-bottom: 1rem;
 }
