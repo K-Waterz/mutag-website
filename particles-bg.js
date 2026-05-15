@@ -188,8 +188,41 @@
   }
 
   function resize() {
+    var ow = W;
+    var oh = H;
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
+    var nowR = Date.now();
+    var preserve =
+      activeTouchCount > 0 ||
+      (pointerTouchRecoverUntil > 0 && nowR < pointerTouchRecoverUntil) ||
+      (lastPointerTime > 0 && nowR - lastPointerTime < 2800);
+    var hasOld = typeof ow === 'number' && typeof oh === 'number' && ow > 16 && oh > 16;
+
+    if (preserve && hasOld) {
+      var sx = W / ow;
+      var sy = H / oh;
+      lastClientX = Math.max(0, Math.min(W, lastClientX * sx));
+      lastClientY = Math.max(0, Math.min(H, lastClientY * sy));
+      lastTapX = Math.max(0, Math.min(W, lastTapX * sx));
+      lastTapY = Math.max(0, Math.min(H, lastTapY * sy));
+      lastSampleX = Math.max(0, Math.min(W, lastSampleX * sx));
+      lastSampleY = Math.max(0, Math.min(H, lastSampleY * sy));
+      mouse.x = Math.max(0, Math.min(W, mouse.x * sx));
+      mouse.y = Math.max(0, Math.min(H, mouse.y * sy));
+      target.x = Math.max(0, Math.min(W, target.x * sx));
+      target.y = Math.max(0, Math.min(H, target.y * sy));
+      var oti;
+      for (oti = 0; oti < orbitTrail.length; oti++) {
+        var ot = orbitTrail[oti];
+        ot.x = Math.max(0, Math.min(W, ot.x * sx));
+        ot.y = Math.max(0, Math.min(H, ot.y * sy));
+      }
+      touchBursts.length = 0;
+      waves.length = 0;
+      return;
+    }
+
     lastClientX = W / 2;
     lastClientY = H / 2;
     lastPointerTime = 0;
@@ -204,6 +237,7 @@
     lastTailNy = -1;
     orbitTrail.length = 0;
     touchBursts.length = 0;
+    waves.length = 0;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
@@ -783,7 +817,7 @@
     } else if (!useMouseFollow) {
       var tSec = nowMs / 1000;
       var sp = Math.sqrt(velX * velX + velY * velY);
-      var moving = !pointerStale || sp > 0.2;
+      var moving = !pointerStale || sp > 0.07 || idleMs < 520;
       var anchorStale = lastPointerTime === 0 || nowMs - lastPointerTime > 9000;
       var orbitCx = anchorStale ? W * 0.5 : lastClientX;
       var orbitCy = anchorStale ? H * 0.5 : lastClientY;
@@ -792,7 +826,8 @@
       var gyroPx = W * 0.5 + gyroX * W * 0.2;
       var gyroPy = H * 0.5 + gyroY * H * 0.16;
       if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
-        if (moving) {
+        var deepIdle = pointerStale && idleMs > 380 && sp < 0.065;
+        if (moving || !deepIdle) {
           target.x = lastClientX * 0.94 + gyroPx * 0.06;
           target.y = lastClientY * 0.94 + gyroPy * 0.06;
         } else {
