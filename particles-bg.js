@@ -64,6 +64,8 @@
   var VEL_SMOOTH_TOUCH = 0.58;
   var VEL_CLAMP = 7.5;
   var activeTouchCount = 0;
+  /** After iOS touchcancel / gesture steal, pointer stream may briefly be the only signal. */
+  var pointerTouchRecoverUntil = 0;
   var trailBoostUntil = 0;
   var lastTapX = 0;
   var lastTapY = 0;
@@ -104,7 +106,7 @@
     lastClientY = cy;
     lastPointerTime = t;
     var smooth = useMouseFollow ? VEL_SMOOTH_MOUSE : VEL_SMOOTH_TOUCH;
-    var gapResetMs = useMouseFollow ? 100 : 55;
+    var gapResetMs = useMouseFollow ? 100 : (activeTouchCount > 0 ? 92 : 55);
     if (lastSampleT === 0) {
       lastSampleX = cx;
       lastSampleY = cy;
@@ -156,6 +158,7 @@
     lastSampleT = 0;
     velX = velY = 0;
     activeTouchCount = 0;
+    pointerTouchRecoverUntil = 0;
     trailBoostUntil = 0;
     lastTapX = W / 2;
     lastTapY = H / 2;
@@ -184,30 +187,101 @@
     return pt === '' && hasTouchScreen;
   }
 
+  function rejectBadTouchClient(cx, cy) {
+    if (cx !== 0 || cy !== 0) return false;
+    var now = Date.now();
+    if (activeTouchCount > 0 && (lastClientX > 48 || lastClientY > 48)) return true;
+    if (lastPointerTime && now - lastPointerTime < 320 && (lastClientX > 48 || lastClientY > 48)) return true;
+    return false;
+  }
+
   function readTouchClient(t) {
+    if (!t) return null;
     var cx = t.clientX;
     var cy = t.clientY;
-    if (typeof cx === 'number' && typeof cy === 'number' && cx === cx && cy === cy) return { x: cx, y: cy };
-    if (typeof t.pageX === 'number' && typeof t.pageY === 'number') return { x: t.pageX, y: t.pageY };
+    if (typeof cx === 'number' && typeof cy === 'number' && cx === cx && cy === cy) {
+      if (rejectBadTouchClient(cx, cy)) return null;
+      return { x: cx, y: cy };
+    }
+    if (typeof t.pageX === 'number' && typeof t.pageY === 'number' && t.pageX === t.pageX && t.pageY === t.pageY) {
+      if (rejectBadTouchClient(t.pageX, t.pageY)) return null;
+      return { x: t.pageX, y: t.pageY };
+    }
     return null;
+  }
+
+  function pointerFingerClient(ev) {
+    var cx = ev.clientX;
+    var cy = ev.clientY;
+    if (typeof cx !== 'number' || typeof cy !== 'number' || cx !== cx || cy !== cy) return null;
+    if (rejectBadTouchClient(cx, cy)) return null;
+    if (W > 1 && H > 1) {
+      cx = Math.max(0, Math.min(W, cx));
+      cy = Math.max(0, Math.min(H, cy));
+    }
+    return { x: cx, y: cy };
   }
 
   if (!useMouseFollow || hasTouchScreen) {
     function onPointerDown(e) {
       if (!isTouchLikePointer(e)) return;
-      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') {
+        var pfd = pointerFingerClient(e);
+        if (!pfd) return;
+        pointerTouchRecoverUntil = 0;
+        if (activeTouchCount === 0) {
+          activeTouchCount = 1;
+          pokeTouchImpulse(pfd.x, pfd.y);
+        } else {
+          activeTouchCount = Math.max(activeTouchCount, 1);
+        }
+        setLastClient(pfd.x, pfd.y);
+        return;
+      }
       activeTouchCount++;
       pokeTouchImpulse(e.clientX, e.clientY);
       setLastClient(e.clientX, e.clientY);
     }
     function onPointerMove(e) {
       if (!isTouchLikePointer(e)) return;
-      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') {
+        var list = e.getCoalescedEvents && e.getCoalescedEvents();
+        if (list && list.length > 1) {
+          var ci;
+          for (ci = 0; ci < list.length; ci++) {
+            var pfc = pointerFingerClient(list[ci]);
+            if (!pfc) continue;
+            if (activeTouchCount > 0 || Date.now() < pointerTouchRecoverUntil) {
+              if (activeTouchCount === 0) activeTouchCount = 1;
+              setLastClient(pfc.x, pfc.y);
+            }
+          }
+          return;
+        }
+        var pf = pointerFingerClient(e);
+        if (!pf) return;
+        if (activeTouchCount > 0 || Date.now() < pointerTouchRecoverUntil) {
+          if (activeTouchCount === 0) activeTouchCount = 1;
+          setLastClient(pf.x, pf.y);
+        }
+        return;
+      }
       setLastClient(e.clientX, e.clientY);
     }
     function onPointerEnd(e) {
       if (!isTouchLikePointer(e)) return;
-      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') {
+        var pfe = pointerFingerClient(e);
+        if (activeTouchCount > 0 && pfe) {
+          var bvx = velX;
+          var bvy = velY;
+          setLastClient(pfe.x, pfe.y);
+          spawnTouchFirework(pfe.x, pfe.y, bvx, bvy);
+          activeTouchCount = 0;
+          pointerTouchRecoverUntil = 0;
+        }
+        return;
+      }
       var rx = typeof e.clientX === 'number' ? e.clientX : lastClientX;
       var ry = typeof e.clientY === 'number' ? e.clientY : lastClientY;
       var burstVx = velX;
@@ -216,17 +290,31 @@
       spawnTouchFirework(rx, ry, burstVx, burstVy);
       activeTouchCount = Math.max(0, activeTouchCount - 1);
     }
+    function onPointerCancel(e) {
+      if (!isTouchLikePointer(e)) return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') {
+        pointerTouchRecoverUntil = Date.now() + 1700;
+        activeTouchCount = 0;
+        return;
+      }
+      onPointerEnd(e);
+    }
     var cap = { passive: true, capture: true };
     window.addEventListener('pointerdown', onPointerDown, cap);
     window.addEventListener('pointermove', onPointerMove, cap);
     window.addEventListener('pointerup', onPointerEnd, cap);
-    window.addEventListener('pointercancel', onPointerEnd, cap);
+    window.addEventListener('pointercancel', onPointerCancel, cap);
 
     function onTouchStartCoarse(e) {
       if (!useTouchApiForFinger) return;
       if (!e.touches || e.touches.length === 0) return;
-      var tch = e.touches[0];
-      var p = readTouchClient(tch);
+      pointerTouchRecoverUntil = 0;
+      var ti;
+      var p = null;
+      for (ti = 0; ti < e.touches.length; ti++) {
+        p = readTouchClient(e.touches[ti]);
+        if (p) break;
+      }
       if (!p) return;
       activeTouchCount = e.touches.length;
       pokeTouchImpulse(p.x, p.y);
@@ -235,8 +323,12 @@
     function onTouchMoveCoarse(e) {
       if (!useTouchApiForFinger) return;
       if (!e.touches || e.touches.length === 0) return;
-      var tch = e.touches[0];
-      var p = readTouchClient(tch);
+      var ti;
+      var p = null;
+      for (ti = 0; ti < e.touches.length; ti++) {
+        p = readTouchClient(e.touches[ti]);
+        if (p) break;
+      }
       if (!p) return;
       activeTouchCount = e.touches.length;
       setLastClient(p.x, p.y);
@@ -263,11 +355,26 @@
         spawnTouchFirework(lastClientX, lastClientY, burstVx, burstVy);
       }
       activeTouchCount = 0;
+      pointerTouchRecoverUntil = 0;
+    }
+    function onTouchCancelCoarse(e) {
+      if (!useTouchApiForFinger) return;
+      if (e.touches.length > 0) {
+        var t1 = e.touches[0];
+        var pr = readTouchClient(t1);
+        if (pr) {
+          activeTouchCount = e.touches.length;
+          setLastClient(pr.x, pr.y);
+        }
+        return;
+      }
+      pointerTouchRecoverUntil = Date.now() + 1700;
+      activeTouchCount = 0;
     }
     window.addEventListener('touchstart', onTouchStartCoarse, cap);
     window.addEventListener('touchmove', onTouchMoveCoarse, cap);
     window.addEventListener('touchend', onTouchEndCoarse, cap);
-    window.addEventListener('touchcancel', onTouchEndCoarse, cap);
+    window.addEventListener('touchcancel', onTouchCancelCoarse, cap);
   }
 
   var gyroX = 0, gyroY = 0;
