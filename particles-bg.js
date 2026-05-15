@@ -1,9 +1,9 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
  * Desktop: mouse path leaves a short-lived “snake” polyline that fades out; optional velocity streak.
- * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, stronger streak while moving.
- * Touch-first: listeners use capture so touches are seen before site handlers; field starts immediately
- * (no idle deferral) so fast taps are never missed.
+ * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, shooting-star streak while moving.
+ * Expects <canvas id="particle-canvas"> as the first interactive layer.
+ * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
  */
 (function () {
   var canvas = document.getElementById('particle-canvas');
@@ -44,64 +44,32 @@
   var VEL_CLAMP = 7.5;
   var activeTouchCount = 0;
   var trailBoostUntil = 0;
+  var lastTapX = 0;
+  var lastTapY = 0;
   var lastTailNx = 0;
   var lastTailNy = -1;
-  /** One object per active pointerId: swipe vector = (lx,ly) - (sx,sy) */
-  var gestures = Object.create(null);
 
-  function isMousePointer(e) {
-    return e.pointerType === 'mouse';
-  }
-
-  /** Immediate feedback on touch down (outward from screen center). */
-  function miniBumpOnDown(cx, cy) {
-    var gx = cx - W * 0.5;
-    var gy = cy - H * 0.5;
-    var gl = Math.sqrt(gx * gx + gy * gy) || 1;
-    gx /= gl;
-    gy /= gl;
-    velX += gx * 0.62;
-    velY += gy * 0.62;
-    lastTailNx = gx;
-    lastTailNy = gy;
-    var t = Date.now();
-    trailBoostUntil = Math.max(trailBoostUntil, t + 520);
-  }
-
-  /** On release: strong streak along swipe, or radial “tap star” when barely moved (every tap). */
-  function finalizeSwipeBurst(g) {
-    var dx = g.lx - g.sx;
-    var dy = g.ly - g.sy;
+  function pokeTouchImpulse(cx, cy) {
+    var dx = cx - lastTapX;
+    var dy = cy - lastTapY;
     var d = Math.sqrt(dx * dx + dy * dy);
-    var t = Date.now();
-    trailBoostUntil = Math.max(trailBoostUntil, t + 780);
-    var nx;
-    var ny;
-    var speed;
-    if (d > 4) {
+    lastTapX = cx;
+    lastTapY = cy;
+    if (d > 1.2) {
       var inv = 1 / d;
-      nx = dx * inv;
-      ny = dy * inv;
-      speed = Math.min(5.5, 1.25 + d * 0.024);
+      velX += dx * inv * 0.72;
+      velY += dy * inv * 0.72;
     } else {
-      nx = g.lx - W * 0.5;
-      ny = g.ly - H * 0.5;
-      var nl = Math.sqrt(nx * nx + ny * ny);
-      if (nl < 12) {
-        var tick = (Date.now() >> 4) & 7;
-        var oct = tick * (Math.PI / 4);
-        nx = Math.cos(oct);
-        ny = Math.sin(oct);
-      } else {
-        nx /= nl;
-        ny /= nl;
-      }
-      speed = 2.15;
+      var ang = Math.random() * Math.PI * 2;
+      velX += Math.cos(ang) * 0.55;
+      velY += Math.sin(ang) * 0.55;
     }
-    velX = velX * 0.08 + nx * speed * 0.92;
-    velY = velY * 0.08 + ny * speed * 0.92;
-    lastTailNx = nx;
-    lastTailNy = ny;
+    var vm = Math.sqrt(velX * velX + velY * velY);
+    if (vm > 1e-4) {
+      lastTailNx = velX / vm;
+      lastTailNy = velY / vm;
+    }
+    trailBoostUntil = Date.now() + 620;
   }
 
   function recordPointerPosition(cx, cy) {
@@ -161,7 +129,8 @@
     velX = velY = 0;
     activeTouchCount = 0;
     trailBoostUntil = 0;
-    gestures = Object.create(null);
+    lastTapX = W / 2;
+    lastTapY = H / 2;
     lastTailNx = 0;
     lastTailNy = -1;
     mouseTrail.length = 0;
@@ -192,49 +161,27 @@
       }
     });
   } else {
-    var cap = { passive: true, capture: true };
     function onPointerDown(e) {
-      if (isMousePointer(e)) return;
-      var id = e.pointerId;
-      if (gestures[id]) return;
-      var cx = e.clientX;
-      var cy = e.clientY;
-      activeTouchCount++;
-      gestures[id] = { sx: cx, sy: cy, lx: cx, ly: cy };
-      miniBumpOnDown(cx, cy);
-      setLastClient(cx, cy);
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        activeTouchCount++;
+        pokeTouchImpulse(e.clientX, e.clientY);
+        setLastClient(e.clientX, e.clientY);
+      }
     }
     function onPointerMove(e) {
-      if (isMousePointer(e)) return;
-      var id = e.pointerId;
-      var g = gestures[id];
-      var cx = e.clientX;
-      var cy = e.clientY;
-      if (g) {
-        g.lx = cx;
-        g.ly = cy;
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        setLastClient(e.clientX, e.clientY);
       }
-      setLastClient(cx, cy);
     }
     function onPointerEnd(e) {
-      if (isMousePointer(e)) return;
-      var id = e.pointerId;
-      var g = gestures[id];
-      var cx = e.clientX;
-      var cy = e.clientY;
-      if (g) {
-        g.lx = cx;
-        g.ly = cy;
-        finalizeSwipeBurst(g);
-        delete gestures[id];
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
         activeTouchCount = Math.max(0, activeTouchCount - 1);
       }
-      setLastClient(cx, cy);
     }
-    window.addEventListener('pointerdown', onPointerDown, cap);
-    window.addEventListener('pointermove', onPointerMove, cap);
-    window.addEventListener('pointerup', onPointerEnd, cap);
-    window.addEventListener('pointercancel', onPointerEnd, cap);
+    window.addEventListener('pointerdown', onPointerDown, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerup', onPointerEnd, { passive: true });
+    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
   }
 
   var gyroX = 0, gyroY = 0;
@@ -310,38 +257,30 @@
       ny = lastTailNy / tn;
     }
     var baseAng = Math.atan2(ny, nx);
-    var spreads = useMouseFollow ? [0] : [0, -0.1, 0.1];
-    for (var si = 0; si < spreads.length; si++) {
-      var ang = baseAng + spreads[si];
-      var snx = Math.cos(ang);
-      var sny = Math.sin(ang);
-      var branch = si === 0 ? 1 : 0.38;
-      var tx = mx - snx * tailLen;
-      var ty = my - sny * tailLen;
+    var snx = Math.cos(baseAng);
+    var sny = Math.sin(baseAng);
+    var tx = mx - snx * tailLen;
+    var ty = my - sny * tailLen;
 
-      var aMidB = aMid * branch;
-      var aHeadB = aHead * branch;
+    var lg = ctx.createLinearGradient(tx, ty, mx, my);
+    lg.addColorStop(0, 'hsla(258,100%,72%,' + a0 + ')');
+    lg.addColorStop(0.45, 'hsla(255,92%,78%,' + (aMid * 0.85) + ')');
+    lg.addColorStop(0.82, 'hsla(252,96%,90%,' + aHead + ')');
+    lg.addColorStop(1, 'hsla(260,100%,100%,' + (aHead * 0.95) + ')');
 
-      var lg = ctx.createLinearGradient(tx, ty, mx, my);
-      lg.addColorStop(0, 'hsla(258,100%,72%,' + a0 + ')');
-      lg.addColorStop(0.45, 'hsla(255,92%,78%,' + (aMidB * 0.85) + ')');
-      lg.addColorStop(0.82, 'hsla(252,96%,90%,' + aHeadB + ')');
-      lg.addColorStop(1, 'hsla(260,100%,100%,' + (aHeadB * 0.95) + ')');
+    ctx.strokeStyle = lg;
+    ctx.lineWidth = (useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u;
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(mx, my);
+    ctx.stroke();
 
-      ctx.strokeStyle = lg;
-      ctx.lineWidth = ((useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u) * (si === 0 ? 1 : 0.55);
-      ctx.beginPath();
-      ctx.moveTo(tx, ty);
-      ctx.lineTo(mx, my);
-      ctx.stroke();
-
-      ctx.strokeStyle = dark ? 'hsla(260,100%,100%,' + (0.22 * branch) + ')' : 'hsla(260,100%,98%,' + (0.14 * branch) + ')';
-      ctx.lineWidth = (1.5 + 2.8 * u) * (si === 0 ? 1 : 0.65);
-      ctx.beginPath();
-      ctx.moveTo(tx, ty);
-      ctx.lineTo(mx, my);
-      ctx.stroke();
-    }
+    ctx.strokeStyle = dark ? 'hsla(260,100%,100%,0.22)' : 'hsla(260,100%,98%,0.14)';
+    ctx.lineWidth = 1.5 + 2.8 * u;
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(mx, my);
+    ctx.stroke();
     ctx.restore();
   }
 
@@ -547,13 +486,9 @@
   draw();
   }
 
-  if (useMouseFollow) {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(startParticleField, { timeout: 2000 });
-    } else {
-      window.setTimeout(startParticleField, 16);
-    }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startParticleField, { timeout: 2000 });
   } else {
-    startParticleField();
+    window.setTimeout(startParticleField, 16);
   }
 })();
