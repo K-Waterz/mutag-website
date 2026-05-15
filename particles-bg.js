@@ -1,6 +1,6 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
- * Desktop: orbit (smoothed focal point) leaves a glittery snake trail that lingers; optional velocity streak.
+ * Desktop: smoothed orbit path; touch: finger path. Rendered as soft glow + glitter trail (no sharp snake outline).
  * Touch / pen: while finger is down the glow tracks the touch point and leaves a path trail (including while scrolling);
  * on lift, a short firework biased along swipe velocity stays near the release point.
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
@@ -697,7 +697,7 @@
     ctx.restore();
   }
 
-  /** Smoothed path (desktop orbit + finger-drag / scroll trail) with quadratic stroke + soft glow + glitter specks. */
+  /** Smooth path (same motion as before): diffused glow + dense glitter — no tight stroke outline. */
   function drawOrbitSnakeTrail(nowMs, dark) {
     if (orbitTrail.length < 2) return;
     var maxAge = ORBIT_TRAIL_MAX_AGE;
@@ -733,46 +733,63 @@
       ctx.lineTo(vp[n - 1].x, vp[n - 1].y);
     }
 
-    ctx.shadowBlur = dark ? 14 : 10;
-    ctx.shadowColor = dark ? 'hsla(268,100%,78%,0.45)' : 'hsla(268,85%,62%,0.28)';
+    var baseA = (dark ? 0.42 : 0.22) * uHead;
+
+    ctx.shadowBlur = dark ? 32 : 26;
+    ctx.shadowColor = dark ? 'hsla(268,100%,84%,0.14)' : 'hsla(268,90%,72%,0.1)';
     smoothPathMove();
-    var baseA = (dark ? 0.36 : 0.17) * uHead;
-    ctx.strokeStyle = dark ? 'hsla(256,78%,82%,' + baseA + ')' : 'hsla(256,72%,56%,' + baseA + ')';
-    ctx.lineWidth = 2.4 + 5.2 * uHead;
+    ctx.strokeStyle = dark ? 'hsla(258,88%,90%,' + (baseA * 0.11) + ')' : 'hsla(256,78%,76%,' + (baseA * 0.07) + ')';
+    ctx.lineWidth = 14 + 26 * uHead;
+    ctx.stroke();
+
+    ctx.shadowBlur = dark ? 20 : 16;
+    ctx.shadowColor = dark ? 'hsla(272,95%,80%,0.1)' : 'hsla(270,85%,68%,0.07)';
+    smoothPathMove();
+    ctx.strokeStyle = dark ? 'hsla(262,82%,94%,' + (baseA * 0.09) + ')' : 'hsla(260,72%,82%,' + (baseA * 0.055) + ')';
+    ctx.lineWidth = 6 + 12 * uHead;
     ctx.stroke();
     ctx.shadowBlur = 0;
 
-    smoothPathMove();
-    ctx.strokeStyle = dark ? 'hsla(260,100%,98%,' + (baseA * 0.52) + ')' : 'hsla(260,100%,96%,' + (baseA * 0.32) + ')';
-    ctx.lineWidth = 1.05 + 2.1 * uHead;
-    ctx.stroke();
-
-    for (var gi = 1; gi < n; gi++) {
+    var glitterStride = lightDevice ? 2 : 1;
+    var maxGlitter = lightDevice ? 140 : 280;
+    var drawn = 0;
+    var gi;
+    for (gi = 1; gi < n && drawn < maxGlitter; gi += glitterStride) {
       var a0 = vp[gi - 1];
       var a1 = vp[gi];
       var ag = nowMs - a1.t;
       var ue = 1 - ag / maxAge;
-      if (ue <= 0.06) continue;
-      var mx = (a0.x + a1.x) * 0.5;
-      var my = (a0.y + a1.y) * 0.5;
+      if (ue <= 0.04) continue;
       var dx = a1.x - a0.x;
       var dy = a1.y - a0.y;
       var dlen = Math.sqrt(dx * dx + dy * dy) || 1;
       var px = -dy / dlen;
       var py = dx / dlen;
-      var hue = 246 + ((gi * 19 + (nowMs >> 2)) % 32);
-      var flick = 0.45 + 0.55 * Math.sin(nowMs * 0.007 + gi * 1.83);
-      var ga = (dark ? 0.4 : 0.2) * ue * ue * flick;
-      if ((gi & 1) === 0) {
-        var off = ((gi % 7) - 3) * 0.55;
+      var specks = lightDevice ? 2 : 3;
+      var si;
+      for (si = 0; si < specks && drawn < maxGlitter; si++) {
+        var along = (si + 0.35 + Math.random() * 0.65) / specks;
+        var mx = a0.x + dx * along;
+        var my = a0.y + dy * along;
+        var spread = 2.2 + Math.random() * 4.8;
+        mx += px * (Math.random() - 0.5) * spread;
+        my += py * (Math.random() - 0.5) * spread;
+        var hue = 238 + ((gi * 17 + si * 31 + (nowMs >> 2)) % 48);
+        var flick = 0.35 + 0.65 * Math.sin(nowMs * 0.008 + gi * 1.47 + si);
+        var ga = (dark ? 0.52 : 0.3) * ue * ue * flick * (0.55 + 0.45 * uHead);
+        var rr = 0.4 + Math.random() * 1.5;
         ctx.beginPath();
-        ctx.arc(mx + px * off, my + py * off, 0.75 + flick * 1.1, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(' + hue + ',92%,88%,' + ga + ')';
+        ctx.arc(mx, my, rr, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + hue + ',88%,' + (dark ? '90' : '72') + '%,' + ga + ')';
         ctx.fill();
-        ctx.beginPath();
-        ctx.arc(mx - px * off * 0.45, my - py * off * 0.45, 0.35 + flick * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(260,100%,100%,' + (ga * 0.9) + ')';
-        ctx.fill();
+        if (Math.random() < 0.55) {
+          ctx.beginPath();
+          ctx.arc(mx + (Math.random() - 0.5) * 1.8, my + (Math.random() - 0.5) * 1.8, rr * 0.35, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(260,100%,' + (dark ? '99' : '98') + '%,' + (ga * 0.85) + ')';
+          ctx.fill();
+          drawn++;
+        }
+        drawn++;
       }
     }
     ctx.restore();
