@@ -1980,62 +1980,6 @@ body:has(#particle-canvas) .thank-you {
   background: linear-gradient(rgba(10, 15, 44, 0.2), rgba(10, 15, 44, 0.14)) !important;
 }
 
-/*
- * Orbit legibility: duplicate copy (.orbit-text-spot) is inverted and revealed only through
- * a radial mask at --orbit-spot-* (particles-bg.js sets host-local coordinates each frame).
- */
-body:has(#particle-canvas) .hero-section .hero-title,
-body:has(#particle-canvas) .hero-section .hero-subtitle,
-body:has(#particle-canvas) .hero-section .hero-content > p,
-body:has(#particle-canvas) .contact-hero h1,
-body:has(#particle-canvas) .contact-hero .hero-subtitle,
-body:has(#particle-canvas) .contact-hero .hero-description,
-body:has(#particle-canvas) .portfolio-hero h1,
-body:has(#particle-canvas) .portfolio-hero .container > p,
-body:has(#particle-canvas) .services-hero h1,
-body:has(#particle-canvas) .services-hero .subheading,
-body:has(#particle-canvas) .about-hero h1,
-body:has(#particle-canvas) .about-hero .subheading,
-body:has(#particle-canvas) .thank-you .thank-you-content h1,
-body:has(#particle-canvas) .thank-you .thank-you-content > p {
-  position: relative;
-}
-
-body:has(#particle-canvas) .orbit-text-base {
-  display: block;
-}
-
-body:has(#particle-canvas) .orbit-text-spot {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  box-sizing: border-box;
-  pointer-events: none;
-  filter: invert(1);
-  -webkit-filter: invert(1);
-  opacity: var(--orbit-spot-alpha, 0);
-  transition: opacity 0.05s linear;
-  --orbit-spot-r: clamp(36px, 4.2vw, 56px);
-  mask-image: radial-gradient(
-    circle var(--orbit-spot-r) at var(--orbit-spot-x, -4000px) var(--orbit-spot-y, -4000px),
-    #000 0%,
-    #000 92%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    circle var(--orbit-spot-r) at var(--orbit-spot-x, -4000px) var(--orbit-spot-y, -4000px),
-    #000 0%,
-    #000 92%,
-    transparent 100%
-  );
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-  mask-mode: alpha;
-}
-
 /* ================ PORTFOLIO-STYLE CLIENT LOGO LINKS ================ */
 @keyframes logo-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.0), 0 0 0 3px rgba(99,102,241,0.15); }

@@ -72,172 +72,6 @@
   var lastTailNx = 0;
   var lastTailNy = -1;
 
-  /**
-   * Hero copy: invert only in a small disk that follows the orbit (focal + streak + trail).
-   * Each host gets a duplicate layer (.orbit-text-spot) masked by a radial gradient at --orbit-spot-*.
-   */
-  var orbitTextSel =
-    '.hero-section .hero-title,' +
-    '.hero-section .hero-subtitle,' +
-    '.hero-section .hero-content > p,' +
-    '.contact-hero h1,' +
-    '.contact-hero .hero-subtitle,' +
-    '.contact-hero .hero-description,' +
-    '.portfolio-hero h1,' +
-    '.portfolio-hero .container > p,' +
-    '.services-hero h1,' +
-    '.services-hero .subheading,' +
-    '.about-hero h1,' +
-    '.about-hero .subheading,' +
-    '.thank-you .thank-you-content h1,' +
-    '.thank-you .thank-you-content > p';
-  var orbitTextNodes = null;
-  /** Orbit samples farther than this from the text box contribute zero. */
-  var ORBIT_SPOT_SHOW_DIST = 120;
-
-  /** ~Canvas focal stack (g3 inner + g2 + g1 outer); d = distance from sample point to glow center (mx,my). */
-  function focalGlowIntensityAt(sampleX, sampleY, mx, my, dark) {
-    var dx = sampleX - mx;
-    var dy = sampleY - my;
-    var d = Math.sqrt(dx * dx + dy * dy);
-    var iCore = Math.max(0, 1 - d / 20) * (dark ? 0.88 : 0.62);
-    var iMid = Math.max(0, 1 - d / 86) * (dark ? 0.36 : 0.21);
-    var iHalo = Math.max(0, 1 - d / 215) * (dark ? 0.16 : 0.09);
-    return Math.min(1, iCore + iMid + iHalo);
-  }
-
-  /** Trail segment brightness vs age (loosely matches drawOrbitSnakeTrail). */
-  function trailSampleIntensity(q, nowMs, dark) {
-    var age = nowMs - q.t;
-    if (age > ORBIT_TRAIL_MAX_AGE || age < 0) return 0;
-    var w = Math.max(0, 1 - age / ORBIT_TRAIL_MAX_AGE);
-    var wPow = Math.pow(w, 1.12);
-    return Math.min(1, (dark ? 0.52 : 0.3) * wPow + 0.1 * w);
-  }
-
-  function spotLightRawIntensity(hit, mx, my, nowMs, dark) {
-    var F = focalGlowIntensityAt(hit.px, hit.py, mx, my, dark);
-    if (hit.kind === 'focal') return F;
-    if (hit.kind === 'streak') return Math.min(1, F * 0.58 + 0.18);
-    if (hit.kind === 'trail' && hit.trailQ) {
-      var T = trailSampleIntensity(hit.trailQ, nowMs, dark);
-      return Math.min(1, Math.max(T, F * 0.42));
-    }
-    return F;
-  }
-
-  /** 0 at dist SHOW_DIST, 1 at dist 0 */
-  function proximityToText(dist) {
-    if (dist >= ORBIT_SPOT_SHOW_DIST) return 0;
-    var u = 1 - dist / ORBIT_SPOT_SHOW_DIST;
-    return u * u * (3 - 2 * u);
-  }
-
-  function resetOrbitSpotState() {
-    if (typeof document === 'undefined' || !document.querySelectorAll) return;
-    var hosts = document.querySelectorAll('[data-orbit-spot-host="1"]');
-    var hi;
-    for (hi = 0; hi < hosts.length; hi++) {
-      hosts[hi].style.removeProperty('--orbit-spot-x');
-      hosts[hi].style.removeProperty('--orbit-spot-y');
-      hosts[hi].style.removeProperty('--orbit-spot-alpha');
-    }
-    orbitTextNodes = null;
-  }
-
-  function distPointToRect(px, py, r) {
-    var cx = Math.max(r.left, Math.min(px, r.right));
-    var cy = Math.max(r.top, Math.min(py, r.bottom));
-    var dx = px - cx;
-    var dy = py - cy;
-    return Math.sqrt(dx * dx + dy * dy);
-  }
-
-  function refreshOrbitTextNodeList() {
-    try {
-      orbitTextNodes = document.querySelectorAll(orbitTextSel);
-    } catch (err) {
-      orbitTextNodes = null;
-    }
-  }
-
-  function ensureOrbitSpotLayers(el) {
-    if (!el || el.nodeType !== 1) return false;
-    if (el.getAttribute('data-orbit-spot-host') === '1') return true;
-    var html = el.innerHTML;
-    if (!html || !/\S/.test(html)) return false;
-    el.innerHTML =
-      '<span class="orbit-text-base">' + html + '</span>' +
-      '<span class="orbit-text-spot" aria-hidden="true">' + html + '</span>';
-    el.setAttribute('data-orbit-spot-host', '1');
-    return true;
-  }
-
-  /** Pick viewport point (focal, streak, or trail) closest to this rect; tag source for intensity. */
-  function closestOrbitSampleToRect(rect, focalX, focalY, streakX, streakY) {
-    var bestPx = focalX;
-    var bestPy = focalY;
-    var bestD = distPointToRect(focalX, focalY, rect);
-    var kind = 'focal';
-    var trailQ = null;
-
-    var dStreak = distPointToRect(streakX, streakY, rect);
-    if (dStreak < bestD) {
-      bestD = dStreak;
-      bestPx = streakX;
-      bestPy = streakY;
-      kind = 'streak';
-      trailQ = null;
-    }
-    var pj;
-    var q;
-    var d;
-    for (pj = orbitTrail.length - 1; pj >= 0 && pj >= orbitTrail.length - 160; pj -= 1) {
-      q = orbitTrail[pj];
-      d = distPointToRect(q.x, q.y, rect);
-      if (d < bestD) {
-        bestD = d;
-        bestPx = q.x;
-        bestPy = q.y;
-        kind = 'trail';
-        trailQ = q;
-      }
-    }
-    return { px: bestPx, py: bestPy, dist: bestD, kind: kind, trailQ: trailQ };
-  }
-
-  function updateOrbitTextSpotMasks(focalX, focalY, streakX, streakY, dark, nowMs) {
-    if (!orbitTextNodes || !orbitTextNodes.length) refreshOrbitTextNodeList();
-    if (!orbitTextNodes || !orbitTextNodes.length) return;
-    var ti;
-    var el;
-    var r;
-    var hit;
-    var raw;
-    var prox;
-    var alpha;
-    for (ti = 0; ti < orbitTextNodes.length; ti++) {
-      el = orbitTextNodes[ti];
-      if (!el || el.nodeType !== 1 || !el.getBoundingClientRect) continue;
-      if (!ensureOrbitSpotLayers(el)) continue;
-      r = el.getBoundingClientRect();
-      if (r.width < 2 || r.height < 2) continue;
-      hit = closestOrbitSampleToRect(r, focalX, focalY, streakX, streakY);
-      if (hit.dist > ORBIT_SPOT_SHOW_DIST) {
-        el.style.setProperty('--orbit-spot-alpha', '0');
-        continue;
-      }
-      raw = spotLightRawIntensity(hit, focalX, focalY, nowMs, dark);
-      prox = proximityToText(hit.dist);
-      alpha = raw * prox;
-      if (alpha < 0.012) alpha = 0;
-      else alpha = Math.min(1, alpha);
-      el.style.setProperty('--orbit-spot-x', hit.px - r.left + 'px');
-      el.style.setProperty('--orbit-spot-y', hit.py - r.top + 'px');
-      el.style.setProperty('--orbit-spot-alpha', alpha.toFixed(3));
-    }
-  }
-
   function pokeTouchImpulse(cx, cy) {
     var dx = cx - lastTapX;
     var dy = cy - lastTapY;
@@ -358,7 +192,6 @@
     var oh = H;
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    resetOrbitSpotState();
     var nowR = Date.now();
     var preserve =
       activeTouchCount > 0 ||
@@ -1179,8 +1012,6 @@
     ctx.fillStyle = g3; ctx.fill();
 
     drawTouchFireworks(nowMs, dark);
-
-    updateOrbitTextSpotMasks(mx, my, starX, starY, dark, nowMs);
   }
 
   draw();
