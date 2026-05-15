@@ -72,7 +72,10 @@
   var lastTailNx = 0;
   var lastTailNy = -1;
 
-  /** Hero copy sits above the canvas; AOS `transform` on wrappers breaks mix-blend-mode. Toggle class from focal + trail vs text bounds instead. */
+  /**
+   * Hero copy: invert only in a small disk that follows the orbit (focal + streak + trail).
+   * Each host gets a duplicate layer (.orbit-text-spot) masked by a radial gradient at --orbit-spot-*.
+   */
   var orbitTextSel =
     '.hero-section .hero-title,' +
     '.hero-section .hero-subtitle,' +
@@ -89,15 +92,17 @@
     '.thank-you .thank-you-content h1,' +
     '.thank-you .thank-you-content > p';
   var orbitTextNodes = null;
-  var ORBIT_NEAR_GLOW_PX = 100;
-  var ORBIT_FOCAL_NEAR_CLASS = 'orbit-focal-near';
+  /** Show spotlight only when some orbit sample is this close to the text box. */
+  var ORBIT_SPOT_SHOW_DIST = 120;
 
-  function clearOrbitFocalNearClass() {
+  function resetOrbitSpotState() {
     if (typeof document === 'undefined' || !document.querySelectorAll) return;
-    var marked = document.querySelectorAll('.' + ORBIT_FOCAL_NEAR_CLASS);
-    var ci;
-    for (ci = 0; ci < marked.length; ci++) {
-      marked[ci].classList.remove(ORBIT_FOCAL_NEAR_CLASS);
+    var hosts = document.querySelectorAll('[data-orbit-spot-host="1"]');
+    var hi;
+    for (hi = 0; hi < hosts.length; hi++) {
+      hosts[hi].style.removeProperty('--orbit-spot-x');
+      hosts[hi].style.removeProperty('--orbit-spot-y');
+      hosts[hi].style.removeProperty('--orbit-spot-alpha');
     }
     orbitTextNodes = null;
   }
@@ -118,33 +123,65 @@
     }
   }
 
-  function updateOrbitTextNear(focalX, focalY, streakX, streakY) {
+  function ensureOrbitSpotLayers(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (el.getAttribute('data-orbit-spot-host') === '1') return true;
+    var html = el.innerHTML;
+    if (!html || !/\S/.test(html)) return false;
+    el.innerHTML =
+      '<span class="orbit-text-base">' + html + '</span>' +
+      '<span class="orbit-text-spot" aria-hidden="true">' + html + '</span>';
+    el.setAttribute('data-orbit-spot-host', '1');
+    return true;
+  }
+
+  /** Pick viewport point (focal, streak, or trail sample) closest to this rect — mask follows that exact spot. */
+  function closestOrbitSampleToRect(rect, focalX, focalY, streakX, streakY) {
+    var bestPx = focalX;
+    var bestPy = focalY;
+    var bestD = distPointToRect(focalX, focalY, rect);
+    var dStreak = distPointToRect(streakX, streakY, rect);
+    if (dStreak < bestD) {
+      bestD = dStreak;
+      bestPx = streakX;
+      bestPy = streakY;
+    }
+    var pj;
+    var q;
+    var d;
+    for (pj = orbitTrail.length - 1; pj >= 0 && pj >= orbitTrail.length - 160; pj -= 1) {
+      q = orbitTrail[pj];
+      d = distPointToRect(q.x, q.y, rect);
+      if (d < bestD) {
+        bestD = d;
+        bestPx = q.x;
+        bestPy = q.y;
+      }
+    }
+    return { px: bestPx, py: bestPy, dist: bestD };
+  }
+
+  function updateOrbitTextSpotMasks(focalX, focalY, streakX, streakY) {
     if (!orbitTextNodes || !orbitTextNodes.length) refreshOrbitTextNodeList();
     if (!orbitTextNodes || !orbitTextNodes.length) return;
-    var R = ORBIT_NEAR_GLOW_PX;
     var ti;
     var el;
     var r;
-    var near;
-    var pj;
-    var q;
+    var hit;
     for (ti = 0; ti < orbitTextNodes.length; ti++) {
       el = orbitTextNodes[ti];
       if (!el || el.nodeType !== 1 || !el.getBoundingClientRect) continue;
+      if (!ensureOrbitSpotLayers(el)) continue;
       r = el.getBoundingClientRect();
       if (r.width < 2 || r.height < 2) continue;
-      near = distPointToRect(focalX, focalY, r) < R || distPointToRect(streakX, streakY, r) < R;
-      if (!near && orbitTrail.length) {
-        for (pj = orbitTrail.length - 1; pj >= 0 && pj >= orbitTrail.length - 90; pj -= 2) {
-          q = orbitTrail[pj];
-          if (distPointToRect(q.x, q.y, r) < R - 6) {
-            near = true;
-            break;
-          }
-        }
+      hit = closestOrbitSampleToRect(r, focalX, focalY, streakX, streakY);
+      if (hit.dist > ORBIT_SPOT_SHOW_DIST) {
+        el.style.setProperty('--orbit-spot-alpha', '0');
+        continue;
       }
-      if (near) el.classList.add(ORBIT_FOCAL_NEAR_CLASS);
-      else el.classList.remove(ORBIT_FOCAL_NEAR_CLASS);
+      el.style.setProperty('--orbit-spot-x', hit.px - r.left + 'px');
+      el.style.setProperty('--orbit-spot-y', hit.py - r.top + 'px');
+      el.style.setProperty('--orbit-spot-alpha', '1');
     }
   }
 
@@ -268,7 +305,7 @@
     var oh = H;
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    clearOrbitFocalNearClass();
+    resetOrbitSpotState();
     var nowR = Date.now();
     var preserve =
       activeTouchCount > 0 ||
@@ -1090,7 +1127,7 @@
 
     drawTouchFireworks(nowMs, dark);
 
-    updateOrbitTextNear(mx, my, starX, starY);
+    updateOrbitTextSpotMasks(mx, my, starX, starY);
   }
 
   draw();
