@@ -13,12 +13,6 @@
     return;
   }
 
-  function startParticleField() {
-  var ctx = canvas.getContext('2d');
-  var W, H;
-  var mouse = { x: 0, y: 0 };
-  var target = { x: 0, y: 0 };
-  var tiltX = 0, tiltY = 0;
   var mm = window.matchMedia ? window.matchMedia.bind(window) : null;
   var hasTouchScreen = typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 0;
   var coarsePointer = !!(mm && mm('(pointer: coarse)').matches);
@@ -29,6 +23,13 @@
     !coarsePointer &&
     !(hasTouchScreen && mm('(hover: none)').matches)
   );
+
+  function startParticleField() {
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  var mouse = { x: 0, y: 0 };
+  var target = { x: 0, y: 0 };
+  var tiltX = 0, tiltY = 0;
   var cores = typeof navigator.hardwareConcurrency === 'number' ? navigator.hardwareConcurrency : 4;
   var lightDevice = coarsePointer || !useMouseFollow || hasTouchScreen || cores <= 4;
   var TOTAL = lightDevice ? 38 : 58;
