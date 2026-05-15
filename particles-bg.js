@@ -1,5 +1,7 @@
 /**
- * Full-page particle field + scroll ripples + cursor glow (matches portfolio.html).
+ * Full-page particle field + scroll ripples + focal glow.
+ * Desktop: glow follows mouse. Touch-first devices: glow follows finger/stylus, optional gyro blend,
+ * calm idle drift when idle; scroll ripples anchor to recent touch when available.
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
  * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
  */
@@ -16,31 +18,54 @@
   var mouse = { x: 0, y: 0 };
   var target = { x: 0, y: 0 };
   var tiltX = 0, tiltY = 0;
-  var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  var mm = window.matchMedia ? window.matchMedia.bind(window) : null;
+  var useMouseFollow = !!(mm && mm('(pointer: fine)').matches && mm('(hover: hover)').matches);
   var cores = typeof navigator.hardwareConcurrency === 'number' ? navigator.hardwareConcurrency : 4;
-  var lightDevice = isMobile || cores <= 4;
+  var lightDevice = !useMouseFollow || cores <= 4;
   var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
+  var lastClientX = 0;
+  var lastClientY = 0;
+  var lastPointerTime = 0;
+  var TOUCH_TARGET_MS = 3200;
+  var RIPPLE_ANCHOR_MS = 4500;
+
+  function setLastClient(cx, cy) {
+    lastClientX = cx;
+    lastClientY = cy;
+    lastPointerTime = Date.now();
+  }
 
   function resize() {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
+    lastClientX = W / 2;
+    lastClientY = H / 2;
+    lastPointerTime = 0;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
   resize();
   window.addEventListener('resize', resize);
 
-  if (!isMobile) {
+  if (useMouseFollow) {
     window.addEventListener('mousemove', function (e) {
       target.x = e.clientX;
       target.y = e.clientY;
     });
+  } else {
+    function onPointerClient(e) {
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        setLastClient(e.clientX, e.clientY);
+      }
+    }
+    window.addEventListener('pointerdown', onPointerClient, { passive: true });
+    window.addEventListener('pointermove', onPointerClient, { passive: true });
   }
 
   var gyroX = 0, gyroY = 0;
-  if (isMobile && window.DeviceOrientationEvent) {
+  if (!useMouseFollow && window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation', function (e) {
       gyroX = (e.gamma || 0) / 45;
       gyroY = (e.beta || 0) / 90;
@@ -58,9 +83,15 @@
     var now = Date.now();
     if (now - scrollCooldown < 350) return;
     scrollCooldown = now;
+    var ax = W / 2;
+    var ay = H / 2;
+    if (now - lastPointerTime < RIPPLE_ANCHOR_MS) {
+      ax = Math.max(0, Math.min(W, lastClientX));
+      ay = Math.max(0, Math.min(H, lastClientY));
+    }
     waves.push({
-      x: W / 2,
-      y: H / 2,
+      x: ax,
+      y: ay,
       r: 0,
       maxR: Math.max(W, H) * 0.7,
       alpha: 0.55,
@@ -90,9 +121,20 @@
     requestAnimationFrame(draw);
     var dark = isDark();
 
-    if (isMobile) {
-      target.x = W / 2 + gyroX * W * 0.25;
-      target.y = H / 2 + gyroY * H * 0.20;
+    if (!useMouseFollow) {
+      var nowMs = Date.now();
+      var tSec = nowMs / 1000;
+      var idleX = W * 0.5 + Math.cos(tSec * 0.36) * W * 0.065;
+      var idleY = H * 0.5 + Math.sin(tSec * 0.29) * H * 0.05;
+      var gyroPx = W * 0.5 + gyroX * W * 0.2;
+      var gyroPy = H * 0.5 + gyroY * H * 0.16;
+      if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
+        target.x = lastClientX * 0.78 + gyroPx * 0.22;
+        target.y = lastClientY * 0.78 + gyroPy * 0.22;
+      } else {
+        target.x = idleX * 0.62 + gyroPx * 0.38;
+        target.y = idleY * 0.62 + gyroPy * 0.38;
+      }
     }
     mouse.x += (target.x - mouse.x) * 0.06;
     mouse.y += (target.y - mouse.y) * 0.06;

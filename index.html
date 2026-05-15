@@ -22,11 +22,6 @@
   <meta name="twitter:description" content="Software development studio in Centurion, South Africa. We build scalable web applications, APIs, authentication systems, dashboards, and automation platforms." />
   <meta name="twitter:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-69Y20X3B4W"></script>
   <script>
@@ -40,6 +35,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="fonts/mutag-fonts.css" />
   <link rel="stylesheet" href="style.css">
   <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
@@ -482,123 +478,8 @@
     </div>
   </footer>
 
-  <!-- Mobile Menu Script - Must run before other scripts -->
-  <script>
-    (function() {
-      'use strict';
-      
-      function setupMobileMenu() {
-        var toggleBtn = document.getElementById('mobile-menu-toggle') || document.querySelector('.mobile-menu-toggle');
-        var menu = document.querySelector('.nav-menu');
-        
-        if (!toggleBtn || !menu) {
-          console.log('Menu elements not ready, retrying...', {toggleBtn: !!toggleBtn, menu: !!menu});
-          return false;
-        }
-        
-        console.log('Setting up mobile menu...', {toggleBtn, menu});
-        
-        // Remove all existing event listeners by cloning
-        var newToggle = toggleBtn.cloneNode(true);
-        toggleBtn.parentNode.replaceChild(newToggle, toggleBtn);
-        toggleBtn = newToggle;
-        
-        function toggleMenu(e) {
-          if (e) {
-            if (e.preventDefault) e.preventDefault();
-            if (e.stopPropagation) e.stopPropagation();
-            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-          }
-          
-          var isOpen = menu.classList.contains('active');
-          
-          console.log('Toggle called, current state:', isOpen);
-          
-          if (isOpen) {
-            toggleBtn.classList.remove('active');
-            menu.classList.remove('active');
-            toggleBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-            console.log('Menu closed');
-          } else {
-            toggleBtn.classList.add('active');
-            menu.classList.add('active');
-            toggleBtn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-            console.log('Menu opened');
-          }
-          
-          return false;
-        }
-        
-        // Direct property assignment (most reliable)
-        toggleBtn.onclick = toggleMenu;
-        toggleBtn.ontouchend = function(e) {
-          if (e.preventDefault) e.preventDefault();
-          toggleMenu(e);
-          return false;
-        };
-        
-        // Event listeners as backup
-        try {
-          toggleBtn.addEventListener('click', toggleMenu, {capture: true, passive: false});
-          toggleBtn.addEventListener('touchend', toggleMenu, {capture: true, passive: false});
-        } catch(e) {
-          console.warn('addEventListener failed, using onclick only');
-        }
-        
-        // Make absolutely sure it's clickable
-        toggleBtn.style.pointerEvents = 'auto';
-        toggleBtn.style.cursor = 'pointer';
-        toggleBtn.style.position = 'relative';
-        toggleBtn.style.zIndex = '1001';
-        
-        // Close menu when clicking links
-        var links = menu.querySelectorAll('a');
-        for (var i = 0; i < links.length; i++) {
-          links[i].addEventListener('click', function() {
-            toggleBtn.classList.remove('active');
-            menu.classList.remove('active');
-            toggleBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-          });
-        }
-        
-        // Close on outside click
-        document.addEventListener('click', function(e) {
-          if (menu.classList.contains('active') && 
-              !menu.contains(e.target) && 
-              !toggleBtn.contains(e.target)) {
-            toggleBtn.classList.remove('active');
-            menu.classList.remove('active');
-            toggleBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-          }
-        });
-        
-        console.log('Mobile menu setup complete!');
-        return true;
-      }
-      
-      // Try immediately
-      if (setupMobileMenu()) {
-        console.log('Menu initialized on first try');
-      } else {
-        // Try on DOM ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(setupMobileMenu, 10);
-          });
-        }
-        
-        // Try with delays
-        setTimeout(function() { setupMobileMenu(); }, 50);
-        setTimeout(function() { setupMobileMenu(); }, 200);
-        setTimeout(function() { setupMobileMenu(); }, 500);
-        setTimeout(function() { setupMobileMenu(); }, 1000);
-      }
-    })();
-  </script>
+  <!-- Mobile navigation (shared) -->
+  <script src="mobile-menu.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="script.js"></script>
 </body>
