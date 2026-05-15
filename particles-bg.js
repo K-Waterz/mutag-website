@@ -87,6 +87,10 @@
   }
 
   function recordPointerPosition(cx, cy) {
+    if (W > 1 && H > 1) {
+      cx = Math.max(0, Math.min(W, cx));
+      cy = Math.max(0, Math.min(H, cy));
+    }
     var t = Date.now();
     lastClientX = cx;
     lastClientY = cy;
@@ -112,9 +116,11 @@
     var ix = (cx - lastSampleX) / dt;
     var iy = (cy - lastSampleY) / dt;
     var imag = Math.sqrt(ix * ix + iy * iy);
-    if (imag > VEL_CLAMP) {
-      ix *= VEL_CLAMP / imag;
-      iy *= VEL_CLAMP / imag;
+    var vcap = VEL_CLAMP;
+    if (activeTouchCount > 0) vcap = useMouseFollow ? 3.4 : 2.65;
+    if (imag > vcap) {
+      ix *= vcap / imag;
+      iy *= vcap / imag;
     }
     lastSampleX = cx;
     lastSampleY = cy;
@@ -196,6 +202,13 @@
     window.addEventListener('pointermove', onPointerMove, cap);
     window.addEventListener('pointerup', onPointerEnd, cap);
     window.addEventListener('pointercancel', onPointerEnd, cap);
+    function onTouchMove(e) {
+      if (!e.touches || e.touches.length === 0) return;
+      if (activeTouchCount <= 0) return;
+      var tch = e.touches[0];
+      setLastClient(tch.clientX, tch.clientY);
+    }
+    window.addEventListener('touchmove', onTouchMove, cap);
   }
 
   var gyroX = 0, gyroY = 0;
@@ -361,18 +374,31 @@
     ctx.restore();
   }
 
-  /** Motion streak behind focal point (tail opposite velocity). Stronger on touch-first. */
-  function drawShootingStar(mx, my, dark, nowMs) {
+  /** Motion streak behind focal point (tail opposite velocity). Stronger on touch-first; capped while finger is down so swipes stay on-screen. */
+  function drawShootingStar(mx, my, dark, nowMs, fingerDown) {
+    fingerDown = !!fingerDown;
     var sp0 = Math.sqrt(velX * velX + velY * velY);
     var linger = nowMs < trailBoostUntil;
-    var sp = linger ? Math.max(sp0, useMouseFollow ? 0.18 : 0.48) : sp0;
-    var thresh = useMouseFollow ? 0.14 : 0.012;
+    var minLingerSp = useMouseFollow ? 0.18 : (fingerDown ? 0 : 0.42);
+    var sp = linger ? Math.max(sp0, minLingerSp) : sp0;
+    if (fingerDown) {
+      sp = Math.min(sp, useMouseFollow ? 2.05 : 1.2);
+    } else if (!useMouseFollow) {
+      sp = Math.min(sp, 3.5);
+    }
+    var thresh = useMouseFollow ? 0.14 : (fingerDown ? 0.06 : 0.012);
     if (sp < thresh) return;
 
     var maxSp = useMouseFollow ? 2.8 : 6.2;
+    if (fingerDown) maxSp = useMouseFollow ? 1.95 : 1.28;
     var u = Math.min(1, sp / maxSp);
     var baseLen = useMouseFollow ? 115 : 380;
-    var tailLen = baseLen * u + (useMouseFollow ? 52 : 220) * u;
+    var tailExtra = useMouseFollow ? 52 : 220;
+    if (fingerDown) {
+      baseLen = useMouseFollow ? 70 : 86;
+      tailExtra = useMouseFollow ? 28 : 36;
+    }
+    var tailLen = baseLen * u + tailExtra * u;
     var lingerFade = linger ? Math.min(1, (trailBoostUntil - nowMs) / 420) : 1;
     var a0 = dark ? 0 : 0.02;
     var aMid = (dark ? 0.16 : 0.09) * (0.45 + 0.55 * u) * (0.55 + 0.45 * lingerFade);
@@ -398,6 +424,10 @@
     var sny = Math.sin(baseAng);
     var tx = mx - snx * tailLen;
     var ty = my - sny * tailLen;
+    if (W > 1 && H > 1) {
+      tx = Math.max(-24, Math.min(W + 24, tx));
+      ty = Math.max(-24, Math.min(H + 24, ty));
+    }
 
     var lg = ctx.createLinearGradient(tx, ty, mx, my);
     lg.addColorStop(0, 'hsla(258,100%,72%,' + a0 + ')');
@@ -406,7 +436,13 @@
     lg.addColorStop(1, 'hsla(260,100%,100%,' + (aHead * 0.95) + ')');
 
     ctx.strokeStyle = lg;
-    ctx.lineWidth = (useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u;
+    var lw0 = useMouseFollow ? 5 : 8;
+    var lw1 = useMouseFollow ? 9 : 20;
+    if (fingerDown) {
+      lw0 = useMouseFollow ? 4 : 5;
+      lw1 = useMouseFollow ? 5 : 8;
+    }
+    ctx.lineWidth = lw0 + lw1 * u;
     ctx.beginPath();
     ctx.moveTo(tx, ty);
     ctx.lineTo(mx, my);
@@ -576,8 +612,8 @@
       while (orbitTrail.length > 0 && nowMs - orbitTrail[0].t > ORBIT_TRAIL_MAX_AGE) {
         orbitTrail.shift();
       }
-      var ox = mouse.x;
-      var oy = mouse.y;
+      var ox = W > 1 ? Math.max(0, Math.min(W, mouse.x)) : mouse.x;
+      var oy = H > 1 ? Math.max(0, Math.min(H, mouse.y)) : mouse.y;
       var minDistSq = activeTouchCount > 0 ? 0.22 * 0.22 : ORBIT_TRAIL_MIN_DIST_SQ;
       var lt = orbitTrail.length ? orbitTrail[orbitTrail.length - 1] : null;
       if (!lt || (ox - lt.x) * (ox - lt.x) + (oy - lt.y) * (oy - lt.y) >= minDistSq) {
@@ -652,12 +688,12 @@
 
     drawOrbitSnakeTrail(nowMs, dark);
 
-    var mx = activeTouchCount > 0 ? lastClientX : mouse.x;
-    var my = activeTouchCount > 0 ? lastClientY : mouse.y;
+    var mx = activeTouchCount > 0 ? Math.max(0, Math.min(W, lastClientX)) : mouse.x;
+    var my = activeTouchCount > 0 ? Math.max(0, Math.min(H, lastClientY)) : mouse.y;
     var starX = activeTouchCount > 0 ? lastClientX : (!useMouseFollow ? mx * 0.5 + lastClientX * 0.5 : mx);
     var starY = activeTouchCount > 0 ? lastClientY : (!useMouseFollow ? my * 0.5 + lastClientY * 0.5 : my);
 
-    drawShootingStar(starX, starY, dark, nowMs);
+    drawShootingStar(starX, starY, dark, nowMs, activeTouchCount > 0);
 
     var g1 = ctx.createRadialGradient(mx, my, 0, mx, my, 220);
     g1.addColorStop(0, dark ? 'hsla(250,85%,68%,0.18)' : 'hsla(250,85%,52%,0.10)');
