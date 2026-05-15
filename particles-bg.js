@@ -2,9 +2,8 @@
  * Full-page particle field + scroll ripples + focal glow.
  * Desktop: mouse follow + subtle shooting-star streak on quick moves.
  * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, stronger streak while moving.
- * Optional gyro blend on touch-first; scroll ripples anchor to recent pointer when available.
- * Expects <canvas id="particle-canvas"> as the first interactive layer.
- * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
+ * Touch-first: listeners use capture so touches are seen before site handlers; field starts immediately
+ * (no idle deferral) so fast taps are never missed.
  */
 (function () {
   var canvas = document.getElementById('particle-canvas');
@@ -41,32 +40,64 @@
   var VEL_CLAMP = 7.5;
   var activeTouchCount = 0;
   var trailBoostUntil = 0;
-  var lastTapX = 0;
-  var lastTapY = 0;
   var lastTailNx = 0;
   var lastTailNy = -1;
+  /** One object per active pointerId: swipe vector = (lx,ly) - (sx,sy) */
+  var gestures = Object.create(null);
 
-  function pokeTouchImpulse(cx, cy) {
-    var dx = cx - lastTapX;
-    var dy = cy - lastTapY;
+  function isMousePointer(e) {
+    return e.pointerType === 'mouse';
+  }
+
+  /** Immediate feedback on touch down (outward from screen center). */
+  function miniBumpOnDown(cx, cy) {
+    var gx = cx - W * 0.5;
+    var gy = cy - H * 0.5;
+    var gl = Math.sqrt(gx * gx + gy * gy) || 1;
+    gx /= gl;
+    gy /= gl;
+    velX += gx * 0.62;
+    velY += gy * 0.62;
+    lastTailNx = gx;
+    lastTailNy = gy;
+    var t = Date.now();
+    trailBoostUntil = Math.max(trailBoostUntil, t + 520);
+  }
+
+  /** On release: strong streak along swipe, or radial “tap star” when barely moved (every tap). */
+  function finalizeSwipeBurst(g) {
+    var dx = g.lx - g.sx;
+    var dy = g.ly - g.sy;
     var d = Math.sqrt(dx * dx + dy * dy);
-    lastTapX = cx;
-    lastTapY = cy;
-    if (d > 1.2) {
+    var t = Date.now();
+    trailBoostUntil = Math.max(trailBoostUntil, t + 780);
+    var nx;
+    var ny;
+    var speed;
+    if (d > 4) {
       var inv = 1 / d;
-      velX += dx * inv * 0.72;
-      velY += dy * inv * 0.72;
+      nx = dx * inv;
+      ny = dy * inv;
+      speed = Math.min(5.5, 1.25 + d * 0.024);
     } else {
-      var ang = Math.random() * Math.PI * 2;
-      velX += Math.cos(ang) * 0.55;
-      velY += Math.sin(ang) * 0.55;
+      nx = g.lx - W * 0.5;
+      ny = g.ly - H * 0.5;
+      var nl = Math.sqrt(nx * nx + ny * ny);
+      if (nl < 12) {
+        var tick = (Date.now() >> 4) & 7;
+        var oct = tick * (Math.PI / 4);
+        nx = Math.cos(oct);
+        ny = Math.sin(oct);
+      } else {
+        nx /= nl;
+        ny /= nl;
+      }
+      speed = 2.15;
     }
-    var vm = Math.sqrt(velX * velX + velY * velY);
-    if (vm > 1e-4) {
-      lastTailNx = velX / vm;
-      lastTailNy = velY / vm;
-    }
-    trailBoostUntil = Date.now() + 620;
+    velX = velX * 0.08 + nx * speed * 0.92;
+    velY = velY * 0.08 + ny * speed * 0.92;
+    lastTailNx = nx;
+    lastTailNy = ny;
   }
 
   function recordPointerPosition(cx, cy) {
@@ -126,8 +157,7 @@
     velX = velY = 0;
     activeTouchCount = 0;
     trailBoostUntil = 0;
-    lastTapX = W / 2;
-    lastTapY = H / 2;
+    gestures = Object.create(null);
     lastTailNx = 0;
     lastTailNy = -1;
     mouse.x = target.x = W / 2;
@@ -143,27 +173,49 @@
       target.y = e.clientY;
     });
   } else {
+    var cap = { passive: true, capture: true };
     function onPointerDown(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        activeTouchCount++;
-        pokeTouchImpulse(e.clientX, e.clientY);
-        setLastClient(e.clientX, e.clientY);
-      }
+      if (isMousePointer(e)) return;
+      var id = e.pointerId;
+      if (gestures[id]) return;
+      var cx = e.clientX;
+      var cy = e.clientY;
+      activeTouchCount++;
+      gestures[id] = { sx: cx, sy: cy, lx: cx, ly: cy };
+      miniBumpOnDown(cx, cy);
+      setLastClient(cx, cy);
     }
     function onPointerMove(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        setLastClient(e.clientX, e.clientY);
+      if (isMousePointer(e)) return;
+      var id = e.pointerId;
+      var g = gestures[id];
+      var cx = e.clientX;
+      var cy = e.clientY;
+      if (g) {
+        g.lx = cx;
+        g.ly = cy;
       }
+      setLastClient(cx, cy);
     }
     function onPointerEnd(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (isMousePointer(e)) return;
+      var id = e.pointerId;
+      var g = gestures[id];
+      var cx = e.clientX;
+      var cy = e.clientY;
+      if (g) {
+        g.lx = cx;
+        g.ly = cy;
+        finalizeSwipeBurst(g);
+        delete gestures[id];
         activeTouchCount = Math.max(0, activeTouchCount - 1);
       }
+      setLastClient(cx, cy);
     }
-    window.addEventListener('pointerdown', onPointerDown, { passive: true });
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-    window.addEventListener('pointerup', onPointerEnd, { passive: true });
-    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+    window.addEventListener('pointerdown', onPointerDown, cap);
+    window.addEventListener('pointermove', onPointerMove, cap);
+    window.addEventListener('pointerup', onPointerEnd, cap);
+    window.addEventListener('pointercancel', onPointerEnd, cap);
   }
 
   var gyroX = 0, gyroY = 0;
@@ -218,6 +270,15 @@
     var u = Math.min(1, sp / maxSp);
     var baseLen = useMouseFollow ? 115 : 380;
     var tailLen = baseLen * u + (useMouseFollow ? 52 : 220) * u;
+    var lingerFade = linger ? Math.min(1, (trailBoostUntil - nowMs) / 420) : 1;
+    var a0 = dark ? 0 : 0.02;
+    var aMid = (dark ? 0.16 : 0.09) * (0.45 + 0.55 * u) * (0.55 + 0.45 * lingerFade);
+    var aHead = (dark ? 0.5 : 0.28) * (0.5 + 0.5 * u) * (0.55 + 0.45 * lingerFade);
+
+    ctx.save();
+    ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
+    ctx.lineCap = 'round';
+
     var nx;
     var ny;
     if (sp0 > 0.035) {
@@ -229,37 +290,39 @@
       nx = lastTailNx / tn;
       ny = lastTailNy / tn;
     }
-    var tx = mx - nx * tailLen;
-    var ty = my - ny * tailLen;
+    var baseAng = Math.atan2(ny, nx);
+    var spreads = useMouseFollow ? [0] : [0, -0.1, 0.1];
+    for (var si = 0; si < spreads.length; si++) {
+      var ang = baseAng + spreads[si];
+      var snx = Math.cos(ang);
+      var sny = Math.sin(ang);
+      var branch = si === 0 ? 1 : 0.38;
+      var tx = mx - snx * tailLen;
+      var ty = my - sny * tailLen;
 
-    var lingerFade = linger ? Math.min(1, (trailBoostUntil - nowMs) / 420) : 1;
-    var a0 = dark ? 0 : 0.02;
-    var aMid = (dark ? 0.16 : 0.09) * (0.45 + 0.55 * u) * (0.55 + 0.45 * lingerFade);
-    var aHead = (dark ? 0.5 : 0.28) * (0.5 + 0.5 * u) * (0.55 + 0.45 * lingerFade);
+      var aMidB = aMid * branch;
+      var aHeadB = aHead * branch;
 
-    ctx.save();
-    ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
-    ctx.lineCap = 'round';
+      var lg = ctx.createLinearGradient(tx, ty, mx, my);
+      lg.addColorStop(0, 'hsla(258,100%,72%,' + a0 + ')');
+      lg.addColorStop(0.45, 'hsla(255,92%,78%,' + (aMidB * 0.85) + ')');
+      lg.addColorStop(0.82, 'hsla(252,96%,90%,' + aHeadB + ')');
+      lg.addColorStop(1, 'hsla(260,100%,100%,' + (aHeadB * 0.95) + ')');
 
-    var g = ctx.createLinearGradient(tx, ty, mx, my);
-    g.addColorStop(0, 'hsla(258,100%,72%,' + a0 + ')');
-    g.addColorStop(0.45, 'hsla(255,92%,78%,' + (aMid * 0.85) + ')');
-    g.addColorStop(0.82, 'hsla(252,96%,90%,' + aHead + ')');
-    g.addColorStop(1, 'hsla(260,100%,100%,' + (aHead * 0.95) + ')');
+      ctx.strokeStyle = lg;
+      ctx.lineWidth = ((useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u) * (si === 0 ? 1 : 0.55);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(mx, my);
+      ctx.stroke();
 
-    ctx.strokeStyle = g;
-    ctx.lineWidth = (useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u;
-    ctx.beginPath();
-    ctx.moveTo(tx, ty);
-    ctx.lineTo(mx, my);
-    ctx.stroke();
-
-    ctx.strokeStyle = dark ? 'hsla(260,100%,100%,0.22)' : 'hsla(260,100%,98%,0.14)';
-    ctx.lineWidth = 1.5 + 2.8 * u;
-    ctx.beginPath();
-    ctx.moveTo(tx, ty);
-    ctx.lineTo(mx, my);
-    ctx.stroke();
+      ctx.strokeStyle = dark ? 'hsla(260,100%,100%,' + (0.22 * branch) + ')' : 'hsla(260,100%,98%,' + (0.14 * branch) + ')';
+      ctx.lineWidth = (1.5 + 2.8 * u) * (si === 0 ? 1 : 0.65);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(mx, my);
+      ctx.stroke();
+    }
     ctx.restore();
   }
 
@@ -420,9 +483,13 @@
   draw();
   }
 
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(startParticleField, { timeout: 2000 });
+  if (useMouseFollow) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startParticleField, { timeout: 2000 });
+    } else {
+      window.setTimeout(startParticleField, 16);
+    }
   } else {
-    window.setTimeout(startParticleField, 16);
+    startParticleField();
   }
 })();
