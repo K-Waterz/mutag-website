@@ -105,8 +105,8 @@
     lastClientX = cx;
     lastClientY = cy;
     lastPointerTime = t;
-    var smooth = useMouseFollow ? VEL_SMOOTH_MOUSE : VEL_SMOOTH_TOUCH;
-    var gapResetMs = useMouseFollow ? 100 : (activeTouchCount > 0 ? 92 : 55);
+    var smooth = useMouseFollow ? VEL_SMOOTH_MOUSE : (activeTouchCount > 0 ? 0.74 : VEL_SMOOTH_TOUCH);
+    var gapResetMs = useMouseFollow ? 100 : (activeTouchCount > 0 ? 200 : 55);
     if (lastSampleT === 0) {
       lastSampleX = cx;
       lastSampleY = cy;
@@ -116,6 +116,30 @@
     }
     var gap = t - lastSampleT;
     if (gap > gapResetMs) {
+      if (activeTouchCount > 0 && gap < 420) {
+        var dtJump = Math.max(1, gap);
+        var jx = (cx - lastSampleX) / dtJump;
+        var jy = (cy - lastSampleY) / dtJump;
+        var jmag = Math.sqrt(jx * jx + jy * jy);
+        var vcap2 = VEL_CLAMP;
+        if (activeTouchCount > 0) vcap2 = useMouseFollow ? 4.2 : 3.5;
+        if (jmag > vcap2) {
+          jx *= vcap2 / jmag;
+          jy *= vcap2 / jmag;
+        }
+        lastSampleX = cx;
+        lastSampleY = cy;
+        lastSampleT = t;
+        velX += (jx - velX) * smooth * 1.08;
+        velY += (jy - velY) * smooth * 1.08;
+        var spj = Math.sqrt(velX * velX + velY * velY);
+        if (spj > 0.06) {
+          lastTailNx = velX / spj;
+          lastTailNy = velY / spj;
+        }
+        trailBoostUntil = Math.max(trailBoostUntil, t + (useMouseFollow ? 260 : 620));
+        return;
+      }
       lastSampleX = cx;
       lastSampleY = cy;
       lastSampleT = t;
@@ -127,7 +151,7 @@
     var iy = (cy - lastSampleY) / dt;
     var imag = Math.sqrt(ix * ix + iy * iy);
     var vcap = VEL_CLAMP;
-    if (activeTouchCount > 0) vcap = useMouseFollow ? 3.4 : 2.65;
+    if (activeTouchCount > 0) vcap = useMouseFollow ? 4.0 : 3.45;
     if (imag > vcap) {
       ix *= vcap / imag;
       iy *= vcap / imag;
@@ -146,6 +170,20 @@
   }
 
   function setLastClient(cx, cy) {
+    if (activeTouchCount > 0 && typeof cx === 'number' && typeof cy === 'number' && cx === cx && cy === cy) {
+      var lx = lastClientX;
+      var ly = lastClientY;
+      var dx = cx - lx;
+      var dy = cy - ly;
+      var d2 = dx * dx + dy * dy;
+      if (d2 > 28 * 28) {
+        var steps = Math.min(14, Math.max(2, Math.ceil(Math.sqrt(d2) / 22)));
+        var s;
+        for (s = 1; s <= steps; s++) {
+          recordPointerPosition(lx + (dx * s) / (steps + 1), ly + (dy * s) / (steps + 1));
+        }
+      }
+    }
     recordPointerPosition(cx, cy);
   }
 
@@ -246,7 +284,7 @@
       if (!isTouchLikePointer(e)) return;
       if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') {
         var list = e.getCoalescedEvents && e.getCoalescedEvents();
-        if (list && list.length > 1) {
+        if (list && list.length > 0) {
           var ci;
           for (ci = 0; ci < list.length; ci++) {
             var pfc = pointerFingerClient(list[ci]);
@@ -422,7 +460,9 @@
     var t = Date.now();
     var ddx = cx - lastTouchBurstX;
     var ddy = cy - lastTouchBurstY;
-    if (t - lastTouchBurstAt < 70 && ddx * ddx + ddy * ddy < 196) return;
+    var minGap = useTouchApiForFinger ? 38 : 70;
+    var minDistSq = useTouchApiForFinger ? 100 : 196;
+    if (t - lastTouchBurstAt < minGap && ddx * ddx + ddy * ddy < minDistSq) return;
     lastTouchBurstAt = t;
     lastTouchBurstX = cx;
     lastTouchBurstY = cy;
@@ -548,15 +588,15 @@
     var minLingerSp = useMouseFollow ? 0.18 : (fingerDown ? 0 : 0.42);
     var sp = linger ? Math.max(sp0, minLingerSp) : sp0;
     if (fingerDown) {
-      sp = Math.min(sp, useMouseFollow ? 2.05 : 1.2);
+      sp = Math.min(sp, useMouseFollow ? 2.05 : 1.42);
     } else if (!useMouseFollow) {
       sp = Math.min(sp, 3.5);
     }
-    var thresh = useMouseFollow ? 0.14 : (fingerDown ? 0.06 : 0.012);
+    var thresh = useMouseFollow ? 0.14 : (fingerDown ? 0.034 : 0.012);
     if (sp < thresh) return;
 
     var maxSp = useMouseFollow ? 2.8 : 6.2;
-    if (fingerDown) maxSp = useMouseFollow ? 1.95 : 1.28;
+    if (fingerDown) maxSp = useMouseFollow ? 1.95 : 1.48;
     var u = Math.min(1, sp / maxSp);
     var baseLen = useMouseFollow ? 115 : 380;
     var tailExtra = useMouseFollow ? 52 : 220;
@@ -723,7 +763,8 @@
     var nowMs = Date.now();
     var idleMs = nowMs - lastPointerTime;
     var pointerStale = idleMs > 105;
-    if (idleMs > 28) {
+    var touchHeldOrRecover = activeTouchCount > 0 || nowMs < pointerTouchRecoverUntil;
+    if (idleMs > 28 && !touchHeldOrRecover) {
       if (idleMs < 420) {
         velX *= useMouseFollow ? 0.965 : 0.991;
         velY *= useMouseFollow ? 0.965 : 0.991;
