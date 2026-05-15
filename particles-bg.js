@@ -697,7 +697,7 @@
     ctx.restore();
   }
 
-  /** Continuous smoothed path (no segment gaps) + age-faded glitter along the curve. */
+  /** Per-segment shooting-star fade + faint continuous ribbon (no dotted gaps); brighter glitter. */
   function drawOrbitSnakeTrail(nowMs, dark) {
     if (orbitTrail.length < 2) return;
     var maxAge = ORBIT_TRAIL_MAX_AGE;
@@ -711,6 +711,7 @@
     var n = vp.length;
     var headAge = nowMs - vp[n - 1].t;
     var uHead = Math.max(0.12, 1 - headAge / maxAge);
+    var baseA0 = (dark ? 0.36 : 0.17) * uHead;
 
     ctx.save();
     ctx.lineCap = 'round';
@@ -733,28 +734,72 @@
       ctx.lineTo(vp[n - 1].x, vp[n - 1].y);
     }
 
-    ctx.shadowBlur = dark ? 14 : 10;
-    ctx.shadowColor = dark ? 'hsla(268,100%,78%,0.45)' : 'hsla(268,85%,62%,0.28)';
+    ctx.shadowBlur = dark ? 9 : 7;
+    ctx.shadowColor = dark ? 'hsla(268,100%,84%,0.14)' : 'hsla(268,90%,72%,0.1)';
     smoothPathMove();
-    var baseA = (dark ? 0.36 : 0.17) * uHead;
-    ctx.strokeStyle = dark ? 'hsla(256,78%,82%,' + baseA + ')' : 'hsla(256,72%,56%,' + baseA + ')';
-    ctx.lineWidth = 2.4 + 5.2 * uHead;
+    var ribbonA = (dark ? 0.075 : 0.048) * uHead;
+    ctx.strokeStyle = dark ? 'hsla(256,70%,90%,' + ribbonA + ')' : 'hsla(256,65%,64%,' + ribbonA + ')';
+    ctx.lineWidth = 4.5 + 8.2 * uHead;
     ctx.stroke();
     ctx.shadowBlur = 0;
 
-    smoothPathMove();
-    ctx.strokeStyle = dark ? 'hsla(260,100%,98%,' + (baseA * 0.52) + ')' : 'hsla(260,100%,96%,' + (baseA * 0.32) + ')';
-    ctx.lineWidth = 1.05 + 2.1 * uHead;
-    ctx.stroke();
-
-    var glitterStride = lightDevice ? 2 : 1;
+    var a0;
+    var a1;
+    var tAge;
+    var w;
+    var wPow;
+    var wAlpha;
     var gi;
-    for (gi = 1; gi < n; gi += glitterStride) {
-      var a0 = vp[gi - 1];
-      var a1 = vp[gi];
-      var ag = nowMs - a1.t;
-      var ue = 1 - ag / maxAge;
-      if (ue <= 0.05) continue;
+    for (gi = 1; gi < n; gi++) {
+      a0 = vp[gi - 1];
+      a1 = vp[gi];
+      tAge = nowMs - a1.t;
+      w = Math.max(0, Math.min(1, 1 - tAge / maxAge));
+      if (w < 0.024) continue;
+      wPow = Math.pow(w, 1.26);
+      wAlpha = Math.pow(w, 1.05);
+
+      ctx.shadowBlur = dark ? (2.5 + 10.5 * wPow) : (2 + 8.5 * wPow);
+      ctx.shadowColor = dark ? 'hsla(268,100%,82%,' + (0.24 * wAlpha) + ')' : 'hsla(268,88%,66%,' + (0.17 * wAlpha) + ')';
+      ctx.beginPath();
+      ctx.moveTo(a0.x, a0.y);
+      ctx.lineTo(a1.x, a1.y);
+      var lw = 0.18 + (2.5 + 4.65 * uHead) * wPow;
+      var ao = Math.min(dark ? 0.52 : 0.3, baseA0 * wAlpha);
+      ctx.strokeStyle = dark ? 'hsla(256,76%,86%,' + ao + ')' : 'hsla(256,70%,60%,' + ao + ')';
+      ctx.lineWidth = lw;
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+
+    for (gi = 1; gi < n; gi++) {
+      a0 = vp[gi - 1];
+      a1 = vp[gi];
+      tAge = nowMs - a1.t;
+      w = Math.max(0, Math.min(1, 1 - tAge / maxAge));
+      if (w < 0.024) continue;
+      wPow = Math.pow(w, 1.26);
+      wAlpha = Math.pow(w, 1.05);
+      ctx.beginPath();
+      ctx.moveTo(a0.x, a0.y);
+      ctx.lineTo(a1.x, a1.y);
+      var lwIn = 0.12 + (0.78 + 1.7 * uHead) * wPow;
+      var ai = Math.min(dark ? 0.4 : 0.26, baseA0 * 0.52 * wAlpha);
+      ctx.strokeStyle = dark ? 'hsla(260,100%,99%,' + ai + ')' : 'hsla(260,100%,98%,' + ai + ')';
+      ctx.lineWidth = lwIn;
+      ctx.stroke();
+    }
+
+    var maxGlitter = lightDevice ? 260 : 420;
+    var gDraw = 0;
+    for (gi = 1; gi < n && gDraw < maxGlitter; gi++) {
+      a0 = vp[gi - 1];
+      a1 = vp[gi];
+      tAge = nowMs - a1.t;
+      w = Math.max(0, Math.min(1, 1 - tAge / maxAge));
+      var ue = w;
+      if (ue <= 0.04) continue;
+      var wGl = Math.pow(ue, 0.85);
       var mx = (a0.x + a1.x) * 0.5;
       var my = (a0.y + a1.y) * 0.5;
       var dx = a1.x - a0.x;
@@ -762,23 +807,26 @@
       var dlen = Math.sqrt(dx * dx + dy * dy) || 1;
       var px = -dy / dlen;
       var py = dx / dlen;
-      var hue = 244 + ((gi * 19 + (nowMs >> 2)) % 36);
-      var flick = 0.45 + 0.55 * Math.sin(nowMs * 0.007 + gi * 1.83);
-      var ga = (dark ? 0.36 : 0.19) * ue * ue * flick;
-      var off = ((gi % 7) - 3) * 0.48;
+      var hue = 240 + ((gi * 19 + (nowMs >> 2)) % 44);
+      var flick = 0.48 + 0.52 * Math.sin(nowMs * 0.007 + gi * 1.83);
+      var ga = (dark ? 0.55 : 0.32) * wGl * wGl * flick;
+      var off = ((gi % 7) - 3) * 0.52;
       ctx.beginPath();
-      ctx.arc(mx + px * off, my + py * off, 0.62 + flick * 0.95, 0, Math.PI * 2);
-      ctx.fillStyle = 'hsla(' + hue + ',90%,' + (dark ? '88' : '72') + '%,' + ga + ')';
+      ctx.arc(mx + px * off, my + py * off, 0.68 + flick * 1.05, 0, Math.PI * 2);
+      ctx.fillStyle = 'hsla(' + hue + ',92%,' + (dark ? '93' : '78') + '%,' + ga + ')';
       ctx.fill();
+      gDraw++;
       ctx.beginPath();
-      ctx.arc(mx - px * off * 0.42, my - py * off * 0.42, 0.32 + flick * 0.35, 0, Math.PI * 2);
-      ctx.fillStyle = 'hsla(260,100%,100%,' + (ga * 0.85) + ')';
+      ctx.arc(mx - px * off * 0.4, my - py * off * 0.4, 0.38 + flick * 0.42, 0, Math.PI * 2);
+      ctx.fillStyle = 'hsla(260,100%,' + (dark ? '100' : '99') + '%,' + Math.min(0.95, ga * 1.05) + ')';
       ctx.fill();
-      if (!lightDevice && ue > 0.35) {
+      gDraw++;
+      if (ue > 0.28 && gDraw < maxGlitter) {
         ctx.beginPath();
-        ctx.arc(mx + dx * 0.08 * (flick - 0.5), my + dy * 0.08 * (flick - 0.5), 0.28 + flick * 0.22, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(' + (hue + 8) + ',88%,92%,' + (ga * 0.55) + ')';
+        ctx.arc(mx + px * 0.55 * Math.sin(gi * 0.9 + nowMs * 0.004), my + py * 0.55 * Math.sin(gi * 0.9 + nowMs * 0.004), 0.32 + flick * 0.28, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + (hue + 6) + ',88%,' + (dark ? '96' : '82') + '%,' + (ga * 0.62) + ')';
         ctx.fill();
+        gDraw++;
       }
     }
     ctx.restore();
@@ -862,7 +910,7 @@
       }
       var ox = W > 1 ? Math.max(0, Math.min(W, mouse.x)) : mouse.x;
       var oy = H > 1 ? Math.max(0, Math.min(H, mouse.y)) : mouse.y;
-      var minDistSq = activeTouchCount > 0 ? 0.22 * 0.22 : ORBIT_TRAIL_MIN_DIST_SQ;
+      var minDistSq = activeTouchCount > 0 ? 0.22 * 0.22 : (useMouseFollow ? 0.45 * 0.45 : ORBIT_TRAIL_MIN_DIST_SQ);
       var lt = orbitTrail.length ? orbitTrail[orbitTrail.length - 1] : null;
       if (!lt || (ox - lt.x) * (ox - lt.x) + (oy - lt.y) * (oy - lt.y) >= minDistSq) {
         orbitTrail.push({ x: ox, y: oy, t: nowMs });
