@@ -16,6 +16,13 @@
   var mm = window.matchMedia ? window.matchMedia.bind(window) : null;
   var hasTouchScreen = typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 0;
   var coarsePointer = !!(mm && mm('(pointer: coarse)').matches);
+  var useTouchApiForFinger =
+    coarsePointer ||
+    /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    (typeof navigator.platform === 'string' &&
+      navigator.platform === 'MacIntel' &&
+      typeof navigator.maxTouchPoints === 'number' &&
+      navigator.maxTouchPoints > 1);
   var useMouseFollow = !!(
     mm &&
     mm('(pointer: fine)').matches &&
@@ -87,6 +94,7 @@
   }
 
   function recordPointerPosition(cx, cy) {
+    if (typeof cx !== 'number' || typeof cy !== 'number' || cx !== cx || cy !== cy) return;
     if (W > 1 && H > 1) {
       cx = Math.max(0, Math.min(W, cx));
       cy = Math.max(0, Math.min(H, cy));
@@ -176,19 +184,30 @@
     return pt === '' && hasTouchScreen;
   }
 
+  function readTouchClient(t) {
+    var cx = t.clientX;
+    var cy = t.clientY;
+    if (typeof cx === 'number' && typeof cy === 'number' && cx === cx && cy === cy) return { x: cx, y: cy };
+    if (typeof t.pageX === 'number' && typeof t.pageY === 'number') return { x: t.pageX, y: t.pageY };
+    return null;
+  }
+
   if (!useMouseFollow || hasTouchScreen) {
     function onPointerDown(e) {
       if (!isTouchLikePointer(e)) return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
       activeTouchCount++;
       pokeTouchImpulse(e.clientX, e.clientY);
       setLastClient(e.clientX, e.clientY);
     }
     function onPointerMove(e) {
       if (!isTouchLikePointer(e)) return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
       setLastClient(e.clientX, e.clientY);
     }
     function onPointerEnd(e) {
       if (!isTouchLikePointer(e)) return;
+      if (useTouchApiForFinger && e.pointerType !== 'pen' && e.pointerType !== 'mouse') return;
       var rx = typeof e.clientX === 'number' ? e.clientX : lastClientX;
       var ry = typeof e.clientY === 'number' ? e.clientY : lastClientY;
       var burstVx = velX;
@@ -202,13 +221,53 @@
     window.addEventListener('pointermove', onPointerMove, cap);
     window.addEventListener('pointerup', onPointerEnd, cap);
     window.addEventListener('pointercancel', onPointerEnd, cap);
-    function onTouchMove(e) {
+
+    function onTouchStartCoarse(e) {
+      if (!useTouchApiForFinger) return;
       if (!e.touches || e.touches.length === 0) return;
-      if (activeTouchCount <= 0) return;
       var tch = e.touches[0];
-      setLastClient(tch.clientX, tch.clientY);
+      var p = readTouchClient(tch);
+      if (!p) return;
+      activeTouchCount = e.touches.length;
+      pokeTouchImpulse(p.x, p.y);
+      setLastClient(p.x, p.y);
     }
-    window.addEventListener('touchmove', onTouchMove, cap);
+    function onTouchMoveCoarse(e) {
+      if (!useTouchApiForFinger) return;
+      if (!e.touches || e.touches.length === 0) return;
+      var tch = e.touches[0];
+      var p = readTouchClient(tch);
+      if (!p) return;
+      activeTouchCount = e.touches.length;
+      setLastClient(p.x, p.y);
+    }
+    function onTouchEndCoarse(e) {
+      if (!useTouchApiForFinger) return;
+      if (e.touches.length > 0) {
+        var t0 = e.touches[0];
+        var p0 = readTouchClient(t0);
+        if (p0) {
+          activeTouchCount = e.touches.length;
+          setLastClient(p0.x, p0.y);
+        }
+        return;
+      }
+      var burstVx = velX;
+      var burstVy = velY;
+      var ch = e.changedTouches && e.changedTouches[0];
+      var p1 = ch ? readTouchClient(ch) : null;
+      if (p1) {
+        setLastClient(p1.x, p1.y);
+        spawnTouchFirework(p1.x, p1.y, burstVx, burstVy);
+      } else {
+        spawnTouchFirework(lastClientX, lastClientY, burstVx, burstVy);
+      }
+      activeTouchCount = 0;
+    }
+    window.addEventListener('touchstart', onTouchStartCoarse, cap);
+    window.addEventListener('touchmove', onTouchMoveCoarse, cap);
+    window.addEventListener('touchend', onTouchEndCoarse, cap);
+    window.addEventListener('touchcancel', onTouchEndCoarse, cap);
   }
 
   var gyroX = 0, gyroY = 0;
