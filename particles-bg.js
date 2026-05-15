@@ -92,8 +92,46 @@
     '.thank-you .thank-you-content h1,' +
     '.thank-you .thank-you-content > p';
   var orbitTextNodes = null;
-  /** Show spotlight only when some orbit sample is this close to the text box. */
+  /** Orbit samples farther than this from the text box contribute zero. */
   var ORBIT_SPOT_SHOW_DIST = 120;
+
+  /** ~Canvas focal stack (g3 inner + g2 + g1 outer); d = distance from sample point to glow center (mx,my). */
+  function focalGlowIntensityAt(sampleX, sampleY, mx, my, dark) {
+    var dx = sampleX - mx;
+    var dy = sampleY - my;
+    var d = Math.sqrt(dx * dx + dy * dy);
+    var iCore = Math.max(0, 1 - d / 20) * (dark ? 0.88 : 0.62);
+    var iMid = Math.max(0, 1 - d / 86) * (dark ? 0.36 : 0.21);
+    var iHalo = Math.max(0, 1 - d / 215) * (dark ? 0.16 : 0.09);
+    return Math.min(1, iCore + iMid + iHalo);
+  }
+
+  /** Trail segment brightness vs age (loosely matches drawOrbitSnakeTrail). */
+  function trailSampleIntensity(q, nowMs, dark) {
+    var age = nowMs - q.t;
+    if (age > ORBIT_TRAIL_MAX_AGE || age < 0) return 0;
+    var w = Math.max(0, 1 - age / ORBIT_TRAIL_MAX_AGE);
+    var wPow = Math.pow(w, 1.12);
+    return Math.min(1, (dark ? 0.52 : 0.3) * wPow + 0.1 * w);
+  }
+
+  function spotLightRawIntensity(hit, mx, my, nowMs, dark) {
+    var F = focalGlowIntensityAt(hit.px, hit.py, mx, my, dark);
+    if (hit.kind === 'focal') return F;
+    if (hit.kind === 'streak') return Math.min(1, F * 0.58 + 0.18);
+    if (hit.kind === 'trail' && hit.trailQ) {
+      var T = trailSampleIntensity(hit.trailQ, nowMs, dark);
+      return Math.min(1, Math.max(T, F * 0.42));
+    }
+    return F;
+  }
+
+  /** 0 at dist SHOW_DIST, 1 at dist 0 */
+  function proximityToText(dist) {
+    if (dist >= ORBIT_SPOT_SHOW_DIST) return 0;
+    var u = 1 - dist / ORBIT_SPOT_SHOW_DIST;
+    return u * u * (3 - 2 * u);
+  }
 
   function resetOrbitSpotState() {
     if (typeof document === 'undefined' || !document.querySelectorAll) return;
@@ -135,16 +173,21 @@
     return true;
   }
 
-  /** Pick viewport point (focal, streak, or trail sample) closest to this rect — mask follows that exact spot. */
+  /** Pick viewport point (focal, streak, or trail) closest to this rect; tag source for intensity. */
   function closestOrbitSampleToRect(rect, focalX, focalY, streakX, streakY) {
     var bestPx = focalX;
     var bestPy = focalY;
     var bestD = distPointToRect(focalX, focalY, rect);
+    var kind = 'focal';
+    var trailQ = null;
+
     var dStreak = distPointToRect(streakX, streakY, rect);
     if (dStreak < bestD) {
       bestD = dStreak;
       bestPx = streakX;
       bestPy = streakY;
+      kind = 'streak';
+      trailQ = null;
     }
     var pj;
     var q;
@@ -156,18 +199,23 @@
         bestD = d;
         bestPx = q.x;
         bestPy = q.y;
+        kind = 'trail';
+        trailQ = q;
       }
     }
-    return { px: bestPx, py: bestPy, dist: bestD };
+    return { px: bestPx, py: bestPy, dist: bestD, kind: kind, trailQ: trailQ };
   }
 
-  function updateOrbitTextSpotMasks(focalX, focalY, streakX, streakY) {
+  function updateOrbitTextSpotMasks(focalX, focalY, streakX, streakY, dark, nowMs) {
     if (!orbitTextNodes || !orbitTextNodes.length) refreshOrbitTextNodeList();
     if (!orbitTextNodes || !orbitTextNodes.length) return;
     var ti;
     var el;
     var r;
     var hit;
+    var raw;
+    var prox;
+    var alpha;
     for (ti = 0; ti < orbitTextNodes.length; ti++) {
       el = orbitTextNodes[ti];
       if (!el || el.nodeType !== 1 || !el.getBoundingClientRect) continue;
@@ -179,9 +227,14 @@
         el.style.setProperty('--orbit-spot-alpha', '0');
         continue;
       }
+      raw = spotLightRawIntensity(hit, focalX, focalY, nowMs, dark);
+      prox = proximityToText(hit.dist);
+      alpha = raw * prox;
+      if (alpha < 0.012) alpha = 0;
+      else alpha = Math.min(1, alpha);
       el.style.setProperty('--orbit-spot-x', hit.px - r.left + 'px');
       el.style.setProperty('--orbit-spot-y', hit.py - r.top + 'px');
-      el.style.setProperty('--orbit-spot-alpha', '1');
+      el.style.setProperty('--orbit-spot-alpha', alpha.toFixed(3));
     }
   }
 
@@ -1127,7 +1180,7 @@
 
     drawTouchFireworks(nowMs, dark);
 
-    updateOrbitTextSpotMasks(mx, my, starX, starY);
+    updateOrbitTextSpotMasks(mx, my, starX, starY, dark, nowMs);
   }
 
   draw();

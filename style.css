@@ -2017,7 +2017,7 @@ body:has(#particle-canvas) .orbit-text-spot {
   filter: invert(1);
   -webkit-filter: invert(1);
   opacity: var(--orbit-spot-alpha, 0);
-  transition: opacity 0.1s ease;
+  transition: opacity 0.05s linear;
   --orbit-spot-r: clamp(36px, 4.2vw, 56px);
   mask-image: radial-gradient(
     circle var(--orbit-spot-r) at var(--orbit-spot-x, -4000px) var(--orbit-spot-y, -4000px),
