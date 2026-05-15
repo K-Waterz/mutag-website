@@ -1,6 +1,6 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
- * Desktop: mouse path leaves a short-lived “snake” polyline that fades out; optional velocity streak.
+ * Desktop: orbit (smoothed focal point) leaves a glittery snake trail that lingers; optional velocity streak.
  * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, shooting-star streak while moving.
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
  * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
@@ -25,10 +25,10 @@
   var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
-  var mouseTrail = [];
-  var MOUSE_TRAIL_MAX_AGE = 1180;
-  var MOUSE_TRAIL_MAX_PTS = 220;
-  var MOUSE_TRAIL_MIN_DIST_SQ = 2.2 * 2.2;
+  var orbitTrail = [];
+  var ORBIT_TRAIL_MAX_AGE = 1340;
+  var ORBIT_TRAIL_MAX_PTS = 300;
+  var ORBIT_TRAIL_MIN_DIST_SQ = 0.65 * 0.65;
   var lastClientX = 0;
   var lastClientY = 0;
   var lastPointerTime = 0;
@@ -133,7 +133,7 @@
     lastTapY = H / 2;
     lastTailNx = 0;
     lastTailNy = -1;
-    mouseTrail.length = 0;
+    orbitTrail.length = 0;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
@@ -142,23 +142,9 @@
 
   if (useMouseFollow) {
     window.addEventListener('mousemove', function (e) {
-      var cx = e.clientX;
-      var cy = e.clientY;
-      var t = Date.now();
-      recordPointerPosition(cx, cy);
-      target.x = cx;
-      target.y = cy;
-      var last = mouseTrail.length ? mouseTrail[mouseTrail.length - 1] : null;
-      if (!last) {
-        mouseTrail.push({ x: cx, y: cy, t: t });
-      } else {
-        var ddx = cx - last.x;
-        var ddy = cy - last.y;
-        if (ddx * ddx + ddy * ddy >= MOUSE_TRAIL_MIN_DIST_SQ) {
-          mouseTrail.push({ x: cx, y: cy, t: t });
-          while (mouseTrail.length > MOUSE_TRAIL_MAX_PTS) mouseTrail.shift();
-        }
-      }
+      recordPointerPosition(e.clientX, e.clientY);
+      target.x = e.clientX;
+      target.y = e.clientY;
     });
   } else {
     function onPointerDown(e) {
@@ -284,39 +270,83 @@
     ctx.restore();
   }
 
-  /** Desktop: fading polyline of recent mouse path (“snake”), lingers then ages out. */
-  function drawMouseSnakeTrail(nowMs, dark) {
-    if (!useMouseFollow || mouseTrail.length < 2) return;
-    var maxAge = MOUSE_TRAIL_MAX_AGE;
+  /** Desktop: smoothed orbit path with quadratic stroke + soft glow + glitter specks. */
+  function drawOrbitSnakeTrail(nowMs, dark) {
+    if (!useMouseFollow || orbitTrail.length < 2) return;
+    var maxAge = ORBIT_TRAIL_MAX_AGE;
+    var vp = [];
+    for (var j = 0; j < orbitTrail.length; j++) {
+      var q = orbitTrail[j];
+      if (nowMs - q.t <= maxAge) vp.push(q);
+    }
+    if (vp.length < 2) return;
+
+    var n = vp.length;
+    var headAge = nowMs - vp[n - 1].t;
+    var uHead = Math.max(0.12, 1 - headAge / maxAge);
+
     ctx.save();
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
 
-    for (var i = 1; i < mouseTrail.length; i++) {
-      var p0 = mouseTrail[i - 1];
-      var p1 = mouseTrail[i];
-      var age = nowMs - p1.t;
-      if (age > maxAge) continue;
-      var u = 1 - age / maxAge;
-      if (u <= 0.03) continue;
-      var ease = u * u;
-      var aMain = (dark ? 0.34 : 0.15) * ease;
-      var aCore = (dark ? 0.2 : 0.09) * ease;
-
+    function smoothPathMove() {
       ctx.beginPath();
-      ctx.moveTo(p0.x, p0.y);
-      ctx.lineTo(p1.x, p1.y);
-      ctx.strokeStyle = dark ? 'hsla(255,86%,76%,' + aMain + ')' : 'hsla(255,82%,56%,' + aMain + ')';
-      ctx.lineWidth = 2.2 + 5.5 * ease;
-      ctx.stroke();
+      ctx.moveTo(vp[0].x, vp[0].y);
+      if (n === 2) {
+        ctx.lineTo(vp[1].x, vp[1].y);
+        return;
+      }
+      var i;
+      for (i = 1; i < n - 1; i++) {
+        var xc = (vp[i].x + vp[i + 1].x) * 0.5;
+        var yc = (vp[i].y + vp[i + 1].y) * 0.5;
+        ctx.quadraticCurveTo(vp[i].x, vp[i].y, xc, yc);
+      }
+      ctx.lineTo(vp[n - 1].x, vp[n - 1].y);
+    }
 
-      ctx.beginPath();
-      ctx.moveTo(p0.x, p0.y);
-      ctx.lineTo(p1.x, p1.y);
-      ctx.strokeStyle = dark ? 'hsla(260,100%,96%,' + aCore + ')' : 'hsla(260,100%,94%,' + aCore + ')';
-      ctx.lineWidth = 1 + 2.2 * ease;
-      ctx.stroke();
+    ctx.shadowBlur = dark ? 14 : 10;
+    ctx.shadowColor = dark ? 'hsla(268,100%,78%,0.45)' : 'hsla(268,85%,62%,0.28)';
+    smoothPathMove();
+    var baseA = (dark ? 0.36 : 0.17) * uHead;
+    ctx.strokeStyle = dark ? 'hsla(256,78%,82%,' + baseA + ')' : 'hsla(256,72%,56%,' + baseA + ')';
+    ctx.lineWidth = 2.4 + 5.2 * uHead;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    smoothPathMove();
+    ctx.strokeStyle = dark ? 'hsla(260,100%,98%,' + (baseA * 0.52) + ')' : 'hsla(260,100%,96%,' + (baseA * 0.32) + ')';
+    ctx.lineWidth = 1.05 + 2.1 * uHead;
+    ctx.stroke();
+
+    for (var gi = 1; gi < n; gi++) {
+      var a0 = vp[gi - 1];
+      var a1 = vp[gi];
+      var ag = nowMs - a1.t;
+      var ue = 1 - ag / maxAge;
+      if (ue <= 0.06) continue;
+      var mx = (a0.x + a1.x) * 0.5;
+      var my = (a0.y + a1.y) * 0.5;
+      var dx = a1.x - a0.x;
+      var dy = a1.y - a0.y;
+      var dlen = Math.sqrt(dx * dx + dy * dy) || 1;
+      var px = -dy / dlen;
+      var py = dx / dlen;
+      var hue = 246 + ((gi * 19 + (nowMs >> 2)) % 32);
+      var flick = 0.45 + 0.55 * Math.sin(nowMs * 0.007 + gi * 1.83);
+      var ga = (dark ? 0.4 : 0.2) * ue * ue * flick;
+      if ((gi & 1) === 0) {
+        var off = ((gi % 7) - 3) * 0.55;
+        ctx.beginPath();
+        ctx.arc(mx + px * off, my + py * off, 0.75 + flick * 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + hue + ',92%,88%,' + ga + ')';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(mx - px * off * 0.45, my - py * off * 0.45, 0.35 + flick * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(260,100%,100%,' + (ga * 0.9) + ')';
+        ctx.fill();
+      }
     }
     ctx.restore();
   }
@@ -353,12 +383,6 @@
       }
     }
 
-    if (useMouseFollow) {
-      while (mouseTrail.length > 0 && nowMs - mouseTrail[0].t > MOUSE_TRAIL_MAX_AGE) {
-        mouseTrail.shift();
-      }
-    }
-
     if (!useMouseFollow) {
       var tSec = nowMs / 1000;
       var sp = Math.sqrt(velX * velX + velY * velY);
@@ -389,6 +413,19 @@
       : (moveSpeed > 0.25 ? 0.16 : 0.075);
     mouse.x += (target.x - mouse.x) * followK;
     mouse.y += (target.y - mouse.y) * followK;
+
+    if (useMouseFollow) {
+      while (orbitTrail.length > 0 && nowMs - orbitTrail[0].t > ORBIT_TRAIL_MAX_AGE) {
+        orbitTrail.shift();
+      }
+      var ox = mouse.x;
+      var oy = mouse.y;
+      var lt = orbitTrail.length ? orbitTrail[orbitTrail.length - 1] : null;
+      if (!lt || (ox - lt.x) * (ox - lt.x) + (oy - lt.y) * (oy - lt.y) >= ORBIT_TRAIL_MIN_DIST_SQ) {
+        orbitTrail.push({ x: ox, y: oy, t: nowMs });
+        while (orbitTrail.length > ORBIT_TRAIL_MAX_PTS) orbitTrail.shift();
+      }
+    }
 
     tiltX += ((mouse.x - W / 2) * 0.20 - tiltX) * 0.05;
     tiltY += ((mouse.y - H / 2) * 0.20 - tiltY) * 0.05;
@@ -454,7 +491,7 @@
       }
     }
 
-    drawMouseSnakeTrail(nowMs, dark);
+    drawOrbitSnakeTrail(nowMs, dark);
 
     var mx = mouse.x, my = mouse.y;
     var starX = useMouseFollow ? mx : mx * 0.5 + lastClientX * 0.5;
