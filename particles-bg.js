@@ -1,6 +1,6 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
- * Desktop: mouse follow + subtle shooting-star streak on quick moves.
+ * Desktop: mouse path leaves a short-lived “snake” polyline that fades out; optional velocity streak.
  * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, stronger streak while moving.
  * Touch-first: listeners use capture so touches are seen before site handlers; field starts immediately
  * (no idle deferral) so fast taps are never missed.
@@ -25,6 +25,10 @@
   var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
+  var mouseTrail = [];
+  var MOUSE_TRAIL_MAX_AGE = 1180;
+  var MOUSE_TRAIL_MAX_PTS = 220;
+  var MOUSE_TRAIL_MIN_DIST_SQ = 2.2 * 2.2;
   var lastClientX = 0;
   var lastClientY = 0;
   var lastPointerTime = 0;
@@ -160,6 +164,7 @@
     gestures = Object.create(null);
     lastTailNx = 0;
     lastTailNy = -1;
+    mouseTrail.length = 0;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
@@ -168,9 +173,23 @@
 
   if (useMouseFollow) {
     window.addEventListener('mousemove', function (e) {
-      recordPointerPosition(e.clientX, e.clientY);
-      target.x = e.clientX;
-      target.y = e.clientY;
+      var cx = e.clientX;
+      var cy = e.clientY;
+      var t = Date.now();
+      recordPointerPosition(cx, cy);
+      target.x = cx;
+      target.y = cy;
+      var last = mouseTrail.length ? mouseTrail[mouseTrail.length - 1] : null;
+      if (!last) {
+        mouseTrail.push({ x: cx, y: cy, t: t });
+      } else {
+        var ddx = cx - last.x;
+        var ddy = cy - last.y;
+        if (ddx * ddx + ddy * ddy >= MOUSE_TRAIL_MIN_DIST_SQ) {
+          mouseTrail.push({ x: cx, y: cy, t: t });
+          while (mouseTrail.length > MOUSE_TRAIL_MAX_PTS) mouseTrail.shift();
+        }
+      }
     });
   } else {
     var cap = { passive: true, capture: true };
@@ -326,6 +345,43 @@
     ctx.restore();
   }
 
+  /** Desktop: fading polyline of recent mouse path (“snake”), lingers then ages out. */
+  function drawMouseSnakeTrail(nowMs, dark) {
+    if (!useMouseFollow || mouseTrail.length < 2) return;
+    var maxAge = MOUSE_TRAIL_MAX_AGE;
+    ctx.save();
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
+
+    for (var i = 1; i < mouseTrail.length; i++) {
+      var p0 = mouseTrail[i - 1];
+      var p1 = mouseTrail[i];
+      var age = nowMs - p1.t;
+      if (age > maxAge) continue;
+      var u = 1 - age / maxAge;
+      if (u <= 0.03) continue;
+      var ease = u * u;
+      var aMain = (dark ? 0.34 : 0.15) * ease;
+      var aCore = (dark ? 0.2 : 0.09) * ease;
+
+      ctx.beginPath();
+      ctx.moveTo(p0.x, p0.y);
+      ctx.lineTo(p1.x, p1.y);
+      ctx.strokeStyle = dark ? 'hsla(255,86%,76%,' + aMain + ')' : 'hsla(255,82%,56%,' + aMain + ')';
+      ctx.lineWidth = 2.2 + 5.5 * ease;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(p0.x, p0.y);
+      ctx.lineTo(p1.x, p1.y);
+      ctx.strokeStyle = dark ? 'hsla(260,100%,96%,' + aCore + ')' : 'hsla(260,100%,94%,' + aCore + ')';
+      ctx.lineWidth = 1 + 2.2 * ease;
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   function Particle() { this.reset(); }
   Particle.prototype.reset = function () {
     this.x = (Math.random() - 0.5) * 1800;
@@ -355,6 +411,12 @@
       } else {
         velX *= useMouseFollow ? 0.9 : 0.935;
         velY *= useMouseFollow ? 0.9 : 0.935;
+      }
+    }
+
+    if (useMouseFollow) {
+      while (mouseTrail.length > 0 && nowMs - mouseTrail[0].t > MOUSE_TRAIL_MAX_AGE) {
+        mouseTrail.shift();
       }
     }
 
@@ -452,6 +514,8 @@
         ctx.stroke();
       }
     }
+
+    drawMouseSnakeTrail(nowMs, dark);
 
     var mx = mouse.x, my = mouse.y;
     var starX = useMouseFollow ? mx : mx * 0.5 + lastClientX * 0.5;
