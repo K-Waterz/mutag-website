@@ -1,7 +1,7 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
  * Desktop: orbit (smoothed focal point) leaves a glittery snake trail that lingers; optional velocity streak.
- * Touch / pen: tight swipe follow, idle orbit anchored to last interaction, shooting-star streak while moving.
+ * Touch / pen: while finger is down the glow tracks the touch point; on lift a subtle firework bursts there.
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
  * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
  */
@@ -25,6 +25,7 @@
   var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
+  var touchBursts = [];
   var orbitTrail = [];
   var ORBIT_TRAIL_MAX_AGE = 1340;
   var ORBIT_TRAIL_MAX_PTS = 300;
@@ -134,6 +135,7 @@
     lastTailNx = 0;
     lastTailNy = -1;
     orbitTrail.length = 0;
+    touchBursts.length = 0;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
@@ -161,6 +163,10 @@
     }
     function onPointerEnd(e) {
       if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        var rx = typeof e.clientX === 'number' ? e.clientX : lastClientX;
+        var ry = typeof e.clientY === 'number' ? e.clientY : lastClientY;
+        setLastClient(rx, ry);
+        spawnTouchFirework(rx, ry);
         activeTouchCount = Math.max(0, activeTouchCount - 1);
       }
     }
@@ -208,6 +214,100 @@
   function isDark() {
     return !document.documentElement.hasAttribute('data-theme') ||
       document.documentElement.getAttribute('data-theme') === 'dark';
+  }
+
+  /** Subtle firework when touch/pen lifts: soft core flash, expanding ring, short-lived sparks. */
+  function spawnTouchFirework(cx, cy) {
+    var dark = isDark();
+    var baseHue = 246 + Math.random() * 38;
+    var sparks = [];
+    var n = 18 + ((Math.random() * 10) | 0);
+    var i;
+    for (i = 0; i < n; i++) {
+      var ang = (i / n) * Math.PI * 2 + (Math.random() - 0.5) * 0.55;
+      var spd = 1.05 + Math.random() * 2.1;
+      sparks.push({
+        x: cx,
+        y: cy,
+        vx: Math.cos(ang) * spd,
+        vy: Math.sin(ang) * spd,
+        hue: baseHue + (Math.random() * 28 - 14),
+        life: 1,
+        r: 0.9 + Math.random() * 1.45
+      });
+    }
+    touchBursts.push({
+      x: cx,
+      y: cy,
+      sparks: sparks,
+      ringR: 0,
+      ringAlpha: dark ? 0.36 : 0.19,
+      flash: dark ? 0.5 : 0.26,
+      born: Date.now()
+    });
+    while (touchBursts.length > 4) touchBursts.shift();
+  }
+
+  function drawTouchFireworks(nowMs, dark) {
+    if (!touchBursts.length) return;
+    ctx.save();
+    ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
+    var b;
+    for (b = touchBursts.length - 1; b >= 0; b--) {
+      var B = touchBursts[b];
+      var age = nowMs - B.born;
+      if (age > 640) {
+        touchBursts.splice(b, 1);
+        continue;
+      }
+      var tNorm = age / 640;
+      B.ringR += 4.8;
+      B.ringAlpha *= 0.93;
+      B.flash *= 0.86;
+
+      if (B.flash > 0.04) {
+        var rg = ctx.createRadialGradient(B.x, B.y, 0, B.x, B.y, 28 + age * 0.12);
+        rg.addColorStop(0, dark ? 'hsla(260,100%,96%,' + (B.flash * 0.5) + ')' : 'hsla(260,100%,98%,' + (B.flash * 0.28) + ')');
+        rg.addColorStop(0.45, dark ? 'hsla(255,90%,78%,' + (B.flash * 0.22) + ')' : 'hsla(255,85%,62%,' + (B.flash * 0.12) + ')');
+        rg.addColorStop(1, 'hsla(255,90%,70%,0)');
+        ctx.beginPath();
+        ctx.arc(B.x, B.y, 36 + age * 0.15, 0, Math.PI * 2);
+        ctx.fillStyle = rg;
+        ctx.fill();
+      }
+
+      if (B.ringR > 4 && B.ringAlpha > 0.02) {
+        ctx.beginPath();
+        ctx.arc(B.x, B.y, B.ringR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'hsla(' + (248 + (b * 7) % 20) + ',85%,72%,' + (B.ringAlpha * (1 - tNorm * 0.6)) + ')';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        if (B.ringR > 12) {
+          ctx.beginPath();
+          ctx.arc(B.x, B.y, B.ringR * 0.72, 0, Math.PI * 2);
+          ctx.strokeStyle = 'hsla(265,90%,82%,' + (B.ringAlpha * 0.35 * (1 - tNorm)) + ')';
+          ctx.lineWidth = 0.65;
+          ctx.stroke();
+        }
+      }
+
+      var si;
+      for (si = 0; si < B.sparks.length; si++) {
+        var s = B.sparks[si];
+        if (s.life < 0.04) continue;
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vx *= 0.965;
+        s.vy *= 0.965;
+        s.vy += 0.032;
+        s.life *= 0.94;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * s.life, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + s.hue + ',88%,' + (dark ? '82' : '58') + '%,' + (s.life * (dark ? 0.42 : 0.22)) + ')';
+        ctx.fill();
+      }
+    }
+    ctx.restore();
   }
 
   /** Motion streak behind focal point (tail opposite velocity). Stronger on touch-first. */
@@ -394,7 +494,10 @@
       var idleY = orbitCy + Math.sin(tSec * 0.29) * H * 0.046;
       var gyroPx = W * 0.5 + gyroX * W * 0.2;
       var gyroPy = H * 0.5 + gyroY * H * 0.16;
-      if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
+      if (activeTouchCount > 0) {
+        target.x = lastClientX;
+        target.y = lastClientY;
+      } else if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
         if (moving) {
           target.x = lastClientX * 0.94 + gyroPx * 0.06;
           target.y = lastClientY * 0.94 + gyroPy * 0.06;
@@ -410,7 +513,7 @@
     var moveSpeed = Math.sqrt(velX * velX + velY * velY);
     var followK = useMouseFollow
       ? (moveSpeed > 0.35 ? 0.11 : 0.065)
-      : (moveSpeed > 0.25 ? 0.16 : 0.075);
+      : (activeTouchCount > 0 ? 0.48 : (moveSpeed > 0.25 ? 0.16 : 0.075));
     mouse.x += (target.x - mouse.x) * followK;
     mouse.y += (target.y - mouse.y) * followK;
 
@@ -491,11 +594,13 @@
       }
     }
 
+    drawTouchFireworks(nowMs, dark);
+
     drawOrbitSnakeTrail(nowMs, dark);
 
     var mx = mouse.x, my = mouse.y;
-    var starX = useMouseFollow ? mx : mx * 0.5 + lastClientX * 0.5;
-    var starY = useMouseFollow ? my : my * 0.5 + lastClientY * 0.5;
+    var starX = useMouseFollow ? mx : (activeTouchCount > 0 ? lastClientX : mx * 0.5 + lastClientX * 0.5);
+    var starY = useMouseFollow ? my : (activeTouchCount > 0 ? lastClientY : my * 0.5 + lastClientY * 0.5);
 
     drawShootingStar(starX, starY, dark, nowMs);
 
