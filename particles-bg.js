@@ -1,7 +1,8 @@
 /**
  * Full-page particle field + scroll ripples + focal glow.
  * Desktop: orbit (smoothed focal point) leaves a glittery snake trail that lingers; optional velocity streak.
- * Touch / pen: while finger is down the glow tracks the touch point; on lift a subtle firework bursts there.
+ * Touch / pen: while finger is down the glow tracks the touch point and leaves a path trail (including while scrolling);
+ * on lift, a short firework biased along swipe velocity stays near the release point.
  * Expects <canvas id="particle-canvas"> as the first interactive layer.
  * Deferred until browser idle (or short timeout) so first paint and navigation stay responsive.
  */
@@ -19,13 +20,24 @@
   var target = { x: 0, y: 0 };
   var tiltX = 0, tiltY = 0;
   var mm = window.matchMedia ? window.matchMedia.bind(window) : null;
-  var useMouseFollow = !!(mm && mm('(pointer: fine)').matches && mm('(hover: hover)').matches);
+  var hasTouchScreen = typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 0;
+  var coarsePointer = !!(mm && mm('(pointer: coarse)').matches);
+  var useMouseFollow = !!(
+    mm &&
+    mm('(pointer: fine)').matches &&
+    mm('(hover: hover)').matches &&
+    !coarsePointer &&
+    !(hasTouchScreen && mm('(hover: none)').matches)
+  );
   var cores = typeof navigator.hardwareConcurrency === 'number' ? navigator.hardwareConcurrency : 4;
-  var lightDevice = !useMouseFollow || cores <= 4;
+  var lightDevice = coarsePointer || !useMouseFollow || hasTouchScreen || cores <= 4;
   var TOTAL = lightDevice ? 38 : 58;
   var particles = [];
   var waves = [];
   var touchBursts = [];
+  var lastTouchBurstAt = 0;
+  var lastTouchBurstX = 0;
+  var lastTouchBurstY = 0;
   var orbitTrail = [];
   var ORBIT_TRAIL_MAX_AGE = 1340;
   var ORBIT_TRAIL_MAX_PTS = 300;
@@ -148,32 +160,41 @@
       target.x = e.clientX;
       target.y = e.clientY;
     });
-  } else {
+  }
+
+  function isTouchLikePointer(e) {
+    var pt = e.pointerType;
+    if (pt === 'touch' || pt === 'pen') return true;
+    if (pt === 'mouse') return false;
+    return pt === '' && hasTouchScreen;
+  }
+
+  if (!useMouseFollow || hasTouchScreen) {
     function onPointerDown(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        activeTouchCount++;
-        pokeTouchImpulse(e.clientX, e.clientY);
-        setLastClient(e.clientX, e.clientY);
-      }
+      if (!isTouchLikePointer(e)) return;
+      activeTouchCount++;
+      pokeTouchImpulse(e.clientX, e.clientY);
+      setLastClient(e.clientX, e.clientY);
     }
     function onPointerMove(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        setLastClient(e.clientX, e.clientY);
-      }
+      if (!isTouchLikePointer(e)) return;
+      setLastClient(e.clientX, e.clientY);
     }
     function onPointerEnd(e) {
-      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        var rx = typeof e.clientX === 'number' ? e.clientX : lastClientX;
-        var ry = typeof e.clientY === 'number' ? e.clientY : lastClientY;
-        setLastClient(rx, ry);
-        spawnTouchFirework(rx, ry);
-        activeTouchCount = Math.max(0, activeTouchCount - 1);
-      }
+      if (!isTouchLikePointer(e)) return;
+      var rx = typeof e.clientX === 'number' ? e.clientX : lastClientX;
+      var ry = typeof e.clientY === 'number' ? e.clientY : lastClientY;
+      var burstVx = velX;
+      var burstVy = velY;
+      setLastClient(rx, ry);
+      spawnTouchFirework(rx, ry, burstVx, burstVy);
+      activeTouchCount = Math.max(0, activeTouchCount - 1);
     }
-    window.addEventListener('pointerdown', onPointerDown, { passive: true });
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-    window.addEventListener('pointerup', onPointerEnd, { passive: true });
-    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+    var cap = { passive: true, capture: true };
+    window.addEventListener('pointerdown', onPointerDown, cap);
+    window.addEventListener('pointermove', onPointerMove, cap);
+    window.addEventListener('pointerup', onPointerEnd, cap);
+    window.addEventListener('pointercancel', onPointerEnd, cap);
   }
 
   var gyroX = 0, gyroY = 0;
@@ -216,16 +237,40 @@
       document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
-  /** Subtle firework when touch/pen lifts: soft core flash, expanding ring, short-lived sparks. */
-  function spawnTouchFirework(cx, cy) {
+  /** Subtle firework when touch/pen lifts: soft core flash, expanding ring, short-lived sparks. Optional swipe vector biases sparks forward and keeps them compact. */
+  function spawnTouchFirework(cx, cy, swipeVx, swipeVy) {
+    var t = Date.now();
+    var ddx = cx - lastTouchBurstX;
+    var ddy = cy - lastTouchBurstY;
+    if (t - lastTouchBurstAt < 70 && ddx * ddx + ddy * ddy < 196) return;
+    lastTouchBurstAt = t;
+    lastTouchBurstX = cx;
+    lastTouchBurstY = cy;
+    swipeVx = typeof swipeVx === 'number' ? swipeVx : 0;
+    swipeVy = typeof swipeVy === 'number' ? swipeVy : 0;
+    var swSp = Math.sqrt(swipeVx * swipeVx + swipeVy * swipeVy);
+    var hasSwipe = swSp > 0.11;
     var dark = isDark();
     var baseHue = 246 + Math.random() * 38;
     var sparks = [];
     var n = 18 + ((Math.random() * 10) | 0);
     var i;
+    var baseAng = hasSwipe ? Math.atan2(swipeVy, swipeVx) : 0;
     for (i = 0; i < n; i++) {
-      var ang = (i / n) * Math.PI * 2 + (Math.random() - 0.5) * 0.55;
-      var spd = 1.05 + Math.random() * 2.1;
+      var ang;
+      var spd;
+      if (hasSwipe) {
+        if (Math.random() < 0.74) {
+          ang = baseAng + (Math.random() - 0.5) * 1.28;
+          spd = 0.42 + Math.random() * 0.88 + Math.min(0.72, swSp * 0.18);
+        } else {
+          ang = baseAng + (Math.random() - 0.5) * (Math.PI * 0.92);
+          spd = 0.35 + Math.random() * 0.62;
+        }
+      } else {
+        ang = (i / n) * Math.PI * 2 + (Math.random() - 0.5) * 0.55;
+        spd = 1.05 + Math.random() * 2.1;
+      }
       sparks.push({
         x: cx,
         y: cy,
@@ -233,7 +278,8 @@
         vy: Math.sin(ang) * spd,
         hue: baseHue + (Math.random() * 28 - 14),
         life: 1,
-        r: 0.9 + Math.random() * 1.45
+        r: hasSwipe ? 0.75 + Math.random() * 1.05 : 0.9 + Math.random() * 1.45,
+        tight: hasSwipe ? 1 : 0
       });
     }
     touchBursts.push({
@@ -295,15 +341,19 @@
       for (si = 0; si < B.sparks.length; si++) {
         var s = B.sparks[si];
         if (s.life < 0.04) continue;
+        var tight = s.tight ? 1 : 0;
+        var damp = tight ? 0.94 : 0.965;
+        var grav = tight ? 0.018 : 0.032;
+        var lifeMul = tight ? 0.91 : 0.94;
         s.x += s.vx;
         s.y += s.vy;
-        s.vx *= 0.965;
-        s.vy *= 0.965;
-        s.vy += 0.032;
-        s.life *= 0.94;
+        s.vx *= damp;
+        s.vy *= damp;
+        s.vy += grav;
+        s.life *= lifeMul;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r * s.life, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(' + s.hue + ',88%,' + (dark ? '82' : '58') + '%,' + (s.life * (dark ? 0.42 : 0.22)) + ')';
+        ctx.fillStyle = 'hsla(' + s.hue + ',88%,' + (dark ? '82' : '58') + '%,' + (s.life * (dark ? 0.52 : 0.28)) + ')';
         ctx.fill();
       }
     }
@@ -370,9 +420,9 @@
     ctx.restore();
   }
 
-  /** Desktop: smoothed orbit path with quadratic stroke + soft glow + glitter specks. */
+  /** Smoothed path (desktop orbit + finger-drag / scroll trail) with quadratic stroke + soft glow + glitter specks. */
   function drawOrbitSnakeTrail(nowMs, dark) {
-    if (!useMouseFollow || orbitTrail.length < 2) return;
+    if (orbitTrail.length < 2) return;
     var maxAge = ORBIT_TRAIL_MAX_AGE;
     var vp = [];
     for (var j = 0; j < orbitTrail.length; j++) {
@@ -483,10 +533,13 @@
       }
     }
 
-    if (!useMouseFollow) {
+    if (activeTouchCount > 0) {
+      target.x = lastClientX;
+      target.y = lastClientY;
+    } else if (!useMouseFollow) {
       var tSec = nowMs / 1000;
       var sp = Math.sqrt(velX * velX + velY * velY);
-      var moving = activeTouchCount > 0 || !pointerStale || sp > 0.2;
+      var moving = !pointerStale || sp > 0.2;
       var anchorStale = lastPointerTime === 0 || nowMs - lastPointerTime > 9000;
       var orbitCx = anchorStale ? W * 0.5 : lastClientX;
       var orbitCy = anchorStale ? H * 0.5 : lastClientY;
@@ -494,10 +547,7 @@
       var idleY = orbitCy + Math.sin(tSec * 0.29) * H * 0.046;
       var gyroPx = W * 0.5 + gyroX * W * 0.2;
       var gyroPy = H * 0.5 + gyroY * H * 0.16;
-      if (activeTouchCount > 0) {
-        target.x = lastClientX;
-        target.y = lastClientY;
-      } else if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
+      if (nowMs - lastPointerTime < TOUCH_TARGET_MS) {
         if (moving) {
           target.x = lastClientX * 0.94 + gyroPx * 0.06;
           target.y = lastClientY * 0.94 + gyroPy * 0.06;
@@ -512,19 +562,24 @@
     }
     var moveSpeed = Math.sqrt(velX * velX + velY * velY);
     var followK = useMouseFollow
-      ? (moveSpeed > 0.35 ? 0.11 : 0.065)
-      : (activeTouchCount > 0 ? 0.48 : (moveSpeed > 0.25 ? 0.16 : 0.075));
+      ? (activeTouchCount > 0 ? 1 : (moveSpeed > 0.35 ? 0.11 : 0.065))
+      : (activeTouchCount > 0 ? 1 : (moveSpeed > 0.25 ? 0.16 : 0.075));
     mouse.x += (target.x - mouse.x) * followK;
     mouse.y += (target.y - mouse.y) * followK;
+    if (activeTouchCount > 0) {
+      mouse.x = lastClientX;
+      mouse.y = lastClientY;
+    }
 
-    if (useMouseFollow) {
+    if (useMouseFollow || activeTouchCount > 0) {
       while (orbitTrail.length > 0 && nowMs - orbitTrail[0].t > ORBIT_TRAIL_MAX_AGE) {
         orbitTrail.shift();
       }
       var ox = mouse.x;
       var oy = mouse.y;
+      var minDistSq = activeTouchCount > 0 ? 0.22 * 0.22 : ORBIT_TRAIL_MIN_DIST_SQ;
       var lt = orbitTrail.length ? orbitTrail[orbitTrail.length - 1] : null;
-      if (!lt || (ox - lt.x) * (ox - lt.x) + (oy - lt.y) * (oy - lt.y) >= ORBIT_TRAIL_MIN_DIST_SQ) {
+      if (!lt || (ox - lt.x) * (ox - lt.x) + (oy - lt.y) * (oy - lt.y) >= minDistSq) {
         orbitTrail.push({ x: ox, y: oy, t: nowMs });
         while (orbitTrail.length > ORBIT_TRAIL_MAX_PTS) orbitTrail.shift();
       }
@@ -594,13 +649,12 @@
       }
     }
 
-    drawTouchFireworks(nowMs, dark);
-
     drawOrbitSnakeTrail(nowMs, dark);
 
-    var mx = mouse.x, my = mouse.y;
-    var starX = useMouseFollow ? mx : (activeTouchCount > 0 ? lastClientX : mx * 0.5 + lastClientX * 0.5);
-    var starY = useMouseFollow ? my : (activeTouchCount > 0 ? lastClientY : my * 0.5 + lastClientY * 0.5);
+    var mx = activeTouchCount > 0 ? lastClientX : mouse.x;
+    var my = activeTouchCount > 0 ? lastClientY : mouse.y;
+    var starX = activeTouchCount > 0 ? lastClientX : (!useMouseFollow ? mx * 0.5 + lastClientX * 0.5 : mx);
+    var starY = activeTouchCount > 0 ? lastClientY : (!useMouseFollow ? my * 0.5 + lastClientY * 0.5 : my);
 
     drawShootingStar(starX, starY, dark, nowMs);
 
@@ -623,14 +677,16 @@
     g3.addColorStop(1, 'hsla(260,100%,70%,0)');
     ctx.beginPath(); ctx.arc(mx, my, 18, 0, Math.PI * 2);
     ctx.fillStyle = g3; ctx.fill();
+
+    drawTouchFireworks(nowMs, dark);
   }
 
   draw();
   }
 
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(startParticleField, { timeout: 2000 });
+    requestIdleCallback(startParticleField, { timeout: hasTouchScreen || !useMouseFollow ? 400 : 2000 });
   } else {
-    window.setTimeout(startParticleField, 16);
+    window.setTimeout(startParticleField, hasTouchScreen || !useMouseFollow ? 0 : 16);
   }
 })();
