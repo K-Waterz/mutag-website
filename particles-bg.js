@@ -36,27 +36,59 @@
   var lastSampleX = 0;
   var lastSampleY = 0;
   var lastSampleT = 0;
-  var VEL_SMOOTH = 0.38;
-  var VEL_DECAY = 0.9;
+  var VEL_SMOOTH_MOUSE = 0.38;
+  var VEL_SMOOTH_TOUCH = 0.58;
   var VEL_CLAMP = 7.5;
   var activeTouchCount = 0;
+  var trailBoostUntil = 0;
+  var lastTapX = 0;
+  var lastTapY = 0;
+  var lastTailNx = 0;
+  var lastTailNy = -1;
+
+  function pokeTouchImpulse(cx, cy) {
+    var dx = cx - lastTapX;
+    var dy = cy - lastTapY;
+    var d = Math.sqrt(dx * dx + dy * dy);
+    lastTapX = cx;
+    lastTapY = cy;
+    if (d > 1.2) {
+      var inv = 1 / d;
+      velX += dx * inv * 0.72;
+      velY += dy * inv * 0.72;
+    } else {
+      var ang = Math.random() * Math.PI * 2;
+      velX += Math.cos(ang) * 0.55;
+      velY += Math.sin(ang) * 0.55;
+    }
+    var vm = Math.sqrt(velX * velX + velY * velY);
+    if (vm > 1e-4) {
+      lastTailNx = velX / vm;
+      lastTailNy = velY / vm;
+    }
+    trailBoostUntil = Date.now() + 620;
+  }
 
   function recordPointerPosition(cx, cy) {
     var t = Date.now();
     lastClientX = cx;
     lastClientY = cy;
     lastPointerTime = t;
+    var smooth = useMouseFollow ? VEL_SMOOTH_MOUSE : VEL_SMOOTH_TOUCH;
+    var gapResetMs = useMouseFollow ? 100 : 55;
     if (lastSampleT === 0) {
       lastSampleX = cx;
       lastSampleY = cy;
       lastSampleT = t;
+      if (!useMouseFollow) trailBoostUntil = Math.max(trailBoostUntil, t + 560);
       return;
     }
     var gap = t - lastSampleT;
-    if (gap > 100) {
+    if (gap > gapResetMs) {
       lastSampleX = cx;
       lastSampleY = cy;
       lastSampleT = t;
+      if (!useMouseFollow) trailBoostUntil = Math.max(trailBoostUntil, t + 560);
       return;
     }
     var dt = Math.max(1, gap);
@@ -70,8 +102,14 @@
     lastSampleX = cx;
     lastSampleY = cy;
     lastSampleT = t;
-    velX += (ix - velX) * VEL_SMOOTH;
-    velY += (iy - velY) * VEL_SMOOTH;
+    velX += (ix - velX) * smooth;
+    velY += (iy - velY) * smooth;
+    var spm = Math.sqrt(velX * velX + velY * velY);
+    if (spm > 0.06) {
+      lastTailNx = velX / spm;
+      lastTailNy = velY / spm;
+    }
+    trailBoostUntil = Math.max(trailBoostUntil, t + (useMouseFollow ? 260 : 580));
   }
 
   function setLastClient(cx, cy) {
@@ -87,6 +125,11 @@
     lastSampleT = 0;
     velX = velY = 0;
     activeTouchCount = 0;
+    trailBoostUntil = 0;
+    lastTapX = W / 2;
+    lastTapY = H / 2;
+    lastTailNx = 0;
+    lastTailNy = -1;
     mouse.x = target.x = W / 2;
     mouse.y = target.y = H / 2;
   }
@@ -103,6 +146,7 @@
     function onPointerDown(e) {
       if (e.pointerType === 'touch' || e.pointerType === 'pen') {
         activeTouchCount++;
+        pokeTouchImpulse(e.clientX, e.clientY);
         setLastClient(e.clientX, e.clientY);
       }
     }
@@ -163,24 +207,35 @@
   }
 
   /** Motion streak behind focal point (tail opposite velocity). Stronger on touch-first. */
-  function drawShootingStar(mx, my, dark) {
-    var sp = Math.sqrt(velX * velX + velY * velY);
-    var thresh = useMouseFollow ? 0.22 : 0.11;
+  function drawShootingStar(mx, my, dark, nowMs) {
+    var sp0 = Math.sqrt(velX * velX + velY * velY);
+    var linger = nowMs < trailBoostUntil;
+    var sp = linger ? Math.max(sp0, useMouseFollow ? 0.18 : 0.48) : sp0;
+    var thresh = useMouseFollow ? 0.14 : 0.012;
     if (sp < thresh) return;
 
-    var maxSp = useMouseFollow ? 2.8 : 4.2;
+    var maxSp = useMouseFollow ? 2.8 : 6.2;
     var u = Math.min(1, sp / maxSp);
-    var baseLen = useMouseFollow ? 100 : 200;
-    var tailLen = baseLen * u + (useMouseFollow ? 40 : 90) * u;
-    var inv = 1 / sp;
-    var nx = velX * inv;
-    var ny = velY * inv;
+    var baseLen = useMouseFollow ? 115 : 380;
+    var tailLen = baseLen * u + (useMouseFollow ? 52 : 220) * u;
+    var nx;
+    var ny;
+    if (sp0 > 0.035) {
+      var inv = 1 / sp0;
+      nx = velX * inv;
+      ny = velY * inv;
+    } else {
+      var tn = Math.sqrt(lastTailNx * lastTailNx + lastTailNy * lastTailNy) || 1;
+      nx = lastTailNx / tn;
+      ny = lastTailNy / tn;
+    }
     var tx = mx - nx * tailLen;
     var ty = my - ny * tailLen;
 
+    var lingerFade = linger ? Math.min(1, (trailBoostUntil - nowMs) / 420) : 1;
     var a0 = dark ? 0 : 0.02;
-    var aMid = (dark ? 0.16 : 0.09) * (0.45 + 0.55 * u);
-    var aHead = (dark ? 0.5 : 0.28) * (0.5 + 0.5 * u);
+    var aMid = (dark ? 0.16 : 0.09) * (0.45 + 0.55 * u) * (0.55 + 0.45 * lingerFade);
+    var aHead = (dark ? 0.5 : 0.28) * (0.5 + 0.5 * u) * (0.55 + 0.45 * lingerFade);
 
     ctx.save();
     ctx.globalCompositeOperation = dark ? 'lighter' : 'screen';
@@ -193,14 +248,14 @@
     g.addColorStop(1, 'hsla(260,100%,100%,' + (aHead * 0.95) + ')');
 
     ctx.strokeStyle = g;
-    ctx.lineWidth = (useMouseFollow ? 5 : 7) + (useMouseFollow ? 8 : 16) * u;
+    ctx.lineWidth = (useMouseFollow ? 5 : 8) + (useMouseFollow ? 9 : 20) * u;
     ctx.beginPath();
     ctx.moveTo(tx, ty);
     ctx.lineTo(mx, my);
     ctx.stroke();
 
     ctx.strokeStyle = dark ? 'hsla(260,100%,100%,0.22)' : 'hsla(260,100%,98%,0.14)';
-    ctx.lineWidth = 1.5 + 2.5 * u;
+    ctx.lineWidth = 1.5 + 2.8 * u;
     ctx.beginPath();
     ctx.moveTo(tx, ty);
     ctx.lineTo(mx, my);
@@ -225,10 +280,19 @@
     requestAnimationFrame(draw);
     var dark = isDark();
     var nowMs = Date.now();
-    var pointerStale = nowMs - lastPointerTime > 70;
-    if (pointerStale) {
-      velX *= VEL_DECAY;
-      velY *= VEL_DECAY;
+    var idleMs = nowMs - lastPointerTime;
+    var pointerStale = idleMs > 105;
+    if (idleMs > 28) {
+      if (idleMs < 420) {
+        velX *= useMouseFollow ? 0.965 : 0.991;
+        velY *= useMouseFollow ? 0.965 : 0.991;
+      } else if (idleMs < 1100) {
+        velX *= useMouseFollow ? 0.94 : 0.975;
+        velY *= useMouseFollow ? 0.94 : 0.975;
+      } else {
+        velX *= useMouseFollow ? 0.9 : 0.935;
+        velY *= useMouseFollow ? 0.9 : 0.935;
+      }
     }
 
     if (!useMouseFollow) {
@@ -330,7 +394,7 @@
     var starX = useMouseFollow ? mx : mx * 0.5 + lastClientX * 0.5;
     var starY = useMouseFollow ? my : my * 0.5 + lastClientY * 0.5;
 
-    drawShootingStar(starX, starY, dark);
+    drawShootingStar(starX, starY, dark, nowMs);
 
     var g1 = ctx.createRadialGradient(mx, my, 0, mx, my, 220);
     g1.addColorStop(0, dark ? 'hsla(250,85%,68%,0.18)' : 'hsla(250,85%,52%,0.10)');
