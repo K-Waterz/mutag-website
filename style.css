@@ -1845,6 +1845,24 @@ html.motion-ready .scroll-reveal-target.is-revealed {
     -webkit-backdrop-filter: none !important;
   }
 
+  /* Particle script bails out under reduced motion; keep hero type un-blended. */
+  body:has(#particle-canvas) .hero-section .hero-title,
+  body:has(#particle-canvas) .hero-section .hero-subtitle,
+  body:has(#particle-canvas) .hero-section .hero-content > p,
+  body:has(#particle-canvas) .contact-hero h1,
+  body:has(#particle-canvas) .contact-hero .hero-subtitle,
+  body:has(#particle-canvas) .contact-hero .hero-description,
+  body:has(#particle-canvas) .portfolio-hero h1,
+  body:has(#particle-canvas) .portfolio-hero .container > p,
+  body:has(#particle-canvas) .services-hero h1,
+  body:has(#particle-canvas) .services-hero .subheading,
+  body:has(#particle-canvas) .about-hero h1,
+  body:has(#particle-canvas) .about-hero .subheading,
+  body:has(#particle-canvas) .thank-you .thank-you-content h1,
+  body:has(#particle-canvas) .thank-you .thank-you-content > p {
+    mix-blend-mode: normal;
+  }
+
   .logo-link-wrap {
     animation: none !important;
   }
@@ -1978,6 +1996,28 @@ body:has(#particle-canvas) main {
 /* Thank-you and other pages: embedded <style> or inline heroes */
 body:has(#particle-canvas) .thank-you {
   background: linear-gradient(rgba(10, 15, 44, 0.2), rgba(10, 15, 44, 0.14)) !important;
+}
+
+/*
+ * Hero / page-intro copy sits above the fixed particle canvas. `difference` blends each
+ * glyph with the pixels behind it (gradient + orbit trail + glow), approximating an
+ * on-the-fly colour inversion so type stays readable when the orbit passes underneath.
+ */
+body:has(#particle-canvas) .hero-section .hero-title,
+body:has(#particle-canvas) .hero-section .hero-subtitle,
+body:has(#particle-canvas) .hero-section .hero-content > p,
+body:has(#particle-canvas) .contact-hero h1,
+body:has(#particle-canvas) .contact-hero .hero-subtitle,
+body:has(#particle-canvas) .contact-hero .hero-description,
+body:has(#particle-canvas) .portfolio-hero h1,
+body:has(#particle-canvas) .portfolio-hero .container > p,
+body:has(#particle-canvas) .services-hero h1,
+body:has(#particle-canvas) .services-hero .subheading,
+body:has(#particle-canvas) .about-hero h1,
+body:has(#particle-canvas) .about-hero .subheading,
+body:has(#particle-canvas) .thank-you .thank-you-content h1,
+body:has(#particle-canvas) .thank-you .thank-you-content > p {
+  mix-blend-mode: difference;
 }
 
 /* ================ PORTFOLIO-STYLE CLIENT LOGO LINKS ================ */
