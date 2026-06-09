@@ -54,9 +54,9 @@ const Footer = () => {
           <div className="md:col-span-4">
             <a href="/" className="inline-block mb-6">
               <img
-                src="/Logo-no-background.png"
+                src="/Logo-white.svg"
                 alt="MUTAG HOUSE"
-                className="h-10 w-auto"
+                className="h-10 w-auto bg-transparent"
                 loading="lazy"
               />
             </a>

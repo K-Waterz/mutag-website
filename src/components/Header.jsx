@@ -49,9 +49,9 @@ const Header = () => {
           {/* Logo */}
           <a href="/" className="flex items-center" aria-label="MUTAG HOUSE Home">
             <img
-              src="/Logo-no-background.png"
+              src="/Logo-white.svg"
               alt="MUTAG HOUSE"
-              className="h-10 w-auto"
+              className="h-10 w-auto bg-transparent"
               loading="eager"
             />
           </a>
