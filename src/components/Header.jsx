@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import ClickFingerIcon from './ClickFingerIcon'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -80,7 +79,6 @@ const Header = () => {
               className="inline-flex items-center gap-2 gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm transition-luxury hover:opacity-90 hover:shadow-lg hover:shadow-brand-blue/20"
             >
               Request Private Strategy Call
-              <ClickFingerIcon />
             </a>
           </div>
 
@@ -145,7 +143,6 @@ const Header = () => {
                 className="inline-flex items-center justify-center gap-2 gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm text-center mt-2"
               >
                 Request Private Strategy Call
-                <ClickFingerIcon />
               </a>
             </div>
           </motion.div>

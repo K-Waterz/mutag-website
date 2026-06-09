@@ -5,7 +5,6 @@ import Section from '../components/Section'
 import Card from '../components/Card'
 import Modal from '../components/Modal'
 import Button from '../components/Button'
-import ClickFingerIcon from '../components/ClickFingerIcon'
 import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
 
@@ -180,9 +179,8 @@ const Work = () => {
                 <h3 className="font-heading text-xl mb-3">{item.title}</h3>
                 <p className="text-brand-light/70 mb-4">{item.description}</p>
                 <div className="flex flex-wrap items-center gap-3">
-                  <button className="inline-flex items-center gap-1.5 text-brand-blue hover:underline text-sm font-medium">
+                  <button className="text-brand-blue hover:underline text-sm font-medium">
                     View Case Study
-                    <ClickFingerIcon className="w-4 h-4" />
                   </button>
                   {item.link && (
                     <a
@@ -193,7 +191,6 @@ const Work = () => {
                       className="inline-flex items-center gap-2 px-4 py-2 border-2 border-brand-blue text-brand-blue rounded-lg text-sm font-medium hover:bg-brand-blue/10 transition-luxury"
                     >
                       Visit Site
-                      <ClickFingerIcon className="w-4 h-4" />
                     </a>
                   )}
                 </div>
@@ -248,9 +245,8 @@ const Work = () => {
                     className="h-16 w-auto grayscale group-hover:grayscale-0 transition-luxury"
                     loading="lazy"
                   />
-                  <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-blue opacity-0 group-hover:opacity-100 transition-luxury">
+                  <span className="text-xs font-medium text-brand-blue opacity-0 group-hover:opacity-100 transition-luxury">
                     Visit Site
-                    <ClickFingerIcon className="w-3.5 h-3.5" />
                   </span>
                 </a>
               ) : (
@@ -320,7 +316,6 @@ const Work = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 border-2 border-brand-blue text-brand-blue rounded-lg font-medium hover:bg-brand-blue/10 transition-luxury"
               >
                 Visit Site
-                <ClickFingerIcon />
               </a>
             )}
           </div>

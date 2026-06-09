@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import ClickFingerIcon from './ClickFingerIcon'
 
 const Button = ({
   children,
@@ -9,7 +8,6 @@ const Button = ({
   onClick,
   type = 'button',
   disabled = false,
-  showIcon = true,
   ...props
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-luxury focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue disabled:opacity-50 disabled:cursor-not-allowed'
@@ -39,7 +37,6 @@ const Button = ({
       {...props}
     >
       {children}
-      {showIcon && <ClickFingerIcon className="ml-2" />}
     </motion.button>
   )
 }
