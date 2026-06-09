@@ -441,7 +441,10 @@ img {
 
 /* ================ BUTTONS ================ */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-md);
   font-weight: 600;
@@ -453,6 +456,21 @@ img {
   font-family: var(--font-primary);
   min-height: 44px;
   touch-action: manipulation;
+}
+
+.cta-finger-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn .cta-finger-icon {
+  filter: brightness(0) invert(1);
+}
+
+.btn-secondary .cta-finger-icon,
+.btn[style*="transparent"] .cta-finger-icon {
+  filter: none;
 }
 
 .btn-primary {

@@ -341,6 +341,7 @@ const Contact = () => {
                 size="lg"
                 className="w-full"
                 disabled={isSubmitting}
+                showIcon={!isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit for Private Review'}
               </Button>

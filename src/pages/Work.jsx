@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import Card from '../components/Card'
 import Modal from '../components/Modal'
 import Button from '../components/Button'
+import ClickFingerIcon from '../components/ClickFingerIcon'
 import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
 
@@ -178,8 +179,9 @@ const Work = () => {
                 </div>
                 <h3 className="font-heading text-xl mb-3">{item.title}</h3>
                 <p className="text-brand-light/70 mb-4">{item.description}</p>
-                <button className="text-brand-blue hover:underline text-sm font-medium">
-                  View Case Study →
+                <button className="inline-flex items-center gap-1.5 text-brand-blue hover:underline text-sm font-medium">
+                  View Case Study
+                  <ClickFingerIcon className="w-4 h-4" />
                 </button>
               </Card>
             </motion.div>
