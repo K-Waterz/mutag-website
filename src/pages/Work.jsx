@@ -179,10 +179,24 @@ const Work = () => {
                 </div>
                 <h3 className="font-heading text-xl mb-3">{item.title}</h3>
                 <p className="text-brand-light/70 mb-4">{item.description}</p>
-                <button className="inline-flex items-center gap-1.5 text-brand-blue hover:underline text-sm font-medium">
-                  View Case Study
-                  <ClickFingerIcon className="w-4 h-4" />
-                </button>
+                <div className="flex flex-wrap items-center gap-3">
+                  <button className="inline-flex items-center gap-1.5 text-brand-blue hover:underline text-sm font-medium">
+                    View Case Study
+                    <ClickFingerIcon className="w-4 h-4" />
+                  </button>
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 border-2 border-brand-blue text-brand-blue rounded-lg text-sm font-medium hover:bg-brand-blue/10 transition-luxury"
+                    >
+                      Visit Site
+                      <ClickFingerIcon className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </Card>
             </motion.div>
           ))}
@@ -219,13 +233,35 @@ const Work = () => {
         <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
           {portfolioItems.map((item) => (
             item.logo && (
-              <img
-                key={item.id}
-                src={item.logo}
-                alt={item.title}
-                className="h-16 w-auto grayscale hover:grayscale-0 transition-luxury"
-                loading="lazy"
-              />
+              item.link ? (
+                <a
+                  key={item.id}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-2 hover:opacity-100 transition-luxury"
+                  aria-label={`Visit ${item.title} website`}
+                >
+                  <img
+                    src={item.logo}
+                    alt={item.title}
+                    className="h-16 w-auto grayscale group-hover:grayscale-0 transition-luxury"
+                    loading="lazy"
+                  />
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-blue opacity-0 group-hover:opacity-100 transition-luxury">
+                    Visit Site
+                    <ClickFingerIcon className="w-3.5 h-3.5" />
+                  </span>
+                </a>
+              ) : (
+                <img
+                  key={item.id}
+                  src={item.logo}
+                  alt={item.title}
+                  className="h-16 w-auto grayscale transition-luxury"
+                  loading="lazy"
+                />
+              )
             )
           ))}
         </div>
@@ -281,12 +317,10 @@ const Work = () => {
                 href={selectedWork.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand-blue hover:underline"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-brand-blue text-brand-blue rounded-lg font-medium hover:bg-brand-blue/10 transition-luxury"
               >
-                Visit Website
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                Visit Site
+                <ClickFingerIcon />
               </a>
             )}
           </div>

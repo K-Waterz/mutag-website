@@ -469,8 +469,63 @@ img {
 }
 
 .btn-secondary .cta-finger-icon,
-.btn[style*="transparent"] .cta-finger-icon {
+.btn[style*="transparent"] .cta-finger-icon,
+.btn-visit-site .cta-finger-icon {
   filter: none;
+}
+
+.btn-visit-site {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary-light);
+  font-size: 0.9rem;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.btn-visit-site:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-whatsapp {
+  background: #25D366 !important;
+  border: 2px solid #25D366 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:hover {
+  background: #1fb855 !important;
+  border-color: #1fb855 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+}
+
+.btn-whatsapp .cta-finger-icon {
+  filter: brightness(0) invert(1);
+}
+
+.contact-method-whatsapp {
+  border-color: rgba(37, 211, 102, 0.35) !important;
+  background: rgba(37, 211, 102, 0.08) !important;
+}
+
+.contact-method-whatsapp h3 {
+  color: #25D366 !important;
+}
+
+.contact-method-desc {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--gray-light);
+}
+
+.portfolio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
 }
 
 .btn-primary {
@@ -2029,23 +2084,20 @@ body:has(#particle-canvas) .thank-you {
 }
 
 .logo-link-wrap::before {
-  content: "↗ Visit Site";
+  content: "Visit Site";
   position: absolute;
-  bottom: -1.65rem;
+  bottom: -1.75rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: #6366f1;
   white-space: nowrap;
-  opacity: 0.75;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.logo-link-wrap:hover::before {
   opacity: 1;
+  pointer-events: none;
+  padding-left: 1.25rem;
+  background: url('click-here-finger.svg') left center / 14px 14px no-repeat;
 }
 
 .logo-link-wrap img {
@@ -2072,8 +2124,18 @@ body:has(#particle-canvas) .thank-you {
   border: none;
 }
 
+.client-logo-item .logo-link-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .client-logo-item .logo-link-wrap::before {
-  display: none;
+  display: block;
+  position: static;
+  transform: none;
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
 }
 
 .client-logo-item img.no-link,
