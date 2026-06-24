@@ -2286,3 +2286,143 @@ body:has(#particle-canvas) .thank-you {
 [data-theme="light"] .faq-item summary h3 {
   color: #0f172a;
 }
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+  color: #fff;
+}
+
+.whatsapp-float svg {
+  flex-shrink: 0;
+}
+
+/* Trust signals bar */
+.trust-signals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.trust-signal {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(127, 148, 255, 0.15);
+  border-radius: 0.75rem;
+  background: rgba(127, 148, 255, 0.04);
+}
+
+.trust-signal strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin-bottom: 0.25rem;
+}
+
+.trust-signal span {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+[data-theme="light"] .trust-signal strong {
+  color: #0f172a;
+}
+
+/* Hero micro-CTA and availability */
+.hero-micro-cta {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.hero-micro-cta a {
+  color: #7f94ff;
+  text-decoration: underline;
+}
+
+.hero-availability {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.hero-availability a {
+  color: #7f94ff;
+  text-decoration: underline;
+}
+
+/* Beneficial ownership callout card */
+.bo-callout-card {
+  margin: 2rem 0 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(127, 148, 255, 0.25);
+  background: linear-gradient(135deg, rgba(127, 148, 255, 0.12), rgba(127, 148, 255, 0.04));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bo-callout-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.bo-callout-card strong {
+  color: #7f94ff;
+}
+
+.portfolio-service-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #7f94ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.portfolio-service-cta:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+.contact-method-fastest {
+  font-size: 0.75rem;
+  color: #25D366;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.contact-response-note {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  text-align: center;
+}
