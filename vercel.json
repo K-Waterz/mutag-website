@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/services.html", "destination": "/services", "permanent": true },
+    { "source": "/portfolio.html", "destination": "/portfolio", "permanent": true },
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/beneficial-ownership.html", "destination": "/beneficial-ownership", "permanent": true },
+    { "source": "/thank-you.html", "destination": "/thank-you", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/portfolio", "destination": "/portfolio.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/beneficial-ownership", "destination": "/beneficial-ownership.html" },
+    { "source": "/thank-you", "destination": "/thank-you.html" }
+  ]
+}

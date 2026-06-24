@@ -15,14 +15,14 @@
   <title>About MUTAG HOUSE | Software Development Studio & Digital Systems Company</title>
   <meta name="description" content="Learn about MUTAG HOUSE, a software development studio in Centurion, South Africa. We architect and build enterprise-grade software solutions for modern businesses." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.mutag.co.za/about.html" />
+  <link rel="canonical" href="https://www.mutag.co.za/about" />
   <meta name="keywords" content="about MUTAG HOUSE, software development studio Centurion, digital systems company, software company South Africa, custom software development" />
   
   <!-- Open Graph -->
   <meta property="og:title" content="About MUTAG HOUSE | Software Development Studio & Digital Systems Company" />
   <meta property="og:description" content="Learn about MUTAG HOUSE, a software development studio in Centurion, South Africa. We architect and build enterprise-grade software solutions for modern businesses." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.mutag.co.za/about.html" />
+  <meta property="og:url" content="https://www.mutag.co.za/about" />
   <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
   
   <!-- Twitter -->
@@ -182,14 +182,13 @@
 <body>
   <!-- 3D Particle Background -->
   <canvas id="particle-canvas"></canvas>
-  <script src="particles-bg.js"></script>
 
   <!-- Header -->
   <header id="header" class="header">
     <nav class="nav-container">
       <a href="index.html" class="logo-link" aria-label="MUTAG HOUSE Home">
-        <img src="Logo-white.svg" alt="MUTAG HOUSE" class="logo-img logo-img-white">
-        <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black">
+        <img src="Logo-white.svg" alt="MUTAG HOUSE" class="logo-img logo-img-white" width="120" height="40">
+        <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black" width="120" height="40">
       </a>
       
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
@@ -243,7 +242,7 @@
             <p>At our core, we are builders of systems — practical, scalable, and designed for the realities of modern business.</p>
           </div>
           <div class="image" data-aos="fade-left" data-aos-delay="400">
-            <img src="Mutag wesbite images/Team working on project on separate screens.png" alt="MUTAG HOUSE team collaborating on creative projects" loading="lazy" style="border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.15);" />
+            <picture><source srcset="Mutag wesbite images/Team working on project on separate screens.webp" type="image/webp"><img src="Mutag wesbite images/Team working on project on separate screens.png" alt="MUTAG HOUSE team collaborating on software development projects in Centurion" loading="lazy" style="border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.15);" width="940" height="608" /></picture>
           </div>
         </div>
       </section>
@@ -300,7 +299,7 @@
             <p>We also offer supporting digital and marketing services—including branding, web development, and growth support—to ensure your software systems align with your brand identity and market positioning. Whether you're building your first software system, modernizing existing infrastructure, or scaling operations, we have the expertise and resources to help you achieve your goals.</p>
           </div>
           <div class="image" data-aos="fade-left" data-aos-delay="400">
-            <img src="Mutag wesbite images/Team showing each other code on a screen.png" alt="MUTAG HOUSE team developing digital solutions" loading="lazy" style="border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.15);" />
+            <picture><source srcset="Mutag wesbite images/Team showing each other code on a screen.webp" type="image/webp"><img src="Mutag wesbite images/Team showing each other code on a screen.png" alt="MUTAG HOUSE software developers reviewing code together in Centurion, South Africa" loading="lazy" style="border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.15);" width="940" height="516" /></picture>
           </div>
         </div>
       </section>
@@ -375,8 +374,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="Logo-white.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-white">
-          <img src="Logo-black.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-black">
+          <img src="Logo-white.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-white" width="120" height="40">
+          <img src="Logo-black.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-black" width="120" height="40">
           <p class="footer-description">Software development studio building scalable systems, platforms, and digital infrastructure for modern businesses.</p>
           <div class="social-links">
             <a href="https://www.facebook.com/people/MUTAG-House/61578437019157/" target="_blank" rel="noopener" aria-label="Facebook">
@@ -426,9 +425,10 @@
   </footer>
 
   <!-- Mobile navigation (shared) -->
-  <script src="mobile-menu.js"></script>
+  <script src="mobile-menu.js" defer></script>
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="particles-bg.js" defer></script>
 </body>
 </html>

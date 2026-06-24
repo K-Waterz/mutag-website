@@ -160,13 +160,12 @@
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
-  <script src="particles-bg.js"></script>
   <!-- Header -->
   <header id="header" class="header">
     <nav class="nav-container">
       <a href="index.html" class="logo-link" aria-label="MUTAG HOUSE Home">
-        <img src="Logo-white.svg" alt="MUTAG HOUSE" class="logo-img logo-img-white">
-        <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black">
+        <img src="Logo-white.svg" alt="MUTAG HOUSE" class="logo-img logo-img-white" width="120" height="40">
+        <img src="Logo-black.svg" alt="MUTAG HOUSE" class="logo-img logo-img-black" width="120" height="40">
       </a>
       
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
@@ -224,7 +223,7 @@
           <a href="about.html" class="link-arrow">Learn more about our approach →</a>
         </div>
         <div class="image-content" data-aos="fade-up" data-aos-delay="250">
-          <img src="Mutag wesbite images/Team working on project on separate screens.png" alt="MUTAG HOUSE team developing software systems" loading="lazy">
+          <picture><source srcset="Mutag wesbite images/Team working on project on separate screens.webp" type="image/webp"><img src="Mutag wesbite images/Team working on project on separate screens.png" alt="MUTAG HOUSE team developing software systems" loading="lazy" width="940" height="608"></picture>
         </div>
       </div>
     </div>
@@ -428,8 +427,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand" data-aos="fade-up" data-aos-delay="100">
-          <img src="Logo-white.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-white">
-          <img src="Logo-black.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-black">
+          <img src="Logo-white.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-white" width="120" height="40">
+          <img src="Logo-black.svg" alt="MUTAG HOUSE" class="footer-logo-img footer-logo-black" width="120" height="40">
           <p class="footer-description">
             Software development studio building scalable systems, platforms, and digital infrastructure for modern businesses.
           </p>
@@ -479,8 +478,9 @@
   </footer>
 
   <!-- Mobile navigation (shared) -->
-  <script src="mobile-menu.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <script src="mobile-menu.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="particles-bg.js" defer></script>
 </body>
 </html>
