@@ -44,8 +44,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="msapplication-TileColor" content="#0f172a" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
   <script type="application/ld+json">
@@ -128,7 +128,6 @@
   </script>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
   <!-- Header -->
   <header id="header" class="header">
     <nav class="nav-container">
@@ -163,25 +162,32 @@
       </div>
     </section>
 
-    <nav class="service-nav-sticky" aria-label="Core software services navigation">
+    <nav class="service-nav-sticky" aria-label="Service categories navigation">
       <div class="container">
         <ul class="service-nav-list">
-          <li><a href="#custom-web-apps">Web Apps</a></li>
-          <li><a href="#e-commerce-platforms">E-Commerce</a></li>
-          <li><a href="#backend-systems-apis">APIs</a></li>
-          <li><a href="#business-intelligence-dashboards">Dashboards</a></li>
-          <li><a href="#automation-workflow-systems">Automation</a></li>
-          <li><a href="#authentication-security-systems">Security</a></li>
+          <li><a href="#software-engineering">Software Engineering</a></li>
+          <li><a href="#web-digital-presence">Web &amp; Digital</a></li>
+          <li><a href="#branding-design">Branding &amp; Design</a></li>
+          <li><a href="#business-compliance">Business &amp; Compliance</a></li>
         </ul>
       </div>
     </nav>
 
     <section class="services-details">
       <div class="container">
-        <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Core Software Services</h2>
-        <p style="text-align: center; margin-bottom: 3rem; color: #94a3b8; font-size: 1.1rem;">MUTAG HOUSE delivers custom web application development, REST API design, business intelligence dashboards, and workflow automation systems tailored for South African businesses — from startups to enterprise clients.</p>
-        
-        <div class="service-cards">
+        <div class="services-intro" data-aos="fade-up">
+          <h2>Our Services</h2>
+          <p>MUTAG HOUSE delivers custom software, digital presence, branding, and business compliance services for South African businesses — from startups to enterprise clients. Our work is organised into four areas so you can quickly find what you need.</p>
+        </div>
+
+        <!-- CATEGORY 1: Software Engineering -->
+        <div class="service-category" id="software-engineering">
+          <div class="service-category-header" data-aos="fade-up">
+            <span class="service-category-eyebrow">01 — Core Engineering</span>
+            <h2>Software Engineering</h2>
+            <p>Production-grade systems that run your business — web applications, e-commerce, APIs, dashboards, automation, and security.</p>
+          </div>
+          <div class="service-cards">
           <article class="service-card" data-aos="fade-up" data-aos-delay="200" id="custom-web-apps">
             <div class="service-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -303,53 +309,19 @@
              
             </a>
           </article>
+          </div>
         </div>
+        <!-- /Category 1: Software Engineering -->
 
-        <!-- Supporting Services Section -->
-        <div style="margin-top: 10rem;">
-          <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Supporting Digital & Marketing Services</h2>
-          <p style="text-align: center; margin-bottom: 3rem; color: #94a3b8; font-size: 1.1rem;">We also offer branding and marketing services to ensure your software aligns with your brand identity and market positioning.</p>
-          
+        <!-- CATEGORY 2: Web & Digital Presence -->
+        <div class="service-category" id="web-digital-presence">
+          <div class="service-category-header" data-aos="fade-up">
+            <span class="service-category-eyebrow">02 — Online Presence</span>
+            <h2>Web &amp; Digital Presence</h2>
+            <p>Corporate websites, landing pages, and growth support that put your business in front of the right audience.</p>
+          </div>
           <div class="service-cards">
-            <article class="service-card" data-aos="fade-up" data-aos-delay="200" id="business-services">
-              <div class="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="7" width="18" height="13" rx="2"/>
-                  <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>
-                  <path d="M3 13h18"/>
-                </svg>
-              </div>
-              <h3>Business Services</h3>
-              <p class="service-desc">Business services cover company registration, compliance documentation, and corporate filings required to operate legally in South Africa. MUTAG HOUSE handles CIPC registrations, beneficial ownership filings, and business documentation.</p>
-              <ul>
-                <li>Company registration</li>
-                <li><a href="/beneficial-ownership" style="color: #7f94ff; text-decoration: underline; font-weight: 600;">Beneficial ownership</a> <span style="color: #ef4444; font-size: 0.8em;">★ Popular</span></li>
-                <li>Business documentation</li>
-                <li>Presentation design (investor decks, sales materials)</li>
-              </ul>
-            </article>
-
-            <!-- Beneficial Ownership Banner -->
-            <section data-aos="fade-up" style="margin: 1rem 0 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(127, 148, 255, 0.15), rgba(127, 148, 255, 0.05)); border-radius: 1rem; border: 2px solid rgba(127, 148, 255, 0.3); grid-column: 1 / -1;">
-              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
-                <div style="flex: 1; min-width: 250px;">
-                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem; font-size: 1.5rem;">Need Help with Beneficial Ownership?</h3>
-                  <p style="margin-bottom: 0; color: #94a3b8;">Many businesses struggle with CIPC beneficial ownership requirements. We make it simple and ensure compliance.</p>
-                </div>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                  <a href="/beneficial-ownership" class="btn" style="white-space: nowrap;">
-                    <span>Learn More</span>
-                  </a>
-                  <a href="https://wa.link/rgwahs" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="white-space: nowrap;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                    </svg>
-                    <span>Chat with us on WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </section>
-
-            <article class="service-card" data-aos="fade-up" data-aos-delay="300" id="web-development-digital-presence">
+            <article class="service-card" data-aos="fade-up" data-aos-delay="200" id="web-development-digital-presence">
               <div class="service-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect x="3" y="4" width="18" height="12" rx="2"/>
@@ -357,7 +329,7 @@
                   <line x1="12" y1="16" x2="12" y2="20"/>
                 </svg>
               </div>
-              <h3>Web Development & Digital Presence</h3>
+              <h3>Web Development &amp; Digital Presence</h3>
               <p class="service-desc">Web development and digital presence is the practice of building corporate websites and online properties that represent a business online. MUTAG HOUSE develops SEO-optimised corporate sites, landing pages, and conversion-focused web properties.</p>
               <ul>
                 <li>Corporate websites</li>
@@ -367,14 +339,42 @@
               </ul>
             </article>
 
-            <article class="service-card" data-aos="fade-up" data-aos-delay="400" id="branding-visual-identity">
+            <article class="service-card" data-aos="fade-up" data-aos-delay="300" id="growth-go-to-market">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 3v18h18"/>
+                  <polyline points="3,17 9,11 13,15 21,7"/>
+                </svg>
+              </div>
+              <h3>Growth &amp; Go-To-Market Support</h3>
+              <p class="service-desc">Growth and go-to-market support is strategic marketing assistance that helps businesses launch and scale their digital products. MUTAG HOUSE provides email campaigns, SEO optimisation, and content strategy when it complements software delivery.</p>
+              <ul>
+                <li>Email marketing campaigns</li>
+                <li>SEO optimization for web properties</li>
+                <li>Content strategy (when supporting software)</li>
+              </ul>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; font-style: italic;">Note: Social media marketing, content creation, and digital advertising are available as integrated services when they support the software platform, not as standalone offerings.</p>
+            </article>
+          </div>
+        </div>
+        <!-- /Category 2: Web & Digital Presence -->
+
+        <!-- CATEGORY 3: Branding & Design -->
+        <div class="service-category" id="branding-design">
+          <div class="service-category-header" data-aos="fade-up">
+            <span class="service-category-eyebrow">03 — Brand &amp; Design</span>
+            <h2>Branding &amp; Design</h2>
+            <p>A cohesive visual identity across digital and print — from logo systems to business stationery.</p>
+          </div>
+          <div class="service-cards">
+            <article class="service-card" data-aos="fade-up" data-aos-delay="200" id="branding-visual-identity">
               <div class="service-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M12 20h9"/>
                   <path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z"/>
                 </svg>
               </div>
-              <h3>Branding & Visual Identity</h3>
+              <h3>Branding &amp; Visual Identity</h3>
               <p class="service-desc">Branding and visual identity is the design discipline that defines how a business looks and communicates visually. MUTAG HOUSE creates logo systems, brand guidelines, and corporate identity packages aligned with your software products.</p>
               <ul>
                 <li>Logo design</li>
@@ -384,24 +384,7 @@
               </ul>
             </article>
 
-            <article class="service-card" data-aos="fade-up" data-aos-delay="500" id="growth-go-to-market">
-              <div class="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 3v18h18"/>
-                  <polyline points="3,17 9,11 13,15 21,7"/>
-                </svg>
-              </div>
-              <h3>Growth & Go-To-Market Support</h3>
-              <p class="service-desc">Growth and go-to-market support is strategic marketing assistance that helps businesses launch and scale their digital products. MUTAG HOUSE provides email campaigns, SEO optimisation, and content strategy when it complements software delivery.</p>
-              <ul>
-                <li>Email marketing campaigns</li>
-                <li>SEO optimization for web properties</li>
-                <li>Content strategy (when supporting software)</li>
-              </ul>
-              <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem; font-style: italic;">Note: Social media marketing, content creation, and digital advertising are available as integrated services when they support the software platform, not as standalone offerings.</p>
-            </article>
-
-            <article class="service-card" data-aos="fade-up" data-aos-delay="600" id="print-services">
+            <article class="service-card" data-aos="fade-up" data-aos-delay="300" id="print-services">
               <div class="service-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M21 16V8a2 2 0 0 0-1-1.73L12 2 4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L12 22l8-4.27A2 2 0 0 0 21 16z"/>
@@ -420,6 +403,56 @@
             </article>
           </div>
         </div>
+        <!-- /Category 3: Branding & Design -->
+
+        <!-- CATEGORY 4: Business & Compliance -->
+        <div class="service-category" id="business-compliance">
+          <div class="service-category-header" data-aos="fade-up">
+            <span class="service-category-eyebrow">04 — Business &amp; Compliance</span>
+            <h2>Business &amp; Compliance</h2>
+            <p>Get and stay compliant in South Africa — company registration, documentation, and CIPC beneficial ownership filings.</p>
+          </div>
+          <div class="service-cards">
+            <article class="service-card" data-aos="fade-up" data-aos-delay="200" id="business-services">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="7" width="18" height="13" rx="2"/>
+                  <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                  <path d="M3 13h18"/>
+                </svg>
+              </div>
+              <h3>Business Services</h3>
+              <p class="service-desc">Business services cover company registration, compliance documentation, and corporate filings required to operate legally in South Africa. MUTAG HOUSE handles CIPC registrations, beneficial ownership filings, and business documentation.</p>
+              <ul>
+                <li>Company registration</li>
+                <li><a href="/beneficial-ownership" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Beneficial ownership</a> <span style="color: #ef4444; font-size: 0.8em;">★ Popular</span></li>
+                <li>Business documentation</li>
+                <li>Presentation design (investor decks, sales materials)</li>
+              </ul>
+            </article>
+
+            <!-- Beneficial Ownership Banner -->
+            <section data-aos="fade-up" style="margin: 1rem 0 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.04)); border-radius: 1rem; border: 1px solid rgba(37, 99, 235, 0.25); grid-column: 1 / -1;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+                <div style="flex: 1; min-width: 250px;">
+                  <h3 style="color: #2563eb; margin-bottom: 0.5rem; font-size: 1.5rem;">Need Help with Beneficial Ownership?</h3>
+                  <p style="margin-bottom: 0; color: #64748b;">Many businesses struggle with CIPC beneficial ownership requirements. We make it simple and ensure compliance.</p>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                  <a href="/beneficial-ownership" class="btn" style="white-space: nowrap;">
+                    <span>Learn More</span>
+                  </a>
+                  <a href="https://wa.link/rgwahs" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="white-space: nowrap;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    <span>Chat with us on WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- /Category 4: Business & Compliance -->
 
         <!-- Elevate Business Video Section -->
         <div class="elevate-video-section" data-aos="fade-up" data-aos-delay="750" style="margin: 4rem auto; text-align: center; display: flex; justify-content: center; align-items: center; width: 100%;">
@@ -443,19 +476,19 @@
               
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 <div>
-                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Clean Architecture</h3>
+                  <h3 style="color: #2563eb; margin-bottom: 0.5rem;">Clean Architecture</h3>
                   <p>We design and build software with clean architecture principles, ensuring scalability, maintainability, and long-term success. Every system is built to handle growth and integrate seamlessly with existing infrastructure.</p>
                 </div>
                 <div>
-                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Business Logic Expertise</h3>
+                  <h3 style="color: #2563eb; margin-bottom: 0.5rem;">Business Logic Expertise</h3>
                   <p>Every project begins with a thorough understanding of your business requirements. We translate complex business rules into robust, reliable software systems that accurately reflect your operational needs.</p>
                 </div>
                 <div>
-                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Full-Stack Capability</h3>
+                  <h3 style="color: #2563eb; margin-bottom: 0.5rem;">Full-Stack Capability</h3>
                   <p>From frontend interfaces to backend APIs, databases, authentication, and automation—we handle the entire stack. Our development approach ensures your software systems perform at their best.</p>
                 </div>
                 <div>
-                  <h3 style="color: #7f94ff; margin-bottom: 0.5rem;">Long-Term Support</h3>
+                  <h3 style="color: #2563eb; margin-bottom: 0.5rem;">Long-Term Support</h3>
                   <p>Based in Centurion, we provide ongoing maintenance, scaling support, and system updates. Our team combines local market knowledge with international best practices in software development.</p>
                 </div>
               </div>
@@ -472,7 +505,7 @@
               </div>
 
               <div style="margin-top: 3rem;">
-                <p style="font-size: 1.1rem; line-height: 1.8;">Whether you're a startup building your first software system, an established business seeking to modernize your infrastructure, or a company ready to scale your operations, MUTAG HOUSE has the expertise and resources to help you succeed. <a href="/contact" style="color: #7f94ff; text-decoration: underline;">Contact us today</a> to discuss your software requirements and technical architecture needs.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8;">Whether you're a startup building your first software system, an established business seeking to modernize your infrastructure, or a company ready to scale your operations, MUTAG HOUSE has the expertise and resources to help you succeed. <a href="/contact" style="color: #2563eb; text-decoration: underline;">Contact us today</a> to discuss your software requirements and technical architecture needs.</p>
               </div>
             </div>
           </div>
@@ -485,7 +518,7 @@
               <span>Schedule Technical Consultation</span>
              
             </a>
-            <a href="/portfolio" class="btn" style="background: transparent; border: 2px solid #7f94ff; color: #7f94ff;">
+            <a href="/portfolio" class="btn" style="background: transparent; border: 2px solid #2563eb; color: #2563eb;">
               <span>View Our Work</span>
              
             </a>
@@ -555,7 +588,6 @@
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
   <script src="script.js" defer></script>
-  <script src="particles-bg.js" defer></script>
   <script src="whatsapp-float.js" defer></script>
 </body>
 </html>

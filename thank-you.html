@@ -38,8 +38,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="msapplication-TileColor" content="#0f172a" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="theme-color" content="#ffffff" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -82,7 +82,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(rgba(10, 15, 44, 0.9), rgba(10, 15, 44, 0.7));
+      background:
+        radial-gradient(900px 400px at 50% 0%, #e9f0ff 0%, rgba(233, 240, 255, 0) 65%),
+        linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
     }
     
     .thank-you-content {
@@ -92,7 +94,7 @@
     
     .thank-you h1 {
       font-size: clamp(2.5rem, 5vw, 4rem);
-      color: #7f94ff;
+      color: #2563eb;
       margin-bottom: 1.5rem;
       line-height: 1.2;
     }
@@ -100,7 +102,7 @@
     .thank-you p {
       font-size: 1.2rem;
       margin-bottom: 2.5rem;
-      color: #e0e0e0;
+      color: #64748b;
     }
     
     .thank-you-actions {
@@ -111,27 +113,25 @@
     }
     
     .btn-return {
-      background-color: #7f94ff;
+      background-color: #2563eb;
       color: white;
     }
     
     .btn-contact {
       background-color: transparent;
-      border: 2px solid #7f94ff;
-      color: #7f94ff;
+      border: 2px solid #2563eb;
+      color: #2563eb;
     }
     
     /* Confirmation Icon */
     .confirmation-icon {
       font-size: 4rem;
-      color: #7f94ff;
+      color: #2563eb;
       margin-bottom: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
-  <script src="particles-bg.js"></script>
   <!-- Header -->
   <header id="header">
     <div class="container nav">

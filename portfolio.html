@@ -41,8 +41,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="msapplication-TileColor" content="#0f172a" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="theme-color" content="#ffffff" />
   <!-- Preload critical resources -->
   <link rel="dns-prefetch" href="https://unpkg.com">
   <!-- Optimized font loading with display=swap -->
@@ -264,9 +264,6 @@
 </head>
 <body>
 
-  <!-- 3D Particle Background -->
-  <canvas id="particle-canvas"></canvas>
-
   <!-- Header -->
   <header id="header" class="header">
     <nav class="nav-container">
@@ -302,8 +299,51 @@
 
   <!-- Portfolio Grid -->
   <main class="portfolio-grid container">
-    <!-- We Moove SA -->
+    <!-- FlowerClub -->
     <article class="portfolio-item featured-item" data-aos="fade-up" data-aos-delay="200">
+      <div class="portfolio-media">
+        <div class="fc-carousel" role="region" aria-label="FlowerClub social media gallery">
+          <div class="fc-track">
+            <picture><source srcset="Flower Club black and white image.webp" type="image/webp"><img src="Flower Club black and white image.png" alt="FlowerClub social media visual" loading="lazy" width="1080" height="1080"></picture>
+            <picture><source srcset="flowerclub-archive/1.webp" type="image/webp"><img src="flowerclub-archive/1.png" alt="FlowerClub floral content design" loading="lazy" width="1080" height="1350"></picture>
+            <picture><source srcset="flowerclub-archive/2.webp" type="image/webp"><img src="flowerclub-archive/2.png" alt="FlowerClub floral content design" loading="lazy" width="1080" height="1350"></picture>
+            <picture><source srcset="flowerclub-archive/3.webp" type="image/webp"><img src="flowerclub-archive/3.png" alt="FlowerClub floral content design" loading="lazy" width="1080" height="1350"></picture>
+            <picture><source srcset="flowerclub-archive/4.webp" type="image/webp"><img src="flowerclub-archive/4.png" alt="FlowerClub floral content design" loading="lazy" width="1080" height="1350"></picture>
+            <!-- Duplicate set for a seamless continuous loop -->
+            <picture aria-hidden="true"><source srcset="Flower Club black and white image.webp" type="image/webp"><img src="Flower Club black and white image.png" alt="" aria-hidden="true" loading="lazy" width="1080" height="1080"></picture>
+            <picture aria-hidden="true"><source srcset="flowerclub-archive/1.webp" type="image/webp"><img src="flowerclub-archive/1.png" alt="" aria-hidden="true" loading="lazy" width="1080" height="1350"></picture>
+            <picture aria-hidden="true"><source srcset="flowerclub-archive/2.webp" type="image/webp"><img src="flowerclub-archive/2.png" alt="" aria-hidden="true" loading="lazy" width="1080" height="1350"></picture>
+            <picture aria-hidden="true"><source srcset="flowerclub-archive/3.webp" type="image/webp"><img src="flowerclub-archive/3.png" alt="" aria-hidden="true" loading="lazy" width="1080" height="1350"></picture>
+            <picture aria-hidden="true"><source srcset="flowerclub-archive/4.webp" type="image/webp"><img src="flowerclub-archive/4.png" alt="" aria-hidden="true" loading="lazy" width="1080" height="1350"></picture>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-content">
+        <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit FlowerClub website">
+          <picture><source srcset="flowerclub-logo.webp" type="image/webp"><img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo" loading="lazy" style="cursor: pointer;" width="2000" height="2000"></picture>
+        </a>
+        <h2>Social Media Transformation for FlowerClub</h2>
+        <div class="portfolio-services">
+          <span class="service-tag">Social Media Strategy</span>
+          <span class="service-tag">Content Creation</span>
+          <span class="service-tag">Brand Storytelling</span>
+        </div>
+        <div class="portfolio-description">
+          <p>Revitalized FlowerClub's digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic.</p>
+          <p class="description-more">Our team developed a comprehensive social media strategy for FlowerClub that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.</p>
+        </div>
+        <div class="portfolio-actions">
+          <button class="read-more-btn" onclick="toggleReadMore(this)">Read more</button>
+          <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="btn btn-visit-site">
+            <span>Visit Site</span>
+          </a>
+        </div>
+        <a href="/services#growth-go-to-market" class="portfolio-service-cta">Build something similar →</a>
+      </div>
+    </article>
+
+    <!-- We Moove SA -->
+    <article class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
       <div class="portfolio-media">
         <picture><source srcset="we-moove-sa-logo.webp" type="image/webp"><img src="we-moove-sa-logo.png" alt="We Moove SA Custom Quoting System" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy" width="500" height="500"></picture>
       </div>
@@ -454,36 +494,6 @@
           </a>
         </div>
         <a href="/services#web-development-digital-presence" class="portfolio-service-cta">Build something similar →</a>
-      </div>
-    </article>
-
-    <!-- FlowerClub -->
-    <article class="portfolio-item" data-aos="fade-up" data-aos-delay="700">
-      <div class="portfolio-media">
-        <picture><source srcset="Flower Club black and white image.webp" type="image/webp"><img src="Flower Club black and white image.png" alt="FlowerClub Social Media Transformation" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:1rem;box-shadow:0 4px 24px rgba(0,0,0,0.15);" loading="lazy" width="1080" height="1080"></picture>
-      </div>
-      <div class="portfolio-content">
-        <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="logo-link-wrap" aria-label="Visit FlowerClub website">
-          <picture><source srcset="flowerclub-logo.webp" type="image/webp"><img src="flowerclub-logo.png" alt="FlowerClub Logo" class="client-logo" loading="lazy" style="cursor: pointer;" width="2000" height="2000"></picture>
-        </a>
-        <h2>Social Media Transformation for FlowerClub</h2>
-        <div class="portfolio-services">
-          <span class="service-tag">Social Media Strategy</span>
-          <span class="service-tag">Content Creation</span>
-          <span class="service-tag">Brand Storytelling</span>
-        </div>
-        <div class="portfolio-description">
-          <p>Revitalized FlowerClub's digital presence with stunning visual content. Created scroll-stopping social media visuals that perfectly captured their floral artistry while establishing a consistent brand aesthetic.</p>
-          <p class="description-more">Our team developed a comprehensive social media strategy for FlowerClub that included content planning, visual design, and engagement optimization. The result was a cohesive brand presence that resonated with their target audience and helped establish FlowerClub as a premium floral destination.</p>
-        </div>
-        <div class="portfolio-actions">
-          <button class="read-more-btn" onclick="toggleReadMore(this)">Read more</button>
-          <a href="https://flowerclub.co.za" target="_blank" rel="noopener noreferrer" class="btn btn-visit-site">
-            <span>Visit Site</span>
-           
-          </a>
-        </div>
-        <a href="/services#growth-go-to-market" class="portfolio-service-cta">Build something similar →</a>
       </div>
     </article>
 
@@ -691,7 +701,6 @@
       }
     })();
   </script>
-  <script src="particles-bg.js" defer></script>
   <script src="whatsapp-float.js" defer></script>
 </body>
 </html>
