@@ -234,7 +234,7 @@ const Home = () => {
           <Card delay={0.1}>
             <h3 className="font-heading text-xl mb-3">Trusted Signals</h3>
             <p className="text-brand-light/70">
-              100% on-time delivery • South Africa based • Professional documentation services
+              South Africa based • Professional documentation services
             </p>
           </Card>
           <Card delay={0.2}>

@@ -94,7 +94,6 @@ const Work = () => {
   const stats = [
     { value: '3x', label: 'Increase in qualified leads' },
     { value: '+120%', label: 'Organic traffic growth' },
-    { value: '100%', label: 'On-time delivery for projects' },
     { value: '24/7', label: 'Support availability with SLA' }
   ]
 
