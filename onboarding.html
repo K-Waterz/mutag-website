@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-69Y20X3B4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-69Y20X3B4W');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | Client Onboarding | Mutag House</title>
+  <meta name="description" content="Tell us whether you're an individual or a company, pick the services you need, and we'll guide you to the right next step with Mutag House." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mutag.co.za/onboarding" />
+  <meta property="og:title" content="Get Started | Client Onboarding | Mutag House" />
+  <meta property="og:description" content="Tell us whether you're an individual or a company, pick the services you need, and we'll guide you to the right next step with Mutag House." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mutag.co.za/onboarding" />
+  <meta property="og:image" content="https://www.mutag.co.za/Logo-no-background.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="fonts/mutag-fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
+</head>
+<body>
+  <header id="header" class="header">
+    <nav class="nav-container">
+      <a href="/" class="logo-link" aria-label="Mutag House Home">
+        <img src="Logo-white.svg" alt="Mutag House logo — custom software development studio in Centurion, South Africa" class="logo-img logo-img-white" width="120" height="40">
+        <img src="Logo-black.svg" alt="Mutag House logo — custom software development studio in Centurion, South Africa" class="logo-img logo-img-black" width="120" height="40">
+      </a>
+
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/portfolio" class="nav-link">Portfolio</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/contact" class="nav-link">Contact</a>
+        <a href="/onboarding" class="btn btn-primary nav-cta"><span>Get Started</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <!--
+    Submits through the existing Netlify "contact" form (same as contact.html).
+    Onboarding answers are packed into the message field so only one form is needed.
+  -->
+
+  <main class="onboarding-page">
+    <section class="onboarding-hero">
+      <div class="container">
+        <p class="onboarding-eyebrow">Client onboarding</p>
+        <h1>Let's find the right starting point</h1>
+        <p class="onboarding-lead">Answer a few questions and we'll match you with the services that fit — whether you're starting out or growing an existing business.</p>
+      </div>
+    </section>
+
+    <section class="onboarding-section">
+      <div class="container onboarding-container">
+        <div class="onboarding-progress" aria-hidden="true">
+          <div class="onboarding-progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="onboarding-step-label" id="step-label">Step 1 of 5</p>
+
+        <div class="onboarding-card" id="onboarding-wizard" aria-live="polite">
+          <!-- Steps rendered by onboarding.js -->
+        </div>
+
+        <div class="onboarding-nav" id="onboarding-nav">
+          <button type="button" class="btn btn-secondary" id="btn-back" hidden>Back</button>
+          <button type="button" class="btn btn-primary" id="btn-next">Continue</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="Logo-white.svg" alt="Mutag House logo" class="footer-logo-img footer-logo-white" width="120" height="40">
+          <img src="Logo-black.svg" alt="Mutag House logo" class="footer-logo-img footer-logo-black" width="120" height="40">
+          <p class="footer-description">Software development studio building scalable systems, platforms, and digital infrastructure for modern businesses.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/portfolio">Portfolio</a></li>
+            <li><a href="/onboarding">Get Started</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact</h3>
+          <div class="contact-info">
+            <p><a href="mailto:info@mutag.co.za">info@mutag.co.za</a></p>
+            <p><a href="tel:+27729572238">+27 72 957 2238</a></p>
+            <p>Centurion, South Africa</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Mutag House. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="mobile-menu.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="whatsapp-float.js" defer></script>
+  <script src="onboarding.js" defer></script>
+</body>
+</html>
