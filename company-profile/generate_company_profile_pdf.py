@@ -521,7 +521,7 @@ def build():
         story.append(wrap)
     story.append(Spacer(1, 10 * mm))
     story.append(Paragraph("COMPANY PROFILE", styles["cover_title"]))
-    story.append(Paragraph("Software Development Studio &amp; Digital Systems Company", styles["cover_sub"]))
+    story.append(Paragraph("End-to-End Business Solutions — Marketing &amp; Technology", styles["cover_sub"]))
     story.append(Spacer(1, 4 * mm))
     story.append(
         Paragraph(
@@ -540,35 +540,33 @@ def build():
     story.append(section_rule())
     story.append(
         Paragraph(
-            "Mutag House is a software development studio specialising in the design and "
-            "delivery of scalable digital systems. Based in Centurion, Gauteng, we build "
-            "the platforms, applications, and backend infrastructure that organisations "
-            "rely on to operate, grow, and scale.",
+            "Mutag House is an end-to-end business solutions partner. Based in Centurion, "
+            "Gauteng, we help organisations form, grow, and run — through business setup "
+            "and compliance, marketing services, and technology services.",
             styles["body"],
         )
     )
     story.append(
         Paragraph(
-            "Our work goes beyond websites. We architect and implement custom web "
-            "applications, secure authentication systems, APIs, dashboards, and automated "
-            "workflows that support real business processes and complex operational "
-            "requirements. Every system we build is grounded in clean architecture, clear "
-            "business logic, and long-term maintainability.",
+            "The three pillars can be engaged together or alone. Some clients come to us to "
+            "register a company and stay CIPC-compliant. Others need a brand, a website, and "
+            "campaigns. Others need custom software, cybersecurity, or the ICT that keeps an "
+            "office connected. Many need a mix, and they want one partner instead of a "
+            "scattered vendor list.",
             styles["body"],
         )
     )
     story.append(
         Paragraph(
-            "We work with startups, SMEs, corporates, and institutions that require systems "
-            "that integrate with existing tools, enforce access control, manage data "
-            "securely, and perform reliably at scale.",
+            "Where marketing and technology meet, we treat that as one MarTech practice: "
+            "brands, campaigns, websites, and systems designed to work together. We work with "
+            "startups, SMEs, corporates, and institutions across South Africa.",
             styles["body"],
         )
     )
     story.append(
         Paragraph(
-            "At our core, we are builders of systems — practical, scalable, and designed "
-            "for the realities of modern business.",
+            "At our core, we are a business partner — not a single-service studio.",
             styles["body_bold"],
         )
     )
@@ -600,9 +598,8 @@ def build():
     story.append(section_rule())
     story.append(
         Paragraph(
-            "To design and deliver scalable software systems that help South African "
-            "businesses and institutions operate with clarity, efficiency, and confidence "
-            "— combining technical excellence with practical business understanding.",
+            "To help South African businesses and institutions form, grow, and operate with "
+            "clarity — combining business setup, marketing, and technology under one partner.",
             styles["body"],
         )
     )
@@ -611,8 +608,9 @@ def build():
     story.append(section_rule())
     story.append(
         Paragraph(
-            "To be a trusted digital systems partner for growing organisations — known for "
-            "clean architecture, reliable delivery, and solutions that endure beyond launch.",
+            "To be a trusted end-to-end business solutions partner for growing organisations "
+            "— known for practical delivery across business, marketing, and technology, and "
+            "for work that endures beyond launch.",
             styles["body"],
         )
     )
@@ -638,12 +636,44 @@ def build():
     story.append(section_rule())
     story.append(
         Paragraph(
-            "Mutag House organises its work into five complementary service areas.",
+            "Mutag House organises its work into three pillars. Clients can engage one, or we coordinate the full stack.",
             styles["body"],
         )
     )
 
-    story.append(Paragraph("5.1 Software Engineering (Core)", styles["h2"]))
+    story.append(Paragraph("5.1 Business Solutions", styles["h2"]))
+    story.append(
+        bullet_list(
+            styles,
+            [
+                "<b>Company registration</b> — CIPC company registration and trading paperwork",
+                "<b>CIPC beneficial ownership filings</b>",
+                "<b>Business documentation</b> — Profiles, compliance paperwork, operating documents",
+                "<b>CRM and presentations</b> — CRM implementation, investor decks, sales materials",
+            ],
+        )
+    )
+
+    story.append(Paragraph("5.2 Marketing Services", styles["h2"]))
+    story.append(
+        bullet_list(
+            styles,
+            [
+                "<b>Branding &amp; design</b> — Logos, brand guidelines, identity packages, print, giftings",
+                "<b>Web &amp; digital presence</b> — Corporate websites, landing pages, SEO, maintenance",
+                "<b>Growth &amp; campaigns</b> — Email, SEO, content, social, and paid advertising",
+            ],
+        )
+    )
+
+    story.append(Paragraph("5.3 Technology Services", styles["h2"]))
+    story.append(
+        Paragraph(
+            "Software that runs the business, and the ICT that keeps it secure and connected.",
+            styles["body"],
+        )
+    )
+    story.append(Paragraph("Software engineering", styles["h2"]))
     story.append(
         bullet_list(
             styles,
@@ -658,46 +688,10 @@ def build():
         )
     )
 
-    story.append(Paragraph("5.2 Web &amp; Digital Presence", styles["h2"]))
-    story.append(
-        bullet_list(
-            styles,
-            [
-                "Corporate websites and conversion-focused landing pages",
-                "SEO-optimised web properties and ongoing website maintenance",
-                "Growth and go-to-market support where it complements software delivery",
-            ],
-        )
-    )
-
-    story.append(Paragraph("5.3 Branding &amp; Design", styles["h2"]))
-    story.append(
-        bullet_list(
-            styles,
-            [
-                "Logo design, brand guidelines, and corporate identity packages",
-                "Marketing materials and print services",
-                "Corporate giftings and related print production",
-            ],
-        )
-    )
-
-    story.append(Paragraph("5.4 Business &amp; Compliance", styles["h2"]))
-    story.append(
-        bullet_list(
-            styles,
-            [
-                "Company registration and business documentation",
-                "CIPC beneficial ownership filings",
-                "CRM implementation and presentation design",
-            ],
-        )
-    )
-
-    story.append(Paragraph("5.5 ICT &amp; Infrastructure", styles["h2"]))
+    story.append(Paragraph("ICT &amp; infrastructure", styles["h2"]))
     story.append(
         Paragraph(
-            "Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every engagement we design.",
+            "Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every technology engagement we design.",
             styles["body"],
         )
     )
@@ -720,23 +714,23 @@ def build():
         bullet_list(
             styles,
             [
-                "<b>Systems Architecture</b> — Scalable, maintainable software designed to grow and integrate.",
-                "<b>Business Logic Engineering</b> — Operational requirements accurately reflected in code.",
-                "<b>Full-Stack Capability</b> — Frontend, backend, databases, authentication, and automation.",
+                "<b>Understand the Business</b> — How the organisation operates today, and what needs to change.",
+                "<b>Shape the Right Mix</b> — Engage one pillar or the full stack, mapped to the outcome.",
+                "<b>Deliver and Support</b> — File, brand, build, or install — then stay after go-live.",
             ],
         )
     )
 
-    story.append(Paragraph("7. Development Process", styles["h1"]))
+    story.append(Paragraph("7. How We Work", styles["h1"]))
     story.append(section_rule())
     story.append(
         bullet_list(
             styles,
             [
-                "<b>Discovery &amp; System Architecture</b> — Requirements and scalable technical design",
-                "<b>Business Logic Mapping</b> — Maintainable, testable software",
-                "<b>Iterative Development &amp; Testing</b> — Build, test, and refine in cycles",
-                "<b>Deployment, Scaling &amp; Long-Term Support</b> — Launch, monitor, and maintain",
+                "<b>Understand the business</b> — How you operate today and the outcome you want",
+                "<b>Shape the right mix</b> — Map work across business, marketing, and technology",
+                "<b>Deliver</b> — Build, brand, file, or install in cycles",
+                "<b>Support</b> — Stay after go-live for maintenance, campaigns, and compliance",
             ],
         )
     )
@@ -747,7 +741,7 @@ def build():
         Paragraph(
             "Fintech, healthcare, logistics, retail and e-commerce, education, professional "
             "services (including legal), and hospitality and lifestyle brands — adaptable to "
-            "any organisation requiring custom platforms, secure data handling, or process automation.",
+            "any organisation requiring business setup, marketing, custom platforms, secure data handling, or process automation.",
             styles["body"],
         )
     )
@@ -783,10 +777,10 @@ def build():
             styles,
             [
                 "<b>Local expertise</b> — Centurion-based with South African business and POPIA familiarity",
-                "<b>Systems-first mindset</b> — Infrastructure and applications that run operations",
-                "<b>Integrated delivery</b> — Software, web, branding, and compliance under one partner",
+                "<b>Three pillars, one partner</b> — Business, marketing, and technology engaged together or alone",
+                "<b>MarTech that holds together</b> — Brands, campaigns, websites, and systems as one practice",
                 "<b>Personalised engagement</b> — Scoped to each client’s goals and growth stage",
-                "<b>Long-term support</b> — Maintenance, iteration, and scaling after go-live",
+                "<b>Long-term support</b> — Maintenance, campaigns, compliance, and scaling after go-live",
             ],
         )
     )

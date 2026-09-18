@@ -1,22 +1,22 @@
 # Mutag House — Company Profile
 
 **Mutag House (Pty) Ltd**  
-Software Development Studio & Digital Systems Company  
+End-to-End Business Solutions — Marketing & Technology  
 Centurion, Gauteng, South Africa
 
 ---
 
 ## 1. Company Overview
 
-Mutag House is a software development studio specialising in the design and delivery of scalable digital systems. Based in Centurion, Gauteng, we build the platforms, applications, and backend infrastructure that organisations rely on to operate, grow, and scale.
+Mutag House is an end-to-end business solutions partner. Based in Centurion, Gauteng, we help organisations form, grow, and run — through business setup and compliance, marketing services, and technology services.
 
-Our work goes beyond websites. We architect and implement custom web applications, secure authentication systems, APIs, dashboards, and automated workflows that support real business processes and complex operational requirements. Every system we build is grounded in clean architecture, clear business logic, and long-term maintainability.
+The three pillars can be engaged together or alone. Some clients come to us to register a company and stay CIPC-compliant. Others need a brand, a website, and campaigns. Others need custom software, cybersecurity, or the ICT that keeps an office connected. Many need a mix, and they want one partner instead of a scattered vendor list.
 
-We work with startups, SMEs, corporates, and institutions that need systems that integrate with existing tools, enforce access control, manage data securely, and perform reliably at scale.
+Where marketing and technology meet, we treat that as one MarTech practice: brands, campaigns, websites, and systems designed to work together.
 
-While Mutag House maintains capabilities in branding, digital presence, business compliance, and ICT infrastructure, these services sit alongside the systems we build. Our focus is on engineering digital infrastructure that works, lasts, and delivers measurable business impact.
+We work with startups, SMEs, corporates, and institutions across South Africa. The work is practical, scoped to the outcome, and built to last beyond launch.
 
-**At our core, we are builders of systems — practical, scalable, and designed for the realities of modern business.**
+**At our core, we are a business partner — not a single-service studio.**
 
 | | |
 |---|---|
@@ -34,11 +34,11 @@ While Mutag House maintains capabilities in branding, digital presence, business
 
 ## 2. Mission
 
-To design and deliver scalable software systems that help South African businesses and institutions operate with clarity, efficiency, and confidence — combining technical excellence with practical business understanding.
+To help South African businesses and institutions form, grow, and operate with clarity — combining business setup, marketing, and technology under one partner.
 
 ## 3. Vision
 
-To be a trusted digital systems partner for growing organisations — known for clean architecture, reliable delivery, and solutions that endure beyond launch.
+To be a trusted end-to-end business solutions partner for growing organisations — known for practical delivery across business, marketing, and technology, and for work that endures beyond launch.
 
 ## 4. Core Values
 
@@ -53,11 +53,30 @@ To be a trusted digital systems partner for growing organisations — known for 
 
 ## 5. What We Do
 
-Mutag House organises its work into five complementary service areas.
+Mutag House organises its work into three pillars. Clients can engage one, or we coordinate the full stack.
 
-### 5.1 Software Engineering (Core)
+### 5.1 Business Solutions
 
-Production-grade systems that run the business:
+End-to-end setup and operations:
+
+- **Company registration** — CIPC company registration and the paperwork required to start trading in South Africa
+- **CIPC beneficial ownership filings**
+- **Business documentation** — profiles, compliance paperwork, and operating documents
+- **CRM implementation and presentation design** — investor decks and sales materials
+
+### 5.2 Marketing Services
+
+Brand, presence, and growth:
+
+- **Branding & design** — logo design, brand guidelines, corporate identity packages, marketing materials, print, and corporate giftings
+- **Web & digital presence** — corporate websites, conversion-focused landing pages, SEO-optimised web properties, and ongoing maintenance
+- **Growth & campaigns** — email, SEO, content, social, and paid advertising as standalone marketing services or as part of a wider engagement
+
+### 5.3 Technology Services
+
+Software that runs the business, and the ICT that keeps it secure and connected.
+
+**Software engineering**
 
 - **Custom Web Application Development** — Progressive Web Apps (PWAs), Single Page Applications (SPAs), multi-tenant SaaS platforms, and enterprise portals
 - **E-Commerce & Transaction Platforms** — Payment gateway integrations, inventory management, order processing, and subscription billing
@@ -66,27 +85,9 @@ Production-grade systems that run the business:
 - **Automation & Workflow Systems** — Workflow engines, CRM/ERP integrations, automated notifications, and custom automation tooling
 - **Authentication & Security Systems** — OAuth, SSO, role-based access control (RBAC), API security, and POPIA/GDPR-aligned compliance
 
-### 5.2 Web & Digital Presence
+**ICT & infrastructure**
 
-- Corporate websites and conversion-focused landing pages
-- SEO-optimised web properties and ongoing maintenance
-- Growth and go-to-market support (email campaigns, SEO, content strategy) when it complements software delivery
-
-### 5.3 Branding & Design
-
-- Logo design, brand guidelines, and corporate identity packages
-- Marketing materials and print services (business cards, stationery, large-format)
-- Corporate giftings and related print production
-
-### 5.4 Business & Compliance
-
-- Company registration and business documentation
-- CIPC beneficial ownership filings
-- CRM implementation and presentation design (investor decks, sales materials)
-
-### 5.5 ICT & Infrastructure
-
-Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every engagement we design.
+Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every technology engagement we design.
 
 - **Cybersecurity & Network Protection** — endpoint monitoring, firewalls, MFA, backup and disaster recovery, biometric/RFID access, smart locks, CCTV, and security audits
 - **Managed IT Services** — remote and on-site support with SLAs, device monitoring, software and licence management, and 24/7 support
@@ -98,29 +99,29 @@ Reliable ICT that keeps the business secure and connected. Cybersecurity sits at
 
 ## 6. Our Approach
 
-### Systems Architecture
-We design software with scalability, maintainability, and clean architecture at the centre — systems built to grow, integrate with existing infrastructure, and remain operable over time.
+### Understand the Business
+We start with how the organisation operates today — goals, constraints, and what actually needs to change — before recommending a mix of business, marketing, or technology work.
 
-### Business Logic Engineering
-We translate complex operational requirements into robust, reliable software so that business rules are accurately reflected in code.
+### Shape the Right Mix
+Clients can engage one pillar or the full stack. We map the work so they only take on what the outcome requires, and the pieces stay aligned.
 
-### Full-Stack Capability
-From frontend interfaces to backend APIs, databases, authentication, and automation — we cover the full stack to ensure coherent performance across the system.
+### Deliver and Support
+We file, brand, build, or install in cycles, then stay after go-live for maintenance, campaigns, compliance updates, and the next stage of growth.
 
 ---
 
-## 7. Development Process
+## 7. How We Work
 
-1. **Discovery & System Architecture** — Understand business requirements and design a technical architecture that can scale.
-2. **Business Logic Mapping** — Translate operational rules into maintainable, testable software.
-3. **Iterative Development & Testing** — Build in cycles, test continuously, and refine against real feedback.
-4. **Deployment, Scaling & Long-Term Support** — Launch smoothly, monitor performance, and provide ongoing maintenance and scaling support.
+1. **Understand the business** — How you operate today, what needs to change, and the outcome you want.
+2. **Shape the right mix** — Map work across business, marketing, and technology so you only take on what the outcome requires.
+3. **Deliver** — Build, brand, file, or install in cycles, with clear checkpoints as the work lands.
+4. **Support** — Stay after go-live for maintenance, campaigns, compliance, and the next stage of growth.
 
 ---
 
 ## 8. Industries We Serve
 
-Mutag House works across sectors that need scalable digital systems, including:
+Mutag House works across sectors that need to form, grow, or run the business, including:
 
 - Fintech  
 - Healthcare  
@@ -130,7 +131,7 @@ Mutag House works across sectors that need scalable digital systems, including:
 - Professional services (including legal)  
 - Hospitality & lifestyle brands  
 
-Solutions are adaptable to any organisation requiring custom platforms, secure data handling, or process automation.
+Solutions are adaptable to any organisation requiring business setup, marketing, custom platforms, secure data handling, or process automation.
 
 ---
 
@@ -187,10 +188,10 @@ These are some of the companies we have worked with, and the nature of the work 
 ## 10. Why Mutag House
 
 - **Local expertise** — Based in Centurion with deep familiarity with South African business, regulatory, and market realities (including POPIA).
-- **Systems-first mindset** — We build infrastructure and applications that run operations, not only marketing surfaces.
-- **Integrated delivery** — Software, web presence, branding, and compliance can be coordinated under one partner when needed.
-- **Personalised engagement** — Solutions are scoped to each client’s goals, constraints, and growth stage — from first system to modernisation and scale.
-- **Long-term support** — We remain available for maintenance, iteration, and scaling after go-live.
+- **Three pillars, one partner** — Business solutions, marketing services, and technology services can be engaged together or alone.
+- **MarTech that holds together** — Where marketing and technology meet, brands, campaigns, websites, and systems are designed as one practice.
+- **Personalised engagement** — Solutions are scoped to each client’s goals, constraints, and growth stage — from first company registration to modernisation and scale.
+- **Long-term support** — We remain available for maintenance, campaigns, compliance updates, and scaling after go-live.
 
 ---
 

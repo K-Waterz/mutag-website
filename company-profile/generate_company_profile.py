@@ -120,7 +120,7 @@ def build():
     tag = doc.add_paragraph()
     tag.alignment = WD_ALIGN_PARAGRAPH.CENTER
     tag.paragraph_format.space_after = Pt(4)
-    r = tag.add_run("Software Development Studio & Digital Systems Company")
+    r = tag.add_run("End-to-End Business Solutions — Marketing & Technology")
     set_run(r, size=11, color=MUTED)
 
     prepared = doc.add_paragraph()
@@ -133,32 +133,28 @@ def build():
     add_heading(doc, "1. Company Overview", 1)
     add_body(
         doc,
-        "Mutag House is a software development studio specialising in the design and "
-        "delivery of scalable digital systems. Based in Centurion, Gauteng, we build "
-        "the platforms, applications, and backend infrastructure that organisations "
-        "rely on to operate, grow, and scale.",
+        "Mutag House is an end-to-end business solutions partner. Based in Centurion, "
+        "Gauteng, we help organisations form, grow, and run — through business setup "
+        "and compliance, marketing services, and technology services.",
     )
     add_body(
         doc,
-        "Our work goes beyond websites. We architect and implement custom web "
-        "applications, secure authentication systems, APIs, dashboards, and automated "
-        "workflows that support real business processes and complex operational "
-        "requirements. Every system we build is grounded in clean architecture, clear "
-        "business logic, and long-term maintainability.",
+        "The three pillars can be engaged together or alone. Some clients come to us to "
+        "register a company and stay CIPC-compliant. Others need a brand, a website, and "
+        "campaigns. Others need custom software, cybersecurity, or the ICT that keeps an "
+        "office connected. Many need a mix, and they want one partner instead of a "
+        "scattered vendor list.",
     )
     add_body(
         doc,
-        "We work with startups, SMEs, corporates, and institutions that require systems "
-        "that integrate with existing tools, enforce access control, manage data "
-        "securely, and perform reliably at scale. Branding, digital presence, and "
-        "business compliance, and ICT services support the systems we build — our focus remains "
-        "on engineering digital infrastructure that works, lasts, and delivers "
-        "measurable business impact.",
+        "Where marketing and technology meet, we treat that as one MarTech practice: "
+        "brands, campaigns, websites, and systems designed to work together. We work with "
+        "startups, SMEs, corporates, and institutions across South Africa. The work is "
+        "practical, scoped to the outcome, and built to last beyond launch.",
     )
     add_body(
         doc,
-        "At our core, we are builders of systems — practical, scalable, and designed "
-        "for the realities of modern business.",
+        "At our core, we are a business partner — not a single-service studio.",
         bold=True,
     )
 
@@ -185,16 +181,16 @@ def build():
     add_heading(doc, "2. Mission", 1)
     add_body(
         doc,
-        "To design and deliver scalable software systems that help South African "
-        "businesses and institutions operate with clarity, efficiency, and confidence "
-        "— combining technical excellence with practical business understanding.",
+        "To help South African businesses and institutions form, grow, and operate with "
+        "clarity — combining business setup, marketing, and technology under one partner.",
     )
 
     add_heading(doc, "3. Vision", 1)
     add_body(
         doc,
-        "To be a trusted digital systems partner for growing organisations — known for "
-        "clean architecture, reliable delivery, and solutions that endure beyond launch.",
+        "To be a trusted end-to-end business solutions partner for growing organisations "
+        "— known for practical delivery across business, marketing, and technology, and "
+        "for work that endures beyond launch.",
     )
 
     add_heading(doc, "4. Core Values", 1)
@@ -223,11 +219,25 @@ def build():
     add_heading(doc, "5. Services Offered", 1)
     add_body(
         doc,
-        "Mutag House organises its work into five complementary service areas.",
+        "Mutag House organises its work into three pillars. Clients can engage one, or we coordinate the full stack.",
     )
 
-    add_heading(doc, "5.1 Software Engineering (Core)", 2)
-    add_body(doc, "Production-grade systems that run the business:")
+    add_heading(doc, "5.1 Business Solutions", 2)
+    add_body(doc, "End-to-end setup and operations:")
+    add_bullet(doc, "CIPC company registration and the paperwork required to start trading in South Africa", bold_prefix="Company registration —")
+    add_bullet(doc, "CIPC beneficial ownership filings")
+    add_bullet(doc, "Profiles, compliance paperwork, and operating documents", bold_prefix="Business documentation —")
+    add_bullet(doc, "CRM implementation and presentation design (investor decks, sales materials)")
+
+    add_heading(doc, "5.2 Marketing Services", 2)
+    add_body(doc, "Brand, presence, and growth:")
+    add_bullet(doc, "Logo design, brand guidelines, corporate identity packages, marketing materials, print, and corporate giftings", bold_prefix="Branding & design —")
+    add_bullet(doc, "Corporate websites, conversion-focused landing pages, SEO-optimised web properties, and ongoing maintenance", bold_prefix="Web & digital presence —")
+    add_bullet(doc, "Email, SEO, content, social, and paid advertising as standalone marketing services or as part of a wider engagement", bold_prefix="Growth & campaigns —")
+
+    add_heading(doc, "5.3 Technology Services", 2)
+    add_body(doc, "Software that runs the business, and the ICT that keeps it secure and connected.")
+    add_heading(doc, "Software engineering", 3)
     add_bullet(
         doc,
         " Progressive Web Apps (PWAs), Single Page Applications (SPAs), multi-tenant SaaS platforms, and enterprise portals",
@@ -259,34 +269,10 @@ def build():
         bold_prefix="Authentication & Security Systems —",
     )
 
-    add_heading(doc, "5.2 Web & Digital Presence", 2)
-    add_bullet(doc, "Corporate websites and conversion-focused landing pages")
-    add_bullet(doc, "SEO-optimised web properties and ongoing website maintenance")
-    add_bullet(
-        doc,
-        "Growth and go-to-market support (email campaigns, SEO, content strategy) where it complements software delivery",
-    )
-
-    add_heading(doc, "5.3 Branding & Design", 2)
-    add_bullet(doc, "Logo design, brand guidelines, and corporate identity packages")
-    add_bullet(
-        doc,
-        "Marketing materials and print services (business cards, stationery, large-format)",
-    )
-    add_bullet(doc, "Corporate giftings and related print production")
-
-    add_heading(doc, "5.4 Business & Compliance", 2)
-    add_bullet(doc, "Company registration and business documentation")
-    add_bullet(doc, "CIPC beneficial ownership filings")
-    add_bullet(
-        doc,
-        "CRM implementation and presentation design (investor decks, sales materials)",
-    )
-
-    add_heading(doc, "5.5 ICT & Infrastructure", 2)
+    add_heading(doc, "ICT & infrastructure", 3)
     add_body(
         doc,
-        "Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every engagement we design.",
+        "Reliable ICT that keeps the business secure and connected. Cybersecurity sits at the centre of every technology engagement we design.",
     )
     add_bullet(
         doc,
@@ -318,52 +304,51 @@ def build():
     add_heading(doc, "6. Our Approach", 1)
     add_bullet(
         doc,
-        " We design software with scalability, maintainability, and clean architecture at the centre — systems built to grow, integrate with existing infrastructure, and remain operable over time.",
-        bold_prefix="Systems Architecture —",
+        " We start with how the organisation operates today — goals, constraints, and what actually needs to change — before recommending a mix of business, marketing, or technology work.",
+        bold_prefix="Understand the Business —",
     )
     add_bullet(
         doc,
-        " We translate complex operational requirements into robust, reliable software so that business rules are accurately reflected in code.",
-        bold_prefix="Business Logic Engineering —",
+        " Clients can engage one pillar or the full stack. We map the work so they only take on what the outcome requires, and the pieces stay aligned.",
+        bold_prefix="Shape the Right Mix —",
     )
     add_bullet(
         doc,
-        " From frontend interfaces to backend APIs, databases, authentication, and automation — we cover the full stack to ensure coherent performance across the system.",
-        bold_prefix="Full-Stack Capability —",
+        " We file, brand, build, or install in cycles, then stay after go-live for maintenance, campaigns, compliance updates, and the next stage of growth.",
+        bold_prefix="Deliver and Support —",
     )
 
-    # 7 Process
-    add_heading(doc, "7. Development Process", 1)
+    add_heading(doc, "7. How We Work", 1)
     add_bullet(
         doc,
-        " Understand business requirements and design a technical architecture that can scale.",
-        bold_prefix="1. Discovery & System Architecture —",
+        " How you operate today, what needs to change, and the outcome you want.",
+        bold_prefix="1. Understand the business —",
     )
     add_bullet(
         doc,
-        " Translate operational rules into maintainable, testable software.",
-        bold_prefix="2. Business Logic Mapping —",
+        " Map work across business, marketing, and technology so you only take on what the outcome requires.",
+        bold_prefix="2. Shape the right mix —",
     )
     add_bullet(
         doc,
-        " Build in cycles, test continuously, and refine against real feedback.",
-        bold_prefix="3. Iterative Development & Testing —",
+        " Build, brand, file, or install in cycles, with clear checkpoints as the work lands.",
+        bold_prefix="3. Deliver —",
     )
     add_bullet(
         doc,
-        " Launch smoothly, monitor performance, and provide ongoing maintenance and scaling support.",
-        bold_prefix="4. Deployment, Scaling & Long-Term Support —",
+        " Stay after go-live for maintenance, campaigns, compliance, and the next stage of growth.",
+        bold_prefix="4. Support —",
     )
 
     # 8 Industries
     add_heading(doc, "8. Industries Served", 1)
     add_body(
         doc,
-        "Mutag House works across sectors that need scalable digital systems, including "
+        "Mutag House works across sectors that need to form, grow, or run the business, including "
         "fintech, healthcare, logistics, retail and e-commerce, education, professional "
         "services (including legal), and hospitality and lifestyle brands. Solutions are "
-        "adaptable to any organisation requiring custom platforms, secure data handling, "
-        "or process automation.",
+        "adaptable to any organisation requiring business setup, marketing, custom platforms, "
+        "secure data handling, or process automation.",
     )
 
     # 9 Selected Client Work
@@ -463,13 +448,13 @@ def build():
     )
     add_bullet(
         doc,
-        " We build infrastructure and applications that run operations, not only marketing surfaces.",
-        bold_prefix="Systems-first mindset —",
+        " Business solutions, marketing services, and technology services can be engaged together or alone.",
+        bold_prefix="Three pillars, one partner —",
     )
     add_bullet(
         doc,
-        " Software, web presence, branding, and compliance can be coordinated under one partner when required.",
-        bold_prefix="Integrated delivery —",
+        " Where marketing and technology meet, brands, campaigns, websites, and systems are designed as one practice.",
+        bold_prefix="MarTech that holds together —",
     )
     add_bullet(
         doc,

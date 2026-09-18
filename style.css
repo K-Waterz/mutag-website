@@ -708,8 +708,7 @@ strong { color: var(--text); }
   gap: var(--space-lg);
 }
 
-@media (min-width: 560px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .pillar-card {
   position: relative;
@@ -1661,6 +1660,26 @@ html:not(.motion-ready) .process-step {
   margin: 0;
 }
 
+.service-subgroup {
+  margin-top: var(--space-xl);
+  scroll-margin-top: 150px;
+}
+.service-subgroup-header {
+  max-width: 760px;
+  margin: 0 auto var(--space-lg);
+  text-align: center;
+}
+.service-subgroup-header h3 {
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  margin-bottom: var(--space-sm);
+}
+.service-subgroup-header p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ================ FAQ ================ */
 .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
 
@@ -1935,6 +1954,21 @@ html:not(.motion-ready) .process-step {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.75rem;
+}
+
+.onboarding-pillar-group {
+  margin-top: 1.25rem;
+}
+.onboarding-pillar-group:first-of-type {
+  margin-top: 0.35rem;
+}
+.onboarding-pillar-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  margin: 0 0 0.6rem;
 }
 
 @media (min-width: 640px) {

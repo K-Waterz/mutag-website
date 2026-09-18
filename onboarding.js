@@ -10,36 +10,43 @@
       id: "register-company",
       title: "Register a company",
       desc: "CIPC company registration and setup in South Africa",
-    },
-    {
-      id: "design-materials",
-      title: "Design materials",
-      desc: "Logo, brand identity, business cards, and print design",
-    },
-    {
-      id: "website",
-      title: "Website",
-      desc: "A professional online presence for your business",
-    },
-    {
-      id: "landing-page",
-      title: "Landing page",
-      desc: "A focused page for a product, offer, or campaign",
-    },
-    {
-      id: "custom-software",
-      title: "Custom software",
-      desc: "Web apps, tools, or systems built for your needs",
-    },
-    {
-      id: "ict-infrastructure",
-      title: "ICT & infrastructure",
-      desc: "Cybersecurity, IT support, cloud, cabling, and ICT projects",
+      pillar: "business",
     },
     {
       id: "business-docs",
       title: "Business documentation",
       desc: "Profiles, presentations, and compliance paperwork",
+      pillar: "business",
+    },
+    {
+      id: "design-materials",
+      title: "Design materials",
+      desc: "Logo, brand identity, business cards, and print design",
+      pillar: "marketing",
+    },
+    {
+      id: "website",
+      title: "Website",
+      desc: "A professional online presence for your business",
+      pillar: "marketing",
+    },
+    {
+      id: "landing-page",
+      title: "Landing page",
+      desc: "A focused page for a product, offer, or campaign",
+      pillar: "marketing",
+    },
+    {
+      id: "custom-software",
+      title: "Custom software",
+      desc: "Web apps, tools, or systems built for your needs",
+      pillar: "technology",
+    },
+    {
+      id: "ict-infrastructure",
+      title: "ICT & infrastructure",
+      desc: "Cybersecurity, IT support, cloud, cabling, and ICT projects",
+      pillar: "technology",
     },
   ];
 
@@ -48,51 +55,61 @@
       id: "beneficial-ownership",
       title: "Beneficial ownership",
       desc: "CIPC beneficial ownership filing and compliance",
-    },
-    {
-      id: "website",
-      title: "Corporate website",
-      desc: "A full website for your company brand and services",
-    },
-    {
-      id: "landing-page",
-      title: "Landing page",
-      desc: "Conversion-focused pages for campaigns or launches",
-    },
-    {
-      id: "branding",
-      title: "Branding & design",
-      desc: "Logo refresh, brand guidelines, and visual identity",
-    },
-    {
-      id: "custom-software",
-      title: "Custom software",
-      desc: "Web applications, platforms, and internal tools",
-    },
-    {
-      id: "ict-infrastructure",
-      title: "ICT & infrastructure",
-      desc: "Cybersecurity, managed IT, cloud, cabling, and ICT projects",
-    },
-    {
-      id: "dashboards",
-      title: "Dashboards & analytics",
-      desc: "Business intelligence and reporting systems",
-    },
-    {
-      id: "automation",
-      title: "Automation & workflows",
-      desc: "Streamline processes and reduce manual work",
-    },
-    {
-      id: "seo-maintenance",
-      title: "SEO & maintenance",
-      desc: "Ongoing website care, updates, and search visibility",
+      pillar: "business",
     },
     {
       id: "business-docs",
       title: "Business documentation",
       desc: "Corporate docs, presentations, and filings support",
+      pillar: "business",
+    },
+    {
+      id: "website",
+      title: "Corporate website",
+      desc: "A full website for your company brand and services",
+      pillar: "marketing",
+    },
+    {
+      id: "landing-page",
+      title: "Landing page",
+      desc: "Conversion-focused pages for campaigns or launches",
+      pillar: "marketing",
+    },
+    {
+      id: "branding",
+      title: "Branding & design",
+      desc: "Logo refresh, brand guidelines, and visual identity",
+      pillar: "marketing",
+    },
+    {
+      id: "seo-maintenance",
+      title: "SEO & maintenance",
+      desc: "Ongoing website care, updates, and search visibility",
+      pillar: "marketing",
+    },
+    {
+      id: "custom-software",
+      title: "Custom software",
+      desc: "Web applications, platforms, and internal tools",
+      pillar: "technology",
+    },
+    {
+      id: "ict-infrastructure",
+      title: "ICT & infrastructure",
+      desc: "Cybersecurity, managed IT, cloud, cabling, and ICT projects",
+      pillar: "technology",
+    },
+    {
+      id: "dashboards",
+      title: "Dashboards & analytics",
+      desc: "Business intelligence and reporting systems",
+      pillar: "technology",
+    },
+    {
+      id: "automation",
+      title: "Automation & workflows",
+      desc: "Streamline processes and reduce manual work",
+      pillar: "technology",
     },
   ];
 
@@ -454,7 +471,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
           </span>
           <strong>Company</strong>
-          <span>An existing business needing software, ICT, compliance, web, or branding</span>
+          <span>An existing business needing setup, marketing, or technology help</span>
         </button>
       </div>
     `;
@@ -473,20 +490,14 @@
     });
   }
 
-  function renderServicesStep() {
-    const list = serviceList();
-    const label =
-      state.clientType === "company"
-        ? "What services does your company need?"
-        : "What would you like help with?";
+  const PILLAR_LABELS = [
+    { id: "business", title: "Business Solutions" },
+    { id: "marketing", title: "Marketing Services" },
+    { id: "technology", title: "Technology Services" },
+  ];
 
-    wizardEl.innerHTML = `
-      <h2>${label}</h2>
-      <p class="onboarding-hint">Select all that apply — you can choose more than one.</p>
-      <div class="onboarding-option-grid">
-        ${list
-          .map(
-            (s) => `
+  function renderServiceOption(s) {
+    return `
           <label class="onboarding-option ${state.services.includes(s.id) ? "is-selected" : ""}">
             <input type="checkbox" value="${s.id}" ${state.services.includes(s.id) ? "checked" : ""} />
             <span class="onboarding-option-check" aria-hidden="true"></span>
@@ -495,10 +506,33 @@
               <span>${escapeHtml(s.desc)}</span>
             </span>
           </label>
-        `
-          )
-          .join("")}
-      </div>
+        `;
+  }
+
+  function renderServicesStep() {
+    const list = serviceList();
+    const label =
+      state.clientType === "company"
+        ? "What services does your company need?"
+        : "What would you like help with?";
+
+    const groups = PILLAR_LABELS.map((pillar) => {
+      const items = list.filter((s) => s.pillar === pillar.id);
+      if (!items.length) return "";
+      return `
+        <div class="onboarding-pillar-group">
+          <p class="onboarding-pillar-label">${escapeHtml(pillar.title)}</p>
+          <div class="onboarding-option-grid">
+            ${items.map(renderServiceOption).join("")}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    wizardEl.innerHTML = `
+      <h2>${label}</h2>
+      <p class="onboarding-hint">Select all that apply — you can choose more than one, across any pillar.</p>
+      ${groups}
     `;
 
     wizardEl.querySelectorAll('input[type="checkbox"]').forEach((input) => {
