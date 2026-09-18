@@ -69,6 +69,39 @@ const Home = () => {
     }
   ]
 
+  const ictServices = [
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      ),
+      title: 'Cybersecurity',
+      description: 'Layered, proactive security for people, data, and premises.',
+      items: ['Endpoint monitoring', 'Firewalls, MFA & access control', 'Backup & disaster recovery', 'CCTV & biometrics']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+      title: 'Managed IT',
+      description: 'Proactive IT support without a full-time in-house team.',
+      items: ['Remote & on-site support', 'Device monitoring', 'Licence management', '24/7 support']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+        </svg>
+      ),
+      title: 'Cloud & Infrastructure',
+      description: 'Cloud, cabling, WiFi, and ICT projects that scale with you.',
+      items: ['Microsoft 365 / Google Workspace', 'Structured cabling & WiFi', 'Server rooms & UPS', 'Custom ICT rollouts']
+    }
+  ]
+
 
   return (
     <>
@@ -215,6 +248,32 @@ const Home = () => {
               See Full Capabilities
             </Button>
           </a>
+        </div>
+      </Section>
+
+      <Section
+        title="ICT & Infrastructure"
+        subtitle="Cybersecurity, managed IT, cloud, and the networks your operations run on."
+        background="dark"
+      >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ictServices.map((service, index) => (
+            <Card key={service.title} delay={index * 0.1}>
+              <div className="text-brand-blue mb-4">{service.icon}</div>
+              <h3 className="font-heading text-xl mb-3">{service.title}</h3>
+              <p className="text-brand-light/70 mb-4">{service.description}</p>
+              <ul className="space-y-2 text-sm text-brand-light/60">
+                {service.items.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-brand-blue" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))}
         </div>
       </Section>
 

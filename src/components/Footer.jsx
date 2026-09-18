@@ -61,7 +61,7 @@ const Footer = () => {
               />
             </a>
             <p className="text-brand-light/60 text-sm mb-6 max-w-xs">
-              Software development studio and digital systems company. We architect, build, and scale enterprise-grade software solutions that power modern businesses.
+              Software, ICT, and digital systems — from custom applications to cybersecurity, cloud, and infrastructure.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (

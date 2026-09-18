@@ -32,6 +32,11 @@
       desc: "Web apps, tools, or systems built for your needs",
     },
     {
+      id: "ict-infrastructure",
+      title: "ICT & infrastructure",
+      desc: "Cybersecurity, IT support, cloud, cabling, and ICT projects",
+    },
+    {
       id: "business-docs",
       title: "Business documentation",
       desc: "Profiles, presentations, and compliance paperwork",
@@ -63,6 +68,11 @@
       id: "custom-software",
       title: "Custom software",
       desc: "Web applications, platforms, and internal tools",
+    },
+    {
+      id: "ict-infrastructure",
+      title: "ICT & infrastructure",
+      desc: "Cybersecurity, managed IT, cloud, cabling, and ICT projects",
     },
     {
       id: "dashboards",
@@ -231,6 +241,25 @@
             { value: "internal", label: "Internal business tool" },
             { value: "api", label: "Backend / API" },
             { value: "auth", label: "Auth & security (login, SSO)" },
+            { value: "unsure", label: "Not sure — need advice" },
+          ],
+        },
+      ],
+    },
+    "ict-infrastructure": {
+      title: "ICT & infrastructure",
+      questions: [
+        {
+          id: "ict_focus",
+          label: "Which ICT services do you need?",
+          type: "multi",
+          options: [
+            { value: "cybersecurity", label: "Cybersecurity & network protection" },
+            { value: "managed-it", label: "Managed IT / 24/7 support" },
+            { value: "cloud", label: "Cloud (Microsoft 365 / Google Workspace)" },
+            { value: "cabling", label: "Cabling, WiFi & server rooms" },
+            { value: "cctv-access", label: "CCTV, biometrics & access control" },
+            { value: "ict-project", label: "Full ICT rollout / transformation" },
             { value: "unsure", label: "Not sure — need advice" },
           ],
         },
@@ -425,7 +454,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
           </span>
           <strong>Company</strong>
-          <span>An existing business needing compliance, web, branding, or software</span>
+          <span>An existing business needing software, ICT, compliance, web, or branding</span>
         </button>
       </div>
     `;

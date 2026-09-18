@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mutag House — Company Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0d1526;
+      --navy: #131d33;
+      --navy-mid: #1a2744;
+      --blue: #2563eb;
+      --blue-soft: #eef4ff;
+      --slate: #3d4a5c;
+      --muted: #64748b;
+      --line: #d3dae5;
+      --fog: #f7f9fc;
+      --white: #ffffff;
+      --page-w: 210mm;
+      --page-h: 297mm;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: #c5ccd8;
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: var(--page-w);
+      min-height: var(--page-h);
+      height: var(--page-h);
+      margin: 12px auto;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(13, 21, 38, 0.18);
+    }
+
+    @media print {
+      html, body { background: none; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+    }
+
+    @page { size: A4; margin: 0; }
+
+    /* ——— Cover ——— */
+    .cover {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse 80% 50% at 100% 0%, rgba(37, 99, 235, 0.35), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(37, 99, 235, 0.18), transparent 50%),
+        linear-gradient(165deg, #0d1526 0%, #131d33 48%, #1a2744 100%);
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-main {
+      padding: 22mm 18mm 10mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .cover-logo {
+      height: 48px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+    }
+
+    .cover-badge {
+      font-size: 8pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    .cover-hero { margin-top: 28mm; max-width: 150mm; }
+
+    .cover-kicker {
+      font-size: 9pt;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .cover-title {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 600;
+      font-size: 42pt;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .cover-title span {
+      display: block;
+      color: #93c5fd;
+      font-size: 18pt;
+      font-weight: 500;
+      margin-top: 8px;
+      letter-spacing: 0;
+    }
+
+    .cover-lead {
+      font-size: 11.5pt;
+      color: rgba(255,255,255,0.78);
+      max-width: 130mm;
+      line-height: 1.6;
+    }
+
+    .cover-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10mm;
+      margin-top: 22mm;
+      padding-top: 8mm;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cover-meta dt {
+      font-size: 7.5pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 3px;
+    }
+
+    .cover-meta dd {
+      font-size: 9.5pt;
+      color: rgba(255,255,255,0.92);
+      font-weight: 500;
+    }
+
+    .cover-clients {
+      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 8mm 18mm 10mm;
+    }
+
+    .cover-clients h2 {
+      font-size: 8pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      margin-bottom: 6mm;
+    }
+
+    .logo-wall {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3mm;
+      align-items: center;
+    }
+
+    .logo-wall figure {
+      background: var(--white);
+      border-radius: 6px;
+      height: 18mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2mm 2.5mm;
+    }
+
+    .logo-wall img {
+      max-width: 100%;
+      max-height: 12mm;
+      object-fit: contain;
+    }
+
+    /* ——— Inner pages ——— */
+    .inner {
+      display: flex;
+      flex-direction: column;
+      background:
+        linear-gradient(180deg, #f4f7fc 0%, #ffffff 42mm);
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8mm 16mm 5mm;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-header img {
+      height: 26px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+    }
+
+    .page-header-meta {
+      font-size: 7.5pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .page-body {
+      flex: 1;
+      padding: 7mm 16mm 4mm;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4mm 16mm 6mm;
+      border-top: 1px solid var(--line);
+      font-size: 7.5pt;
+      color: var(--muted);
+    }
+
+    .page-footer .accent {
+      width: 28px;
+      height: 3px;
+      background: var(--blue);
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    h1.section {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 17pt;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5mm;
+    }
+
+    .section-rule {
+      width: 18mm;
+      height: 2.5px;
+      background: var(--blue);
+      margin-bottom: 4mm;
+      border: none;
+    }
+
+    h2.sub {
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 3.5mm 0 2mm;
+    }
+
+    p {
+      color: var(--slate);
+      margin-bottom: 2.6mm;
+      font-size: 9.6pt;
+      line-height: 1.5;
+    }
+
+    p.lead-strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 8mm;
+      align-items: start;
+    }
+
+    .facts {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 4.5mm 4.5mm;
+    }
+
+    .facts h3 {
+      font-size: 8pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 4mm;
+      font-weight: 600;
+    }
+
+    .fact-row {
+      display: grid;
+      grid-template-columns: 32mm 1fr;
+      gap: 2mm;
+      padding: 2.4mm 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 8.5pt;
+    }
+
+    .fact-row:last-child { border-bottom: none; }
+
+    .fact-row dt {
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    .fact-row dd {
+      color: var(--white);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5mm;
+      margin-top: 2mm;
+    }
+
+    .value-card {
+      background: var(--fog);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 3.2mm 3.5mm;
+      border-left: 3px solid var(--blue);
+    }
+
+    .value-card h3 {
+      font-size: 9.5pt;
+      color: var(--ink);
+      margin-bottom: 1mm;
+      font-weight: 700;
+    }
+
+    .value-card p {
+      font-size: 8pt;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5mm;
+    }
+
+    .service-block {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 4mm 4.5mm;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-block::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), #1d4ed8);
+    }
+
+    .service-block .num {
+      font-size: 7.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 1.5mm;
+    }
+
+    .service-block h3 {
+      font-size: 10.5pt;
+      color: var(--ink);
+      margin-bottom: 2mm;
+      font-weight: 700;
+    }
+
+    .service-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-block li {
+      font-size: 8.2pt;
+      color: var(--slate);
+      padding: 1.1mm 0 1.1mm 3.5mm;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .service-block li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5.5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      opacity: 0.7;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+      margin-top: 2mm;
+    }
+
+    .process-step {
+      background: var(--fog);
+      border-radius: 8px;
+      padding: 3.5mm;
+      border-top: 3px solid var(--blue);
+    }
+
+    .process-step .n {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 16pt;
+      color: var(--blue);
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 2mm;
+    }
+
+    .process-step h3 {
+      font-size: 8.5pt;
+      color: var(--ink);
+      margin-bottom: 1.5mm;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .process-step p {
+      font-size: 7.8pt;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .intro-note {
+      font-size: 10pt;
+      color: var(--slate);
+      font-style: italic;
+      margin-bottom: 5mm;
+      padding: 3.5mm 4mm;
+      background: var(--blue-soft);
+      border-radius: 6px;
+      border-left: 3px solid var(--blue);
+    }
+
+    .client-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.8mm;
+    }
+
+    .client-card {
+      display: grid;
+      grid-template-columns: 38mm 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      min-height: 28mm;
+    }
+
+    .client-logo {
+      background: var(--fog);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3mm;
+      border-right: 1px solid var(--line);
+    }
+
+    .client-logo img {
+      max-width: 100%;
+      max-height: 20mm;
+      object-fit: contain;
+    }
+
+    .client-body {
+      padding: 3.5mm 4.5mm;
+    }
+
+    .client-body h3 {
+      font-size: 10.5pt;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 1.5mm;
+    }
+
+    .client-body ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5mm 4mm;
+    }
+
+    .client-body li {
+      font-size: 8pt;
+      color: var(--slate);
+      position: relative;
+      padding-left: 3mm;
+      line-height: 1.35;
+    }
+
+    .client-body li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 3mm;
+      align-items: flex-start;
+      padding: 3.5mm;
+      background: var(--fog);
+      border-radius: 8px;
+    }
+
+    .why-item .mark {
+      flex-shrink: 0;
+      width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8pt;
+      font-weight: 700;
+    }
+
+    .why-item h3 {
+      font-size: 9.5pt;
+      color: var(--ink);
+      margin-bottom: 1mm;
+      font-weight: 700;
+    }
+
+    .why-item p {
+      font-size: 8pt;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 6mm;
+      margin-top: 2mm;
+    }
+
+    .contact-card {
+      background: var(--ink);
+      color: white;
+      border-radius: 10px;
+      padding: 6mm;
+    }
+
+    .contact-card h3 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 14pt;
+      margin-bottom: 4mm;
+    }
+
+    .contact-line {
+      display: grid;
+      grid-template-columns: 28mm 1fr;
+      gap: 2mm;
+      font-size: 9pt;
+      padding: 2.2mm 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .contact-line:last-child { border-bottom: none; }
+
+    .contact-line span:first-child {
+      color: rgba(255,255,255,0.45);
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .closing {
+      background: var(--fog);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .closing h3 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 13pt;
+      color: var(--ink);
+      margin-bottom: 3mm;
+    }
+
+    .closing p {
+      font-size: 9pt;
+      margin-bottom: 4mm;
+    }
+
+    .closing .cta {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      font-weight: 600;
+      font-size: 9pt;
+      padding: 3mm 5mm;
+      border-radius: 6px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .industries {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm;
+      margin-top: 2mm;
+    }
+
+    .pill {
+      background: var(--blue-soft);
+      color: var(--navy);
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 1.8mm 3.5mm;
+      border-radius: 999px;
+      border: 1px solid #dbe7ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1: COVER ==================== -->
+  <section class="page cover">
+    <div class="cover-main">
+      <div class="cover-top">
+        <img class="cover-logo" src="assets/mutag-logo-white.svg" alt="Mutag House" />
+        <div class="cover-badge">Company Profile  ·  2026</div>
+      </div>
+
+      <div class="cover-hero">
+        <p class="cover-kicker">Software Development Studio</p>
+        <h1 class="cover-title">
+          Mutag House
+          <span>Digital systems built to last</span>
+        </h1>
+        <p class="cover-lead">
+          We design and deliver scalable software platforms, applications, and
+          digital infrastructure for organisations that need systems that work,
+          scale, and endure.
+        </p>
+      </div>
+
+      <dl class="cover-meta">
+        <div>
+          <dt>Registration</dt>
+          <dd>2025/500507/07</dd>
+        </div>
+        <div>
+          <dt>Headquarters</dt>
+          <dd>Centurion, Gauteng, South Africa</dd>
+        </div>
+        <div>
+          <dt>Legal entity</dt>
+          <dd>Mutag House (Pty) Ltd</dd>
+        </div>
+        <div>
+          <dt>Web</dt>
+          <dd>www.mutag.co.za</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="cover-clients">
+      <h2>Selected organisations we have worked with</h2>
+      <div class="logo-wall">
+        <figure><img src="assets/xfm-tech-logo.png" alt="XFM Tech" /></figure>
+        <figure><img src="assets/flowerclub-logo.png" alt="FlowerClub" /></figure>
+        <figure><img src="assets/attorneys-logo.png" alt="Mathibele Mahlaela Attorneys" /></figure>
+        <figure><img src="assets/magnificent-pools-logo.png" alt="Magnificent Pools" /></figure>
+        <figure><img src="assets/we-moove-sa-logo.png" alt="We Moove SA" /></figure>
+        <figure><img src="assets/Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys" /></figure>
+        <figure><img src="assets/lagracia-logo.png" alt="La Gracia Estate" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 2: OVERVIEW ==================== -->
+  <section class="page inner">
+    <header class="page-header">
+      <img src="assets/mutag-logo-black.svg" alt="Mutag House" />
+      <div class="page-header-meta">Company Profile</div>
+    </header>
+    <div class="page-body">
+      <h1 class="section">Company Overview</h1>
+      <hr class="section-rule" />
+
+      <div class="two-col">
+        <div>
+          <p>
+            Mutag House is a software development studio specialising in the design
+            and delivery of scalable digital systems. Based in Centurion, Gauteng,
+            we build the platforms, applications, and backend infrastructure that
+            organisations rely on to operate, grow, and scale.
+          </p>
+          <p>
+            Our work goes beyond websites. We architect and implement custom web
+            applications, secure authentication systems, APIs, dashboards, and
+            automated workflows that support real business processes and complex
+            operational requirements. Every system we build is grounded in clean
+            architecture, clear business logic, and long-term maintainability.
+          </p>
+          <p>
+            We work with startups, SMEs, corporates, and institutions that require
+            systems that integrate with existing tools, enforce access control,
+            manage data securely, and perform reliably at scale. Branding, digital
+            presence, business compliance, and ICT services support the systems we build —
+            our focus remains on engineering digital infrastructure that delivers
+            measurable business impact.
+          </p>
+          <p class="lead-strong">
+            At our core, we are builders of systems — practical, scalable, and
+            designed for the realities of modern business.
+          </p>
+        </div>
+
+        <aside class="facts">
+          <h3>Company Particulars</h3>
+          <dl>
+            <div class="fact-row"><dt>Legal name</dt><dd>Mutag House (Pty) Ltd</dd></div>
+            <div class="fact-row"><dt>Trading as</dt><dd>Mutag House</dd></div>
+            <div class="fact-row"><dt>Reg. number</dt><dd>2025/500507/07</dd></div>
+            <div class="fact-row"><dt>Address</dt><dd>2957B Goshawk Street, Thatchfield Hills, Centurion, 0157</dd></div>
+            <div class="fact-row"><dt>Email</dt><dd>info@mutag.co.za</dd></div>
+            <div class="fact-row"><dt>Telephone</dt><dd>+27 72 957 2238</dd></div>
+            <div class="fact-row"><dt>Hours</dt><dd>Mon–Fri, 08:00–17:00</dd></div>
+            <div class="fact-row"><dt>Website</dt><dd>www.mutag.co.za</dd></div>
+          </dl>
+        </aside>
+      </div>
+
+      <h2 class="sub">Mission</h2>
+      <p>
+        To design and deliver scalable software systems that help South African
+        businesses and institutions operate with clarity, efficiency, and confidence —
+        combining technical excellence with practical business understanding.
+      </p>
+
+      <h2 class="sub">Vision</h2>
+      <p>
+        To be a trusted digital systems partner for growing organisations — known for
+        clean architecture, reliable delivery, and solutions that endure beyond launch.
+      </p>
+
+      <h2 class="sub">Core Values</h2>
+      <div class="values">
+        <div class="value-card">
+          <h3>Excellence</h3>
+          <p>High standards of quality and professionalism on every engagement.</p>
+        </div>
+        <div class="value-card">
+          <h3>Innovation</h3>
+          <p>Proven technologies and design approaches that deliver lasting value.</p>
+        </div>
+        <div class="value-card">
+          <h3>Partnership</h3>
+          <p>Client relationships treated as collaboration, not transactions.</p>
+        </div>
+        <div class="value-card">
+          <h3>Reliability</h3>
+          <p>On-time delivery, clear communication, and systems that perform.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div><span class="accent"></span>Mutag House (Pty) Ltd · Reg. 2025/500507/07</div>
+      <div>02</div>
+    </footer>
+  </section>
+
+  <!-- ==================== PAGE 3: SERVICES ==================== -->
+  <section class="page inner">
+    <header class="page-header">
+      <img src="assets/mutag-logo-black.svg" alt="Mutag House" />
+      <div class="page-header-meta">Services &amp; Approach</div>
+    </header>
+    <div class="page-body">
+      <h1 class="section">Services Offered</h1>
+      <hr class="section-rule" />
+      <p style="margin-bottom: 4mm;">
+        Mutag House organises its work into five complementary service areas —
+        with software engineering and ICT at the core.
+      </p>
+
+      <div class="service-grid">
+        <article class="service-block">
+          <div class="num">01 — Core</div>
+          <h3>Software Engineering</h3>
+          <ul>
+            <li>Custom web applications (PWAs, SPAs, SaaS, portals)</li>
+            <li>E-commerce &amp; transaction platforms</li>
+            <li>Backend systems &amp; REST/GraphQL APIs</li>
+            <li>Business intelligence &amp; dashboards</li>
+            <li>Automation &amp; workflow systems</li>
+            <li>Authentication &amp; security (OAuth, SSO, RBAC, POPIA)</li>
+          </ul>
+        </article>
+        <article class="service-block">
+          <div class="num">02 — Presence</div>
+          <h3>Web &amp; Digital</h3>
+          <ul>
+            <li>Corporate websites &amp; landing pages</li>
+            <li>SEO-optimised web properties</li>
+            <li>Website maintenance &amp; updates</li>
+            <li>Growth &amp; go-to-market support</li>
+          </ul>
+        </article>
+        <article class="service-block">
+          <div class="num">03 — Brand</div>
+          <h3>Branding &amp; Design</h3>
+          <ul>
+            <li>Logo design &amp; brand guidelines</li>
+            <li>Corporate identity packages</li>
+            <li>Marketing materials &amp; print</li>
+            <li>Corporate giftings</li>
+          </ul>
+        </article>
+        <article class="service-block">
+          <div class="num">04 — Compliance</div>
+          <h3>Business &amp; Compliance</h3>
+          <ul>
+            <li>Company registration</li>
+            <li>CIPC beneficial ownership filings</li>
+            <li>Business documentation</li>
+            <li>CRM implementation &amp; presentations</li>
+          </ul>
+        </article>
+        <article class="service-block" style="grid-column: 1 / -1;">
+          <div class="num">05 — ICT</div>
+          <h3>ICT &amp; Infrastructure</h3>
+          <ul>
+            <li>Cybersecurity &amp; network protection (endpoint, MFA, CCTV, audits)</li>
+            <li>Managed IT — remote/on-site support, licences, 24/7 coverage</li>
+            <li>Cloud — Microsoft 365 / Google Workspace, backup &amp; storage</li>
+            <li>Infrastructure — cabling, server rooms, WiFi, UPS, IoT</li>
+            <li>Custom ICT projects — multi-floor networks, fleet rollouts, transformation</li>
+          </ul>
+        </article>
+      </div>
+
+      <h2 class="sub">Our Approach</h2>
+      <div class="values" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="value-card">
+          <h3>Systems Architecture</h3>
+          <p>Scalable, maintainable software designed to grow and integrate with existing infrastructure.</p>
+        </div>
+        <div class="value-card">
+          <h3>Business Logic</h3>
+          <p>Operational requirements accurately translated into robust, reliable code.</p>
+        </div>
+        <div class="value-card">
+          <h3>Full-Stack Delivery</h3>
+          <p>Frontend, backend, databases, authentication, and automation under one team.</p>
+        </div>
+      </div>
+
+      <h2 class="sub">Development Process</h2>
+      <div class="process">
+        <div class="process-step">
+          <div class="n">01</div>
+          <h3>Discovery &amp; Architecture</h3>
+          <p>Requirements and a technical design that can scale.</p>
+        </div>
+        <div class="process-step">
+          <div class="n">02</div>
+          <h3>Business Logic Mapping</h3>
+          <p>Operational rules into maintainable software.</p>
+        </div>
+        <div class="process-step">
+          <div class="n">03</div>
+          <h3>Build &amp; Test</h3>
+          <p>Iterative development with continuous refinement.</p>
+        </div>
+        <div class="process-step">
+          <div class="n">04</div>
+          <h3>Deploy &amp; Support</h3>
+          <p>Launch, monitor, scale, and maintain.</p>
+        </div>
+      </div>
+
+      <h2 class="sub">Industries Served</h2>
+      <div class="industries">
+        <span class="pill">Fintech</span>
+        <span class="pill">Healthcare</span>
+        <span class="pill">Logistics</span>
+        <span class="pill">Retail &amp; E-commerce</span>
+        <span class="pill">Education</span>
+        <span class="pill">Professional Services</span>
+        <span class="pill">Legal</span>
+        <span class="pill">Hospitality</span>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div><span class="accent"></span>www.mutag.co.za</div>
+      <div>03</div>
+    </footer>
+  </section>
+
+  <!-- ==================== PAGE 4: CLIENT WORK (1) ==================== -->
+  <section class="page inner">
+    <header class="page-header">
+      <img src="assets/mutag-logo-black.svg" alt="Mutag House" />
+      <div class="page-header-meta">Selected Client Work</div>
+    </header>
+    <div class="page-body">
+      <h1 class="section">Selected Client Work</h1>
+      <hr class="section-rule" />
+      <p class="intro-note">
+        These are some of the companies we have worked with, and the nature of the
+        work completed for each.
+      </p>
+
+      <div class="client-list">
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/xfm-tech-logo.png" alt="XFM Tech" /></div>
+          <div class="client-body">
+            <h3>XFM Tech</h3>
+            <ul>
+              <li>Website design and development</li>
+              <li>Brand identity</li>
+              <li>Search engine optimisation (SEO)</li>
+              <li>Custom web application development</li>
+              <li>Social media marketing and branded visual content</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/flowerclub-logo.png" alt="FlowerClub" /></div>
+          <div class="client-body">
+            <h3>FlowerClub</h3>
+            <ul>
+              <li>Social media transformation and brand storytelling</li>
+              <li>Social media strategy and content creation</li>
+              <li>Digital marketing strategy</li>
+              <li>Paid advertising</li>
+              <li>Ongoing website maintenance</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/attorneys-logo.png" alt="Mathibele Mahlaela Attorneys" /></div>
+          <div class="client-body">
+            <h3>Mathibele Mahlaela Attorneys</h3>
+            <ul>
+              <li>Website design and development</li>
+              <li>Legal branding and professional business cards</li>
+              <li>Corporate giftings and printing services</li>
+              <li>CRM implementation</li>
+              <li>CIPC compliance and business documentation</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/magnificent-pools-logo.png" alt="Magnificent Pools" /></div>
+          <div class="client-body">
+            <h3>Magnificent Pools</h3>
+            <ul>
+              <li>Corporate branding and graphic design</li>
+              <li>Lead-capture landing page campaign</li>
+              <li>Lead capture system with database integration</li>
+              <li>Social media visual advertising</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div><span class="accent"></span>Selected Client Work · Continued</div>
+      <div>04</div>
+    </footer>
+  </section>
+
+  <!-- ==================== PAGE 5: CLIENT WORK (2) + WHY + CONTACT ==================== -->
+  <section class="page inner">
+    <header class="page-header">
+      <img src="assets/mutag-logo-black.svg" alt="Mutag House" />
+      <div class="page-header-meta">Client Work &amp; Contact</div>
+    </header>
+    <div class="page-body">
+      <div class="client-list" style="margin-bottom: 5mm;">
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/we-moove-sa-logo.png" alt="We Moove SA" /></div>
+          <div class="client-body">
+            <h3>We Moove SA</h3>
+            <ul>
+              <li>Custom internal web-based quoting system</li>
+              <li>Internal tools to streamline pricing workflows</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/Rapatla-rue-logo.jpg" alt="Rapatla Rue Attorneys" /></div>
+          <div class="client-body">
+            <h3>Rapatla Rue Attorneys</h3>
+            <ul>
+              <li>Complete digital business setup and advertising</li>
+              <li>Custom website development</li>
+              <li>Premium hosting and professional email configuration</li>
+              <li>SEO optimisation</li>
+              <li>Digital advertising campaigns</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="client-card">
+          <div class="client-logo"><img src="assets/lagracia-logo.png" alt="La Gracia Estate" /></div>
+          <div class="client-body">
+            <h3>La Gracia Estate</h3>
+            <ul>
+              <li>Complete brand identity (logo, business cards, letterhead)</li>
+              <li>Strategic brand planning and stationery package</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <h1 class="section" style="font-size: 14pt; margin-top: 2mm;">Why Mutag House</h1>
+      <hr class="section-rule" />
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="mark">1</div>
+          <div>
+            <h3>Local expertise</h3>
+            <p>Centurion-based with South African business and POPIA familiarity.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="mark">2</div>
+          <div>
+            <h3>Systems-first</h3>
+            <p>Infrastructure and applications that run operations — not only marketing.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="mark">3</div>
+          <div>
+            <h3>Integrated delivery</h3>
+            <p>Software, web, branding, and compliance under one partner.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="mark">4</div>
+          <div>
+            <h3>Long-term support</h3>
+            <p>Maintenance, iteration, and scaling after go-live.</p>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="section" style="font-size: 14pt; margin-top: 5mm;">Contact</h1>
+      <hr class="section-rule" />
+      <div class="contact-panel">
+        <div class="contact-card">
+          <h3>Mutag House (Pty) Ltd</h3>
+          <div class="contact-line"><span>Reg.</span><span>2025/500507/07</span></div>
+          <div class="contact-line"><span>Address</span><span>2957B Goshawk Street, Thatchfield Hills, Centurion, 0157</span></div>
+          <div class="contact-line"><span>Email</span><span>info@mutag.co.za</span></div>
+          <div class="contact-line"><span>Phone</span><span>+27 72 957 2238</span></div>
+          <div class="contact-line"><span>Web</span><span>www.mutag.co.za</span></div>
+          <div class="contact-line"><span>LinkedIn</span><span>linkedin.com/company/mutag-house</span></div>
+        </div>
+        <div class="closing">
+          <h3>Ready to build?</h3>
+          <p>
+            Discuss your software requirements and technical architecture needs
+            with our team. We typically respond within one business day.
+          </p>
+          <a class="cta" href="https://www.mutag.co.za/onboarding">www.mutag.co.za/onboarding</a>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div><span class="accent"></span>© 2026 Mutag House (Pty) Ltd. All rights reserved.</div>
+      <div>05</div>
+    </footer>
+  </section>
+
+</body>
+</html>

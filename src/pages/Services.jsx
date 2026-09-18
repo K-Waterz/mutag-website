@@ -75,6 +75,59 @@ const Services = () => {
     }
   ]
 
+  const ictServices = [
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      ),
+      title: 'Cybersecurity & Network Protection',
+      description: 'Layered, proactive security for people, data, and premises.',
+      items: ['Endpoint monitoring & threat detection', 'Firewalls, MFA & access control', 'Backup, recovery & security audits', 'CCTV, biometrics & smart entry']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+      title: 'Managed IT Services',
+      description: 'Proactive IT support without a full-time in-house team.',
+      items: ['Remote & on-site support with SLAs', 'Device monitoring & maintenance', 'Software & licence management', '24/7 support']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+        </svg>
+      ),
+      title: 'Cloud Solutions',
+      description: 'Work from anywhere, securely and efficiently.',
+      items: ['Microsoft 365 or Google Workspace', 'Cloud backup & disaster recovery', 'Secure storage with access controls', 'Real-time collaboration tools']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+        </svg>
+      ),
+      title: 'Infrastructure Services',
+      description: 'We design, install, and maintain the backbone of your technology.',
+      items: ['Structured cabling, Cat6 & fibre', 'Server rooms & rack installations', 'WiFi design & UPS power', 'IoT hardware supply & setup']
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      ),
+      title: 'Custom ICT Projects',
+      description: 'End-to-end ICT rollouts scoped to your sites, people, and systems.',
+      items: ['Multi-floor network installations', 'Fleet-wide endpoint deployments', 'Digital transformation projects', 'Tailored, scoped ICT solutions']
+    }
+  ]
+
   const benefits = [
     {
       title: 'Comprehensive Solutions',
@@ -97,10 +150,10 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Branding, Web & Marketing Services in Centurion | MUTAG HOUSE</title>
-        <meta name="description" content="Software development services: custom web applications, backend systems, APIs, authentication platforms, dashboards, and automation workflows. Centurion, South Africa." />
-        <meta property="og:title" content="Branding, Web & Marketing Services | MUTAG HOUSE" />
-        <meta property="og:description" content="Comprehensive branding, web development, and marketing services in Centurion." />
+        <title>Software, ICT &amp; Digital Services in Centurion | MUTAG HOUSE</title>
+        <meta name="description" content="Software, cybersecurity, managed IT, cloud, infrastructure, websites, branding, and business compliance services from MUTAG HOUSE in Centurion, South Africa." />
+        <meta property="og:title" content="Software, ICT &amp; Digital Services | MUTAG HOUSE" />
+        <meta property="og:description" content="Software, cybersecurity, managed IT, cloud, infrastructure, websites, branding, and compliance — all under one roof." />
         <link rel="canonical" href="https://www.mutag.co.za/services" />
       </Helmet>
       <StructuredData type="organization" />
@@ -115,7 +168,7 @@ const Services = () => {
             transition={{ duration: 0.8 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl mb-6"
           >
-            Branding, Web & Marketing Services
+            Software, ICT & Digital Services
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -123,7 +176,7 @@ const Services = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-brand-light/70 max-w-3xl mx-auto"
           >
-            Logos that make you unforgettable. Websites that convert. Printing that shows up on time.
+            Software and websites that convert. Cybersecurity and IT that keep you running. Branding and print that show up on time.
           </motion.p>
         </div>
       </section>
@@ -143,6 +196,43 @@ const Services = () => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     {typeof item === 'string' ? item : item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline transition-luxury"
+                >
+                  Learn more
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        title="ICT & Infrastructure"
+        subtitle="Reliable ICT that keeps your business secure and connected — cybersecurity, managed IT, cloud, cabling, and end-to-end technology projects."
+        background="dark"
+      >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ictServices.map((service, index) => (
+            <Card key={service.title} delay={index * 0.1}>
+              <div className="text-brand-blue mb-4">{service.icon}</div>
+              <h3 className="font-heading text-xl mb-3">{service.title}</h3>
+              <p className="text-brand-light/70 mb-4">{service.description}</p>
+              <ul className="space-y-2 text-sm text-brand-light/60">
+                {service.items.map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-brand-blue" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {item}
                   </li>
                 ))}
               </ul>
