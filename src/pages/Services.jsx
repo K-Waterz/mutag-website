@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import Card from '../components/Card'
 import Button from '../components/Button'
 import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
+import { whatsappLink } from '../lib/whatsapp'
 
 const Services = () => {
   const services = [
@@ -48,7 +48,7 @@ const Services = () => {
       description: 'Complete business registration and documentation services.',
       items: [
         'Company registration',
-        <Link key="bo" to="/beneficial-ownership" className="text-brand-blue hover:underline font-semibold">Beneficial ownership</Link>,
+        <a key="bo" href={whatsappLink('Hi MUTAG HOUSE, I need help with beneficial ownership.')} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline font-semibold">Beneficial ownership</a>,
         'Business documentation',
         'Compliance setup'
       ]
@@ -200,15 +200,17 @@ const Services = () => {
                 ))}
               </ul>
               <div className="mt-6">
-                <Link
-                  to="/contact"
+                <a
+                  href={whatsappLink(`Hi MUTAG HOUSE, I'd like to know more about ${service.title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline transition-luxury"
                 >
                   Learn more
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </Link>
+                </a>
               </div>
             </Card>
           ))}
@@ -237,15 +239,17 @@ const Services = () => {
                 ))}
               </ul>
               <div className="mt-6">
-                <Link
-                  to="/contact"
+                <a
+                  href={whatsappLink(`Hi MUTAG HOUSE, I'd like to know more about ${service.title}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-brand-blue font-semibold hover:underline transition-luxury"
                 >
                   Learn more
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </Link>
+                </a>
               </div>
             </Card>
           ))}
@@ -314,16 +318,16 @@ const Services = () => {
             Let's discuss how our services can help you achieve your goals.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/contact">
+            <a href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")} target="_blank" rel="noopener noreferrer">
               <Button size="lg">
                 Request Private Strategy Call
               </Button>
-            </Link>
-            <Link to="/work">
+            </a>
+            <a href="/work">
               <Button variant="secondary" size="lg">
                 View Our Work
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </Section>

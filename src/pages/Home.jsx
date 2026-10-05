@@ -4,6 +4,7 @@ import Card from '../components/Card'
 import Button from '../components/Button'
 import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
+import { whatsappLink } from '../lib/whatsapp'
 
 const Home = () => {
   const services = [
@@ -139,7 +140,7 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-brand-light/70 max-w-3xl mx-auto mb-10">
               We transform ambitious ideas into compelling brands that command attention, build authority, and drive meaningful business growth through strategic design and precision execution.
             </p>
-            <a href="/contact">
+            <a href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="text-base px-10 py-4"
@@ -324,7 +325,7 @@ const Home = () => {
           <p className="text-xl text-brand-light/70 mb-10">
             Ready to transform your business? Get in touch and let's discuss how MUTAG HOUSE can help you achieve your branding and marketing goals.
           </p>
-          <a href="/contact">
+          <a href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")} target="_blank" rel="noopener noreferrer">
             <Button size="lg">
               Request Private Strategy Call
             </Button>

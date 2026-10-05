@@ -65,20 +65,25 @@ const Contact = () => {
     setSubmitStatus(null)
     
     try {
-      // Example: Replace with your actual form submission endpoint
-      // For Netlify Forms, use: action="/" method="POST" data-netlify="true"
-      // For custom API, use fetch to your endpoint
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // In production, replace with actual API call:
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
-      
+      const lines = [
+        'New enquiry from mutag.co.za',
+        `Company: ${formData.company.trim()}`,
+        `Contact: ${formData.decisionMaker.trim()}`,
+        formData.employees ? `Team size: ${formData.employees}` : '',
+        `Email: ${formData.email.trim()}`,
+        formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : '',
+        '',
+        formData.summary.trim()
+      ].filter(Boolean)
+
+      const message = lines.join('\n')
+      window.open(
+        `https://wa.me/27729572238?text=${encodeURIComponent(message)}`,
+        '_blank',
+        'noopener,noreferrer'
+      )
+      window.location.href = `mailto:info@mutag.co.za?subject=${encodeURIComponent(`Enquiry from ${formData.company.trim()}`)}&body=${encodeURIComponent(message)}`
+
       setSubmitStatus('success')
       setFormData({
         company: '',
@@ -88,11 +93,6 @@ const Contact = () => {
         phone: '',
         summary: ''
       })
-      
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        window.location.href = '/thank-you'
-      }, 2000)
     } catch (error) {
       setSubmitStatus('error')
       console.error('Form submission error:', error)
@@ -332,7 +332,7 @@ const Contact = () => {
 
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400">
-                  Thank you! We'll be in touch within 24-48 hours.
+                  WhatsApp and your email app should both be open with this enquiry. Send the message so the team receives it.
                 </div>
               )}
 

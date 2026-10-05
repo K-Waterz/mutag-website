@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { whatsappLink } from '../lib/whatsapp'
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -75,7 +76,9 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <a
-              href="/contact"
+              href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm transition-luxury hover:opacity-90 hover:shadow-lg hover:shadow-brand-blue/20"
             >
               Request Private Strategy Call
@@ -138,7 +141,9 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="/contact"
+                href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 className="inline-flex items-center justify-center gap-2 gradient-primary text-white px-6 py-3 rounded-lg font-medium text-sm text-center mt-2"
               >

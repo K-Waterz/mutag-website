@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import Card from '../components/Card'
 import Button from '../components/Button'
 import StructuredData from '../components/StructuredData'
 import { Helmet } from 'react-helmet-async'
+import { whatsappLink } from '../lib/whatsapp'
 
 const About = () => {
   const values = [
@@ -220,11 +220,11 @@ const About = () => {
           <p className="text-base md:text-xl text-brand-light/90 mb-10 leading-relaxed">
             Let's discuss how MUTAG HOUSE can help transform your business.
           </p>
-          <Link to="/contact">
+          <a href={whatsappLink("Hi MUTAG HOUSE, I'd like to request a private strategy call.")} target="_blank" rel="noopener noreferrer">
             <Button size="lg">
               Request Private Strategy Call
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
     </>

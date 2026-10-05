@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react'
 import ErrorBoundary from './ErrorBoundary'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
 import Work from './pages/Work'
 import Contact from './pages/Contact'
 import ThankYou from './pages/ThankYou'
+import Legal from './pages/Legal'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
@@ -52,6 +54,12 @@ function App() {
       case '/thank-you':
       case '/thank-you.html':
         return <ThankYou />
+      case '/privacy':
+      case '/privacy.html':
+        return <Legal page="privacy" />
+      case '/terms':
+      case '/terms.html':
+        return <Legal page="terms" />
       default:
         return <Home />
     }
@@ -66,6 +74,7 @@ function App() {
             {renderPage()}
           </main>
           <Footer />
+          <WhatsAppButton />
         </div>
       </HelmetProvider>
     </ErrorBoundary>

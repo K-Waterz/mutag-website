@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState('')
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
@@ -99,10 +101,21 @@ const Footer = () => {
           {/* Newsletter & Contact */}
           <div className="md:col-span-4">
             <h3 className="font-heading text-lg mb-6 text-brand-light">Stay Connected</h3>
-            <form className="mb-6">
+            <form
+              className="mb-6"
+              onSubmit={(e) => {
+                e.preventDefault()
+                const email = newsletterEmail.trim()
+                if (!email) return
+                window.location.href = `mailto:info@mutag.co.za?subject=${encodeURIComponent('Newsletter signup')}&body=${encodeURIComponent(`Please add this address to the MUTAG HOUSE newsletter:\n${email}`)}`
+              }}
+            >
               <div className="flex gap-2">
                 <input
                   type="email"
+                  required
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Your email"
                   className="flex-1 bg-brand-dark border border-brand-blue/20 rounded-lg px-4 py-3 text-sm text-brand-light placeholder-brand-light/40 focus:outline-none focus:border-brand-blue transition-luxury"
                 />
@@ -123,6 +136,11 @@ const Footer = () => {
               <p>
                 <a href="tel:+27729572238" className="hover:text-brand-blue transition-luxury">
                   +27 72 957 2238
+                </a>
+              </p>
+              <p>
+                <a href="https://wa.link/rgwahs" target="_blank" rel="noopener noreferrer" className="hover:text-brand-blue transition-luxury">
+                  WhatsApp
                 </a>
               </p>
               <p className="mt-4">Centurion, South Africa</p>
