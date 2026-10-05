@@ -852,6 +852,7 @@ strong { color: var(--text); }
 
 .service-card h3,
 .work-card h3,
+.card h2,
 .card h3 {
   font-size: 1.4rem;
   margin-bottom: var(--space-sm);
@@ -2191,4 +2192,152 @@ html:not(.motion-ready) .process-step {
 
 @media (max-width: 480px) {
   .onboarding-nav .btn { flex: 1; min-width: 0; }
+}
+
+/* ================ GUIDES ================ */
+.guide-page {
+  padding: 2.75rem 0 1rem;
+}
+
+.guide-wrap {
+  max-width: 760px;
+}
+
+.guide-wrap-index {
+  max-width: 860px;
+}
+
+.guide-kicker {
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.guide-lede {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 40rem;
+}
+
+.guide-back {
+  margin-bottom: 1rem;
+}
+
+.guide-back a {
+  font-weight: 600;
+}
+
+.guide-wrap h2 {
+  margin-top: 2.25rem;
+}
+
+.guide-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.guide-list a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.guide-list a:hover {
+  color: inherit;
+  border-color: #bfdbfe;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.guide-list h2 {
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  margin: 0 0 0.5rem;
+}
+
+.guide-list p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.guide-read {
+  margin-top: 1rem !important;
+  color: var(--primary) !important;
+  font-weight: 600;
+}
+
+.guide-page .cards {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin: 2rem 0;
+}
+
+.guide-page .card h2 {
+  margin-top: 0;
+}
+
+.guide-page ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  margin: 0 0 var(--space-md);
+}
+
+.guide-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.guide-share {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.guide-share > p:first-child {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.guide-share-actions,
+.guide-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.guide-url {
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+}
+
+.guide-cta {
+  text-align: center;
+  padding: 3rem 0 1rem;
+}
+
+.guide-cta h2 {
+  margin-top: 0;
+}
+
+.guide-cta-actions {
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .guide-page {
+    padding-top: 1.75rem;
+  }
 }

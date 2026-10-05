@@ -2,6 +2,48 @@
   # No build command needed for static HTML site
   publish = "."
 
+# Guide notes are flat HTML files. These rules have to come before the
+# catch-all, or /guides/* is rewritten to the homepage.
+[[redirects]]
+  from = "/guides/own-the-company"
+  to = "/guide-own-the-company.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/own-the-company/"
+  to = "/guide-own-the-company.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/nine-to-five"
+  to = "/guide-nine-to-five.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/nine-to-five/"
+  to = "/guide-nine-to-five.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/visible-website"
+  to = "/guide-visible-website.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/visible-website/"
+  to = "/guide-visible-website.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/five-spreadsheets"
+  to = "/guide-five-spreadsheets.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/five-spreadsheets/"
+  to = "/guide-five-spreadsheets.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
