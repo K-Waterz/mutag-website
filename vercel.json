@@ -18,6 +18,10 @@
     { "source": "/beneficial-ownership", "destination": "/beneficial-ownership.html" },
     { "source": "/thank-you", "destination": "/thank-you.html" },
     { "source": "/onboarding", "destination": "/onboarding.html" },
-    { "source": "/guides", "destination": "/guides.html" }
+    { "source": "/guides", "destination": "/guides.html" },
+    { "source": "/guides/own-the-company", "destination": "/guide-own-the-company.html" },
+    { "source": "/guides/nine-to-five", "destination": "/guide-nine-to-five.html" },
+    { "source": "/guides/visible-website", "destination": "/guide-visible-website.html" },
+    { "source": "/guides/five-spreadsheets", "destination": "/guide-five-spreadsheets.html" }
   ]
 }

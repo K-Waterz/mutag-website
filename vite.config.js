@@ -16,6 +16,10 @@ const cleanPage = (from, to) => ({
 export default defineConfig({
   plugins: [
     cleanPage('/guides', '/guides.html'),
+    cleanPage('/guides/own-the-company', '/guide-own-the-company.html'),
+    cleanPage('/guides/nine-to-five', '/guide-nine-to-five.html'),
+    cleanPage('/guides/visible-website', '/guide-visible-website.html'),
+    cleanPage('/guides/five-spreadsheets', '/guide-five-spreadsheets.html'),
     cleanPage('/about', '/about.html'),
     cleanPage('/services', '/services.html'),
     cleanPage('/portfolio', '/portfolio.html'),

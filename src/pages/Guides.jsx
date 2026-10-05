@@ -100,6 +100,32 @@ const Guides = () => (
       <p>
         A restraint that tries to stop you working at all, long after you leave, has to be reasonable before a court will enforce it. That is a separate question from what your current contract allows while you are still employed.
       </p>
+      <h2 className="font-heading text-4xl text-brand-light pt-10">
+        A website that looks finished can still be invisible.
+      </h2>
+      <p>
+        A page that opens on your phone is the start, not the job. People have to find it, understand it in a few seconds, and know what to do next. That is the difference between a brochure and a site that can take an enquiry.
+      </p>
+      <p>
+        Search is the slow path, and it is the one that keeps working after a campaign ends. The page needs a clear title, a description that matches what you actually sell, and words your customers use — not only the words you prefer. A landing page for one offer should do one job. A company site should make the services easy to tell apart.
+      </p>
+      <p>
+        Campaigns are how you fill the gap while search catches up. An email to people who already know you, a social post with a real offer, or a paid ad that lands on that one page. If the ad promises a quote and the page talks about your story, the click is wasted. The campaign, the page, and the sentence on the button have to agree.
+      </p>
+      <p>
+        Keep the site updated after launch. A broken form, an old price, or a page that never changes is a quiet way to lose the work the campaign just paid for.
+      </p>
+
+      <h2 className="font-heading text-4xl text-brand-light pt-10">
+        If the work lives in five spreadsheets, you do not have a system.
+      </h2>
+      <p>
+        Most companies do not lack information. They lack one version of it. The job was done, the photo was taken, the invoice went out — and the record of that lives in a folder, a WhatsApp chat, a spreadsheet, and a person who says they will check. Facilities contracts, building sites, and offices fracture in the same place.
+      </p>
+      <p>
+        A system is one place the work is written down as it happens, by the person closest to it, in a form the next person can use without a phone call. A spreadsheet is enough for a list one person maintains. It fails when several people change it, when the truth includes a photo or a signature, and when next month’s report has to be rebuilt from scratch.
+      </p>
+
       <p className="text-sm text-brand-light/50">
         This is general information about South African company and employment practice, not legal advice. Your contract, your employer’s policies, and the facts of the role decide what you may do. Confirm anything you rely on with a qualified attorney before you act.
       </p>
