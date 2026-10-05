@@ -11,6 +11,7 @@ import Work from './pages/Work'
 import Contact from './pages/Contact'
 import ThankYou from './pages/ThankYou'
 import Legal from './pages/Legal'
+import Guides from './pages/Guides'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
@@ -51,6 +52,9 @@ function App() {
       case '/contact':
       case '/contact.html':
         return <Contact />
+      case '/guides':
+      case '/guides.html':
+        return <Guides />
       case '/thank-you':
       case '/thank-you.html':
         return <ThankYou />

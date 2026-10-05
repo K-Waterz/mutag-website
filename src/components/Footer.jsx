@@ -10,6 +10,7 @@ const Footer = () => {
       { path: '/about', label: 'About' },
       { path: '/services', label: 'Services' },
       { path: '/work', label: 'Work' },
+      { path: '/guides', label: 'Guides' },
       { path: '/contact', label: 'Contact' }
     ],
     legal: [

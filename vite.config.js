@@ -2,8 +2,27 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
+const cleanPage = (from, to) => ({
+  name: `clean-${from.slice(1)}`,
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      const path = req.url?.split('?')[0]
+      if (path === from) req.url = to
+      next()
+    })
+  }
+})
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    cleanPage('/guides', '/guides.html'),
+    cleanPage('/about', '/about.html'),
+    cleanPage('/services', '/services.html'),
+    cleanPage('/portfolio', '/portfolio.html'),
+    cleanPage('/contact', '/contact.html'),
+    cleanPage('/onboarding', '/onboarding.html'),
+    react()
+  ],
   base: './', // <- ensures relative paths for JS/CSS on any hosting
   server: {
     port: 3000,
